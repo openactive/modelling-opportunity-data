@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "homepage": "https://www.openactive.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openactive/spec-template/"
+  },
+  "bugs": {
+    "url": "https://github.com/openactive/spec-template/issues"
+  },
+  "devDependencies": {
+    "connect-livereload": "^0.5.4",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "livereload": "^0.4.1",
+    "tiny-lr": "^0.2.1"
+  }
+}

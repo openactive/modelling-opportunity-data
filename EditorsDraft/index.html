@@ -1,1 +1,583 @@
-Hello
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+  <head>
+    <meta charset='utf-8'/>
+    <title>Modelling Opportunity Data</title>
+
+    <script type="text/javascript" class='remove'>
+        var respecConfig = {
+          // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
+          specStatus:           "CG-DRAFT",
+
+          // the specification's short name, as in http://www.w3.org/TR/short-name/
+          shortName:            "modelling-opportunity-data",
+
+          // if you wish the publication date to be other than today, set this
+          // publishDate:  "2009-08-06",
+
+          // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+          // and its maturity status
+          // previousPublishDate:  "1977-03-15",
+          // previousMaturity:  "WD",
+
+          // if there a publicly available Editor's Draft, this is the link
+          edDraftURI:           "https://www.openactive.io/modelling-opportunity-data/",
+          //prevED:  "https://www.openactive.io/spec-template/",
+          //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
+          //testSuiteURI: "https://www.openactive.io/endpoint-validator/",
+          copyrightStart: 2016,
+
+          // if this is a LCWD, uncomment and set the end of its review period
+          // lcEnd: "2009-08-05",
+
+          // editors, add as many as you like
+          // only "name" is required
+          editors: [
+              { name: "Leigh Dodds", url: "http://ldodds.com",
+                company: "Open Data Institute", companyURL: "http://opendata.institute/",
+                w3cid: "55359" },
+          ],
+
+          // authors, add as many as you like.
+          // This is optional, uncomment if you have authors as well as editors.
+          // only "name" is required. Same format as editors.
+
+          authors: [
+          ],
+
+          otherLinks: [{
+                key: "Repo",
+                value: "We are on Github",
+                href: "https://github.com/openactive/modelling-opportunity-data/",
+                class: "repo"
+            }, {
+                key: "Issues",
+                href: "https://github.com/openactive/modelling-opportunity-data/issues/"
+            }, {
+                key: "Version",
+                value: "Editor's Draft"
+            }
+          ],
+
+          logos: [
+            {
+              src: 'https://www.openactive.io/assets/openactive-logo-large.png',
+              href: "https://www.openactive.io",
+              alt: "openactive.io",
+              width: 255, //170
+              height: 33, //22
+              id: 'logo'
+            }
+          ],
+
+          // extend the bibliography entries
+          //localBiblio: {},
+
+          // name of the WG
+          wg:           "Openactive Community Group",
+
+          // URI of the public WG page
+          wgURI:        "http://www.w3.org/community/openactive/",
+
+          // name (with the @w3c.org) of the public mailing to which comments are due
+          wgPublicList: "public-openactive",
+
+          // URI of the patent status for this WG, for Rec-track documents
+          // !!!! IMPORTANT !!!!
+          // This is important for Rec-track documents, do not copy a patent URI from a random
+          // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+          // Team Contact.
+          wgPatentURI:  "",
+          maxTocLevel: 4,
+          preProcess: [ ] ,
+          alternateFormats: [ {uri: "diff-previous.html", label: "diff to previous version"} ],
+          isRecTrack:   true,
+          isNoTrack:    true,
+          issueBase:    "https://github.com/openactive/modelling-opportunity-data/issues/",
+          format: "markdown"
+
+        };
+    </script>
+
+    <script src='https://www.openactive.io/respec/builds/respec-w3c-common.js' class='remove'></script>
+
+    <!-- <script src='/builds/respec-w3c-common.js' class='remove'></script>-->
+
+    <!-- <script src='/node_modules/requirejs/require.js' data-main='/js/profile-w3c-common' async class='remove'></script> -->
+
+    <style>
+    table {border-collapse: collapse; border: 1px solid #bec9d9}
+    td, th {padding: 3px 0.5em; border-left:1px solid black; border-right: 1px solid black; border-bottom:1px solid #E2EDFE;}
+    tr th[colspan] {color: #005A9C; background-color: #FEEDE2; text-align: center}
+    th {color: #005A9C; background-color: #E2EDFE; font-weight: normal;border-bottom:1px solid #BEC9D9;}
+    tbody tr th {text-align: left;}
+    td.nb { font-size: smaller;}
+    .rec, .pr {color: #005A9C; background-color: #99EE99}
+    .ext {background-color: #FFFFFF}
+    .cr, .lcwd {color: #005A9C; background-color: #EEEE99}
+    .wd {color: #005A9C; background-color: #EE9999}
+    .ed, .fpwd  {color: #005A9C; background-color: #FF7777}
+    code {white-space: pre;}
+    </style>
+
+  </head>
+  <body >
+    <style>
+    html {
+      background-image: none !important;
+    }
+    body {
+      background: white top left fixed no-repeat !important;
+      background-size: 25px auto !important;
+      background-image: url('https://www.openactive.io/assets/openactive-label-editorsdraft.png') !important;
+    }
+    body.toc-sidebar #toc {
+      background-attachment: fixed !important;
+    }
+    h1 {
+      font-family: 'Open Sans',sans-serif !important;
+      font-weight: 300 !important;
+      color: #69b9ff !important;
+      font-size: 220%;
+    }
+    #toc {
+      padding-top: 0px !important;
+    }
+    .remove {
+      background-colour: yellow;
+    }
+    </style>
+
+    <section id='abstract'>
+This document introduces a high-level data model that describes the key concepts 
+relating to the publication of data about opportunities for people to engage in 
+physical activities. This includes descriptions of activities, events and locations.
+
+As a conceptual data model it will provide a common reference point for other 
+specifications and outputs of the OpenActive community group. The model will also 
+highlight how it aligns with data models in existing specifications.
+
+As a common reference model this document may also be useful in guiding the 
+development of both new and existing booking systems and applications that 
+consume opportunity data.
+    </section>
+
+    <section id='sotd'>
+The purpose of the document is to represent an early draft. It is likely to 
+change based on discussion within the community.
+
+Contributions to this document are not only welcomed but are actively solicited and 
+should be made via [GitHub Issues](https://github.com/openactive/modelling-opportunity-data/issues) 
+and pull requests. The source code is available on [GitHub](https://github.com/openactive/modelling-opportunity-data).
+    </section>
+
+    <section class="informative">
+# Introduction
+
+The [W3C Openactive Community Group](http://www.w3.org/community/openactive/) was 
+established with the objective of facilitating the sharing and use of 
+physical activity data. This data is currently largely closed. Open publishing of this 
+data has enormous potential to increase participation in physical activities.
+
+## Categories of Physical Activity Data
+
+There are several different categories of data that relate to the physical activity 
+data. This data covers different parts of [the data spectrum](http://theodi.org/data-spectrum) 
+and is represented in the following diagram.
+
+    <figure>
+      ![](images/opportunity-data.png)
+      <figcaption>Types of physical activity data</figcaption>
+    </figure>
+
+Some of this data is shared data. It can only be accessed by 
+specific people or groups, under terms and conditions that define how and when 
+it can be accessed and used. This includes personal data about people taking part 
+in activities and other participation data that describes how people have 
+participated in previous events. 
+
+But some of this data can be open data. This includes all of the data that 
+describes:
+
+* the location in which an activity or event takes place and any facilities available
+* the details of the event itself, e.g. when it will take place, restrictions 
+on attendance, costs, etc
+* any related information, e.g. about a related programme or series of events
+
+Collectively this is known as "opportunity data".
+
+## Scope of this Specification
+
+This specification provides a common reference model for opportunity data. This 
+reflects the goal of [the OpenActive project](https://www.openactive.io/) which 
+is to encourage the open publishing and reuse of data that can help people 
+become more active.
+  </section>
+  <section>
+# Key Concepts
+
+## Activities
+
+An __Activity__ is an exercise, sport or other form of bodily movement 
+that involves physical effort. Activities will normally have a well-understood, 
+dictionary definition.
+
+Examples of activities include walking, running and cycling. Sporting activities 
+would include rubgy, football and tennis.
+
+Activities can often be grouped together in different ways. For example Judo, 
+Karate and Kendo are all more specific examples of the broader Martial Arts 
+activity.
+
+Activities may have additional information associated with them. For example a 
+sporting activity might be overseen by an governing body or federation.
+
+Activities may also be recognised by different bodies. In the UK certain 
+activities are recognised as suitable for educational assessments, while others 
+may be recognised by funding bodies like Sport England.
+
+## Programmes
+
+Activities are often organised and run in a variety of different ways. This 
+includes tailoring the activity to a particular type of participant, demographic 
+or fitness level. 
+
+A __Programme__ is a particular way of carrying out a physical activity. 
+There is often branding or marketing associated with the programme. This helps 
+participants understand more about how the activity might be organised.
+
+Some programmes are very loosely defined. While others are more structured and 
+may be run to a specific agenda or in a particular style.
+
+Examples of Programmes include:
+
+* Spin Fit which is a means to participate in an activity called Spinning
+* Buggy Fit, which is a Running activity tailored for parents of young children
+* Zumba is a type of dance (or cardiac exercise) activity
+
+When participants are looking for opportunities to take part in an activity they 
+may be interested in either the general activity (e.g. Running) or a 
+specific programme (Buggy Fit).
+
+## Locations
+
+Activities take place in a __Location__. However depending on the activity, location 
+may be more or less tightly defined. For example:
+
+* A gym class may take place in a leisure centre with an address or other precisely defined location
+* A cycling or walking event might start at a specific location, but will follow a route
+* An exercise or running group might meet in a local park, rather than at a specific address
+
+## Events and Sessions
+
+An __Event__ is an opportunity to take part in a physical activity. The activity 
+may conform to a particular programme, and takes place at a specified date, time 
+and location.
+
+Some Events are one-off occurences. For example a fun run organised by a local group 
+may run as a one-off event on a particular date. Other events take place 
+on a regular recurring schedule.
+
+In order to simplify terminology we recommend the use of the term "Event" to 
+broadly cover individual occurences and regularly occuring activities. Where 
+there is a need to disambiguate, we suggest using "*session*" to refer to an individual 
+event taking place at a specific date and time.
+
+A weekly gym class is a useful example of this distinction. As an event it takes 
+place to a regular schedule, e.g. every Tuesday evening. The specific instance 
+of that event taking place this Tuesday at 6pm is a session.
+
+Regardless of whether an event takes place once or to a regular schedule, there 
+is a common set of information that can describe them, e.g:
+
+* the Location in which it is taking place
+* the Activity being carried out and the Programme being following
+* the Organiser of the event, which might be an individual or an organisation
+* other descriptive attributes including any associated price, attendance numbers, 
+suitability for a particular audience, method of booking, etc.
+  </section>
+  <section>
+# Mapping to Schema.org
+
+Schema.org provides an existing well-used and documented data model for publishing 
+data to the web. It can be used in a variety of use cases including marking up 
+web pages and publishing data in more structured formats like JSON-LD.
+
+The following sections outline how the concepts important to publishing 
+opportunity data can be described using Schema.org classes and properties.
+
+Additional types and properties not supported by the core vocabulary can be 
+defined using an existing extension mechanism. These extensions are defined later 
+in this document.
+
+## Events and Sessions (<code>Event</code>)
+
+The Schema.org Event type aligns with the definition of Event in this specification. 
+The type has a number of properties that allow the event to be described to a 
+variety of detail levels. It can also be related to a number of other types that 
+help to capture the requirements for physical activities.
+
+The following table illustrates different aspects of describing an event 
+map to Schema.org properties.
+
+<table>
+  <thead>
+    <th>Aspect</th>
+    <th>Schema.org Properties</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Description</td>
+      <td>
+        <ul>
+          <li>[`name`](https://schema.org/name)</li>
+          <li>[`url`](https://schema.org/url)</li>
+          <li>[`description`](https://schema.org/description)</li>
+          <li>[`image`](https://schema.org/image)</li>
+        </ul>
+      </td>
+      <td>URL, description and representative images can be associated with any 
+      Schema.org type</td>
+    </tr>
+    <tr>
+      <td>Time</td>
+      <td>
+        <ul>
+          <li>[`startDate`](https://schema.org/startDate)</li>
+          <li>[`endDate`](https://schema.org/endDate)</li>
+          <li>[`duration`](https://schema.org/duration)</li>
+        </ul>
+      </td>
+      <td>Can be specified as [Dates](https://schema.org/Date) and 
+      [DateTime](https://schema.org/DateTime) giving flexibility in precision.</td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <td>
+        <ul>
+          <li>[`location`](https://schema.org/location)</li>
+        </ul>
+      </td>
+      <td>There is flexibility in precision here as the location can be a 
+[Place](https://schema.org/Place) with a fully described geographic location 
+and/or address. A [PostalAddress](https://schema.org/PostalAddress) for systems 
+that only capture addresses, or just as [Text](https://schema.org/Text): "In the park, near the lake"</td>
+    </tr>
+    <tr>
+      <td>Organiser</td>
+      <td>
+        <ul>
+          <li>[`organizer`](https://schema.org/organizer)</li>
+          <li>[`contributor`](https://schema.org/contributor)</li>
+        </ul>
+      <td>An organizer can be an [Organization](https://schema.org/Organization) or 
+      a [Person]((https://schema.org/Person). These support additional descriptive 
+      properties. Contributor, e.g. named staff or helpers can also be included</td>
+    </tr>
+    <tr>
+      <td>Offers</td>
+      <td>
+        <ul>
+          <li>[`offers`](https://schema.org/offers)</li>
+        </ul>
+      </td>
+      <td>The [Offer](https://schema.org/Offer) type draws on a well used vocabulary for ecommerce so provides a variety of ways 
+      to describe, e.g. pricing, availability, etc </td>
+    </tr>
+  </tbody>
+</table>
+
+
+Working Notes:
+
+* `typicalAgeRange` may be useful for specifying suitability
+* `doorTime` gives an example of how different types can be specified within an event, similar to cycles that have a start/end time for the event and the actual ride
+* `sponsor` might also be useful in some cases
+
+### Recurring Events
+
+TODO
+
+**Issue: Schema.org doesn't have a schedule property. We need this to handle 
+recurring Events. There is ongoing discussion around how best to handle this, 
+but [we have an oppportunity to define a schedule property](https://github.com/schemaorg/schemaorg/issues/240#issuecomment-262663653)**
+
+
+### Describing Participation Requirements
+
+TODO
+
+* Audience, suitability
+* Equipment
+* etc
+
+## Location (<code>Place</code> and <code>EventVenue</code>)
+
+Schema.org provides flexibility around defining the `location` for an `Event`. These 
+can be simple textual descriptions or more structured objects.
+
+These objects can consist of a [PostalAddress](https://schema.org/PostalAddress) 
+or a more fully defined venue or facility. The core type for this is 
+[Place](https://schema.org/Place) which is then extended by 
+[CivicStructure](https://schema.org/CivicStructure) and [EventVenue](https://schema.org/EventVenue). 
+
+<table>
+  <thead>
+    <th>Aspect</th>
+    <th>Schema.org Properties</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Description</td>
+      <td>
+        <ul>
+          <li>[`name`](https://schema.org/name)</li>
+          <li>[`url`](https://schema.org/url)</li>
+          <li>[`description`](https://schema.org/description)</li>
+          <li>[`image`](https://schema.org/image)</li>
+          <li>[`photo`](https://schema.org/photo)</li>
+        </ul>
+      </td>
+      <td>URL, description and representative images can be associated with any 
+      Schema.org type</td>
+    </tr>
+    <tr>
+      <td>Physical Location</td>
+      <td>
+        <ul>
+          <li>[`address`](https://schema.org/address)</li>
+          <li>[`geo`](https://schema.org/geo)</li>
+        </ul>
+      </td>
+      <td>Physical locations can be defined as text, an address or a precise 
+      latitude and longitude. These can be combined depending on the detail 
+      available to the publisher.</td>
+    </tr>
+    <tr>
+      <td>Misc</td>
+      <td>
+        <ul>
+          <li>[`telephone`](https://schema.org/address)</li>
+          <li>[`openingHoursSpecification`](https://schema.org/openingHoursSpecification)</li>
+        </ul>
+      </td>
+      <td>The [OpeningHoursSpecification](https://schema.org/OpeningHoursSpecification) provides 
+      some support for describing when a location can be used</td>
+    </tr>
+
+  </tbody>
+</table>
+
+## Activity (<code>PhysicalActivity</code>)
+
+Working notes:
+
+* The Health & Life Science extension to Schema.org defines both a [PhysicalActivity](https://health-lifesci.schema.org/PhysicalActivity) and a  
+[PhysicalActivityCategory](https://health-lifesci.schema.org/PhysicalActivityCategory) these migth be reused or generalised for our purposes.
+* [External Enumerations](https://www.w3.org/wiki/WebSchemas/ExternalEnumerations) allow for the use of controlled vocabularies and 
+categories published elsewhere. This gives us a means to 
+
+**Issue: how do we declare which vocabulary, e.g. for activity lists, programmes, etc, that we're using in a dataset?**
+
+## Programmes
+
+TODO. This is related to Activities.
+
+  </section>
+
+  <section class='informative'>
+# Illustrative Examples
+
+## Locations
+
+<pre class="example" title="A venue with facilities">
+  {
+  "@context": "http://schema.org/",
+  "@type": "EventValue",
+
+  "name": "5ives Community Sports Club",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Burnsall Grove",
+    "addressLocality": "Barnsley",
+    "postalCode": "S70 3JR"
+  },
+  "geo": {
+    "latitude": "53.5372727",
+    "longitude": "-1.4486005"
+  },
+  "amenityFeature": {
+    "name": "Table Tennis Tables"
+  }
+}
+</pre>
+
+
+## Events
+
+<pre class="example" title="Event with organiser">
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "name": "Beach Body Workout",
+  "url": "http://www.joinflex.tv/c/justin-brown/events/137",
+  "description": "get ready to learn new ways to get summertime fine!!...",
+  "image": "https://flex-production.s3.amazonaws.com/uploads/event/image/137/IMG_20140428_111516.jpg",
+  "startDate": "2016-07-13T20:00:00-05:00",
+  "duration": "PT30M",
+  "organizer": {
+    "@type": "Person",
+    "name": "Justin Brown",
+    "url": "http://www.joinflex.tv/c/justin-brown",
+    "description": "Personal trainer with over 9 years of experience...",
+    "image": "https://flex-production.s3.amazonaws.com/uploads/channel/profile_image/23/Beach_oblique_raise.jpg",
+    "workLocation": {
+      "@type": "Place",
+      "address": "panama city beach florida"
+    },
+    "offers": {
+      "price": 0
+    }
+  }
+}
+</pre>
+
+<pre class="example" title="Event with venue and images">
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "name": "Midsummer Night's Dream Run",
+  "alternateName": "Midsummer Night's Dream Run: Run away with the fairies!",
+  "description": "To run or not to run, that is the question...",
+  "startDate": "2016-06-21T18:25:00.000Z",
+  "image": [
+      { "@type": "Image", "url": "https://gg-api.s3.amazonaws.com/uploads/photo/image/21667/uploads_2F1462893771268-1wn3a7whgfpopcad-e038cb67411c05d06ff188b0a029dce2_2F20150307_122900.jpg" },
+      { "@type": "Image", "name": "home_wide", "url": "https://gg-api.s3.amazonaws.com/uploads/photo/image/21667/uploads_2F1462893771268-1wn3a7whgfpopcad-e038cb67411c05d06ff188b0a029dce2_2F20150307_122900.jpg" }
+  ],
+  "location": {
+    "@type": "Place",
+    "name": "Vivo Sports & Gym Club",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Welsh Back",
+      "addressLocality": "Bristol",
+      "postalCode": "BS1 4SB"
+    }
+  }
+}
+</pre>
+
+  </section>
+
+    </section>
+
+    <section class='appendix informative'>
+    Acknowledgements
+    ================
+
+    The editors thank [all members](http://www.w3.org/community/openactive/participants) of the Openactive CG for contributions of various kinds.
+    </section>
+  </body>
+</html>

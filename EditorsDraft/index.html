@@ -149,22 +149,25 @@
     </style>
 
     <section id='abstract'>
-This document introduces a high-level data model that describes the key concepts 
-relating to the publication of data about opportunities for people to engage in 
-physical activities. This includes descriptions of activities, events and locations.
+This specification provides a common reference model for opportunity data. It 
+introduces a high-level data model describing the key concepts relevant to 
+publishing data about opportunities for people to engage in physical activity. 
+This includes descriptions of the activities, as well as the events and locations 
+in which they take place.
 
-As a conceptual data model it will provide a common reference point for other 
-specifications and outputs of the OpenActive community group. The model will also 
-highlight how it aligns with data models in existing specifications.
+As a conceptual data model it provides a common reference point for other 
+specifications and outputs of the OpenActive community group. The model may 
+also be useful in guiding the development of both new and existing 
+booking systems and applications that consume opportunity data.
 
-As a common reference model this document may also be useful in guiding the 
-development of both new and existing booking systems and applications that 
-consume opportunity data.
+The conceptual model is mapped to the types and properties defined by 
+[Schema.org](https://schema.org), which provides a useful existing framework 
+upon which the OpenActive Community Group can build.
     </section>
 
     <section id='sotd'>
-The purpose of the document is to represent an early draft. It is likely to 
-change based on discussion within the community.
+The purpose of this document is to represent an early draft to prompt feedback. 
+It will evolve based on discussion within the community.
 
 Contributions to this document are not only welcomed but are actively solicited and 
 should be made via [GitHub Issues](https://github.com/openactive/modelling-opportunity-data/issues) 
@@ -177,12 +180,12 @@ and pull requests. The source code is available on [GitHub](https://github.com/o
 The [W3C Openactive Community Group](http://www.w3.org/community/openactive/) was 
 established with the objective of facilitating the sharing and use of 
 physical activity data. This data is currently largely closed. Open publishing of this 
-data has enormous potential to increase participation in physical activities.
+data has enormous potential to increase people's participation in physical activities.
 
 ## Categories of Physical Activity Data
 
-There are several different categories of data that relate to the physical activity 
-data. This data covers different parts of [the data spectrum](http://theodi.org/data-spectrum) 
+There are several different categories of data that relevant to physical activities. 
+This data covers different parts of [the data spectrum](http://theodi.org/data-spectrum) 
 and is represented in the following diagram.
 
     <figure>
@@ -192,17 +195,17 @@ and is represented in the following diagram.
 
 Some of this data is shared data. It can only be accessed by 
 specific people or groups, under terms and conditions that define how and when 
-it can be accessed and used. This includes personal data about people taking part 
-in activities and other participation data that describes how people have 
-participated in previous events. 
+it can be accessed and used. This shared data includes personal data about 
+people taking part in activities and participation data that describes how people have 
+been involved in previous events. 
 
-But some of this data can be open data. This includes all of the data that 
+Some of this data can be open data. This includes all of the data that 
 describes:
 
-* the location in which an activity or event takes place and any facilities available
+* the location in which an activity or event takes place, along with any facilities available
 * the details of the event itself, e.g. when it will take place, restrictions 
 on attendance, costs, etc
-* any related information, e.g. about a related programme or series of events
+* any related information, e.g. about the format of the event, its organiser, etc
 
 Collectively this is known as "opportunity data".
 
@@ -280,12 +283,13 @@ on a regular recurring schedule.
 
 In order to simplify terminology we recommend the use of the term "Event" to 
 broadly cover individual occurences and regularly occuring activities. Where 
-there is a need to disambiguate, we suggest using "*session*" to refer to an individual 
+there is a need to disambiguate, we suggest using "*Session*" to refer to an individual 
 event taking place at a specific date and time.
 
-A weekly gym class is a useful example of this distinction. As an event it takes 
-place to a regular schedule, e.g. every Tuesday evening. The specific instance 
-of that event taking place this Tuesday at 6pm is a session.
+A weekly gym class provides a useful example of this distinction. As an Event the 
+class takes place on a regular schedule, e.g. every Tuesday evening. There is 
+a specific instance of that event taking place next Tuesday at 6pm. We would refer 
+to the latter as a session.
 
 Regardless of whether an event takes place once or to a regular schedule, there 
 is a common set of information that can describe them, e.g:
@@ -296,6 +300,7 @@ is a common set of information that can describe them, e.g:
 * other descriptive attributes including any associated price, attendance numbers, 
 suitability for a particular audience, method of booking, etc.
   </section>
+
   <section>
 # Mapping to Schema.org
 
@@ -306,19 +311,25 @@ web pages and publishing data in more structured formats like JSON-LD.
 The following sections outline how the concepts important to publishing 
 opportunity data can be described using Schema.org classes and properties.
 
-Additional types and properties not supported by the core vocabulary can be 
-defined using an existing extension mechanism. These extensions are defined later 
-in this document.
+Where Schema.org does not provide necessary types and/or properties to describe 
+all aspects of opportunity data, we will define new terms using their existing 
+extension mechanism.
+
+These extensions will be defined in this document and other supporting 
+specifications.
 
 ## Events and Sessions (<code>Event</code>)
 
-The Schema.org Event type aligns with the definition of Event in this specification. 
-The type has a number of properties that allow the event to be described to a 
-variety of detail levels. It can also be related to a number of other types that 
-help to capture the requirements for physical activities.
+Schema.org [`Event`](https://schema.org/Event) type aligns with the 
+definition of Event in this specification. A number of properties are provided 
+that allow an [`Event`](https://schema.org/Event) to be described to a different 
+levels of detail. 
 
-The following table illustrates different aspects of describing an event 
-map to Schema.org properties.
+An [`Event`](https://schema.org/Event) can also be related to a number of 
+other types that help to capture the requirements for physical activities.
+
+The following table illustrates how the essential aspects of describing an event 
+map to existing Schema.org properties.
 
 <table>
   <thead>
@@ -388,39 +399,35 @@ that only capture addresses, or just as [Text](https://schema.org/Text): "In the
   </tbody>
 </table>
 
-
-Working Notes:
-
-* `typicalAgeRange` may be useful for specifying suitability
-* `doorTime` gives an example of how different types can be specified within an event, similar to cycles that have a start/end time for the event and the actual ride
-* `sponsor` might also be useful in some cases
-
 ### Recurring Events
 
 TODO
 
-**Issue: Schema.org doesn't have a schedule property. We need this to handle 
-recurring Events. There is ongoing discussion around how best to handle this, 
-but [we have an oppportunity to define a schedule property](https://github.com/schemaorg/schemaorg/issues/240#issuecomment-262663653)**
+**[Issue 2](https://github.com/openactive/modelling-opportunity-data/issues/2): Schema.org doesn't handle recurring events**
 
+### Describing Participation Requirements & Restrictions
 
-### Describing Participation Requirements
+**[Issue 3](https://github.com/openactive/modelling-opportunity-data/issues/3): Define additional 
+event properties.**
 
-TODO
+**[Issue 4](https://github.com/openactive/modelling-opportunity-data/issues/4): Decide how to publish controlled vocabularies**
 
-* Audience, suitability
-* Equipment
-* etc
+These are all broadly categories that help to describe an Event:
+
+* Restrictions: e.g. gender, age, membership restrictions
+* Suitability: e.g. level of fitness, experience 
+* Pre-requisites: e.g. membership, equipment needed
+* Categorisation: e.g. intensity of session, activities involved, programme followed
 
 ## Location (<code>Place</code> and <code>EventVenue</code>)
 
-Schema.org provides flexibility around defining the `location` for an `Event`. These 
-can be simple textual descriptions or more structured objects.
+Schema.org takes a flexible approach towards defining the [`location`](https://schema.org/location) 
+for an [`Event`](https://schema.org/Event). This ranges from simply textual descriptions through 
+to more structured representations.
 
-These objects can consist of a [PostalAddress](https://schema.org/PostalAddress) 
-or a more fully defined venue or facility. The core type for this is 
-[Place](https://schema.org/Place) which is then extended by 
-[CivicStructure](https://schema.org/CivicStructure) and [EventVenue](https://schema.org/EventVenue). 
+For example a [`location`](https://schema.org/location) can be defined as a 
+[PostalAddress](https://schema.org/PostalAddress) or a more fully defined [Place](https://schema.org/Place), 
+e.g. a [CivicStructure](https://schema.org/CivicStructure) or [EventVenue](https://schema.org/EventVenue). 
 
 <table>
   <thead>
@@ -470,25 +477,43 @@ or a more fully defined venue or facility. The core type for this is
   </tbody>
 </table>
 
+**[Issue 5](https://github.com/openactive/modelling-opportunity-data/issues/5): decide how to model venue facilities**
+
 ## Activity (<code>PhysicalActivity</code>)
 
-Working notes:
+Activities may be best described using a controlled vocabulary. 
+[SKOS](https://www.w3.org/TR/skos-primer/) defines an existing standard data 
+model that will allow:
 
-* The Health & Life Science extension to Schema.org defines both a [PhysicalActivity](https://health-lifesci.schema.org/PhysicalActivity) and a  
-[PhysicalActivityCategory](https://health-lifesci.schema.org/PhysicalActivityCategory) these migth be reused or generalised for our purposes.
-* [External Enumerations](https://www.w3.org/wiki/WebSchemas/ExternalEnumerations) allow for the use of controlled vocabularies and 
-categories published elsewhere. This gives us a means to 
+* activities to be organised into hierarchies to capture broader-narrow relationships, 
+e.g. "Martial Arts" and "Judo"
+* activities to be related to one another
+* the capturing of standard terms and codes used for indexing data, as well as alternate 
+spellings to support discovery
 
-**Issue: how do we declare which vocabulary, e.g. for activity lists, programmes, etc, that we're using in a dataset?**
+Schema.org allows controlled vocabularies to be referenced as "[External Enumerations](https://www.w3.org/wiki/WebSchemas/ExternalEnumerations)". 
+This will allow standard terms for categories to be related to lists of activities published by 
+individual publishers or as standards across the sector.
+
+**[Issue 6](https://github.com/openactive/modelling-opportunity-data/issues/6): How do we declare which controlled vocabularies we are using in a dataset?**
+
+**[Issue 7](https://github.com/openactive/modelling-opportunity-data/issues/7): Can we use [PhysicalActivity](https://health-lifesci.schema.org/PhysicalActivity) and a  
+[PhysicalActivityCategory](https://health-lifesci.schema.org/PhysicalActivityCategory) types?**
+
+**[Issue 8](https://github.com/openactive/modelling-opportunity-data/issues/8): collect and publish [more example data about activity lists](https://github.com/openactive/w3c-cg-example-data/tree/master/activity-lists)**
 
 ## Programmes
 
-TODO. This is related to Activities.
+Whereas Activities are best described using a controlled vocabulary, Programmes are 
+likely to be more free-form.
 
+**[Issue 9](https://github.com/openactive/modelling-opportunity-data/issues/9): what attributes do we need to capture about Programmes?**
   </section>
 
   <section class='informative'>
 # Illustrative Examples
+
+**[Issue 10](https://github.com/openactive/modelling-opportunity-data/issues/10) Add more examples**
 
 ## Locations
 
@@ -516,6 +541,7 @@ TODO. This is related to Activities.
 
 
 ## Events
+
 
 <pre class="example" title="Event with organiser">
 {

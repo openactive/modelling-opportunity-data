@@ -222,83 +222,145 @@ become more active.
 ## Activities
 
 An __Activity__ is an exercise, sport or other form of bodily movement 
-that involves physical effort. Activities will normally have a well-understood, 
+that involves physical effort. Activities will usually have a well-understood, 
 dictionary definition.
 
 Examples of activities include walking, running and cycling. Sporting activities 
 would include rubgy, football and tennis.
 
 Activities can often be grouped together in different ways. For example Judo, 
-Karate and Kendo are all more specific examples of the broader Martial Arts 
-activity.
+Karate and Kendo are all more specific examples of the broader activity of 
+"Martial Arts".
 
-Activities may have additional information associated with them. For example a 
-sporting activity might be overseen by an governing body or federation.
+ * Martial Arts
+  * Karate
+  * Kendo
+  * Judo
+  
+Activities might also be grouped together in looser collections. For example 
+swimming, water aerobics, and water polo could all be classified as "Water Sports".
+Water polo and football might also be grouped into a collection of "Team Sports"
 
-Activities may also be recognised by different bodies. In the UK certain 
+ * Team Sports
+  * Football
+  * Water Polo
+ * Water Sports
+  * Swimming
+  * Water Aerobics
+  * Water Polo
+
+Some systems may choose to use groupings and hierarchies of activities to 
+help people find opportunities to be active. For example search engine might offer 
+users results for all types of Martial Art, or for Karate specifically.
+
+Activities will have a name, but might also be associated with a number of 
+synomyms that provide alternative names for the activity. E.g. "Soccer" is a synonym 
+for "Football". Again, this information can be useful to help discover opportunities.
+
+Activities may also have additional information associated with them. 
+For example a sporting activity might be overseen by an governing body or federation.
+
+Activities might also be recognised by different bodies. In the UK certain 
 activities are recognised as suitable for educational assessments, while others 
 may be recognised by funding bodies like Sport England.
 
-## Programmes
+An __Activity List__ is the collection of Activities held in an specific system. The 
+list may capture grouping and relationships between Activities, their synonyms, etc.
+The list may be published an open data, for others to acccess, use and share.
 
-Activities are often organised and run in a variety of different ways. This 
-includes tailoring the activity to a particular type of participant, demographic 
-or fitness level. 
-
-A __Programme__ is a particular way of carrying out a physical activity. 
-There is often branding or marketing associated with the programme. This helps 
-participants understand more about how the activity might be organised.
-
-Some programmes are very loosely defined. While others are more structured and 
-may be run to a specific agenda or in a particular style.
-
-Examples of Programmes include:
-
-* Spin Fit which is a means to participate in an activity called Spinning
-* Buggy Fit, which is a Running activity tailored for parents of young children
-* Zumba is a type of dance (or cardiac exercise) activity
-
-When participants are looking for opportunities to take part in an activity they 
-may be interested in either the general activity (e.g. Running) or a 
-specific programme (Buggy Fit).
-
-## Locations
-
-Activities take place in a __Location__. However depending on the activity, location 
-may be more or less tightly defined. For example:
-
-* A gym class may take place in a leisure centre with an address or other precisely defined location
-* A cycling or walking event might start at a specific location, but will follow a route
-* An exercise or running group might meet in a local park, rather than at a specific address
+**Note**: This specification doesn't place any requirements on how applications manage 
+or use activities or activity lists. There is no requirement to adopt a single standardised list, 
+or to agree on a standard grouping. The intention here is to just capture a useful model 
+that can represent the variety of data currently in use.
 
 ## Events and Sessions
 
-An __Event__ is an opportunity to take part in a physical activity. The activity 
-may conform to a particular programme, and takes place at a specified date, time 
-and location.
+An __Event__ is an opportunity to take part in an Activity. Events take place at a 
+specific location (see below) at an agreed date and time.
 
 Some Events are one-off occurences. For example a fun run organised by a local group 
-may run as a one-off event on a particular date. Other events take place 
-on a regular recurring schedule.
+may run as a standalone event on a particular date. 
+
+Other events take place on a regular __schedule__. For example a weekly gym class may 
+run every Wednesday evening at 7pm. While a local walking club might meet on a Saturday 
+morning once a month.
 
 In order to simplify terminology we recommend the use of the term "Event" to 
-broadly cover individual occurences and regularly occuring activities. Where 
-there is a need to disambiguate, we suggest using "*Session*" to refer to an individual 
-event taking place at a specific date and time.
+broadly cover both situations, i.e. individual occurences and regularly occuring events. 
+Where there is a need to disambiguate, we suggest using "*Session*" to refer to an 
+individual event taking place at a specific date and time.
 
-A weekly gym class provides a useful example of this distinction. As an Event the 
-class takes place on a regular schedule, e.g. every Tuesday evening. There is 
-a specific instance of that event taking place next Tuesday at 6pm. We would refer 
-to the latter as a session.
+An Event might occur on a specified __schedule__ whereas a Session will always take 
+place at a specific date and time.
+
+A weekly gym class provides a useful example of this distinction. There is an 
+Event for the regular class meeting, which takes place on a regular schedule, e.g. every Tuesday evening. 
+There is a specific session of that Event taking place next Tuesday at 6pm.
+
+It is useful to publish data about both Events with schedules and individual Sessions. 
+People looking for opportunities to be active will be interested in both specific questions 
+("what can I do tomorrow") and more general information about scheduled activities.
 
 Regardless of whether an event takes place once or to a regular schedule, there 
-is a common set of information that can describe them, e.g:
+will be a range of additional information that will help describe the event. This includes:
 
-* the Location in which it is taking place
-* the Activity being carried out and the Programme being following
+* the Place in which it is taking place
+* the Activity or Activities that will take place 
+* the Format of the event (see below)
 * the Organiser of the event, which might be an individual or an organisation
 * other descriptive attributes including any associated price, attendance numbers, 
 suitability for a particular audience, method of booking, etc.
+
+## Locations, Places and Equipment
+
+Events take place in a __location__. But, depending on the activity, the location 
+may be defined to different levels of precision. For example:
+
+* A gym class may take place in a leisure centre at a specific address or other precisely defined location
+* A cycling or walking event might start at a specific location, but will subsequently follow a route
+* An exercise or running group might meet in an area of a local park, rather than at a specific address
+
+Recognising this need for flexibility, this model proposes that a location can be specified as any of the 
+following:
+
+* a description, e.g. "by the lake in Victoria Park"
+* an address
+* a Place, such as a leisure centre, which might have an address and/or a latitude or longitude
+* a facility within a larger Place, e.g. a football pitch which is contained in a leisure centre
+
+The concept of Place therefore covers general outdoor areas such as parks, as well as venues (e.g. a Leisure centre) 
+and facilities within a venue (e.g. a squash court, running track, etc). Facilities are contained in Places.
+
+Places may have additional descriptive properties, for example:
+
+* a name
+* an address and/or geographic co-ordinates
+* opening hours
+* lists of __equipment__ that are available to people at that location
+
+## Format
+
+Events are often organised and run in a variety of different ways. This tailoring 
+might include adjusting the activity to a particular type of participant, demographic. 
+Or it could include running the event in a particular style, e.g. with a fixed routine 
+or sequence of activities.
+
+A __Format__ describes a method of carrying out a physical activity. Some formats of are very loosely defined. 
+While others are more structured and may be run to a specific agenda or in a particular style.
+
+Formats are often associated with branding or marketing that helps participants understand more about what they 
+can expect from an event of that format. Formats might be offered or overseen by specific organisations
+
+Examples of formats include:
+
+* Les Mills BodyPump
+* Learn to Row, from British Rowing
+* Back to Netball, from England Netball
+
+Formats provide another means of tagging or describing Events to help describe them to 
+participants. When participants are looking for opportunities they may be interested in 
+discovering Events based on either the general activity (e.g. Running) or a specific 
+programme (Back to Netball).
   </section>
 
   <section>

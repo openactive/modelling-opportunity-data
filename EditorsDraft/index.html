@@ -94,8 +94,21 @@
           isRecTrack:   true,
           isNoTrack:    true,
           issueBase:    "https://github.com/openactive/modelling-opportunity-data/issues/",
-          format: "markdown"
-
+          format: "markdown",
+          localBiblio: {
+            //"WEREWOLF": {
+            //  title: "Tremble Puny Villagers",
+            //  href: "http://w3.org/werewolf",
+            //  status: "RSCND",
+            //  publisher: "W3C",
+            //}
+            "JSON-LD": {
+                "href": "https://www.w3.org/TR/json-ld/",
+                "title": "JSON-LD 1.0",
+                "status": "REC",
+                "publisher": "W3C",
+            }
+          }
         };
     </script>
 
@@ -145,6 +158,9 @@
     }
     .remove {
       background-colour: yellow;
+    }
+    code {
+        color: #C83500;
     }
     </style>
 
@@ -202,6 +218,7 @@ been involved in previous events.
 Some of this data can be open data. This includes all of the data that 
 describes:
 
+* descriptions and lists of physical activities 
 * the location in which an activity or event takes place, along with any facilities available
 * the details of the event itself, e.g. when it will take place, restrictions 
 on attendance, costs, etc
@@ -217,11 +234,42 @@ is to encourage the open publishing and reuse of data that can help people
 become more active.
   </section>
   <section>
+# Typographical Conventions   
+
+The following typographic conventions are used in this specification:
+
+<dl class="typography">
+<dt>`markup`</dt>
+<dd>Markup (elements, attributes, properties), machine processable values (string, characters, media types), property name, or a file name is in a monospace font.</dd>
+<dt>__*definition*__</dt>
+<dd>A definition of a term, to be used elsewhere in this or other specifications, is in bold and italics.</dd>
+<dt>[hyperlink]()</dt>
+<dd>A hyperlink is underlined and in blue.</dd>
+<dt>[[reference]]()</dt>
+<dd>A document reference (normative or informative) is enclosed in square brackets and links to the references section.</dd>
+</dl>
+
+<div class="note">
+Notes are in light green boxes with a green left border and with a "Note" header in green. Notes are normative or informative depending on the whether they are in a normative or informative section, respectively.
+</div>
+<pre class="example">
+Examples are in light khaki boxes, with khaki left border, and with a 
+numbered "Example" header in khaki. Examples are always informative. 
+The content of the example is in monospace font and may be syntax colored.
+</pre>
+
+  </section>
+  
+  <section>
 # Key Concepts
 
-## Activities
+## Data Model Diagram
 
-An __Activity__ is an exercise, sport or other form of bodily movement 
+[TODO](https://github.com/openactive/modelling-opportunity-data/issues/11)
+
+## Physical Activities
+
+A __*Physical Activity*__ is an exercise, sport or other form of bodily movement 
 that involves physical effort. Activities will usually have a well-understood, 
 dictionary definition.
 
@@ -239,7 +287,7 @@ Karate and Kendo are all more specific examples of the broader activity of
   
 Activities might also be grouped together in looser collections. For example 
 swimming, water aerobics, and water polo could all be classified as "Water Sports".
-Water polo and football might also be grouped into a collection of "Team Sports"
+Water polo and football might also be grouped into a collection of "Team Sports".
 
  * Team Sports
   * Football
@@ -250,7 +298,7 @@ Water polo and football might also be grouped into a collection of "Team Sports"
   * Water Polo
 
 Some systems may choose to use groupings and hierarchies of activities to 
-help people find opportunities to be active. For example search engine might offer 
+help people find opportunities to be active. For example a search engine might offer 
 users results for all types of Martial Art, or for Karate specifically.
 
 Activities will have a name, but might also be associated with a number of 
@@ -264,18 +312,24 @@ Activities might also be recognised by different bodies. In the UK certain
 activities are recognised as suitable for educational assessments, while others 
 may be recognised by funding bodies like Sport England.
 
-An __Activity List__ is the collection of Activities held in an specific system. The 
-list may capture grouping and relationships between Activities, their synonyms, etc.
+An __*Activity List*__ describes a set of Activities. This list may be a simple collection of keywords 
+and tags, or it might capture grouping and relationships between Activities, their synonyms, etc.
 The list may be published an open data, for others to acccess, use and share.
 
-**Note**: This specification doesn't place any requirements on how applications manage 
-or use activities or activity lists. There is no requirement to adopt a single standardised list, 
-or to agree on a standard grouping. The intention here is to just capture a useful model 
-that can represent the variety of data currently in use.
+<div class="note">
+This specification doesn't place any requirements on how applications manage 
+or use activities or activity lists. There is no requirement that applications that 
+implement this specification should adopt a single standardised list, 
+or agree on standard groupings. The intention here is to just capture a useful model 
+that can represent the variety of data currently in use. However there may be benefits to 
+the physical activity sector 
+</div>
 
-## Events and Sessions
+**[Issue 15](https://github.com/openactive/modelling-opportunity-data/issues/15)**: Disciplines for Activities
 
-An __Event__ is an opportunity to take part in an Activity. Events take place at a 
+## Events
+
+An __*Event*__ is an opportunity to take part in an Activity. Events take place at a 
 specific location (see below) at an agreed date and time.
 
 Some Events are one-off occurences. For example a fun run organised by a local group 
@@ -286,11 +340,16 @@ run every Wednesday evening at 7pm. While a local walking club might meet on a S
 morning once a month.
 
 In order to simplify terminology we recommend the use of the term "Event" to 
-broadly cover both situations, i.e. individual occurences and regularly occuring events. 
-Where there is a need to disambiguate, we suggest using "*Session*" to refer to an 
-individual event taking place at a specific date and time.
+refer to both individual occurences and regularly occuring events. 
 
-An Event might occur on a specified __schedule__ whereas a Session will always take 
+<div class="note">
+Where there is a need to disambiguate between individual and regularly occuring events in 
+written documentation, we suggest using "session" to refer to an individual event taking 
+place at a specific date and time. But this is suggested purely to improve discussion, sessions 
+are not features of the model presented in this specification. 
+</div>
+
+An Event might occur on a specified __*schedule*__ whereas a Session will always take 
 place at a specific date and time.
 
 A weekly gym class provides a useful example of this distinction. There is an 
@@ -311,9 +370,15 @@ will be a range of additional information that will help describe the event. Thi
 * other descriptive attributes including any associated price, attendance numbers, 
 suitability for a particular audience, method of booking, etc.
 
-## Locations, Places and Equipment
+**[Issue 14](https://github.com/openactive/modelling-opportunity-data/issues/14)**: Settings, style, purposes for Events
 
-Events take place in a __location__. But, depending on the activity, the location 
+## Organisers
+
+[TODO](https://github.com/openactive/modelling-opportunity-data/issues/16)
+
+## Locations, Places and Venues
+
+Events take place in a __*location*__. But, depending on the activity, the location 
 may be defined to different levels of precision. For example:
 
 * A gym class may take place in a leisure centre at a specific address or other precisely defined location
@@ -340,12 +405,14 @@ Places may have additional descriptive properties, for example:
 
 ## Format
 
+**[Issue 13](https://github.com/openactive/modelling-opportunity-data/issues/13)**: Format or Programme?
+
 Events are often organised and run in a variety of different ways. This tailoring 
 might include adjusting the activity to a particular type of participant, demographic. 
 Or it could include running the event in a particular style, e.g. with a fixed routine 
 or sequence of activities.
 
-A __Format__ describes a method of carrying out a physical activity. Some formats of are very loosely defined. 
+A __*Format*__ describes a method of carrying out a physical activity. Some formats of are very loosely defined. 
 While others are more structured and may be run to a specific agenda or in a particular style.
 
 Formats are often associated with branding or marketing that helps participants understand more about what they 
@@ -368,7 +435,7 @@ programme (Back to Netball).
 
 Schema.org provides an existing well-used and documented data model for publishing 
 data to the web. It can be used in a variety of use cases including marking up 
-web pages and publishing data in more structured formats like JSON-LD.
+web pages and publishing data in more structured formats like [[JSON-LD]].
 
 The following sections outline how the concepts important to publishing 
 opportunity data can be described using Schema.org classes and properties.
@@ -380,7 +447,7 @@ extension mechanism.
 These extensions will be defined in this document and other supporting 
 specifications.
 
-## Events and Sessions (<code>Event</code>)
+## Events (<code>Event</code>)
 
 Schema.org [`Event`](https://schema.org/Event) type aligns with the 
 definition of Event in this specification. A number of properties are provided 
@@ -558,9 +625,6 @@ This will allow standard terms for categories to be related to lists of activiti
 individual publishers or as standards across the sector.
 
 **[Issue 6](https://github.com/openactive/modelling-opportunity-data/issues/6): How do we declare which controlled vocabularies we are using in a dataset?**
-
-**[Issue 7](https://github.com/openactive/modelling-opportunity-data/issues/7): Can we use [PhysicalActivity](https://health-lifesci.schema.org/PhysicalActivity) and a  
-[PhysicalActivityCategory](https://health-lifesci.schema.org/PhysicalActivityCategory) types?**
 
 **[Issue 8](https://github.com/openactive/modelling-opportunity-data/issues/8): collect and publish [more example data about activity lists](https://github.com/openactive/w3c-cg-example-data/tree/master/activity-lists)**
 

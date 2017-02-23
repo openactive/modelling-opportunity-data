@@ -25,7 +25,7 @@
           //prevED:  "https://www.openactive.io/spec-template/",
           //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
           //testSuiteURI: "https://www.openactive.io/endpoint-validator/",
-          copyrightStart: 2016,
+          copyrightStart: 2017,
 
           // if this is a LCWD, uncomment and set the end of its review period
           // lcEnd: "2009-08-05",
@@ -96,12 +96,6 @@
           issueBase:    "https://github.com/openactive/modelling-opportunity-data/issues/",
           format: "markdown",
           localBiblio: {
-            //"WEREWOLF": {
-            //  title: "Tremble Puny Villagers",
-            //  href: "http://w3.org/werewolf",
-            //  status: "RSCND",
-            //  publisher: "W3C",
-            //}
             "JSON-LD": {
                 "href": "https://www.w3.org/TR/json-ld/",
                 "title": "JSON-LD 1.0",
@@ -112,6 +106,12 @@
                 "href": "http://schema.org/",
                 "title": "Schema.org"
                 
+            },
+            "SKOS": {
+                "href": "https://www.w3.org/TR/skos-primer",
+                "title": "SKOS Simple Knowledge Organization System Primer",
+                "status": "NOTE",
+                "publisher": "W3C",            
             }
           }
         };
@@ -170,20 +170,25 @@
     </style>
 
     <section id='abstract'>
-This specification provides a common reference model for opportunity data. It 
-introduces a high-level data model describing the key concepts relevant to 
-publishing data about opportunities for people to engage in physical activity. 
-This includes descriptions of the activities, as well as the events and locations 
-in which they take place.
+This specification introduces a common data model that supports the publication of 
+information about opportunities for people to engage in physical activities ("opportunity data"). 
 
-As a conceptual data model it provides a common reference point for other 
-specifications and outputs of the OpenActive community group. The model may 
-also be useful in guiding the development of both new and existing 
-booking systems and applications that consume opportunity data.
+The model covers description of activities, as well as the events and locations in 
+which they take place. The specification is intended to support the publication 
+of opportunity data as open data for anyone to access, use and share. It will also guide reusers 
+of opportunity data, introducing them to the key concepts relevant to that sector.
 
-The conceptual model is mapped to the types and properties defined by 
-[Schema.org](https://schema.org), which provides a useful existing framework 
-upon which the OpenActive Community Group can build.
+The model may also be useful in guiding the development of both new and existing booking 
+systems and applications that consume opportunity data.
+
+The specification is an output of the [Openactive Community Group](http://www.w3.org/community/openactive/) 
+and serves as a common reference point for other specifications and outputs of that activity.
+
+The data model introduced in this document has been mapped to existing standards and vocabularies, including 
+SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. 
+
+This existing work provides a useful existing framework around which the 
+[Openactive Community Group](http://www.w3.org/community/openactive/) can build custom data standards.
     </section>
 
     <section id='sotd'>
@@ -220,24 +225,41 @@ it can be accessed and used. This shared data includes personal data about
 people taking part in activities and participation data that describes how people have 
 been involved in previous events. 
 
-Some of this data can be open data. This includes all of the data that 
-describes:
+Some of this data can be open data. Open data is data that anyone can access, use and share. 
+All of the following types of data can be published as open data:
 
 * descriptions and lists of physical activities 
-* the location in which an activity or event takes place, along with any facilities available
-* the details of the event itself, e.g. when it will take place, restrictions 
+* details of the locations and venues at which activities or events takes plac
+* the facilities available at those locations
+* the details of event involving physical activities e.g. when and where they will take place, restrictions 
 on attendance, costs, etc
 * any related information, e.g. about the format of the event, its organiser, etc
 
-Collectively this is known as "opportunity data".
+Collectively this is known as __*opportunity data*__.
 
-## Scope of this Specification
+## Scope
 
-This specification provides a common reference model for opportunity data. This 
-reflects the goal of [the OpenActive project](https://www.openactive.io/) which 
-is to encourage the open publishing and reuse of data that can help people 
-become more active.
+This specification defines a data model for opportunity data. This reflects the 
+goal of [the OpenActive project](https://www.openactive.io/) whose aim is to 
+encourage the publishing and reuse of open data that might help people to become 
+more active.
+
+It is expected that the [Openactive Community Group](http://www.w3.org/community/openactive/) 
+will produce additional specifications that cover other aspects of achieving this 
+goal, e.g. event bookings, etc.
+
+## Structure of this document
+
+This specification is divided into three main sections:
+
+1. **Key Concepts** - describes a conceptual data model that identifies the key resources described by opportunity data. The model also identifies their relationships and common attributes
+2. **Mapping to Standard Vocabularies** - a mapping of the conceptual data model to [[SKOS]] and the Schema.org ([[SCHEMA-ORG]]) types and properties.
+3. **Worked Examples** - examples that illustrate how to use JSON-LD and the standard vocabularies to structure opportunity data
+
+
   </section>
+
+
   <section>
 # Typographical Conventions   
 
@@ -268,7 +290,19 @@ The content of the example is in monospace font and may be syntax colored.
   <section>
 # Key Concepts
 
+This section introduces the high-level data model for opportunity data. This includes a 
+description of the:
+
+* the resources that are relevant to opportunity data, e.g. places, events, activities, etc
+* the relationships between those resources
+* the main attributes that help to describe those resources, e.g. names, dates, etc
+
+The model also helps to provide definitions of key terms that are used throughout this 
+specification.
+
 ## Data Model Diagram
+
+This diagram illustrates the resources and relationships that are introduced in the following sections.
 
     <figure>
       ![](images/schema-diagram.png)
@@ -278,23 +312,41 @@ The content of the example is in monospace font and may be syntax colored.
 ## Physical Activities
 
 A __*Physical Activity*__ is an exercise, sport or other form of bodily movement 
-that involves physical effort. Activities will usually have a well-understood, 
+that involves physical effort. Physical activities will usually have a well-understood, 
 dictionary definition.
 
-Examples of activities include walking, running and cycling. Sporting activities 
-would include rubgy, football and tennis.
+Examples of Physical Activities include walking, running, cycling, rugby, football and tennis
 
-Activities can often be grouped together in different ways. For example Judo, 
-Karate and Kendo are all more specific examples of the broader activity of 
+Activities should have a name. They might also be associated with one of more synomyms 
+that provide alternative names for that activity. E.g. "Soccer" is a synonym 
+for "Football". This additional information may be useful to help improve search engines and 
+improve data collection.
+
+Physical Activities may also have additional information associated with them. 
+For example a sporting activity might be overseen by an governing body or federation.
+
+Physical Activities might also be recognised by different bodies. In the UK certain 
+activities are recognised as suitable for educational assessments, while others 
+may be recognised by funding bodies like Sport England.
+
+An __*Activity List*__ describes a set of Physical Activities. An Activity List may be a 
+simple list of activity names. But an Activity List might also capture additional information. 
+A common requirement is to describe relationships between Physical Activities.
+
+One method of grouping activities is to define "broader" and "narrower" relationships.
+For example Judo, Karate and Kendo are all more specific examples of the broader activity of 
 "Martial Arts".
 
  * Martial Arts
   * Karate
   * Kendo
   * Judo
-  
-Activities might also be grouped together in looser collections. For example 
-swimming, water aerobics, and water polo could all be classified as "Water Sports".
+
+This type of grouping could also be used to describe the disciplines associated with 
+Physical Activities. For example olympic and open water swimming.
+
+An Activity List might also group Physical Activities into collections. For example 
+swimming, water aerobics, and water polo might all be classified as "Water Sports".
 Water polo and football might also be grouped into a collection of "Team Sports".
 
  * Team Sports
@@ -305,39 +357,39 @@ Water polo and football might also be grouped into a collection of "Team Sports"
   * Water Aerobics
   * Water Polo
 
-Some systems may choose to use groupings and hierarchies of activities to 
-help people find opportunities to be active. For example a search engine might offer 
-users results for all types of Martial Art, or for Karate specifically.
+An Activity List may include any number of collections of Physical Activities. As shown in the 
+example above, an individual Physical Activity might be present in more than one grouping. 
 
-Activities will have a name, but might also be associated with a number of 
-synomyms that provide alternative names for the activity. E.g. "Soccer" is a synonym 
-for "Football". Again, this information can be useful to help discover opportunities.
+Some systems may choose to use grouping and hierarchical relationships between 
+Physical Activities to help people find opportunities to be active. For example 
+a search engine might offer users results for all types of Martial Art, or for Karate specifically.
 
-Activities may also have additional information associated with them. 
-For example a sporting activity might be overseen by an governing body or federation.
-
-Activities might also be recognised by different bodies. In the UK certain 
-activities are recognised as suitable for educational assessments, while others 
-may be recognised by funding bodies like Sport England.
-
-An __*Activity List*__ describes a set of Activities. This list may be a simple collection of keywords 
-and tags, or it might capture grouping and relationships between Activities, their synonyms, etc.
-The list may be published an open data, for others to acccess, use and share.
+<div class="note">
+It is not a requirement that systems store, publish or use relationships between 
+Physical Activities. A system may choose to treat Physical Activities as simple tags 
+or categories associated with Events. Other systems may define a fixed list of 
+Physical Activities that are used as a controlled vocabulary to guides user input 
+and data collection. Others may adopt a more complex hierarchical approach.
+</div>
 
 <div class="note">
 This specification doesn't place any requirements on how applications manage 
-or use activities or activity lists. There is no requirement that applications that 
+or use Physical Activities or Activity Lists. There is no requirement that applications that 
 implement this specification should adopt a single standardised list, 
 or agree on standard groupings. The intention here is to just capture a useful model 
 that can represent the variety of data currently in use. However there may be benefits to 
-the physical activity sector 
+the physical activity sector in converging on a standard list of Physical Activities to 
+improve discovery, reporting, etc.
 </div>
 
-**[Issue 15](https://github.com/openactive/modelling-opportunity-data/issues/15)**: Disciplines for Activities
+<div class="note">
+The proposed model for Activity Lists is based on the [[SKOS]] standard for publishing controlled 
+vocabularies. See later section on [Controlled Vocabularies](#controlled-vocabularies).
+</div>
 
 ## Events
 
-An __*Event*__ is an opportunity to take part in an Activity. Events take place at a 
+An __*Event*__ is an opportunity to take part in a Physical Activity. Events take place at a 
 specific location (see below) at an agreed date and time.
 
 Some Events are one-off occurences. For example a fun run organised by a local group 
@@ -368,23 +420,46 @@ It is useful to publish data about both Events with schedules and individual Ses
 People looking for opportunities to be active will be interested in both specific questions 
 ("what can I do tomorrow") and more general information about scheduled activities.
 
-Regardless of whether an event takes place once or to a regular schedule, there 
-will be a range of additional information that will help describe the event. This includes:
+Regardless of whether an event takes place only once or happens on a regular schedule, there 
+is a range of additional information that may help describe the event to potential participants. 
+This includes:
 
-* the Place in which it is taking place
-* the Activity or Activities that will take place 
-* the Format of the event (see below)
+* the Physical Activity or Activities that will take place at the event
+* the location (Place or Venue) in which it is taking place
 * the Organiser of the event, which might be an individual or an organisation
-* other descriptive attributes including any associated price, attendance numbers, 
-suitability for a particular audience, method of booking, etc.
+* the Format of the event
+* booking information, including price, attendance numbers and method of booking
+* descriptive attributes, such as participation requirements or restrictions
 
-**[Issue 14](https://github.com/openactive/modelling-opportunity-data/issues/14)**: Settings, style, purposes for Events
+Broadly, the descriptive attributes associated with an event might include any or 
+all of the following:
+
+* restrictions: e.g. on gender, age ranges, membership requirements
+* suitability: e.g. fitness levels, experience, or age ranges
+* pre-requisites: e.g. equipment or qualifications needed
+* categorisation: e.g. intensity of session
+* purpose: e.g. training, leisure, competition, etc
+* structure: e.g. formal, informal
+
+These attributes may use values taken from [Controlled Vocabularies](#controlled-vocabulary).
 
 ## Organisers
 
-[TODO](https://github.com/openactive/modelling-opportunity-data/issues/16)
+Events have __*organisers*__. An event organiser might be a person or an organisation. 
+The organiser of an event is the person or organisation who arranged and/or hosts the event.
 
-## Locations, Places and Venues
+Examples of organisers might be coaches, or a local sports club.
+
+Events may involve other named individuals or organisations. Examples might include named staff who will be participating 
+in the event in addition to the main organiser. These are referred to as __*contributors*__.
+
+Organisations might also be a __*funder*__ of an event: supporting or sponsoring an event through some form of 
+financial contribution.
+
+In addition to their names, some systems may have additional information about organisers and contributors. 
+E.g. links to their web sites, photos, logos or contact details.
+
+## Locations: Places and Venues
 
 Events take place in a __*location*__. But, depending on the activity, the location 
 may be defined to different levels of precision. For example:
@@ -420,7 +495,7 @@ might include adjusting the activity to a particular type of participant, demogr
 Or it could include running the event in a particular style, e.g. with a fixed routine 
 or sequence of activities.
 
-A __*Format*__ describes a method of carrying out a physical activity. Some formats of are very loosely defined. 
+A __*Format*__ describes a method of carrying out a Physical Activity. Some formats of are very loosely defined. 
 While others are more structured and may be run to a specific agenda or in a particular style.
 
 Formats are often associated with branding or marketing that helps participants understand more about what they 
@@ -436,33 +511,160 @@ Formats provide another means of tagging or describing Events to help describe t
 participants. When participants are looking for opportunities they may be interested in 
 discovering Events based on either the general activity (e.g. Running) or a specific 
 programme (Back to Netball).
+
+## Controlled Vocabulary
+
+As described in the previous sections, Events may be categorised or tagged with additional properties 
+that help describe it to participants. Publishing this information as structured data, rather than as 
+a simple summary or event description can help create better discovery tools. 
+
+For example an application might allow a user to filter a list of Events based on their suitability 
+for specific age ranges, ability levels, etc.
+
+It can be useful to publish __*Controlled Vocabularies*__ that provide lists of values for these 
+properties.
+
+Activity Lists are another example of where a controlled vocabulary is used to help organise 
+opportunity data.
+
+Systems publishing opportunity data might also openly publish their controlled vocabularies to help 
+users of their data to use and understand it.
+
+Reusing controlled vocabularies across the sector can help users integrate data that comes from different 
+systems.
+
+Like Activity Lists, other controlled vocabularies that support the publication of opportunity data 
+will be published and shared according to the W3C [[SKOS]] standard.
+
+<div class="note">
+Systems that publish and use opportunity data will not be required to use fixed set of controlled 
+vocabularies. This specification just outlines how they can be publish and shared. But, similar to 
+Activity Lists, convergence on standardised controlled vocabulary might be useful for the physical 
+activity sector. 
+</div>
+
   </section>
 
   <section>
-# Mapping to Schema.org
+# Mapping to Standard Vocabularies
+
+## Overview of the standard vocabularies
+
+### SKOS
+
+The Simple Knowledge Organisation System ([[SKOS]]) is a W3C standard for publishing taxonomies and 
+controlled vocabularies. In the context of opportunity data, SKOS provides a means for publishing:
+
+* [Activity Lists](#physical-activities), as it supports publishing both simple lists of terms and 
+hierarchical taxonomies. SKOS also provides support for capturing other relationships between 
+terms and synonyms
+* other [Controlled Vocabularies](#controlled-vocabularies) used to help describe [Events](#events)
+
+This data is likely to be published separately to the other types of opportunity data which will be 
+more regularly updated.
+
+### Schema.org
 
 Schema.org [[SCHEMA-ORG]] provides an existing well-used and documented data model for publishing 
 data to the web. It can be used in a variety of use cases including marking up 
-web pages and publishing data in more structured formats like [[JSON-LD]].
+web pages and publishing data in more structured formats such as [[JSON-LD]].
 
-The following sections outline how the concepts important to publishing 
-opportunity data can be described using Schema.org classes and properties.
+The following sections outline how the resources, relationships and attributes relevant to publishing 
+opportunity data can be described using existing Schema.org classes and properties.
 
-Where Schema.org does not provide necessary types and/or properties to describe 
-all aspects of opportunity data, we will define new terms using their existing 
-extension mechanism.
+### Future Extensions
 
-These extensions will be defined in this document and other supporting 
-specifications.
+Where SKOS and Schema.org do not provide necessary types and/or properties to describe all 
+aspects of opportunity data, the OpenActive Community Group will define new terms 
+using their existing extension mechanisms.
 
-## Events (<code>Event</code>)
+These extensions will be defined in this document and other supporting specifications.
 
-Schema.org [`Event`](https://schema.org/Event) type aligns with the 
+**[Issue 17](https://github.com/openactive/modelling-opportunity-data/issues/17)**: Add section on extending the model in the specification.
+
+## Namespaces
+
+The following sections make use of the following namespaces:
+
+<dl>
+<dt>`schema:`</dt>
+<dd>`http://schema.org/`</dd>
+<dt>`skos:`</dt>
+<dd>`http://www.w3.org/2004/02/skos/core#`</dd>
+</dl>
+
+## Mapping Summary
+
+TODO: add table illustrates how resources map to Schema.org types.
+
+<table>
+  <thead>
+    <th>Concept</th>
+    <th>Mapping</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Physical Activity</td>
+      <td>`skos:Concept`</td>
+      <td></td>
+    <tr>
+    <tr>
+      <td>Activity List</td>
+      <td>`skos:ConceptScheme`</td>
+      <td></td>
+    <tr>
+    <tr>
+      <td>Event</td>
+      <td>`schema:Event`</td>
+      <td></td>
+    <tr>
+    <tr>
+      <td>Place</td>
+      <td>`schema:Place`</td>
+      <td></td>
+    <tr>
+    <tr>
+      <td>Venue</td>
+      <td>`schema:EventVenue`</td>
+      <td></td>
+    <tr>
+    <tr>
+      <td>Organisation</td>
+      <td>`schema:Organization`</td>
+      <td></td>
+    <tr>
+    <tr>
+      <td>Person</td>
+      <td>`schema:Person`</td>
+      <td></td>
+    <tr>
+    <tr>
+      <td>Format</td>
+      <td></td>
+      <td></td>
+    <tr>    
+    <tr>
+      <td>Controlled Vocabulary</td>
+      <td>`schema:ConceptScheme`</td>
+      <td></td>
+    <tr>
+    <tr>
+      <td>Controlled Vocabulary Term</td>
+      <td>`schema:Concept`</td>
+      <td></td>
+    <tr>
+  </tbody>
+</table>  
+
+## Events (<code>schema:Event</code>)
+
+Schema.org [`schema:Event`](https://schema.org/Event) type aligns with the 
 definition of Event in this specification. A number of properties are provided 
 that allow an [`Event`](https://schema.org/Event) to be described to a different 
 levels of detail. 
 
-An [`Event`](https://schema.org/Event) can also be related to a number of 
+A [`schema:Event`](https://schema.org/Event) can also be related to a number of 
 other types that help to capture the requirements for physical activities.
 
 The following table illustrates how the essential aspects of describing an event 
@@ -471,7 +673,7 @@ map to existing Schema.org properties.
 <table>
   <thead>
     <th>Aspect</th>
-    <th>Schema.org Properties</th>
+    <th>Properties</th>
     <th>Notes</th>
   </thead>
   <tbody>
@@ -479,10 +681,10 @@ map to existing Schema.org properties.
       <td>Description</td>
       <td>
         <ul>
-          <li>[`name`](https://schema.org/name)</li>
-          <li>[`url`](https://schema.org/url)</li>
-          <li>[`description`](https://schema.org/description)</li>
-          <li>[`image`](https://schema.org/image)</li>
+          <li>[`schema:name`](https://schema.org/name)</li>
+          <li>[`schema:url`](https://schema.org/url)</li>
+          <li>[`schema:description`](https://schema.org/description)</li>
+          <li>[`schema:image`](https://schema.org/image)</li>
         </ul>
       </td>
       <td>URL, description and representative images can be associated with any 
@@ -492,45 +694,45 @@ map to existing Schema.org properties.
       <td>Time</td>
       <td>
         <ul>
-          <li>[`startDate`](https://schema.org/startDate)</li>
-          <li>[`endDate`](https://schema.org/endDate)</li>
-          <li>[`duration`](https://schema.org/duration)</li>
+          <li>[`schema:startDate`](https://schema.org/startDate)</li>
+          <li>[`schema:endDate`](https://schema.org/endDate)</li>
+          <li>[`schema:duration`](https://schema.org/duration)</li>
         </ul>
       </td>
-      <td>Can be specified as [Dates](https://schema.org/Date) and 
-      [DateTime](https://schema.org/DateTime) giving flexibility in precision.</td>
+      <td>Can be specified as a [`schema:Date`](https://schema.org/Date) or
+      [`schema:DateTime`](https://schema.org/DateTime) giving flexibility in precision.</td>
     </tr>
     <tr>
       <td>Location</td>
       <td>
         <ul>
-          <li>[`location`](https://schema.org/location)</li>
+          <li>[`schema:location`](https://schema.org/location)</li>
         </ul>
       </td>
       <td>There is flexibility in precision here as the location can be a 
-[Place](https://schema.org/Place) with a fully described geographic location 
-and/or address. A [PostalAddress](https://schema.org/PostalAddress) for systems 
-that only capture addresses, or just as [Text](https://schema.org/Text): "In the park, near the lake"</td>
+[`schema:Place`](https://schema.org/Place) with a fully described geographic location 
+and/or address. A [`schema:PostalAddress`](https://schema.org/PostalAddress) for systems 
+that only capture addresses, or just as [`schema:Text`](https://schema.org/Text): "In the park, near the lake"</td>
     </tr>
     <tr>
       <td>Organiser</td>
       <td>
         <ul>
-          <li>[`organizer`](https://schema.org/organizer)</li>
-          <li>[`contributor`](https://schema.org/contributor)</li>
+          <li>[`schema:organizer`](https://schema.org/organizer)</li>
+          <li>[`schema:contributor`](https://schema.org/contributor)</li>
         </ul>
-      <td>An organizer can be an [Organization](https://schema.org/Organization) or 
-      a [Person]((https://schema.org/Person). These support additional descriptive 
+      <td>An organizer can be an [`schema:Organization`](https://schema.org/Organization) or 
+      a [`schema:Person`]((https://schema.org/Person). These support additional descriptive 
       properties. Contributor, e.g. named staff or helpers can also be included</td>
     </tr>
     <tr>
       <td>Offers</td>
       <td>
         <ul>
-          <li>[`offers`](https://schema.org/offers)</li>
+          <li>[`schema:offers`](https://schema.org/offers)</li>
         </ul>
       </td>
-      <td>The [Offer](https://schema.org/Offer) type draws on a well used vocabulary for ecommerce so provides a variety of ways 
+      <td>The [`schema:Offer`](https://schema.org/Offer) type draws on a well used vocabulary for ecommerce so provides a variety of ways 
       to describe, e.g. pricing, availability, etc </td>
     </tr>
   </tbody>
@@ -556,20 +758,20 @@ These are all broadly categories that help to describe an Event:
 * Pre-requisites: e.g. membership, equipment needed
 * Categorisation: e.g. intensity of session, activities involved, programme followed
 
-## Location (<code>Place</code> and <code>EventVenue</code>)
+## Location (<code>schema:Place</code> and <code>schema:EventVenue</code>)
 
 Schema.org takes a flexible approach towards defining the [`location`](https://schema.org/location) 
 for an [`Event`](https://schema.org/Event). This ranges from simply textual descriptions through 
 to more structured representations.
 
 For example a [`location`](https://schema.org/location) can be defined as a 
-[PostalAddress](https://schema.org/PostalAddress) or a more fully defined [Place](https://schema.org/Place), 
-e.g. a [CivicStructure](https://schema.org/CivicStructure) or [EventVenue](https://schema.org/EventVenue). 
+[`schema:PostalAddress`](https://schema.org/PostalAddress) or a more fully defined [`schema:Place`](https://schema.org/Place), 
+e.g. a [`schema:CivicStructure`](https://schema.org/CivicStructure) or [`schema:EventVenue`](https://schema.org/EventVenue). 
 
 <table>
   <thead>
     <th>Aspect</th>
-    <th>Schema.org Properties</th>
+    <th>Properties</th>
     <th>Notes</th>
   </thead>
   <tbody>
@@ -577,11 +779,11 @@ e.g. a [CivicStructure](https://schema.org/CivicStructure) or [EventVenue](https
       <td>Description</td>
       <td>
         <ul>
-          <li>[`name`](https://schema.org/name)</li>
-          <li>[`url`](https://schema.org/url)</li>
-          <li>[`description`](https://schema.org/description)</li>
-          <li>[`image`](https://schema.org/image)</li>
-          <li>[`photo`](https://schema.org/photo)</li>
+          <li>[`schema:name`](https://schema.org/name)</li>
+          <li>[`schema:url`](https://schema.org/url)</li>
+          <li>[`schema:description`](https://schema.org/description)</li>
+          <li>[`schema:image`](https://schema.org/image)</li>
+          <li>[`schema:photo`](https://schema.org/photo)</li>
         </ul>
       </td>
       <td>URL, description and representative images can be associated with any 
@@ -591,8 +793,8 @@ e.g. a [CivicStructure](https://schema.org/CivicStructure) or [EventVenue](https
       <td>Physical Location</td>
       <td>
         <ul>
-          <li>[`address`](https://schema.org/address)</li>
-          <li>[`geo`](https://schema.org/geo)</li>
+          <li>[`schema:address`](https://schema.org/address)</li>
+          <li>[`schema:geo`](https://schema.org/geo)</li>
         </ul>
       </td>
       <td>Physical locations can be defined as text, an address or a precise 
@@ -603,11 +805,11 @@ e.g. a [CivicStructure](https://schema.org/CivicStructure) or [EventVenue](https
       <td>Misc</td>
       <td>
         <ul>
-          <li>[`telephone`](https://schema.org/address)</li>
-          <li>[`openingHoursSpecification`](https://schema.org/openingHoursSpecification)</li>
+          <li>[`schema:telephone`](https://schema.org/address)</li>
+          <li>[`schema:openingHoursSpecification`](https://schema.org/openingHoursSpecification)</li>
         </ul>
       </td>
-      <td>The [OpeningHoursSpecification](https://schema.org/OpeningHoursSpecification) provides 
+      <td>The [`schema:OpeningHoursSpecification`](https://schema.org/OpeningHoursSpecification) provides 
       some support for describing when a location can be used</td>
     </tr>
 
@@ -616,7 +818,7 @@ e.g. a [CivicStructure](https://schema.org/CivicStructure) or [EventVenue](https
 
 **[Issue 5](https://github.com/openactive/modelling-opportunity-data/issues/5): decide how to model venue facilities**
 
-## Activity (<code>PhysicalActivity</code>)
+## Physical Activity (<code>PhysicalActivity</code>)
 
 Activities may be best described using a controlled vocabulary. 
 [SKOS](https://www.w3.org/TR/skos-primer/) defines an existing standard data 
@@ -636,9 +838,9 @@ individual publishers or as standards across the sector.
 
 **[Issue 8](https://github.com/openactive/modelling-opportunity-data/issues/8): collect and publish [more example data about activity lists](https://github.com/openactive/w3c-cg-example-data/tree/master/activity-lists)**
 
-## Programmes
+## Formats (<code>skos:Concept</code>)
 
-Whereas Activities are best described using a controlled vocabulary, Programmes are 
+Whereas Activities are best described using a controlled vocabulary, Formats are 
 likely to be more free-form.
 
 **[Issue 9](https://github.com/openactive/modelling-opportunity-data/issues/9): what attributes do we need to capture about Programmes?**

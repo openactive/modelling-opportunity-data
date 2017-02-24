@@ -252,8 +252,8 @@ goal, e.g. event bookings, etc.
 
 This specification is divided into three main sections:
 
-1. **Key Concepts** - describes a conceptual data model that identifies the key resources described by opportunity data. The model also identifies their relationships and common attributes
-2. **Mapping to Standard Vocabularies** - a mapping of the conceptual data model to [[SKOS]] and the Schema.org ([[SCHEMA-ORG]]) types and properties.
+1. **Key Concepts** - describes the key types of resources relevant to opportunity data, along with their relationships and common attributes
+2. **Data Model** - a data model that maps the key concepts to some standard vocabularies
 3. **Worked Examples** - examples that illustrate how to use JSON-LD and the standard vocabularies to structure opportunity data
 
 
@@ -468,15 +468,19 @@ may be defined to different levels of precision. For example:
 * A cycling or walking event might start at a specific location, but will subsequently follow a route
 * An exercise or running group might meet in an area of a local park, rather than at a specific address
 
+In addition to this, data publishers will have different approaches for capturing location data.
+
 Recognising this need for flexibility, this model proposes that a location can be specified as any of the 
 following:
 
-* a description, e.g. "by the lake in Victoria Park"
+* a description, e.g. "Meet by the lake, in Victoria Park"
 * an address
-* a Place, such as a leisure centre, which might have an address and/or a latitude or longitude
-* a facility within a larger Place, e.g. a football pitch which is contained in a leisure centre
+* a venue, such as a leisure centre, which might have an address and/or a latitude or longitude
+* a facility within a larger venue, e.g. a football pitch which is part of a leisure centre
 
-The concept of Place therefore covers general outdoor areas such as parks, as well as venues (e.g. a Leisure centre) 
+This specification uses __*Place*__ as a general concept to refer to both venues and facilities. 
+
+The concept of Place therefore covers general outdoor areas such as parks, event venues (e.g. a Leisure centre) 
 and facilities within a venue (e.g. a squash court, running track, etc). Facilities are contained in Places.
 
 Places may have additional descriptive properties, for example:
@@ -484,7 +488,11 @@ Places may have additional descriptive properties, for example:
 * a name
 * an address and/or geographic co-ordinates
 * opening hours
-* lists of __equipment__ that are available to people at that location
+* a list of __*equipment*__ that is available for people to use at that location
+
+To help distinguish between equipment and facilities: facilities will be fixed features of a location, e.g. 
+squash courts or a walking trail; equipment will be items like table tennis tables that may be moved around 
+a facility.
 
 ## Format
 
@@ -512,6 +520,28 @@ participants. When participants are looking for opportunities they may be intere
 discovering Events based on either the general activity (e.g. Running) or a specific 
 programme (Back to Netball).
 
+## Activity Opportunities
+
+Not all opportunities to be physically activity are organised Events. Some opportunities are self-directed 
+for example: 
+
+* following a designated walking route
+* using a permanent (or temporary) orienteering course
+* going for a ride on a mountain bike trail
+
+The common elements here is that facilities are provided for use at a time of the participants choosing 
+(within limits of opening hours or availability), rather than at a time or schedule specified by the 
+organiser.
+
+However many of the other aspects of describing an [Event](#event) are applicable to describing this 
+type of opportunity. For example:
+
+* they will involve one or more Physical Activities, e.g. mountain biking
+* take place in a location, e.g. "Victoria Park Mountain Bike Trail"
+* have other descriptive attributes, such as suitability for particular types of participants, fitness levels, etc.
+
+In this specification this type of self-guided activities will be referred to as __*Activity Opportunities*__.
+
 ## Controlled Vocabulary
 
 As described in the previous sections, Events may be categorised or tagged with additional properties 
@@ -521,8 +551,8 @@ a simple summary or event description can help create better discovery tools.
 For example an application might allow a user to filter a list of Events based on their suitability 
 for specific age ranges, ability levels, etc.
 
-It can be useful to publish __*Controlled Vocabularies*__ that provide lists of values for these 
-properties.
+It can be useful to publish __*Controlled Vocabularies*__ that provide lists of values or __*Terms*__ 
+for these   properties.
 
 Activity Lists are another example of where a controlled vocabulary is used to help organise 
 opportunity data.
@@ -546,56 +576,46 @@ activity sector.
   </section>
 
   <section>
-# Mapping to Standard Vocabularies
+# Data Model
 
-## Overview of the standard vocabularies
-
-### SKOS
+The data model described in the following sections reuses existing standards and vocabularies which 
+have then been extended to cover the additional requirements needs to support the publication of 
+opportunity data.
 
 The Simple Knowledge Organisation System ([[SKOS]]) is a W3C standard for publishing taxonomies and 
-controlled vocabularies. In the context of opportunity data, SKOS provides a means for publishing:
-
-* [Activity Lists](#physical-activities), as it supports publishing both simple lists of terms and 
-hierarchical taxonomies. SKOS also provides support for capturing other relationships between 
-terms and synonyms
-* other [Controlled Vocabularies](#controlled-vocabularies) used to help describe [Events](#events)
-
-This data is likely to be published separately to the other types of opportunity data which will be 
-more regularly updated.
-
-### Schema.org
+category schemes. It can be used to help describe Activity Lists, Physical Activities and 
+other Controlled Vocabularies
 
 Schema.org [[SCHEMA-ORG]] provides an existing well-used and documented data model for publishing 
-data to the web. It can be used in a variety of use cases including marking up 
-web pages and publishing data in more structured formats such as [[JSON-LD]].
+data to the web. It provides an existing model for describing Events, Organisations, People, and 
+Places. 
 
-The following sections outline how the resources, relationships and attributes relevant to publishing 
-opportunity data can be described using existing Schema.org classes and properties.
+Both standards are widely used, and can be used to publish data in a variety of structured formats, including 
+[[JSON-LD]]. 
 
-### Future Extensions
-
-Where SKOS and Schema.org do not provide necessary types and/or properties to describe all 
-aspects of opportunity data, the OpenActive Community Group will define new terms 
-using their existing extension mechanisms.
-
-These extensions will be defined in this document and other supporting specifications.
-
-**[Issue 17](https://github.com/openactive/modelling-opportunity-data/issues/17)**: Add section on extending the model in the specification.
+The __*Open Active Vocabulary*__ is a custom vocabulary designed to support the publication of 
+opportunity data. It defines a number of new terms that extend SKOS and Schema.org to cover additional 
+requirements.
 
 ## Namespaces
 
-The following sections make use of the following namespaces:
+The rest of this specification make use of the following namespaces:
 
 <dl>
 <dt>`schema:`</dt>
 <dd>`http://schema.org/`</dd>
 <dt>`skos:`</dt>
 <dd>`http://www.w3.org/2004/02/skos/core#`</dd>
+<dt>`oa:`</dt>
+<dd>`TBC`</dd>
 </dl>
 
-## Mapping Summary
+**[Issue 18](https://github.com/openactive/modelling-opportunity-data/issues/18)**: Create namespace for OA custom terms.
 
-TODO: add table illustrates how resources map to Schema.org types.
+## Data Model Overview
+
+The following table provides a high-level summary of how the concepts introduced in the previous sections map to 
+definitions in SKOS, Schema.org and the Open Active Vocabulary. 
 
 <table>
   <thead>
@@ -605,67 +625,71 @@ TODO: add table illustrates how resources map to Schema.org types.
   </thead>
   <tbody>
     <tr>
-      <td>Physical Activity</td>
-      <td>`skos:Concept`</td>
-      <td></td>
-    <tr>
-    <tr>
       <td>Activity List</td>
       <td>`skos:ConceptScheme`</td>
-      <td></td>
+      <td>
+      Activity lists are controlled vocabularies and map well to the definition of a SKOS Concept Scheme.
+      </td>
+    <tr>
+    <tr>
+      <td>Physical Activity</td>
+      <td>`skos:Concept`</td>
+      <td>
+      Individual Physical Activities can be represented as individual SKOS concepts
+      </td>
     <tr>
     <tr>
       <td>Event</td>
       <td>`schema:Event`</td>
-      <td></td>
+      <td>Schema.org provides a well defined model for Events already with properties that cover many 
+      of the core requirements for opportunity data</td>
     <tr>
     <tr>
       <td>Place</td>
       <td>`schema:Place`</td>
-      <td></td>
-    <tr>
-    <tr>
-      <td>Venue</td>
-      <td>`schema:EventVenue`</td>
-      <td></td>
+      <td>As well as the general definition of a Place, Schema.org defines sub-types including 
+      `schema:EventVenue`, etc. This can be used where appropriate</td>
     <tr>
     <tr>
       <td>Organisation</td>
       <td>`schema:Organization`</td>
-      <td></td>
+      <td>Covers all types of organisations, including companies, clubs, etc</td>
     <tr>
     <tr>
       <td>Person</td>
       <td>`schema:Person`</td>
-      <td></td>
+      <td>An individual person</td>
     <tr>
     <tr>
       <td>Format</td>
+      <td>`skos:Concept`/`schema:CategoryCode`</td>
       <td></td>
+    <tr>    
+    <tr>
+      <td>Activity Opportunity</td>
+      <td>`oa:ActivityOpportunity`</td>
       <td></td>
     <tr>    
     <tr>
       <td>Controlled Vocabulary</td>
       <td>`schema:ConceptScheme`</td>
-      <td></td>
+      <td>Additional Concept Schemes can be used to publish lists of, e.g. age ranges, suitability levels, etc.</td>
     <tr>
     <tr>
-      <td>Controlled Vocabulary Term</td>
+      <td>Term</td>
       <td>`schema:Concept`</td>
-      <td></td>
+      <td>An entry in a controlled vocabulary</td>
     <tr>
   </tbody>
 </table>  
 
-## Events (<code>schema:Event</code>)
+## Describing Events (<code>schema:Event</code>)
 
-Schema.org [`schema:Event`](https://schema.org/Event) type aligns with the 
-definition of Event in this specification. A number of properties are provided 
-that allow an [`Event`](https://schema.org/Event) to be described to a different 
-levels of detail. 
+The Schema.org [`schema:Event`](https://schema.org/Event) type aligns with the 
+definition of Event as given in this specification. 
 
-A [`schema:Event`](https://schema.org/Event) can also be related to a number of 
-other types that help to capture the requirements for physical activities.
+Schema.org defines a number of properties and relationships allow an Event to be described to 
+different levels of details.
 
 The following table illustrates how the essential aspects of describing an event 
 map to existing Schema.org properties.
@@ -725,48 +749,51 @@ that only capture addresses, or just as [`schema:Text`](https://schema.org/Text)
       a [`schema:Person`]((https://schema.org/Person). These support additional descriptive 
       properties. Contributor, e.g. named staff or helpers can also be included</td>
     </tr>
-    <tr>
-      <td>Offers</td>
-      <td>
-        <ul>
-          <li>[`schema:offers`](https://schema.org/offers)</li>
-        </ul>
-      </td>
-      <td>The [`schema:Offer`](https://schema.org/Offer) type draws on a well used vocabulary for ecommerce so provides a variety of ways 
-      to describe, e.g. pricing, availability, etc </td>
-    </tr>
   </tbody>
 </table>
 
-### Recurring Events
+In addition to these properties, some custom terms are required to describe the activities that will take place in an 
+Event and categorise it in various ways. These are covered in the following sections.
 
-TODO
+### Describing Event schedules
 
-**[Issue 2](https://github.com/openactive/modelling-opportunity-data/issues/2): Schema.org doesn't handle recurring events**
+<div class="note">
+There is a discussion under way in the Schema.org community to extend their model to cover recurring events. The [proposal](https://github.com/schemaorg/schemaorg/issues/1457) 
+is to add a new `schema:schedule` property that will refer to a [recurrence rule](http://www.kanzaki.com/docs/ical/rrule.html) as defined in the iCalendar specification.  
+this specification will be updated to refer to that property.
+</div>
+
+**[Issue 2](https://github.com/openactive/modelling-opportunity-data/issues/2)**: Schema.org support for recurring events
 
 ### Describing Participation Requirements & Restrictions
 
-**[Issue 3](https://github.com/openactive/modelling-opportunity-data/issues/3): Define additional 
-event properties.**
+<div class="note">
+This area is still under definition, see the issues linked below for discussion. Feedback and suggestions are welcomed.
+</div>
 
-**[Issue 4](https://github.com/openactive/modelling-opportunity-data/issues/4): Decide how to publish controlled vocabularies**
+**[Issue 3](https://github.com/openactive/modelling-opportunity-data/issues/3)**: Define additional 
+event properties
 
-These are all broadly categories that help to describe an Event:
+**[Issue 4](https://github.com/openactive/modelling-opportunity-data/issues/4)**: Decide how to publish controlled vocabularies
 
-* Restrictions: e.g. gender, age, membership restrictions
-* Suitability: e.g. level of fitness, experience 
-* Pre-requisites: e.g. membership, equipment needed
-* Categorisation: e.g. intensity of session, activities involved, programme followed
+Draft proposal is to define a number of new properties:
 
-## Location (<code>schema:Place</code> and <code>schema:EventVenue</code>)
+* `oa:activity` -- to refer to the Physical Activities related to an event
+* `oa:ageSuitability` -- age range for the event. Alternatively use [`schema:typicalAgeRange`](https://schema.org/typicalAgeRange) but this doesn't allow use of a controlled vocabulary
 
-Schema.org takes a flexible approach towards defining the [`location`](https://schema.org/location) 
-for an [`Event`](https://schema.org/Event). This ranges from simply textual descriptions through 
-to more structured representations.
+## Describing Locations (<code>schema:Place</code>)
 
-For example a [`location`](https://schema.org/location) can be defined as a 
-[`schema:PostalAddress`](https://schema.org/PostalAddress) or a more fully defined [`schema:Place`](https://schema.org/Place), 
-e.g. a [`schema:CivicStructure`](https://schema.org/CivicStructure) or [`schema:EventVenue`](https://schema.org/EventVenue). 
+Schema.org takes a flexible approach towards defining the values for the [`schema:location`](https://schema.org/location) property 
+for a [`schema:Event`](https://schema.org/Event). 
+
+For example a [`location`](https://schema.org/location) can be defined as: 
+
+* a simple textual description
+* a [`schema:PostalAddress`](https://schema.org/PostalAddress) 
+* a more fully defined [`schema:Place`](https://schema.org/Place) or one of its sub-types such as a [`schema:CivicStructure`](https://schema.org/CivicStructure) or [`schema:EventVenue`](https://schema.org/EventVenue)
+
+Where a `schema:Place` is used, then there are additional properties that can be used to provide more information 
+about that location
 
 <table>
   <thead>
@@ -802,6 +829,19 @@ e.g. a [`schema:CivicStructure`](https://schema.org/CivicStructure) or [`schema:
       available to the publisher.</td>
     </tr>
     <tr>
+      <td>Facilities</td>
+      <td>
+        <ul>
+          <li>[`schema:containedInPlace`](https://schema.org/containedInPlace)</li>
+          <li>[`schema:containsPlace`](https://schema.org/containsPlace)</li>
+        </ul>
+      </td>
+      <td>Facilities within a location can also be defined as Place which are related to one another 
+      via these containment properties. This also allows information about the individual facilities 
+      to be provided, e.g. opening hours, photos, etc</td>
+    </tr>
+    
+    <tr>
       <td>Misc</td>
       <td>
         <ul>
@@ -812,16 +852,43 @@ e.g. a [`schema:CivicStructure`](https://schema.org/CivicStructure) or [`schema:
       <td>The [`schema:OpeningHoursSpecification`](https://schema.org/OpeningHoursSpecification) provides 
       some support for describing when a location can be used</td>
     </tr>
-
-  </tbody>
+  </tbody>   
 </table>
 
-**[Issue 5](https://github.com/openactive/modelling-opportunity-data/issues/5): decide how to model venue facilities**
+**[Issue 19](https://github.com/openactive/modelling-opportunity-data/issues/19)**: agree on how to represent equipment  
 
-## Physical Activity (<code>PhysicalActivity</code>)
+## Describing Organisers (<code>schema:Person</code> and <code>schema:Organization</code>)
 
-Activities may be best described using a controlled vocabulary. 
-[SKOS](https://www.w3.org/TR/skos-primer/) defines an existing standard data 
+The [`schema:Person`](https://schema.org/Person) and [`schema:Organization`](https://schema.org/Organization) share 
+some common descriptive properties:
+
+<table>
+  <thead>
+    <th>Aspect</th>
+    <th>Properties</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Description</td>
+      <td>
+        <ul>
+          <li>[`schema:name`](https://schema.org/name)</li>
+          <li>[`schema:url`](https://schema.org/url)</li>
+          <li>[`schema:description`](https://schema.org/description)</li>
+          <li>[`schema:image`](https://schema.org/image)</li>
+          <li>[`schema:photo`](https://schema.org/photo)</li>
+        </ul>
+      </td>
+      <td>URL, description and representative images can be associated with any 
+      Schema.org type</td>
+    </tr>    
+  </tbody>   
+</table>
+
+## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
+
+Activities may be best described using a controlled vocabulary. [SKOS](https://www.w3.org/TR/skos-primer/) defines an existing standard data 
 model that will allow:
 
 * activities to be organised into hierarchies to capture broader-narrow relationships, 
@@ -834,16 +901,70 @@ Schema.org allows controlled vocabularies to be referenced as "[External Enumera
 This will allow standard terms for categories to be related to lists of activities published by 
 individual publishers or as standards across the sector.
 
-**[Issue 6](https://github.com/openactive/modelling-opportunity-data/issues/6): How do we declare which controlled vocabularies we are using in a dataset?**
+## Describing Formats (<code>skos:Concept</code>)
 
-**[Issue 8](https://github.com/openactive/modelling-opportunity-data/issues/8): collect and publish [more example data about activity lists](https://github.com/openactive/w3c-cg-example-data/tree/master/activity-lists)**
+**[Issue 13](https://github.com/openactive/modelling-opportunity-data/issues/13)**: Should we use Format or Programme?
 
-## Formats (<code>skos:Concept</code>)
+**[Issue 9](https://github.com/openactive/modelling-opportunity-data/issues/9)**: what attributes do we need to capture about Programmes?
 
-Whereas Activities are best described using a controlled vocabulary, Formats are 
-likely to be more free-form.
+<table>
+  <thead>
+    <th>Aspect</th>
+    <th>Properties</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Description</td>
+      <td>
+        <ul>
+          <li>[`schema:name`](https://schema.org/name)</li>
+          <li>[`schema:url`](https://schema.org/url)</li>
+          <li>[`schema:description`](https://schema.org/description)</li>
+          <li>[`schema:image`](https://schema.org/image)</li>
+          <li>[`schema:photo`](https://schema.org/photo)</li>
+        </ul>
+      </td>
+      <td>URL, description and representative images can be associated with any 
+      Schema.org type</td>
+    </tr>    
+  </tbody>   
+</table>
 
-**[Issue 9](https://github.com/openactive/modelling-opportunity-data/issues/9): what attributes do we need to capture about Programmes?**
+## Describing Activity Opportunities (<code>oa:ActivityOpportunity</code>)
+
+As defined in this specification an [Activity Opportunity](#activity-opportunity) is similar to an Event, except without the 
+properties to describe a time at which it will take place.
+
+The `oa:ActivityOpportunity` type will be used to represent these opportunities. The section on [Describing Events](#describing-events) also 
+applies to describing Activity Opportunities.
+
+## Extending the Model
+
+The previous sections described how to publish opportunity data using a combination of existing and new vocabularies. 
+But this approach may not address every requirement. Specific applications may need custom extensions and the community may want to 
+revise or improve the core model in future.
+
+With this in mind, this section briefly outlines an approach to handling extensions and revisions to this model.
+
+Firstly, where SKOS or Schema.org define additional properties that are not referenced in this specification, then data publishers are 
+free to use them. For example an application may wish to share reviews of events, places or clubs. The [`schema:review`](https://schema.org/review) property 
+and related model can be used for this purpose, without requiring revisions to the Open Active Vocabulary.
+
+This specification defines only loose conformance criteria, in the form of recommended properties. Consumers of opportunity data 
+should be liberal in what they accept from data publishers, to allow the use of additional properties in this way. Over time this specification may 
+be revised to reference more of these properties if and when they become widely used.
+
+Secondly there may be a need to define new vocabulary relevant to broad needs of the open active community. An example is the need to 
+support publication of data related to event booking. This may require revisions to this specification, e.g. to support the sharing of 
+pricing and related information, in addition to an API specification to support bookings.
+ 
+Finally, there may be a need for new vocabulary to support the needs for specific applications or user communities. For example there may be 
+a need for a standard way to describe the characteristics of cycle tracks or orienteering trails. These extensions might be included in this 
+data model or may be better described in other custom vocabularies, or even proposed as extensions to Schema.org.
+
+Regardless of the type of extension, this activity can continue to be co-ordinated within the Open Active Community Group which can provide 
+a ongoing forum for this type of standardisation activity.
   </section>
 
   <section class='informative'>

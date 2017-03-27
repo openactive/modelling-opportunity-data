@@ -259,6 +259,9 @@ This specification is divided into three main sections:
 
   </section>
 
+<section id="conformance">
+This specification makes use of the compact IRI Syntax; please refer to the [Compact IRIs](http://www.w3.org/TR/json-ld/#compact-iris) from [[JSON-LD]].
+</section>
 
   <section>
 # Typographical Conventions   
@@ -365,6 +368,11 @@ Physical Activities to help people find opportunities to be active. For example
 a search engine might offer users results for all types of Martial Art, or for Karate specifically.
 
 <div class="note">
+The proposed model for Activity Lists is based on the [[SKOS]] standard for publishing controlled 
+vocabularies.
+</div>
+
+<div class="note">
 It is not a requirement that systems store, publish or use relationships between 
 Physical Activities. A system may choose to treat Physical Activities as simple tags 
 or categories associated with Events. Other systems may define a fixed list of 
@@ -373,18 +381,16 @@ and data collection. Others may adopt a more complex hierarchical approach.
 </div>
 
 <div class="note">
-This specification doesn't place any requirements on how applications manage 
+<p>__Developing a standard activity list__</p>
+<p>This specification doesn't place any requirements on how applications manage 
 or use Physical Activities or Activity Lists. There is no requirement that applications that 
 implement this specification should adopt a single standardised list, 
-or agree on standard groupings. The intention here is to just capture a useful model 
-that can represent the variety of data currently in use. However there may be benefits to 
-the physical activity sector in converging on a standard list of Physical Activities to 
-improve discovery, reporting, etc.
-</div>
-
-<div class="note">
-The proposed model for Activity Lists is based on the [[SKOS]] standard for publishing controlled 
-vocabularies. See later section on [Controlled Vocabularies](#controlled-vocabularies).
+or agree on standard groupings. The intention here is to just capture a useful model that can represent the variety of data 
+currently in use.
+</p>
+<p>However there will be benefits to the physical activity sector in developing a 
+standard list of Physical Activities to improve discovery, reporting, etc. Defining that list is 
+outside the scope of this specification.
 </div>
 
 ## Events
@@ -402,21 +408,7 @@ morning once a month.
 In order to simplify terminology we recommend the use of the term "Event" to 
 refer to both individual occurences and regularly occuring events. 
 
-<div class="note">
-Where there is a need to disambiguate between individual and regularly occuring events in 
-written documentation, we suggest using "session" to refer to an individual event taking 
-place at a specific date and time. But this is suggested purely to improve discussion, sessions 
-are not features of the model presented in this specification. 
-</div>
-
-An Event might occur on a specified __*schedule*__ whereas a Session will always take 
-place at a specific date and time.
-
-A weekly gym class provides a useful example of this distinction. There is an 
-Event for the regular class meeting, which takes place on a regular schedule, e.g. every Tuesday evening. 
-There is a specific session of that Event taking place next Tuesday at 6pm.
-
-It is useful to publish data about both Events with schedules and individual Sessions. 
+It is useful to publish data about both individual Events and those with recurring schedules. 
 People looking for opportunities to be active will be interested in both specific questions 
 ("what can I do tomorrow") and more general information about scheduled activities.
 
@@ -426,26 +418,29 @@ This includes:
 
 * the Physical Activity or Activities that will take place at the event
 * the location (Place or Venue) in which it is taking place
-* the Organiser of the event, which might be an individual or an organisation
-* the Format of the event
+* the Organiser of the event, which might be a person or an organisation
+* the Programme used to structure the event
+* descriptive attributes, such as its suitability for specific age or weight ranges
+* general category information to tag the event as suitable for certain fitness levels, intensity, etc
 * booking information, including price, attendance numbers and method of booking
-* descriptive attributes, such as participation requirements or restrictions
 
-Broadly, the descriptive attributes associated with an event might include any or 
-all of the following:
+<div class="note">
+<p>There are a variety of ways to categorise and describe events. This includes restrictions on attendance, 
+aspect of suitability for different audiences and fitness levels, and a mixture of pre-requisities such as the 
+need for certain qualifications, membership or equipment.
+</p>
+<p>
+The initial version of this specification prioritises capturing the essential elements of describing an event. The 
+structured information about time, place and activity is supplemented with some basic descriptive properties. 
+This also includes the ability to add "tags" to an event to capture a variety of categorisation elements. Future 
+versions of this specification will use experience working with real-world data to decide the best approach of 
+formalising these categories.
+</p>
+</div>
 
-* restrictions: e.g. on gender, age ranges, membership requirements
-* suitability: e.g. fitness levels, experience, or age ranges
-* pre-requisites: e.g. equipment or qualifications needed
-* categorisation: e.g. intensity of session
-* purpose: e.g. training, leisure, competition, etc
-* structure: e.g. formal, informal
+## Organisers (Persons and Organizations)
 
-These attributes may use values taken from [Controlled Vocabularies](#controlled-vocabulary).
-
-## Organisers
-
-Events have __*organisers*__. An event organiser might be a person or an organisation. 
+Events have __*organisers*__. An event organiser might be a __*Person*__ or an __*Organization*__. 
 The organiser of an event is the person or organisation who arranged and/or hosts the event.
 
 Examples of organisers might be coaches, or a local sports club.
@@ -453,13 +448,25 @@ Examples of organisers might be coaches, or a local sports club.
 Events may involve other named individuals or organisations. Examples might include named staff who will be participating 
 in the event in addition to the main organiser. These are referred to as __*contributors*__.
 
-Organisations might also be a __*funder*__ of an event: supporting or sponsoring an event through some form of 
-financial contribution.
-
 In addition to their names, some systems may have additional information about organisers and contributors. 
 E.g. links to their web sites, photos, logos or contact details.
 
-## Locations: Places and Venues
+<div class="note">
+<p>__Applications should not publish personal data without permission__</p>
+<p>
+This specification provides a data model for publishing information about individual people, e.g. coaches, 
+volunteers, etc. However applications should respect privacy and data protection laws and must not publish 
+data about individuals without their consent.
+</p>
+<p>
+The ability to publish this type of data has been included because event organisers often choose to publicly 
+share some information about themselves to help advertise an event. E.g. their name and some background on 
+their qualifications or experience. But this information should not be published as open data without getting the 
+consent of the individual concerned.
+</p>
+</div>
+
+## Places
 
 Events take place in a __*location*__. But, depending on the activity, the location 
 may be defined to different levels of precision. For example:
@@ -478,7 +485,7 @@ following:
 * a venue, such as a leisure centre, which might have an address and/or a latitude or longitude
 * a facility within a larger venue, e.g. a football pitch which is part of a leisure centre
 
-This specification uses __*Place*__ as a general concept to refer to both venues and facilities. 
+This specification uses __*Place*__ as a general concept to refer to all types of locations, venues and facilities. 
 
 The concept of Place therefore covers general outdoor areas such as parks, event venues (e.g. a Leisure centre) 
 and facilities within a venue (e.g. a squash court, running track, etc). Facilities are contained in Places.
@@ -494,28 +501,26 @@ To help distinguish between equipment and facilities: facilities will be fixed f
 squash courts or a walking trail; equipment will be items like table tennis tables that may be moved around 
 a facility.
 
-## Format
-
-**[Issue 13](https://github.com/openactive/modelling-opportunity-data/issues/13)**: Format or Programme?
+## Programmes
 
 Events are often organised and run in a variety of different ways. This tailoring 
 might include adjusting the activity to a particular type of participant, demographic. 
 Or it could include running the event in a particular style, e.g. with a fixed routine 
 or sequence of activities.
 
-A __*Format*__ describes a method of carrying out a Physical Activity. Some formats of are very loosely defined. 
+A __*Programme*__ describes a method of carrying out a Physical Activity. Some programmes are very loosely defined. 
 While others are more structured and may be run to a specific agenda or in a particular style.
 
-Formats are often associated with branding or marketing that helps participants understand more about what they 
+Programmes are often associated with branding or marketing that helps participants understand more about what they 
 can expect from an event of that format. Formats might be offered or overseen by specific organisations
 
-Examples of formats include:
+Examples of programmes include:
 
 * Les Mills BodyPump
 * Learn to Row, from British Rowing
 * Back to Netball, from England Netball
 
-Formats provide another means of tagging or describing Events to help describe them to 
+Programmes provide another means of tagging or describing Events to help describe them to 
 participants. When participants are looking for opportunities they may be interested in 
 discovering Events based on either the general activity (e.g. Running) or a specific 
 programme (Back to Netball).
@@ -542,37 +547,6 @@ type of opportunity. For example:
 
 In this specification this type of self-guided activities will be referred to as __*Activity Opportunities*__.
 
-## Controlled Vocabulary
-
-As described in the previous sections, Events may be categorised or tagged with additional properties 
-that help describe it to participants. Publishing this information as structured data, rather than as 
-a simple summary or event description can help create better discovery tools. 
-
-For example an application might allow a user to filter a list of Events based on their suitability 
-for specific age ranges, ability levels, etc.
-
-It can be useful to publish __*Controlled Vocabularies*__ that provide lists of values or __*Terms*__ 
-for these   properties.
-
-Activity Lists are another example of where a controlled vocabulary is used to help organise 
-opportunity data.
-
-Systems publishing opportunity data might also openly publish their controlled vocabularies to help 
-users of their data to use and understand it.
-
-Reusing controlled vocabularies across the sector can help users integrate data that comes from different 
-systems.
-
-Like Activity Lists, other controlled vocabularies that support the publication of opportunity data 
-will be published and shared according to the W3C [[SKOS]] standard.
-
-<div class="note">
-Systems that publish and use opportunity data will not be required to use fixed set of controlled 
-vocabularies. This specification just outlines how they can be publish and shared. But, similar to 
-Activity Lists, convergence on standardised controlled vocabulary might be useful for the physical 
-activity sector. 
-</div>
-
   </section>
 
   <section>
@@ -583,8 +557,8 @@ have then been extended to cover the additional requirements needs to support th
 opportunity data.
 
 The Simple Knowledge Organisation System ([[SKOS]]) is a W3C standard for publishing taxonomies and 
-category schemes. It can be used to help describe Activity Lists, Physical Activities and 
-other Controlled Vocabularies
+category schemes. It can be used to help publish and organise Activity Lists and to describe 
+Physical Activities.
 
 Schema.org [[SCHEMA-ORG]] provides an existing well-used and documented data model for publishing 
 data to the web. It provides an existing model for describing Events, Organisations, People, and 
@@ -595,7 +569,7 @@ Both standards are widely used, and can be used to publish data in a variety of 
 
 The __*Open Active Vocabulary*__ is a custom vocabulary designed to support the publication of 
 opportunity data. It defines a number of new terms that extend SKOS and Schema.org to cover additional 
-requirements.
+requirements highlighted in this specification.
 
 ## Namespaces
 
@@ -661,283 +635,866 @@ definitions in SKOS, Schema.org and the Open Active Vocabulary.
       <td>An individual person</td>
     <tr>
     <tr>
-      <td>Format</td>
-      <td>`skos:Concept`/`schema:CategoryCode`</td>
+      <td>Programme</td>
+      <td>`skos:Concept`</td>
       <td></td>
     <tr>    
     <tr>
       <td>Activity Opportunity</td>
       <td>`oa:ActivityOpportunity`</td>
-      <td></td>
+      <td>An opportunity to carry out an activity at a location, at a time of the participants 
+      choosing.</td>
     <tr>    
-    <tr>
-      <td>Controlled Vocabulary</td>
-      <td>`schema:ConceptScheme`</td>
-      <td>Additional Concept Schemes can be used to publish lists of, e.g. age ranges, suitability levels, etc.</td>
-    <tr>
-    <tr>
-      <td>Term</td>
-      <td>`schema:Concept`</td>
-      <td>An entry in a controlled vocabulary</td>
-    <tr>
   </tbody>
 </table>  
 
+## Identifying Resources
+
+This specification follows the approach adopted by schema.org of using URLs as unique identifiers for resources.
+The assumption is that information about Events, Places, Organizations and other resource types will already be 
+published to the web to make that information accessible to users.
+
+Using URLs as identifiers avoids the need to define a new identifier scheme for the resources described in opportunity 
+data. Each of the resources in the following sections can be uniquely identified by adding a `schema:url` property. 
+
+In general it is expected that there will be a single canonical link to a resource, e.g. a homepage for an Organization or 
+Place, or a public page advertising an Event.
+
+Where there may be several different URLs that may be used to identify a resource, it is recommended that systems use:
+
+* a direct link to the resource that avoids redirects
+* a stable link that will resolve to a public web page, accessible to both web browsers and applications
+* a consistent link that will allow reusers to rely on the URL as an identifier, e.g. to merge in updated data
+
+In some cases a resource may not have a unique URL, e.g. an Event might only be presented within a list of other Events 
+on a web page. In this case a unique URL can be created by adding a fragment identifier to the URL to identify a unique 
+element within the page.
+
+## Required and Optional Properties
+
+The following sections include more detail about the properties available to describe each type of resource. Some 
+properties are considered to be essential to ensure the provision of a minimally useful set of information about each 
+resource. These <em class="rfc2119">REQUIRED</em> properties must be provided.
+
+All other properties are considered to be optional but it is <em class="rfc2119">RECOMMENDED</em> that they 
+be provided where possible.
+
+Data publishers <em class="rfc2119">MAY</em> include additional properties, e.g. from Schema.org or other vocabularies 
+where helpful to describe their data. See the section on **Extending the Model** for more information.
+
+Applications that consume opportunity data <em class="rfc2119">MUST</em> ignore any properties that they don't 
+understand. This allows data publishing practices within the sector to evolve as required.
+
 ## Describing Events (<code>schema:Event</code>)
 
-The Schema.org [`schema:Event`](https://schema.org/Event) type aligns with the 
-definition of Event as given in this specification. 
+The Schema.org [`schema:Event`](https://schema.org/Event) type corresponds to the definition of 
+Event given earlier in this specification. The properties and relationships associated with the 
+[`schema:Event`](https://schema.org/Event) type can all be used to describe events.
 
-Schema.org defines a number of properties and relationships allow an Event to be described to 
-different levels of details.
-
-The following table illustrates how the essential aspects of describing an event 
-map to existing Schema.org properties.
+The following table illustrates how the essential aspects of describing an event map to 
+existing Schema.org properties and/or properties defined in the OpenActive Vocabulary.
 
 <table>
   <thead>
-    <th>Aspect</th>
-    <th>Properties</th>
+    <th>Property</th>
+    <th>Status</th>
     <th>Notes</th>
   </thead>
   <tbody>
+
     <tr>
-      <td>Description</td>
+      <td>[`schema:url`](https://schema.org/url)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URL to a web page (or section of a page) that describes the event</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:name`](https://schema.org/name)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The name of the event</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:description`](https://schema.org/description)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>A free text description of the event</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:image`](https://schema.org/image)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>An image or photo that depicts the event, e.g. a photo taken at a previously run event</td>
+    </tr>
+    
+    <tr>
+      <td>[`schema:startDate`](https://schema.org/startDate)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
       <td>
-        <ul>
-          <li>[`schema:name`](https://schema.org/name)</li>
-          <li>[`schema:url`](https://schema.org/url)</li>
-          <li>[`schema:description`](https://schema.org/description)</li>
-          <li>[`schema:image`](https://schema.org/image)</li>
-        </ul>
+      <p>The start date and time of the event. Can be specified as a [`schema:Date`](https://schema.org/Date) or
+      [`schema:DateTime`](https://schema.org/DateTime).
+      </p>
+      <p>While this property is marked as <em class="rfc2119">OPTIONAL</em>, a data publisher <em class="rfc2119">MUST</em> 
+      provide either a [`schema:startDate`](https://schema.org/startDate) or specify a [`oa:schedule`]() for an event. 
       </td>
-      <td>URL, description and representative images can be associated with any 
-      Schema.org type</td>
     </tr>
+
     <tr>
-      <td>Time</td>
+      <td>[`schema:endDate`](https://schema.org/endDate)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
       <td>
-        <ul>
-          <li>[`schema:startDate`](https://schema.org/startDate)</li>
-          <li>[`schema:endDate`](https://schema.org/endDate)</li>
-          <li>[`schema:duration`](https://schema.org/duration)</li>
-        </ul>
+      <p>
+      The end date and time of the event. Can be specified as a [`schema:Date`](https://schema.org/Date) or
+      [`schema:DateTime`](https://schema.org/DateTime)
+      </p>
+      <p>
+      It is <em class="rfc2119">RECOMMENDED</em> that publishers provide either an [`schema:endDate`](https://schema.org/endDate) or a 
+      [`schema:duration`](https://schema.org/duration) for an event.
+      </p>
+    </tr>
+
+    <tr>
+      <td>[`schema:duration`](https://schema.org/duration)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>The duration of the event given in [[ISO8601]] format.</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:location`](https://schema.org/location)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The location at which the event will take place. Or, in the case of events that may span multiple locations, the initial meeting or starting point.
+      <p>
+      It is recommended that locations <em class="rfc2119">SHOULD</em> be specified as a [`schema:Place`](https://schema.org/Place) complete with a 
+      fully described geographic location and/or address.
+      </p> 
+      <p>If only an address is available then this <em class="rfc2119">SHOULD</em> be described as a 
+      [`schema:PostalAddress`](https://schema.org/PostalAddress).
+      </p>
+      <p>Applications <em class="rfc2119">MAY</em> use [`schema:Text`](https://schema.org/Text) to provide 
+      a more general description of a location ("In Victoria Park, near the lake"), but this is not recommended: consuming applications 
+      will be unable to help users discover opportunities based on their location.
+      </p>
       </td>
-      <td>Can be specified as a [`schema:Date`](https://schema.org/Date) or
-      [`schema:DateTime`](https://schema.org/DateTime) giving flexibility in precision.</td>
     </tr>
+
     <tr>
-      <td>Location</td>
-      <td>
-        <ul>
-          <li>[`schema:location`](https://schema.org/location)</li>
-        </ul>
-      </td>
-      <td>There is flexibility in precision here as the location can be a 
-[`schema:Place`](https://schema.org/Place) with a fully described geographic location 
-and/or address. A [`schema:PostalAddress`](https://schema.org/PostalAddress) for systems 
-that only capture addresses, or just as [`schema:Text`](https://schema.org/Text): "In the park, near the lake"</td>
+      <td>[`schema:organizer`](https://schema.org/organizer)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>The organizer or host of an event. An organizer might be an [`schema:Organization`](https://schema.org/Organization) or 
+      a [`schema:Person`]((https://schema.org/Person).</td>
     </tr>
+
     <tr>
-      <td>Organiser</td>
-      <td>
-        <ul>
-          <li>[`schema:organizer`](https://schema.org/organizer)</li>
-          <li>[`schema:contributor`](https://schema.org/contributor)</li>
-        </ul>
-      <td>An organizer can be an [`schema:Organization`](https://schema.org/Organization) or 
-      a [`schema:Person`]((https://schema.org/Person). These support additional descriptive 
-      properties. Contributor, e.g. named staff or helpers can also be included</td>
+      <td>[`schema:contributor`](https://schema.org/contributor)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>A [`schema:Person`]((https://schema.org/Person), e.g. a coach, staff member or volunteer who will be helping to run the event.</td>
     </tr>
+
+    <tr>
+      <td>`schema:schedule`</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A [`schema:Person`]((https://schema.org/Person), e.g. a coach, staff member or volunteer who will be helping to run the event.
+      **Note: this is a draft Schema.org property. See [Issue]((https://github.com/openactive/modelling-opportunity-data/issues/2)) for discussion.</td>
+    </tr>
+
+    <tr>
+      <td>`oa:activity`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Specifies the physical activity or activities that will take place during an event</td>
+    </tr>
+
+    <tr>
+      <td>`oa:category`</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.</td>
+    </tr>
+
+    <tr>
+      <td>`oa:ageRange`</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Indicates that an event is suitable for a specific age range. If only a single age is specified then this is assumed to be a minimum age. 
+      Age ranges can be specified as follows: 18-30</td>
+    </tr>
+
+    <tr>
+      <td>`oa:heightRange`</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Indicates that an event is suitable for a people within a specific range of heights. Heights are specified in metres. 
+      If only a single height is specified, this is assumed to be a minimum height. Height ranges can be specified as follows: 1-1.4</td>
+    </tr>
+
+    <tr>
+      <td>`oa:weightRange`</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Indicates that an event is suitable for a people within a specific range of weights. Weights are specified in kilograms. 
+      If only a single weight is specified, this is assumed to be a minimum weight. Weight ranges can be specified as follows: 45-125</td>
+    </tr>
+
+    <tr>
+      <td>`oa:genderRestriction`</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Indicates that an event is restricted to male, female or a mixed audience. If a gender restriction isn't specified then applications 
+      should assume that an event is suitable for a mixed audience</td>
+    </tr>
+
+
   </tbody>
 </table>
 
-In addition to these properties, some custom terms are required to describe the activities that will take place in an 
-Event and categorise it in various ways. These are covered in the following sections.
+The following example shows a simple event description, including its start time and duration:
 
-### Describing Event schedules
+<pre class="example" title="Simple event description"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M"
+}
+</code>
+</pre>
+
+This basic description can be improve by providing information about its location and organizer.
+
+<pre class="example" title="Adding a venue and an organizer"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "organizer": {
+    "@type": "Person",
+    "url": "http://example.org/orgs/bristol-tai-chi",
+    "name": "Bristol Tai Chi"  
+  },
+  "location": {
+    "@type": "Place",
+    "name": "ExampleCo Gym",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1 High Street",
+      "addressLocality": "Bristol",
+      "postalCode": "BS1 4SD"
+    }
+  }  
+}
+</code></pre>
+
+### Relating Events to Physical Activities
+
+The [`oa:activity`]() property allows an event to be associated with one or more Physical Activities. It's simplest usage is as follows:
+
+<pre class="example" title="Specifying activities"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "oa:activity": "Tai chi"
+}
+</code>
+</pre>
+
+This specifies that the event will involve Tai Chi. Multiple activities can be specified by using repeated values:
+
+<pre class="example" title="Specifying multiple activities"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "oa:activity": ["Tai chi", "Martial Arts", "Combat"]
+}
+</code>
+</pre>
+
+The Physical Activities used to describe an event may be drawn from a standard Activity List. In this case it is useful to make this clear in 
+the opportunity data. In the following example the Physical Activity associated with the Event is shown as a structured value. This allows 
+more information to be provided, including its identifier, its label and alternative labels, and the identifier of the Activity List from which 
+it has been drawn:
+
+<pre class="example" title="Using activities from an Activity List"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "oa:activity": {
+    "@id": "http://example.org/activity-list#tai-chi"
+    "@type": "skos:Concept",
+    "skos:prefLabel": "Tai chi",
+    "skos:altLabel": "Tai-chi",
+    "skos:inScheme": "http://example.org/activity-list"
+  }
+}
+</code>
+</pre>
+
+Again, multiple activities can be specified by specifying an array of values.
+
+### Categorising events
+
+The `oa:category` property can be used to associate an Event with one or more tags that provide more detail about the event.
+
+<pre class="example" title="Tagging an Event"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "oa:category": ["Beginner", "Low intensity"]
+}
+</code>
+</pre>
+
+### Describing Event Suitability
+
+There are a variety of ways in which the suitability of an event for specific audiences can be expressed. This includes specifying that 
+an event is:
+
+* suited for a specific age range
+* suited for people within a specific height or weight rage
+* restricted to a male, female or mixed audience
+
+The following example illustrates how to indicate that an event it targeted as a specific age range (over 60s) but is open to a mixed 
+audience:
+
+<pre class="example" title="Age and gender example"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "oa:ageRange": 60,
+  "oa:genderRestriction": "mixed"
+}
+</code>
+</pre>
+
+An Event involving a climbing activity might be limited to people within a specific age and/or weight range. The following example illustrates 
+how to use these properties:
+
+<pre class="example" title="Age and gender example"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Climbing adventure",
+  "description": "A tree top climbing adventure",
+  "startDate": "2017-03-22T10:00:00",
+  "duration": "PT60M",
+  "oa:ageRange": 10,
+  "oa:heightRange": 1.4,
+  "oa:weightRange": "45-125",
+  "oa:genderRestriction": "mixed"
+}
+</code>
+</pre>
+
+### Adding programmes
+
+Events can be associated with a Programme using the [`oa:programme`]() property. In its simplest form this allows the name of a Programme to be associated with an event:
+
+<pre class="example" title="Tagging an Event"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Rowing Class",
+  "description": "A rowing class for beginners",
+  "startDate": "2017-04-01T08:00:00",
+  "duration": "PT60M",
+  "oa:category": ["Beginner"],
+  "oa:programme": "Learn to Row"
+}
+</code>
+</pre>
+
+If more information about the programme is available, then this can be included by describing the Programme in a more structured way:
+
+<pre class="example" title="Tagging an Event"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Rowing Class",
+  "description": "A rowing class for beginners",
+  "startDate": "2017-04-01T08:00:00",
+  "duration": "PT60M",
+  "oa:category": ["Beginner"],
+  "oa:programme": {
+    "name": "Learn to Row",
+    "url": "https://www.britishrowing.org/go-rowing/learn-to-row/",
+    "description": "Getting started in rowing couldn’t be easier!"
+  }
+}
+</code>
+</pre>
+
+### Describing Scheduled events
 
 <div class="note">
-There is a discussion under way in the Schema.org community to extend their model to cover recurring events. The [proposal](https://github.com/schemaorg/schemaorg/issues/1457) 
-is to add a new `schema:schedule` property that will refer to a [recurrence rule](http://www.kanzaki.com/docs/ical/rrule.html) as defined in the iCalendar specification.  
-this specification will be updated to refer to that property.
-</div>
+**Schema.org support for recurring events**
 
 **[Issue 2](https://github.com/openactive/modelling-opportunity-data/issues/2)**: Schema.org support for recurring events
 
-### Describing Participation Requirements & Restrictions
-
-<div class="note">
-This area is still under definition, see the issues linked below for discussion. Feedback and suggestions are welcomed.
+There is a discussion under way in the Schema.org community to extend their model to cover recurring events. The [proposal](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) 
+is to add a new `schema:eventSchedule` property that will refer to a [recurrence rule](http://www.kanzaki.com/docs/ical/rrule.html) as defined in the iCalendar specification. The 
+assumption is that this proposal will be expected and this specification will then recommend use of the `schema:eventSchedule` property. The following section is written on that basis but 
+is subsequent to change.
 </div>
 
-**[Issue 3](https://github.com/openactive/modelling-opportunity-data/issues/3)**: Define additional 
-event properties
+The following example illustrates basic usage of the [`schema:eventSchedule`](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) property. The data describes 
+a Tai Chi class that occurs every Weds at 7pm
 
-**[Issue 4](https://github.com/openactive/modelling-opportunity-data/issues/4)**: Decide how to publish controlled vocabularies
+<pre class="example" title="Age and gender example"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "duration": "PT60M",
+  "eventSchedule": {
+     "@type": "Schedule",
+     "startDate": "2017-01-01",
+     "endDate": "2017-12-31",
+     "frequency": "weekly",
+     "byDay": "http://schema.org/Wednesday",
+     "startTime": "19:00",
+     "endTime": "20:00"
+  }  
+}
+</code>
+</pre>
 
-Draft proposal is to define a number of new properties:
+## Describing Locations (<code>schema:Place</code> and <code>schema:PostalAddress</code>)
 
-* `oa:activity` -- to refer to the Physical Activities related to an event
-* `oa:ageSuitability` -- age range for the event. Alternatively use [`schema:typicalAgeRange`](https://schema.org/typicalAgeRange) but this doesn't allow use of a controlled vocabulary
+Schema.org takes a flexible approach towards defining the locations for an [`schema:Event`](https://schema.org/Event). 
 
-## Describing Locations (<code>schema:Place</code>)
-
-Schema.org takes a flexible approach towards defining the values for the [`schema:location`](https://schema.org/location) property 
-for a [`schema:Event`](https://schema.org/Event). 
-
-For example a [`location`](https://schema.org/location) can be defined as: 
+The legal values for the [`schema:location`](https://schema.org/location) property include:
 
 * a simple textual description
 * a [`schema:PostalAddress`](https://schema.org/PostalAddress) 
 * a more fully defined [`schema:Place`](https://schema.org/Place) or one of its sub-types such as a [`schema:CivicStructure`](https://schema.org/CivicStructure) or [`schema:EventVenue`](https://schema.org/EventVenue)
 
-Where a `schema:Place` is used, then there are additional properties that can be used to provide more information 
-about that location
+While all three forms are allowed by Schema.org, applications that are publish opportunity data <em class="rfc2119">SHOULD</em> either
+specify an [`schema:PostalAddress`](https://schema.org/PostalAddress) or a more details [`schema:Place`](https://schema.org/Place) description.
+
+### Describing Addresses
+
+Schema.org provides the following properties for publishing address data using the [`schema:PostalAddress`](https://schema.org/PostalAddress) type:
 
 <table>
   <thead>
-    <th>Aspect</th>
-    <th>Properties</th>
+    <th>Property</th>
+    <th>Status</th>
     <th>Notes</th>
   </thead>
-  <tbody>
+  <tbody>  
     <tr>
-      <td>Description</td>
-      <td>
-        <ul>
-          <li>[`schema:name`](https://schema.org/name)</li>
-          <li>[`schema:url`](https://schema.org/url)</li>
-          <li>[`schema:description`](https://schema.org/description)</li>
-          <li>[`schema:image`](https://schema.org/image)</li>
-          <li>[`schema:photo`](https://schema.org/photo)</li>
-        </ul>
-      </td>
-      <td>URL, description and representative images can be associated with any 
-      Schema.org type</td>
-    </tr>
-    <tr>
-      <td>Physical Location</td>
-      <td>
-        <ul>
-          <li>[`schema:address`](https://schema.org/address)</li>
-          <li>[`schema:geo`](https://schema.org/geo)</li>
-        </ul>
-      </td>
-      <td>Physical locations can be defined as text, an address or a precise 
-      latitude and longitude. These can be combined depending on the detail 
-      available to the publisher.</td>
-    </tr>
-    <tr>
-      <td>Facilities</td>
-      <td>
-        <ul>
-          <li>[`schema:containedInPlace`](https://schema.org/containedInPlace)</li>
-          <li>[`schema:containsPlace`](https://schema.org/containsPlace)</li>
-        </ul>
-      </td>
-      <td>Facilities within a location can also be defined as Place which are related to one another 
-      via these containment properties. This also allows information about the individual facilities 
-      to be provided, e.g. opening hours, photos, etc</td>
+      <td>[`schema:streetAddress`](https://schema.org/streetAddress)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Street address</td>
     </tr>
     
     <tr>
-      <td>Misc</td>
-      <td>
-        <ul>
-          <li>[`schema:telephone`](https://schema.org/address)</li>
-          <li>[`schema:openingHoursSpecification`](https://schema.org/openingHoursSpecification)</li>
-        </ul>
-      </td>
-      <td>The [`schema:OpeningHoursSpecification`](https://schema.org/OpeningHoursSpecification) provides 
-      some support for describing when a location can be used</td>
+      <td>[`schema:addressLocality`](https://schema.org/addressLocality)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Town or other area</td>
     </tr>
+
+    <tr>
+      <td>[`schema:region`](https://schema.org/region)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Region</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:postalCode`](https://schema.org/postalCode)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Postcode</td>
+    </tr>
+
   </tbody>   
 </table>
 
-**[Issue 19](https://github.com/openactive/modelling-opportunity-data/issues/19)**: agree on how to represent equipment  
+<pre class="example" title="An Address"><code>
+  {
+  "@context": "http://schema.org/",
+  "@type": "PostalAddress",
+  "streetAddress": "North Parade Road",
+  "addressLocality": "Bath",
+  "region": "Somerset",
+  "postalCode": "BA2 4ET"
+}
+</code></pre>
+
+In order to provide additional information, e.g. the name of the location or its geographic co-ordinates, then the [`schema:Place`](https://schema.org/Place) 
+type should be used instead.
+
+### Describing Places
+
+The following table lists the properties that can be used to provide descriptions of a [`schema:Place`](https://schema.org/Place) 
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>[`schema:url`](https://schema.org/url)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URL to a web page (or section of a page) that describes the Place</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:name`](https://schema.org/name)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The name of the Place</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:description`](https://schema.org/description)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>A free text description of the Place</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:image`](https://schema.org/image)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>An image or photo that depicts the place</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:address`](https://schema.org/address)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>The street address of the location, expressed as a [`schema:PostalAddress`](https://schema.org/PostalAddress). See the following section for more information on 
+      describing [`schema:PostalAddress`](https://schema.org/PostalAddress) resources</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:geo`](https://schema.org/geo)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>The geographic co-ordinates, specified as a latitude and longitude of a Place</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:containedInPlace`](https://schema.org/containedInPlace)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Indicates that this Place is part of a larger location. Can be used to allow, e.g. a pitch or other facility to be related to a parent location such as a 
+      Leisure Centre</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:containsPlace`](https://schema.org/containsPlace)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Relates a Place to other locations and facilities that it contains. Schema.org provides a specific type of Place, called a 
+      [`schema:SportsActivityLocation`](https://schema.org/SportsActivityLocation) for describing facilities</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:telephone`](https://schema.org/telephone)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A contact telephone number for the location, e.g. for enquiries</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:openingHoursSpecification`](https://schema.org/openingHoursSpecification)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Specifies the opening hours of a location. The value of this property is a [`schema:OpeningHoursSpecification`](http://schema.org/OpeningHoursSpecification).</td>
+    </tr>
+    
+  </tbody>   
+</table>
+
+This example illustrates a simple place description. Building on the previous example it adds the name, telephone number and website address for the leisure centre:
+
+<pre class="example" title="Describing a leisure centre"><code>
+  {
+  "@context": "http://schema.org/",
+  "@type": "Place",
+  "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
+  "name": "Bath Sports and Leisure Centre",
+  "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "North Parade Road",
+      "addressLocality": "Bath",
+      "region": "Somerset",
+      "postalCode": "BA2 4ET"
+  },
+  "telephone": "+44 (0)1225 486905"    
+}
+</code></pre>
+
+A more precise geographical location can be provided by adding a [`schema:geo`](https://schema.org/geo) property:
+
+<pre class="example" title="Locating a leisure centre"><code>
+  {
+  "@context": "http://schema.org/",
+  "@type": "Place",
+  "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
+  "name": "Bath Sports and Leisure Centre",
+  "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "North Parade Road",
+      "addressLocality": "Bath",
+      "region": "Somerset",
+      "postalCode": "BA2 4ET"
+  },
+  "telephone": "+44 (0)1225 486905",
+  "geo": {
+    "latitude": "51.3816123",
+    "longitude": "-2.3544367"
+  }
+}
+</code></pre>
+
+### Describing Facilities
+
+Facilities available at a location can be expressed using the containment properties ([`schema:containedInPlace`](https://schema.org/containedInPlace) and [`schema:containsPlace`](https://schema.org/containsPlace)). The following example illustrates how to describe that a Leisure Centre includes a gym:
+
+<pre class="example" title="Describing a leisure centre"><code>
+  {
+  "@context": "http://schema.org/",
+  "@type": "Place",
+  "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
+  "name": "Bath Sports and Leisure Centre",
+  "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "North Parade Road",
+      "addressLocality": "Bath",
+      "region": "Somerset",
+      "postalCode": "BA2 4ET"
+  },
+  "containsPlace": {
+    "@type": "SportsActivityLocation",
+    "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym",
+    "name": "Gym"
+  }    
+}
+</code></pre>
 
 ## Describing Organisers (<code>schema:Person</code> and <code>schema:Organization</code>)
 
-The [`schema:Person`](https://schema.org/Person) and [`schema:Organization`](https://schema.org/Organization) share 
-some common descriptive properties:
+To describe the people and organisations involving in organising Events, Schema.org provides the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`](https://schema.org/Organization) types.
+
+Both of the types support a common set of properties that capture the basic information required for publishing opportunity data.
 
 <table>
   <thead>
-    <th>Aspect</th>
-    <th>Properties</th>
+    <th>Property</th>
+    <th>Status</th>
     <th>Notes</th>
   </thead>
   <tbody>
     <tr>
-      <td>Description</td>
-      <td>
-        <ul>
-          <li>[`schema:name`](https://schema.org/name)</li>
-          <li>[`schema:url`](https://schema.org/url)</li>
-          <li>[`schema:description`](https://schema.org/description)</li>
-          <li>[`schema:image`](https://schema.org/image)</li>
-          <li>[`schema:photo`](https://schema.org/photo)</li>
-        </ul>
-      </td>
-      <td>URL, description and representative images can be associated with any 
-      Schema.org type</td>
-    </tr>    
+      <td>[`schema:url`](https://schema.org/url)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>A URL to the homepage or other page about the organisation</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:name`](https://schema.org/name)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The name of the organisation</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:description`](https://schema.org/description)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A description of the organisation</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:logo`](https://schema.org/logo)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>The logo of an organisation</td>
+    </tr>
+
   </tbody>   
 </table>
+
+The following example illustrates how to associate an [`schema:Organization`](https://schema.org/Organization) with an event:
+
+<pre class="example" title="Specifying an organiser"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "organizer": {
+    "@type": "Organization",
+    "url": "http://example.org/clubs/1",
+    "name": "Bath Tai Chi Club"    
+  }
+}
+</code>
+</pre>
+
+<div class="note">
+<p>__Applications should not publish personal data without permission__</p>
+<p>
+While the [`schema:Person`](https://schema.org/Person) type allows a variety of information to be published about a 
+person, applications should not publish this information as open data without consent.
+</p>
+</div>
 
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
 
-Activities may be best described using a controlled vocabulary. [SKOS](https://www.w3.org/TR/skos-primer/) defines an existing standard data 
-model that will allow:
+List of Physical Activities are controlled vocabularies that can be published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. 
+This will cover all the requirements [outlined in the concept model](#physical-activities), allowing:
 
-* activities to be organised into hierarchies to capture broader-narrow relationships, 
-e.g. "Martial Arts" and "Judo"
-* activities to be related to one another
-* the capturing of standard terms and codes used for indexing data, as well as alternate 
-spellings to support discovery
-
-Schema.org allows controlled vocabularies to be referenced as "[External Enumerations](https://www.w3.org/wiki/WebSchemas/ExternalEnumerations)". 
-This will allow standard terms for categories to be related to lists of activities published by 
-individual publishers or as standards across the sector.
-
-## Describing Formats (<code>skos:Concept</code>)
-
-**[Issue 13](https://github.com/openactive/modelling-opportunity-data/issues/13)**: Should we use Format or Programme?
-
-**[Issue 9](https://github.com/openactive/modelling-opportunity-data/issues/9)**: what attributes do we need to capture about Programmes?
+* activities to be organised into hierarchies to capture broader-narrow relationships, e.g. "Martial Arts" and "Judo"
+* sharing of alternative labels to support search and indexing
+* the sharing of standard codes to support data integration
 
 <table>
   <thead>
-    <th>Aspect</th>
-    <th>Properties</th>
+    <th>Property</th>
+    <th>Status</th>
     <th>Notes</th>
   </thead>
   <tbody>
     <tr>
-      <td>Description</td>
-      <td>
-        <ul>
-          <li>[`schema:name`](https://schema.org/name)</li>
-          <li>[`schema:url`](https://schema.org/url)</li>
-          <li>[`schema:description`](https://schema.org/description)</li>
-          <li>[`schema:image`](https://schema.org/image)</li>
-          <li>[`schema:photo`](https://schema.org/photo)</li>
-        </ul>
-      </td>
-      <td>URL, description and representative images can be associated with any 
-      Schema.org type</td>
-    </tr>    
+      <td>[`oa:title`]()</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Title of the Activity List</td>
+    </tr>
+
+    <tr>
+      <td>[`oa:description`]()</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>Description of the activity list</td>
+    </tr>
+
+    <tr>
+      <td>[`oa:license`]()</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>Reference to the license under which the activity list has been published</td>
+    </tr>
+
   </tbody>   
 </table>
 
+<pre class="example" title="Publishing an activity list"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "skos:ConceptScheme",
+  "url": "http://www.example.org/activity-list",
+  "title": "Activity List",
+  "description": "An example activity list",
+  "inScheme": [{
+    "@type": "skos:Concept",
+    "prefLabel": "Martial Arts",
+    "narrower": {
+      "@type": "skos:Concept",
+      "prefLabel": "Tai Chi"
+    }    
+  }]
+}
+</code>
+</pre>
+
+<div class="note">
+The `inScheme` property used in the above example is defined in the JSON-LD context published as part of the Open Active Vocabulary.
+</div>
+
+### Describing Physical Activities
+
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[`oa:prefLabel`]()</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Preferred label for referring to the physical activity. The preferred labels should be used when publishing data about the activities involved in an event.</td>
+    </tr>
+
+    <tr>
+      <td>[`oa:altLabel`]()</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Alternative labels for the physical activity</td>
+    </tr>
+
+    <tr>
+      <td>[`oa:inScheme`]()</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>Refers to the Activity List in which this physical activity is defined.</td>
+    </tr>
+
+    <tr>
+      <td>[`oa:broader`]()</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi".</td>
+    </tr>
+
+    <tr>
+      <td>[`oa:narrower`]()</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts"</td>
+    </tr>
+
+    <tr>
+      <td>[`oa:notation`]()</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Provides a unique code or identifier for an activity</td>
+    </tr>
+
+  </tbody>   
+</table>
+
+<pre class="example" title="Publishing an activity list"><code>
+{
+  "@context": "http://schema.org/",
+  "@type": "skos:Concept",
+  "url": "http://www.example.org/activity-list#tai-chi",
+  "prefLabel": "Tai Chi",
+  "altLabel": "Tai-Chi",
+  "inScheme": "http://www.example.org/activity-list
+}
+</code>
+</pre>
+
 ## Describing Activity Opportunities (<code>oa:ActivityOpportunity</code>)
 
-As defined in this specification an [Activity Opportunity](#activity-opportunity) is similar to an Event, except without the 
-properties to describe a time at which it will take place.
+As described earlier in this specification, an [Activity Opportunity](#activity-opportunity) is similar to an Event except it does not take 
+place at a specific time: individual participants will decide when they will take part in the physical activity.
 
-The `oa:ActivityOpportunity` type will be used to represent these opportunities. The section on [Describing Events](#describing-events) also 
-applies to describing Activity Opportunities.
+The [`oa:ActivityOpportunity`]() type will be used to represent these opportunities. 
+
+Information about Activity Opportunities can be published using the same set of properties that have been identified for [Describing Events](#describing-events-code-schema-event-code-).
+
+However applications <em class="rfc2119">MUST</em> not use the `schema:schedule`, `schema:startDate` and `schema:endDate` properties on this 
+type of resource.
 
 ## Extending the Model
 
@@ -965,93 +1522,6 @@ data model or may be better described in other custom vocabularies, or even prop
 
 Regardless of the type of extension, this activity can continue to be co-ordinated within the Open Active Community Group which can provide 
 a ongoing forum for this type of standardisation activity.
-  </section>
-
-  <section class='informative'>
-# Illustrative Examples
-
-**[Issue 10](https://github.com/openactive/modelling-opportunity-data/issues/10) Add more examples**
-
-## Locations
-
-<pre class="example" title="A venue with facilities">
-  {
-  "@context": "http://schema.org/",
-  "@type": "EventValue",
-
-  "name": "5ives Community Sports Club",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Burnsall Grove",
-    "addressLocality": "Barnsley",
-    "postalCode": "S70 3JR"
-  },
-  "geo": {
-    "latitude": "53.5372727",
-    "longitude": "-1.4486005"
-  },
-  "amenityFeature": {
-    "name": "Table Tennis Tables"
-  }
-}
-</pre>
-
-
-## Events
-
-
-<pre class="example" title="Event with organiser">
-{
-  "@context": "http://schema.org/",
-  "@type": "Event",
-  "name": "Beach Body Workout",
-  "url": "http://www.joinflex.tv/c/justin-brown/events/137",
-  "description": "get ready to learn new ways to get summertime fine!!...",
-  "image": "https://flex-production.s3.amazonaws.com/uploads/event/image/137/IMG_20140428_111516.jpg",
-  "startDate": "2016-07-13T20:00:00-05:00",
-  "duration": "PT30M",
-  "organizer": {
-    "@type": "Person",
-    "name": "Justin Brown",
-    "url": "http://www.joinflex.tv/c/justin-brown",
-    "description": "Personal trainer with over 9 years of experience...",
-    "image": "https://flex-production.s3.amazonaws.com/uploads/channel/profile_image/23/Beach_oblique_raise.jpg",
-    "workLocation": {
-      "@type": "Place",
-      "address": "panama city beach florida"
-    },
-    "offers": {
-      "price": 0
-    }
-  }
-}
-</pre>
-
-<pre class="example" title="Event with venue and images">
-{
-  "@context": "http://schema.org/",
-  "@type": "Event",
-  "name": "Midsummer Night's Dream Run",
-  "alternateName": "Midsummer Night's Dream Run: Run away with the fairies!",
-  "description": "To run or not to run, that is the question...",
-  "startDate": "2016-06-21T18:25:00.000Z",
-  "image": [
-      { "@type": "Image", "url": "https://gg-api.s3.amazonaws.com/uploads/photo/image/21667/uploads_2F1462893771268-1wn3a7whgfpopcad-e038cb67411c05d06ff188b0a029dce2_2F20150307_122900.jpg" },
-      { "@type": "Image", "name": "home_wide", "url": "https://gg-api.s3.amazonaws.com/uploads/photo/image/21667/uploads_2F1462893771268-1wn3a7whgfpopcad-e038cb67411c05d06ff188b0a029dce2_2F20150307_122900.jpg" }
-  ],
-  "location": {
-    "@type": "Place",
-    "name": "Vivo Sports & Gym Club",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Welsh Back",
-      "addressLocality": "Bristol",
-      "postalCode": "BS1 4SB"
-    }
-  }
-}
-</pre>
-
   </section>
 
     </section>

@@ -567,7 +567,7 @@ Places.
 Both standards are widely used, and can be used to publish data in a variety of structured formats, including 
 [[JSON-LD]]. 
 
-The __*Open Active Vocabulary*__ is a custom vocabulary designed to support the publication of 
+The __[*Open Active Vocabulary*](https://www.openactive.io/ns/)__ is a custom vocabulary designed to support the publication of 
 opportunity data. It defines a number of new terms that extend SKOS and Schema.org to cover additional 
 requirements highlighted in this specification.
 
@@ -576,15 +576,26 @@ requirements highlighted in this specification.
 The rest of this specification make use of the following namespaces:
 
 <dl>
+<dt>`dc:`</dt>
+<dd>`http://purl.org/dc/terms/`</dd>
 <dt>`schema:`</dt>
 <dd>`http://schema.org/`</dd>
 <dt>`skos:`</dt>
 <dd>`http://www.w3.org/2004/02/skos/core#`</dd>
 <dt>`oa:`</dt>
-<dd>`TBC`</dd>
+<dd>`https://www.openactive.io/ns/`</dd>
 </dl>
 
-**[Issue 18](https://github.com/openactive/modelling-opportunity-data/issues/18)**: Create namespace for OA custom terms.
+<div class="note">
+<p>
+In the following sections all referenced terms have been qualified using their namespace prefix. This helps to highlight the 
+source vocabulary in which they are defined. Terms are also linked to their definitions.
+</p>
+<p>
+The examples in each section use [[JSON-LD]] syntax and make use of [the terms declared in the OpenActive Vocabulary](https://www.openactive.io/ns/#term-definitions). 
+This feature of [[JSON-LD]] removes the need to use explicit namespace prefixes.
+</p>
+</div>
 
 ## Data Model Overview
 
@@ -600,48 +611,48 @@ definitions in SKOS, Schema.org and the Open Active Vocabulary.
   <tbody>
     <tr>
       <td>Activity List</td>
-      <td>`skos:ConceptScheme`</td>
+      <td>[`skos:ConceptScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme)</td>
       <td>
       Activity lists are controlled vocabularies and map well to the definition of a SKOS Concept Scheme.
       </td>
     <tr>
     <tr>
       <td>Physical Activity</td>
-      <td>`skos:Concept`</td>
+      <td>[`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
       <td>
       Individual Physical Activities can be represented as individual SKOS concepts
       </td>
     <tr>
     <tr>
       <td>Event</td>
-      <td>`schema:Event`</td>
+      <td>[`schema:Event`](https://schema.org/Event)</td>
       <td>Schema.org provides a well defined model for Events already with properties that cover many 
       of the core requirements for opportunity data</td>
     <tr>
     <tr>
       <td>Place</td>
-      <td>`schema:Place`</td>
+      <td>[`schema:Place`](https://schema.org/Place)</td>
       <td>As well as the general definition of a Place, Schema.org defines sub-types including 
-      `schema:EventVenue`, etc. This can be used where appropriate</td>
+      [`schema:EventVenue`](http://schema.org/EventVenue) and [`schema:SportsActivityLocation`](http://schema.org/SportsActivityLocation) which can be used where appropriate</td>
     <tr>
     <tr>
       <td>Organisation</td>
-      <td>`schema:Organization`</td>
+      <td>[`schema:Organization`](https://schema.org/Organization)</td>
       <td>Covers all types of organisations, including companies, clubs, etc</td>
     <tr>
     <tr>
       <td>Person</td>
-      <td>`schema:Person`</td>
+      <td>[`schema:Person`](https://schema.org/Person)</td>
       <td>An individual person</td>
     <tr>
     <tr>
       <td>Programme</td>
-      <td>`skos:Concept`</td>
+      <td>[`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
       <td></td>
     <tr>    
     <tr>
       <td>Activity Opportunity</td>
-      <td>`oa:ActivityOpportunity`</td>
+      <td>[`oa:ActivityOpportunity`](https://www.openactive.io/ns/#ActivityOpportunity)</td>
       <td>An opportunity to carry out an activity at a location, at a time of the participants 
       choosing.</td>
     <tr>    
@@ -649,6 +660,8 @@ definitions in SKOS, Schema.org and the Open Active Vocabulary.
 </table>  
 
 ## Identifying Resources
+
+__Issue: Redraft this section to clarify role of `schema:url`, `@id` and `schema:identifier`__
 
 This specification follows the approach adopted by schema.org of using URLs as unique identifiers for resources.
 The assumption is that information about Events, Places, Organizations and other resource types will already be 
@@ -797,43 +810,49 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     </tr>
 
     <tr>
-      <td>`oa:activity`</td>
+      <td>[`oa:activity`](https://www.openactive.io/ns/#activity)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Specifies the physical activity or activities that will take place during an event</td>
     </tr>
 
     <tr>
-      <td>`oa:category`</td>
+      <td>[`oa:category`]https://www.openactive.io/ns/#category()</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.</td>
     </tr>
 
     <tr>
-      <td>`oa:ageRange`</td>
+      <td>[`oa:ageRange`](https://www.openactive.io/ns/#ageRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is suitable for a specific age range. If only a single age is specified then this is assumed to be a minimum age. 
       Age ranges can be specified as follows: 18-30</td>
     </tr>
 
     <tr>
-      <td>`oa:heightRange`</td>
+      <td>[`oa:heightRange`](https://www.openactive.io/ns/#heightRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is suitable for a people within a specific range of heights. Heights are specified in metres. 
       If only a single height is specified, this is assumed to be a minimum height. Height ranges can be specified as follows: 1-1.4</td>
     </tr>
 
     <tr>
-      <td>`oa:weightRange`</td>
+      <td>[`oa:weightRange`](https://www.openactive.io/ns/#weightRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is suitable for a people within a specific range of weights. Weights are specified in kilograms. 
       If only a single weight is specified, this is assumed to be a minimum weight. Weight ranges can be specified as follows: 45-125</td>
     </tr>
 
     <tr>
-      <td>`oa:genderRestriction`</td>
+      <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is restricted to male, female or a mixed audience. If a gender restriction isn't specified then applications 
       should assume that an event is suitable for a mixed audience</td>
+    </tr>
+
+    <tr>
+      <td>[`oa:programme`](https://www.openactive.io/ns/#programme)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Indicates that an event will be organised according to a specific Programme</td>
     </tr>
 
 
@@ -844,7 +863,7 @@ The following example shows a simple event description, including its start time
 
 <pre class="example" title="Simple event description"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -859,7 +878,7 @@ This basic description can be improve by providing information about its locatio
 
 <pre class="example" title="Adding a venue and an organizer"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -886,11 +905,11 @@ This basic description can be improve by providing information about its locatio
 
 ### Relating Events to Physical Activities
 
-The [`oa:activity`]() property allows an event to be associated with one or more Physical Activities. It's simplest usage is as follows:
+The [`oa:activity`](https://www.openactive.io/ns/#activity) property allows an event to be associated with one or more Physical Activities. It's simplest usage is as follows:
 
 <pre class="example" title="Specifying activities"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -906,14 +925,14 @@ This specifies that the event will involve Tai Chi. Multiple activities can be s
 
 <pre class="example" title="Specifying multiple activities"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "oa:activity": ["Tai chi", "Martial Arts", "Combat"]
+  "activity": ["Tai chi", "Martial Arts", "Combat"]
 }
 </code>
 </pre>
@@ -925,19 +944,19 @@ it has been drawn:
 
 <pre class="example" title="Using activities from an Activity List"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "oa:activity": {
+  "activity": {
     "@id": "http://example.org/activity-list#tai-chi"
-    "@type": "skos:Concept",
-    "skos:prefLabel": "Tai chi",
-    "skos:altLabel": "Tai-chi",
-    "skos:inScheme": "http://example.org/activity-list"
+    "@type": "Concept",
+    "prefLabel": "Tai chi",
+    "altLabel": "Tai-chi",
+    "inScheme": "http://example.org/activity-list"
   }
 }
 </code>
@@ -947,18 +966,18 @@ Again, multiple activities can be specified by specifying an array of values.
 
 ### Categorising events
 
-The `oa:category` property can be used to associate an Event with one or more tags that provide more detail about the event.
+The [`oa:category`](https://www.openactive.io/ns/#category) property can be used to associate an Event with one or more tags that provide more detail about the event.
 
 <pre class="example" title="Tagging an Event"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "oa:category": ["Beginner", "Low intensity"]
+  "category": ["Beginner", "Low intensity"]
 }
 </code>
 </pre>
@@ -977,15 +996,15 @@ audience:
 
 <pre class="example" title="Age and gender example"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "oa:ageRange": 60,
-  "oa:genderRestriction": "mixed"
+  "ageRange": 60,
+  "genderRestriction": "mixed"
 }
 </code>
 </pre>
@@ -995,36 +1014,36 @@ how to use these properties:
 
 <pre class="example" title="Age and gender example"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Climbing adventure",
   "description": "A tree top climbing adventure",
   "startDate": "2017-03-22T10:00:00",
   "duration": "PT60M",
-  "oa:ageRange": 10,
-  "oa:heightRange": 1.4,
-  "oa:weightRange": "45-125",
-  "oa:genderRestriction": "mixed"
+  "ageRange": 10,
+  "heightRange": 1.4,
+  "weightRange": "45-125",
+  "genderRestriction": "mixed"
 }
 </code>
 </pre>
 
 ### Adding programmes
 
-Events can be associated with a Programme using the [`oa:programme`]() property. In its simplest form this allows the name of a Programme to be associated with an event:
+Events can be associated with a Programme using the [`oa:programme`](https://www.openactive.io/ns/#programme) property. In its simplest form this allows the name of a Programme to be associated with an event:
 
 <pre class="example" title="Tagging an Event"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
   "description": "A rowing class for beginners",
   "startDate": "2017-04-01T08:00:00",
   "duration": "PT60M",
-  "oa:category": ["Beginner"],
-  "oa:programme": "Learn to Row"
+  "category": ["Beginner"],
+  "programme": "Learn to Row"
 }
 </code>
 </pre>
@@ -1033,15 +1052,15 @@ If more information about the programme is available, then this can be included 
 
 <pre class="example" title="Tagging an Event"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
   "description": "A rowing class for beginners",
   "startDate": "2017-04-01T08:00:00",
   "duration": "PT60M",
-  "oa:category": ["Beginner"],
-  "oa:programme": {
+  "category": ["Beginner"],
+  "programme": {
     "name": "Learn to Row",
     "url": "https://www.britishrowing.org/go-rowing/learn-to-row/",
     "description": "Getting started in rowing couldn’t be easier!"
@@ -1068,7 +1087,7 @@ a Tai Chi class that occurs every Weds at 7pm
 
 <pre class="example" title="Age and gender example"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1140,7 +1159,7 @@ Schema.org provides the following properties for publishing address data using t
 
 <pre class="example" title="An Address"><code>
   {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "PostalAddress",
   "streetAddress": "North Parade Road",
   "addressLocality": "Bath",
@@ -1233,7 +1252,7 @@ This example illustrates a simple place description. Building on the previous ex
 
 <pre class="example" title="Describing a leisure centre"><code>
   {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
@@ -1252,7 +1271,7 @@ A more precise geographical location can be provided by adding a [`schema:geo`](
 
 <pre class="example" title="Locating a leisure centre"><code>
   {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
@@ -1277,7 +1296,7 @@ Facilities available at a location can be expressed using the containment proper
 
 <pre class="example" title="Describing a leisure centre"><code>
   {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
@@ -1340,7 +1359,7 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 
 <pre class="example" title="Specifying an organiser"><code>
 {
-  "@context": "http://schema.org/",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
   "@type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1381,19 +1400,19 @@ This will cover all the requirements [outlined in the concept model](#physical-a
   </thead>
   <tbody>
     <tr>
-      <td>[`oa:title`]()</td>
+      <td>[`dc:title`](http://purl.org/dc/terms/title)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Title of the Activity List</td>
     </tr>
 
     <tr>
-      <td>[`oa:description`]()</td>
+      <td>[`schema:description`](https://schema.org/description)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Description of the activity list</td>
     </tr>
 
     <tr>
-      <td>[`oa:license`]()</td>
+      <td>[`dc:license`](http://purl.org/dc/terms/license)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Reference to the license under which the activity list has been published</td>
     </tr>
@@ -1403,16 +1422,16 @@ This will cover all the requirements [outlined in the concept model](#physical-a
 
 <pre class="example" title="Publishing an activity list"><code>
 {
-  "@context": "http://schema.org/",
-  "@type": "skos:ConceptScheme",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@type": "ConceptScheme",
   "url": "http://www.example.org/activity-list",
   "title": "Activity List",
   "description": "An example activity list",
   "inScheme": [{
-    "@type": "skos:Concept",
+    "@type": "Concept",
     "prefLabel": "Martial Arts",
     "narrower": {
-      "@type": "skos:Concept",
+      "@type": "Concept",
       "prefLabel": "Tai Chi"
     }    
   }]
@@ -1425,7 +1444,6 @@ The `inScheme` property used in the above example is defined in the JSON-LD cont
 </div>
 
 ### Describing Physical Activities
-
 <table>
   <thead>
     <th>Property</th>
@@ -1434,37 +1452,37 @@ The `inScheme` property used in the above example is defined in the JSON-LD cont
   </thead>
   <tbody>
     <tr>
-      <td>[`oa:prefLabel`]()</td>
+      <td>[`skos:prefLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Preferred label for referring to the physical activity. The preferred labels should be used when publishing data about the activities involved in an event.</td>
     </tr>
 
     <tr>
-      <td>[`oa:altLabel`]()</td>
+      <td>[`skos:altLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#altLabel)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Alternative labels for the physical activity</td>
     </tr>
 
     <tr>
-      <td>[`oa:inScheme`]()</td>
+      <td>[`skos:inScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#inScheme)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Refers to the Activity List in which this physical activity is defined.</td>
     </tr>
 
     <tr>
-      <td>[`oa:broader`]()</td>
+      <td>[`skos:broader`](https://www.w3.org/2009/08/skos-reference/skos.html#broader)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi".</td>
     </tr>
 
     <tr>
-      <td>[`oa:narrower`]()</td>
+      <td>[`skos:narrower`](https://www.w3.org/2009/08/skos-reference/skos.html#narrower)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts"</td>
     </tr>
 
     <tr>
-      <td>[`oa:notation`]()</td>
+      <td>[`skos:notation`](https://www.w3.org/2009/08/skos-reference/skos.html#notation)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Provides a unique code or identifier for an activity</td>
     </tr>
@@ -1474,8 +1492,8 @@ The `inScheme` property used in the above example is defined in the JSON-LD cont
 
 <pre class="example" title="Publishing an activity list"><code>
 {
-  "@context": "http://schema.org/",
-  "@type": "skos:Concept",
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@type": "Concept",
   "url": "http://www.example.org/activity-list#tai-chi",
   "prefLabel": "Tai Chi",
   "altLabel": "Tai-Chi",
@@ -1489,7 +1507,7 @@ The `inScheme` property used in the above example is defined in the JSON-LD cont
 As described earlier in this specification, an [Activity Opportunity](#activity-opportunity) is similar to an Event except it does not take 
 place at a specific time: individual participants will decide when they will take part in the physical activity.
 
-The [`oa:ActivityOpportunity`]() type will be used to represent these opportunities. 
+The [`oa:ActivityOpportunity`](https://www.openactive.io/ns/#ActivityOpportunity) type will be used to represent these opportunities. 
 
 Information about Activity Opportunities can be published using the same set of properties that have been identified for [Describing Events](#describing-events-code-schema-event-code-).
 

@@ -709,29 +709,60 @@ definitions in SKOS, Schema.org and the Open Active Vocabulary.
   </tbody>
 </table>  
 
-## Identifying Resources
+## Identifying and Linking Resources
 
 __Issue: Redraft this section to clarify role of `schema:url`, `@id` and `schema:identifier`__
 
-This specification follows the approach adopted by schema.org of using URLs as unique identifiers for resources.
-The assumption is that information about Events, Places, Organizations and other resource types will already be 
-published to the web to make that information accessible to users.
+This specification adopts the same approach as Schema.org and encourages the use of URLs as unique identifiers for resources.
 
-Using URLs as identifiers avoids the need to define a new identifier scheme for the resources described in opportunity 
-data. Each of the resources in the following sections can be uniquely identified by adding a `schema:url` property. 
+Information about Events, Places, Organizations and other types of resources should already have been published online to 
+make that information accessible to users. Using existing URLs as identifiers avoids the need to define a new identifier 
+scheme for resources described in opportunity data. 
 
-In general it is expected that there will be a single canonical link to a resource, e.g. a homepage for an Organization or 
-Place, or a public page advertising an Event.
+There will generally be a single canonical URL for a resource, e.g. the homepage for an Organization or Place, or 
+a public web page advertising an Event.
 
-Where there may be several different URLs that may be used to identify a resource, it is recommended that systems use:
+If there are several different URLs that may be used to identify a resource, it is recommended that systems use:
 
 * a direct link to the resource that avoids redirects
 * a stable link that will resolve to a public web page, accessible to both web browsers and applications
 * a consistent link that will allow reusers to rely on the URL as an identifier, e.g. to merge in updated data
 
-In some cases a resource may not have a unique URL, e.g. an Event might only be presented within a list of other Events 
-on a web page. In this case a unique URL can be created by adding a fragment identifier to the URL to identify a unique 
-element within the page.
+This specification provides two related properties for identifying resources:
+
+* `@id` - is used to [assign a globally unique URI to a resource](https://www.w3.org/TR/json-ld/#node-identifiers). This may resolve to further machine-readable 
+ information about the resource. When supplied, this URI should be stable and unchanging over time. Applications harvesting and 
+ indexing opportunity data <em class="rfc2119">SHOULD</em> use this as a unique identifier for the resource
+* [`schema:url`](http://schema.org/url) - provides a link to a public web page about the resource. Further machine-readable metadata 
+may be discoverable from that web page. Applications must be able to use this URL as a means for providing users with a link to more information 
+ about a resource.
+
+In short, the `@id` property provides a unique identifier while the `schema:url` provides a means to provide a link to 
+a public web page about a resource. 
+
+If applicable then publishers may choose to use the same URI for these two properties. If an `@id` property is not provided then 
+applications <em class="rfc2119">MAY</em> choose to rely on the value of this property as a unique identifier.
+
+The option to use two different URls is useful when there is a need to distinguish between a unique identifier and a 
+public resource. For example a platform hosting opportunity data may need to assign a unique identifier to a resource 
+that is separate to its public web page.
+
+<pre class="example" title="Simple event description"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "id": "http://host.opportunity-data.com/id/12345"
+  "url": "http://my-leisure-centre.example.org/events/1",
+  "name": "Tai chi Class"
+}
+</code>
+</pre>
+
+In the above example the `@id` property provides a unique identifier across the hosting application. But the public URL for the 
+Event uses a separate, customer-specific domain.
+
+If a publisher has existing non-URI identifiers for a resource, e.g. a company or registration number for an Organization, then 
+this can be provided using the [`schema:identifier`](http://schema.org/identifier) property.
 
 ## Required and Optional Properties
 

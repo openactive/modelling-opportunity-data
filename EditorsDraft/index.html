@@ -1002,7 +1002,7 @@ it has been drawn:
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "activity": {
-    "id": "http://example.org/activity-list#tai-chi"
+    "id": "http://example.org/activity-list#tai-chi",
     "type": "Concept",
     "prefLabel": "Tai chi",
     "altLabel": "Tai-chi",
@@ -1208,7 +1208,7 @@ Schema.org provides the following properties for publishing address data using t
 </table>
 
 <pre class="example" title="An Address"><code>
-  {
+{
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "PostalAddress",
   "streetAddress": "North Parade Road",
@@ -1301,7 +1301,7 @@ The following table lists the properties that can be used to provide description
 This example illustrates a simple place description. Building on the previous example it adds the name, telephone number and website address for the leisure centre:
 
 <pre class="example" title="Describing a leisure centre"><code>
-  {
+{
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
@@ -1320,7 +1320,7 @@ This example illustrates a simple place description. Building on the previous ex
 A more precise geographical location can be provided by adding a [`schema:geo`](https://schema.org/geo) property:
 
 <pre class="example" title="Locating a leisure centre"><code>
-  {
+{
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
@@ -1345,7 +1345,7 @@ A more precise geographical location can be provided by adding a [`schema:geo`](
 Facilities available at a location can be expressed using the containment properties ([`schema:containedInPlace`](https://schema.org/containedInPlace) and [`schema:containsPlace`](https://schema.org/containsPlace)). The following example illustrates how to describe that a Leisure Centre includes a gym:
 
 <pre class="example" title="Describing a leisure centre"><code>
-  {
+{
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
@@ -1547,7 +1547,7 @@ The `inScheme` property used in the above example is defined in the JSON-LD cont
   "url": "http://www.example.org/activity-list#tai-chi",
   "prefLabel": "Tai Chi",
   "altLabel": "Tai-Chi",
-  "inScheme": "http://www.example.org/activity-list
+  "inScheme": "http://www.example.org/activity-list"
 }
 </code>
 </pre>

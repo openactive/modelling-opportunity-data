@@ -864,7 +864,7 @@ The following example shows a simple event description, including its start time
 <pre class="example" title="Simple event description"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
@@ -879,22 +879,22 @@ This basic description can be improve by providing information about its locatio
 <pre class="example" title="Adding a venue and an organizer"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "organizer": {
-    "@type": "Person",
+    "type": "Person",
     "url": "http://example.org/orgs/bristol-tai-chi",
     "name": "Bristol Tai Chi"  
   },
   "location": {
-    "@type": "Place",
+    "type": "Place",
     "name": "ExampleCo Gym",
     "address": {
-      "@type": "PostalAddress",
+      "type": "PostalAddress",
       "streetAddress": "1 High Street",
       "addressLocality": "Bristol",
       "postalCode": "BS1 4SD"
@@ -910,7 +910,7 @@ The [`oa:activity`](https://www.openactive.io/ns/#activity) property allows an e
 <pre class="example" title="Specifying activities"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
@@ -926,7 +926,7 @@ This specifies that the event will involve Tai Chi. Multiple activities can be s
 <pre class="example" title="Specifying multiple activities"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
@@ -945,15 +945,15 @@ it has been drawn:
 <pre class="example" title="Using activities from an Activity List"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "activity": {
-    "@id": "http://example.org/activity-list#tai-chi"
-    "@type": "Concept",
+    "id": "http://example.org/activity-list#tai-chi"
+    "type": "Concept",
     "prefLabel": "Tai chi",
     "altLabel": "Tai-chi",
     "inScheme": "http://example.org/activity-list"
@@ -971,7 +971,7 @@ The [`oa:category`](https://www.openactive.io/ns/#category) property can be used
 <pre class="example" title="Tagging an Event"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
@@ -997,7 +997,7 @@ audience:
 <pre class="example" title="Age and gender example"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
@@ -1015,7 +1015,7 @@ how to use these properties:
 <pre class="example" title="Age and gender example"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Climbing adventure",
   "description": "A tree top climbing adventure",
@@ -1036,7 +1036,7 @@ Events can be associated with a Programme using the [`oa:programme`](https://www
 <pre class="example" title="Tagging an Event"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
   "description": "A rowing class for beginners",
@@ -1053,7 +1053,7 @@ If more information about the programme is available, then this can be included 
 <pre class="example" title="Tagging an Event"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
   "description": "A rowing class for beginners",
@@ -1088,13 +1088,13 @@ a Tai Chi class that occurs every Weds at 7pm
 <pre class="example" title="Age and gender example"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "duration": "PT60M",
   "eventSchedule": {
-     "@type": "Schedule",
+     "type": "Schedule",
      "startDate": "2017-01-01",
      "endDate": "2017-12-31",
      "frequency": "weekly",
@@ -1160,7 +1160,7 @@ Schema.org provides the following properties for publishing address data using t
 <pre class="example" title="An Address"><code>
   {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "PostalAddress",
+  "type": "PostalAddress",
   "streetAddress": "North Parade Road",
   "addressLocality": "Bath",
   "region": "Somerset",
@@ -1253,11 +1253,11 @@ This example illustrates a simple place description. Building on the previous ex
 <pre class="example" title="Describing a leisure centre"><code>
   {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Place",
+  "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
   "address": {
-      "@type": "PostalAddress",
+      "type": "PostalAddress",
       "streetAddress": "North Parade Road",
       "addressLocality": "Bath",
       "region": "Somerset",
@@ -1272,11 +1272,11 @@ A more precise geographical location can be provided by adding a [`schema:geo`](
 <pre class="example" title="Locating a leisure centre"><code>
   {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Place",
+  "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
   "address": {
-      "@type": "PostalAddress",
+      "type": "PostalAddress",
       "streetAddress": "North Parade Road",
       "addressLocality": "Bath",
       "region": "Somerset",
@@ -1297,18 +1297,18 @@ Facilities available at a location can be expressed using the containment proper
 <pre class="example" title="Describing a leisure centre"><code>
   {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Place",
+  "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
   "address": {
-      "@type": "PostalAddress",
+      "type": "PostalAddress",
       "streetAddress": "North Parade Road",
       "addressLocality": "Bath",
       "region": "Somerset",
       "postalCode": "BA2 4ET"
   },
   "containsPlace": {
-    "@type": "SportsActivityLocation",
+    "type": "SportsActivityLocation",
     "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym",
     "name": "Gym"
   }    
@@ -1360,14 +1360,14 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 <pre class="example" title="Specifying an organiser"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Event",
+  "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "organizer": {
-    "@type": "Organization",
+    "type": "Organization",
     "url": "http://example.org/clubs/1",
     "name": "Bath Tai Chi Club"    
   }
@@ -1423,15 +1423,15 @@ This will cover all the requirements [outlined in the concept model](#physical-a
 <pre class="example" title="Publishing an activity list"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "ConceptScheme",
+  "type": "ConceptScheme",
   "url": "http://www.example.org/activity-list",
   "title": "Activity List",
   "description": "An example activity list",
   "inScheme": [{
-    "@type": "Concept",
+    "type": "Concept",
     "prefLabel": "Martial Arts",
     "narrower": {
-      "@type": "Concept",
+      "type": "Concept",
       "prefLabel": "Tai Chi"
     }    
   }]
@@ -1493,7 +1493,7 @@ The `inScheme` property used in the above example is defined in the JSON-LD cont
 <pre class="example" title="Publishing an activity list"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "@type": "Concept",
+  "type": "Concept",
   "url": "http://www.example.org/activity-list#tai-chi",
   "prefLabel": "Tai Chi",
   "altLabel": "Tai-Chi",

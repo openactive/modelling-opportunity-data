@@ -170,13 +170,13 @@
     </style>
 
     <section id='abstract'>
-This specification introduces a common data model that supports the publication of 
-information about opportunities for people to engage in physical activities ("opportunity data"). 
+This specification introduces a data model to support the publication of data describing 
+opportunities for people to engage in physical activities ("opportunity data"). This model 
+covers description of activities, as well as the events and locations in which they take place. 
 
-The model covers description of activities, as well as the events and locations in 
-which they take place. The specification is intended to support the publication 
-of opportunity data as open data for anyone to access, use and share. It will also guide reusers 
-of opportunity data, introducing them to the key concepts relevant to that sector.
+The specification is intended to support the publication of opportunity data as open data 
+for anyone to access, use and share. It will also guide reusers of opportunity data, 
+introducing them to the key concepts relevant to that sector.
 
 The model may also be useful in guiding the development of both new and existing booking 
 systems and applications that consume opportunity data.
@@ -237,25 +237,75 @@ on attendance, costs, etc
 
 Collectively this is known as __*opportunity data*__.
 
+## Requirements
+
+This specification has been developed to meet a broad set of requirements.
+
+### Support all types of opportunity data
+
+As described in the previous section, opportunity data covers a variety of different types of 
+information including data on venues, activities and events. The specification should support 
+publication of all of these different types of data
+
+### Support discovery of opportunities
+
+The aims of OpenActive project is to encourage people to be more physically active. This means 
+that this specification should focus on the data that will help people discover these 
+opportunities. 
+
+### Support all physical activities
+
+The specification should be inclusive and support sharing of opportunity data about 
+all types of physical activities, not just sports.
+
+### Allow sharing of activity lists 
+
+At present the physical activity sector does not have a standard list of physical activities. 
+The specification should allow data providers to share the lists they have and support the 
+sector in moving towards a standardised list of physical activities
+
+### Support variety of sources
+
+Opportunity data is collected and held in a variety of different tools, platforms and websites. 
+There is variation in the amount of detail held about individual events so the specification must 
+provide flexibility to share what data is currently available, whilst guiding activity providers 
+towards additional useful data to collect about events.
+
+### Be agnostic to formats and APIs
+
+Reflecting the wide variety of tools and platforms in use, and also that the sector is at an 
+early stage in sharing its data more widely, this specification should not prescribe specific 
+data formats or APIs. Ideally opportunity data could be published as JSON, XML, CSV or other formats.
+
+### Create an extensible framework
+
+This specification should support extensions to allow it to be customed and revised to meet future 
+requirements, as well as needs of specific communities of data publisher and consumer.
+
 ## Scope
 
-This specification defines a data model for opportunity data. This reflects the 
-goal of [the OpenActive project](https://www.openactive.io/) whose aim is to 
+This specification defines a data model for opportunity data. This reflects the goal of 
+[the OpenActive project](https://www.openactive.io/) whose aim is to 
 encourage the publishing and reuse of open data that might help people to become 
 more active.
 
-It is expected that the [Openactive Community Group](http://www.w3.org/community/openactive/) 
-will produce additional specifications that cover other aspects of achieving this 
-goal, e.g. event bookings, etc.
+The following items are therefore out of scope for this specification:
+
+* booking and related activities, e.g. availability, booking process and membership packages 
+* participation data, e.g. statistics on attendance
+* personal information, demographics and other information about event participants 
+* APIs for publishing and discovering opportunity data
+
+The [Openactive Community Group](http://www.w3.org/community/openactive/) may produce 
+additional specifications that address these areas.
 
 ## Structure of this document
 
-This specification is divided into three main sections:
+This specification is divided into two main sections:
 
-1. **Key Concepts** - describes the key types of resources relevant to opportunity data, along with their relationships and common attributes
-2. **Data Model** - a data model that maps the key concepts to some standard vocabularies
-3. **Worked Examples** - examples that illustrate how to use JSON-LD and the standard vocabularies to structure opportunity data
-
+1. **Introduction** - provides a broad definition of opportunity data and goals for this specification
+2. **Key Concepts** - describes the key types of resources relevant to opportunity data, along with their relationships and common attributes
+3. **Data Model** - a data model that maps the key concepts to some standard vocabularies
 
   </section>
 

@@ -14,7 +14,7 @@ git clone -b develop "https://github.com/openactive/respec.git"
 
 cd respec
 
-# npm install #note: not required for phantom
+npm install #note: not required for phantom
 
 cd ..
 

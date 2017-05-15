@@ -5,5 +5,5 @@ node_js:
 script: bash ./deploy.sh
 env:
   global:
-    - GH_REF: github.com:openactive/modelling-opportunity-data.git
+    - GH_REF: github.com/openactive/modelling-opportunity-data.git
     - secure: "VxCbYbrb9zhw7hQ7WtRJaqyVPIn+68OLmKmF0L8yt25COxiBMwEHxeyJdG0s5ZytIyAMnCSEGgdc87vcTO7bvBvc+LamhX1k8v2TdzZsIFVrE6hGgDn16Sh7WDLuGtDB2An0jk4sBwEljq9qVrxvycOJgiOwTcL9xwgSPeeYIdU/hvLzxcpEMLjx/zvRo6amA3k+aLxutZaTkIAyLnyNZYZtIrxyDx/df6T6PTxJEFEEygf1fwDnClSFjkjSlLeb+tC3eaxhMiHlTAi3/mYLx9+ZIjCu0G3KXMGRFqJgMDUnCXEg5Lokehr3HPV1NvdLDtUabOl+dVDsdwxMr3gdmrN/Kr7tWCfQASJXLDNKWxEpC7MItSQwWFzeJuru5aH4GVLcpldohCAZLrGt477sFjuh7aGY8rLmaFVL10KoK8xOjq8guDGWv1LIF4CInznG3r+pkwU/28ww7vJDW7qLItUFXFxXBMY+VaxjiM5ExqWVcipunKGSyQv/pZeFbPS7ESBd2Xq+Tv4ofJ5lOW9XgemI9LQA+LLMHvE4xTNH/PR9uSbr3cokQLWCieQPAHfO3U/PN2u6TR4ZzksefK+oaVseGZN8p8l/4/YhA9idbjEDhkQsDx6x/FuQB8siwxxAw17zxk+QW52m7Y9Hl9yLo4uJTNx/DPkJwkWN88DaXgo="

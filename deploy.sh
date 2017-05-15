@@ -36,6 +36,7 @@ function respec2html {
   echo Running respec2html Nightmare for $1 $2
   node respec/tools/respec2html.js --haltonerror --src $1 --out $2 &>log
   cat log
+  echo "Checking for file"
   {
   if [ ! -f $2 ]; then
       echo "respect2html Nightmare failed to generate index.html for $3"

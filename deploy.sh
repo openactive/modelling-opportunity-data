@@ -60,7 +60,7 @@ function respec2htmlPhantom {
 
 
 echo Copying static files
-cp -r ../0.8/* .
+cp -r ../0.8 .
 cp -r ../EditorsDraft/* .
 
 cd ..

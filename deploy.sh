@@ -33,7 +33,7 @@ git config user.email "travis@openactive.org"
 # compile using respec2html (handling each version separately)
 function respec2html {
   rm $2
-  echo Running respec2html Nightmare for $3
+  echo Running respec2html Nightmare for $1 $2
   node respec/tools/respec2html.js --haltonerror --src $1 --out $2
   {
   if [ ! -f $2 ]; then

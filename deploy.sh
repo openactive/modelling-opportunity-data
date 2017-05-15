@@ -10,7 +10,7 @@ git config --global push.default matching
 rm -rf respec || exit 0;
 
 # get existing gh-pages
-git clone -b develop "https://github.com/w3c/respec.git"
+git clone -b develop "https://github.com/ldodds/respec.git"
 
 cd respec
 
@@ -34,7 +34,8 @@ git config user.email "travis@openactive.org"
 function respec2html {
   rm $2
   echo Running respec2html Nightmare for $1 $2
-  node respec/tools/respec2html.js --haltonerror --src $1 --out $2
+  node respec/tools/respec2html.js --haltonerror --src $1 --out $2 &>log
+  cat log
   {
   if [ ! -f $2 ]; then
       echo "respect2html Nightmare failed to generate index.html for $3"

@@ -34,7 +34,7 @@ git config user.email "travis@openactive.org"
 function respec2html {
   rm $2
   echo Running respec2html Nightmare for $1 $2
-  node respec/tools/respec2html.js --haltonerror --src $1 --out $2 &>log
+  DEBUG=nightmare node respec/tools/respec2html.js --haltonerror --src $1 --out $2 &>log
   cat log
   echo "Checking for file"
   {

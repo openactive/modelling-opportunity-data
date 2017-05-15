@@ -10,7 +10,7 @@ git config --global push.default matching
 rm -rf respec || exit 0;
 
 # get existing gh-pages
-git clone -b develop "https://github.com/ldodds/respec.git"
+git clone -b develop "https://github.com/w3c/respec.git"
 
 cd respec
 
@@ -34,9 +34,7 @@ git config user.email "travis@openactive.org"
 function respec2html {
   rm $2
   echo Running respec2html Nightmare for $1 $2
-  DEBUG=nightmare xvfb-run --server-args="-screen 0 1024x768x24" node respec/tools/respec2html.js --haltonerror --src $1 --out $2 &>log
-  cat log
-  echo "Checking for file"
+  DEBUG=nightmare xvfb-run --server-args="-screen 0 1024x768x24" node respec/tools/respec2html.js --haltonerror --src $1 --out $2
   {
   if [ ! -f $2 ]; then
       echo "respect2html Nightmare failed to generate index.html for $3"
@@ -64,6 +62,6 @@ git commit -m "Deploy to GitHub Pages - Static"
 # will be lost, since we are overwriting it.) We redirect any output to
 # /dev/null to hide any sensitive credential data that might otherwise be exposed.
 # FIXME should be authorised via key
-git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
+git push --force "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
 
 cd ..

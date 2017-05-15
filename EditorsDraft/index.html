@@ -117,8 +117,14 @@
         };
     </script>
 
-    <script src='https://www.openactive.io/respec/builds/respec-w3c-common.js' class='remove'></script>
+    <script 
+     src='https://www.w3.org/Tools/respec/respec-w3c-common' 
+     class='remove'></script>
 
+    <!--    
+    <script src='https://www.openactive.io/respec/builds/respec-w3c-common.js' class='remove'></script>
+    -->
+    
     <!-- <script src='/builds/respec-w3c-common.js' class='remove'></script>-->
 
     <!-- <script src='/node_modules/requirejs/require.js' data-main='/js/profile-w3c-common' async class='remove'></script> -->
@@ -136,20 +142,16 @@
     .wd {color: #005A9C; background-color: #EE9999}
     .ed, .fpwd  {color: #005A9C; background-color: #FF7777}
     code {white-space: pre;}
-    </style>
-
-  </head>
-  <body >
-    <style>
+    
     html {
       background-image: none !important;
     }
     body {
       background: white top left fixed no-repeat !important;
-      background-size: 25px auto !important;
       background-image: url('https://www.openactive.io/assets/openactive-label-editorsdraft.png') !important;
     }
     body.toc-sidebar #toc {
+      background-size: 25px auto !important;
       background-attachment: fixed !important;
     }
     h1 {
@@ -167,8 +169,11 @@
     code {
         color: #C83500;
     }
+
     </style>
 
+  </head>
+  <body>
     <section id='abstract'>
 This specification introduces a data model to support the publication of data describing 
 opportunities for people to engage in physical activities ("opportunity data"). This model 

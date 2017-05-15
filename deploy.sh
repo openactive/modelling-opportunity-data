@@ -10,14 +10,13 @@ git config --global push.default matching
 rm -rf respec || exit 0;
 
 # get existing gh-pages
-git clone -b develop "https://github.com/openactive/respec.git"
+git clone -b develop "https://github.com/w3c/respec.git"
 
 cd respec
 
-npm install #note: not required for phantom
+npm install
 
 cd ..
-
 
 # clear and re-create the out directory
 rm -rf out || exit 0;
@@ -35,7 +34,7 @@ git config user.email "travis@openactive.org"
 function respec2html {
   rm $2
   echo Running respec2html Nightmare for $3
-  node respec/tools/respec2html.js --haltonerror --haltonwarn --src $1 --out $2
+  node respec/tools/respec2html.js --haltonerror --src $1 --out $2
   {
   if [ ! -f $2 ]; then
       echo "respect2html Nightmare failed to generate index.html for $3"
@@ -44,36 +43,14 @@ function respec2html {
   }
 }
 
-# old version using phantom still available in case of issues
-function respec2htmlPhantom {
-  rm $2
-  echo Running respec2html Phantom for $3
-  phantomjs --ssl-protocol=any respec/tools/respec2html-phantom.js -e -w $1 $2 15000
-  {
-  if [ ! -f $2 ]; then
-      echo "respect2html Phantom failed to generate index.html for $3"
-      exit 2
-  fi
-  }
-}
-
-
-
 echo Copying static files
-cp -r ../0.8 .
 cp -r ../EditorsDraft/* .
 
 cd ..
 
-respec2html "file://$PWD/0.8/index.html" "$PWD/out/0.8/index.html" "0.8"
 respec2html "file://$PWD/EditorsDraft/index.html" "$PWD/out/index.html" "EditorsDraft"
 
-#respec2htmlPhantom "file://$PWD/0.8/index.html" "$PWD/out/0.8/index.html" "0.8"
-#respec2htmlPhantom "file://$PWD/EditorsDraft/index.html" "$PWD/out/index.html" "EditorsDraft"
-
 cd out
-
-# curl "https://labs.w3.org/spec-generator/?type=respec&url=http://openactive.github.io/spec-template/index.html" > index.static.html;
 
 # The first and only commit to this new Git repo contains all the
 # files present with the commit message "Deploy to GitHub Pages".

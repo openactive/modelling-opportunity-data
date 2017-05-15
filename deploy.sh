@@ -34,7 +34,7 @@ git config user.email "travis@openactive.org"
 function respec2html {
   rm $2
   echo Running respec2html Nightmare for $1 $2
-  DEBUG=nightmare node respec/tools/respec2html.js --haltonerror --src $1 --out $2 &>log
+  DEBUG=nightmare xvfb-run --server-args="-screen 0 1024x768x24" node respec/tools/respec2html.js --haltonerror --src $1 --out $2 &>log
   cat log
   echo "Checking for file"
   {

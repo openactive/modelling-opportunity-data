@@ -923,6 +923,12 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event will be organised according to a specific Programme</td>
     </tr>
+    <tr>
+      <td>[`oa:leader`](https://www.openactive.io/ns/#leader)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>The person who will be leading an event. E.g. a coach. This is a more specific role than an organiser or a contributor</td>
+    </tr>
+
   </tbody>
 </table>
 
@@ -1377,8 +1383,9 @@ person, applications should not publish this information as open data without co
 </p>
 </div>
 
-
 To describe the people and organisations involving in organising Events, Schema.org provides the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`](https://schema.org/Organization) types.
+
+People and organisations can be associated with an Event using the [`schema:organizer`](http://schema.org/organizer), [`schema:contributor`](http://schema.org/contributor) or [`oa:leader`](https://www.openactive.io/ns/#leader) properties. These allow some flexibility in defining how a person or organisation is associated with an event.
 
 Both of the types support a common set of properties that capture the basic information required for publishing opportunity data.
 

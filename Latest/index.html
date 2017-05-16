@@ -801,31 +801,26 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <th>Notes</th>
   </thead>
   <tbody>
-
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>A URL to a web page (or section of a page) that describes the event</td>
     </tr>
-
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>The name of the event</td>
     </tr>
-
     <tr>
       <td>[`schema:description`](https://schema.org/description)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>A free text description of the event</td>
     </tr>
-
     <tr>
       <td>[`schema:image`](https://schema.org/image)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>An image or photo that depicts the event, e.g. a photo taken at a previously run event</td>
     </tr>
-    
     <tr>
       <td>[`schema:startDate`](https://schema.org/startDate)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
@@ -837,7 +832,6 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       provide either a [`schema:startDate`](https://schema.org/startDate) or specify a [`oa:schedule`]() for an event. 
       </td>
     </tr>
-
     <tr>
       <td>[`schema:endDate`](https://schema.org/endDate)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
@@ -851,13 +845,11 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       [`schema:duration`](https://schema.org/duration) for an event.
       </p>
     </tr>
-
     <tr>
       <td>[`schema:duration`](https://schema.org/duration)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>The duration of the event given in [[ISO8601]] format.</td>
     </tr>
-
     <tr>
       <td>[`schema:location`](https://schema.org/location)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
@@ -875,74 +867,62 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       </p>
       </td>
     </tr>
-
     <tr>
       <td>[`schema:organizer`](https://schema.org/organizer)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>The organizer or host of an event. An organizer might be an [`schema:Organization`](https://schema.org/Organization) or 
       a [`schema:Person`]((https://schema.org/Person).</td>
     </tr>
-
     <tr>
       <td>[`schema:contributor`](https://schema.org/contributor)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>A [`schema:Person`]((https://schema.org/Person), e.g. a coach, staff member or volunteer who will be helping to run the event.</td>
     </tr>
-
     <tr>
       <td>`schema:schedule`</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>A [`schema:Person`]((https://schema.org/Person), e.g. a coach, staff member or volunteer who will be helping to run the event.
       **Note: this is a draft Schema.org property. See [Issue]((https://github.com/openactive/modelling-opportunity-data/issues/2)) for discussion.</td>
     </tr>
-
     <tr>
       <td>[`oa:activity`](https://www.openactive.io/ns/#activity)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Specifies the physical activity or activities that will take place during an event</td>
     </tr>
-
     <tr>
       <td>[`oa:category`]https://www.openactive.io/ns/#category()</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.</td>
     </tr>
-
     <tr>
       <td>[`oa:ageRange`](https://www.openactive.io/ns/#ageRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is suitable for a specific age range. If only a single age is specified then this is assumed to be a minimum age. 
       Age ranges can be specified as follows: 18-30</td>
     </tr>
-
     <tr>
       <td>[`oa:heightRange`](https://www.openactive.io/ns/#heightRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is suitable for a people within a specific range of heights. Heights are specified in metres. 
       If only a single height is specified, this is assumed to be a minimum height. Height ranges can be specified as follows: 1-1.4</td>
     </tr>
-
     <tr>
       <td>[`oa:weightRange`](https://www.openactive.io/ns/#weightRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is suitable for a people within a specific range of weights. Weights are specified in kilograms. 
       If only a single weight is specified, this is assumed to be a minimum weight. Weight ranges can be specified as follows: 45-125</td>
     </tr>
-
     <tr>
       <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is restricted to male, female or a mixed audience. If a gender restriction isn't specified then applications 
       should assume that an event is suitable for a mixed audience</td>
     </tr>
-
     <tr>
       <td>[`oa:programme`](https://www.openactive.io/ns/#programme)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event will be organised according to a specific Programme</td>
     </tr>
-
-
   </tbody>
 </table>
 
@@ -1222,25 +1202,21 @@ Schema.org provides the following properties for publishing address data using t
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Street address</td>
     </tr>
-    
     <tr>
       <td>[`schema:addressLocality`](https://schema.org/addressLocality)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Town or other area</td>
     </tr>
-
     <tr>
       <td>[`schema:region`](https://schema.org/region)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Region</td>
     </tr>
-
     <tr>
       <td>[`schema:postalCode`](https://schema.org/postalCode)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Postcode</td>
     </tr>
-
   </tbody>   
 </table>
 
@@ -1268,70 +1244,59 @@ The following table lists the properties that can be used to provide description
     <th>Notes</th>
   </thead>
   <tbody>
-  
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>A URL to a web page (or section of a page) that describes the Place</td>
     </tr>
-
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>The name of the Place</td>
     </tr>
-
     <tr>
       <td>[`schema:description`](https://schema.org/description)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>A free text description of the Place</td>
     </tr>
-
     <tr>
       <td>[`schema:image`](https://schema.org/image)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>An image or photo that depicts the place</td>
     </tr>
-
     <tr>
       <td>[`schema:address`](https://schema.org/address)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>The street address of the location, expressed as a [`schema:PostalAddress`](https://schema.org/PostalAddress). See the following section for more information on 
       describing [`schema:PostalAddress`](https://schema.org/PostalAddress) resources</td>
     </tr>
-
     <tr>
       <td>[`schema:geo`](https://schema.org/geo)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>The geographic co-ordinates, specified as a latitude and longitude of a Place</td>
     </tr>
-
     <tr>
       <td>[`schema:containedInPlace`](https://schema.org/containedInPlace)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that this Place is part of a larger location. Can be used to allow, e.g. a pitch or other facility to be related to a parent location such as a 
       Leisure Centre</td>
     </tr>
-
     <tr>
       <td>[`schema:containsPlace`](https://schema.org/containsPlace)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Relates a Place to other locations and facilities that it contains. Schema.org provides a specific type of Place, called a 
       [`schema:SportsActivityLocation`](https://schema.org/SportsActivityLocation) for describing facilities</td>
     </tr>
-
     <tr>
       <td>[`schema:telephone`](https://schema.org/telephone)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>A contact telephone number for the location, e.g. for enquiries</td>
     </tr>
-
     <tr>
       <td>[`schema:openingHoursSpecification`](https://schema.org/openingHoursSpecification)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Specifies the opening hours of a location. The value of this property is a [`schema:OpeningHoursSpecification`](http://schema.org/OpeningHoursSpecification).</td>
     </tr>
-    
   </tbody>   
 </table>
 
@@ -1404,6 +1369,15 @@ Facilities available at a location can be expressed using the containment proper
 
 ## Describing Organisers (<code>schema:Person</code> and <code>schema:Organization</code>)
 
+<div class="note">
+<p>__Applications should not publish personal data without permission__</p>
+<p>
+While the [`schema:Person`](https://schema.org/Person) type allows a variety of information to be published about a 
+person, applications should not publish this information as open data without consent.
+</p>
+</div>
+
+
 To describe the people and organisations involving in organising Events, Schema.org provides the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`](https://schema.org/Organization) types.
 
 Both of the types support a common set of properties that capture the basic information required for publishing opportunity data.
@@ -1420,25 +1394,21 @@ Both of the types support a common set of properties that capture the basic info
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>A URL to the homepage or other page about the organisation</td>
     </tr>
-
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>The name of the organisation</td>
     </tr>
-
     <tr>
       <td>[`schema:description`](https://schema.org/description)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>A description of the organisation</td>
     </tr>
-
     <tr>
       <td>[`schema:logo`](https://schema.org/logo)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>The logo of an organisation</td>
     </tr>
-
   </tbody>   
 </table>
 
@@ -1462,13 +1432,6 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 </code>
 </pre>
 
-<div class="note">
-<p>__Applications should not publish personal data without permission__</p>
-<p>
-While the [`schema:Person`](https://schema.org/Person) type allows a variety of information to be published about a 
-person, applications should not publish this information as open data without consent.
-</p>
-</div>
 
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
 
@@ -1491,19 +1454,16 @@ This will cover all the requirements [outlined in the concept model](#physical-a
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Title of the Activity List</td>
     </tr>
-
     <tr>
       <td>[`schema:description`](https://schema.org/description)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Description of the activity list</td>
     </tr>
-
     <tr>
       <td>[`dc:license`](http://purl.org/dc/terms/license)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Reference to the license under which the activity list has been published</td>
     </tr>
-
   </tbody>   
 </table>
 
@@ -1526,11 +1486,12 @@ This will cover all the requirements [outlined in the concept model](#physical-a
 </code>
 </pre>
 
-<div class="note">
 The `inScheme` property used in the above example is defined in the JSON-LD context published as part of the Open Active Vocabulary.
-</div>
 
 ### Describing Physical Activities
+
+The following properties from the [[SKOS]] specification can be used to describe physical activities.
+
 <table>
   <thead>
     <th>Property</th>
@@ -1543,37 +1504,31 @@ The `inScheme` property used in the above example is defined in the JSON-LD cont
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Preferred label for referring to the physical activity. The preferred labels should be used when publishing data about the activities involved in an event.</td>
     </tr>
-
     <tr>
       <td>[`skos:altLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#altLabel)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Alternative labels for the physical activity</td>
     </tr>
-
     <tr>
       <td>[`skos:inScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#inScheme)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Refers to the Activity List in which this physical activity is defined.</td>
     </tr>
-
     <tr>
       <td>[`skos:broader`](https://www.w3.org/2009/08/skos-reference/skos.html#broader)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi".</td>
     </tr>
-
     <tr>
       <td>[`skos:narrower`](https://www.w3.org/2009/08/skos-reference/skos.html#narrower)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts"</td>
     </tr>
-
     <tr>
       <td>[`skos:notation`](https://www.w3.org/2009/08/skos-reference/skos.html#notation)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Provides a unique code or identifier for an activity</td>
     </tr>
-
   </tbody>   
 </table>
 

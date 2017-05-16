@@ -959,6 +959,12 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>Indicates that an event will be organised according to a specific Programme</td>
     </tr>
 
+    <tr>
+      <td>[`oa:attendeeInstructions`](https://www.openactive.io/ns/#attendeeInstructions)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Provides additional notes and instructions for event attendees. E.g. more information on how to find the event, what to bring, etc.</td>
+    </tr>
+
 
   </tbody>
 </table>
@@ -972,6 +978,7 @@ The following example shows a simple event description, including its start time
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
+  "attendeeInstructions": "Please wear trainers and comfortable clothing",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M"
 }
@@ -987,6 +994,7 @@ This basic description can be improve by providing information about its locatio
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
+  "attendeeInstructions": "Please wear trainers and comfortable clothing",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "organizer": {

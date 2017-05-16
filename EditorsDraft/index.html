@@ -889,6 +889,18 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     </tr>
 
     <tr>
+      <td>[`schema:maximumAttendeeCapacity`](http://schema.org/maximumAttendeeCapacity)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>The maximum capacity of the event</td>
+    </tr>
+
+    <tr>
+      <td>[`schema:remainingAttendeeCapacity`](http://schema.org/remainingAttendeeCapacity)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>The number of places that are still available for the event</td>
+    </tr>
+
+    <tr>
       <td>`schema:schedule`</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>A [`schema:Person`]((https://schema.org/Person), e.g. a coach, staff member or volunteer who will be helping to run the event.
@@ -1188,6 +1200,27 @@ a Tai Chi class that occurs every Weds at 7pm
      "startTime": "19:00",
      "endTime": "20:00"
   }  
+}
+</code>
+</pre>
+
+### Describing event availability
+
+Schema.org provides a couple of basic properties for describing the maximum ([`schema:maximumAttendeeCapacity`](http://schema.org/maximumAttendeeCapacity)) and remaining capacity ([`schema:remainingAttendeeCapacity`](http://schema.org/remainingAttendeeCapacity)) for an [`schema:Event`](https://schema.org/Event). 
+
+These properties can be used to provide some basic availability information for scheduled events. These are illustrated in the following example which states that a Tai chi class can be attended by up to 20 people and that there are 4 spaces remaining.
+
+<pre class="example" title="Basic event availability"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "maximumAttendeeCapacity": 20,
+  "remainingAttendeeCapacity": 4
 }
 </code>
 </pre>

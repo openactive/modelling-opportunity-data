@@ -890,7 +890,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>Specifies the physical activity or activities that will take place during an event</td>
     </tr>
     <tr>
-      <td>[`oa:category`]https://www.openactive.io/ns/#category()</td>
+      <td>[`oa:category`](https://www.openactive.io/ns/#category)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.</td>
     </tr>
@@ -922,11 +922,6 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>[`oa:programme`](https://www.openactive.io/ns/#programme)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event will be organised according to a specific Programme</td>
-    </tr>
-    <tr>
-      <td>[`oa:leader`](https://www.openactive.io/ns/#leader)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>The person who will be leading an event. E.g. a coach. This is a more specific role than an organiser or a contributor</td>
     </tr>
 
   </tbody>
@@ -1226,6 +1221,8 @@ Schema.org provides the following properties for publishing address data using t
   </tbody>   
 </table>
 
+The following example shows how to markup a simple address:
+
 <pre class="example" title="An Address"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
@@ -1237,10 +1234,10 @@ Schema.org provides the following properties for publishing address data using t
 }
 </code></pre>
 
+### Describing Places
+
 In order to provide additional information, e.g. the name of the location or its geographic co-ordinates, then the [`schema:Place`](https://schema.org/Place) 
 type should be used instead.
-
-### Describing Places
 
 The following table lists the properties that can be used to provide descriptions of a [`schema:Place`](https://schema.org/Place) 
 <table>

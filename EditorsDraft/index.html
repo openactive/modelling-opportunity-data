@@ -942,6 +942,11 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Provides additional notes and instructions for event attendees. E.g. more information on how to find the event, what to bring, etc.</td>
     </tr>
+    <tr>
+      <td>[`oa:leader`](https://www.openactive.io/ns/#leader)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>The person who will be leading an event. E.g. a coach. This is a more specific role than an organiser or a contributor</td>
+    </tr>    
   </tbody>
 </table>
 
@@ -1547,7 +1552,7 @@ The following example illustrates the basic structure of an activity list:
   "url": "http://www.example.org/activity-list",
   "title": "Activity List",
   "description": "An example activity list",
-  "inScheme": [{
+  "concepts": [{
     "type": "Concept",
     "prefLabel": "Martial Arts",
     "narrower": {
@@ -1559,7 +1564,7 @@ The following example illustrates the basic structure of an activity list:
 </code>
 </pre>
 
-The `inScheme` property used in the above example is defined in the JSON-LD context published as part of the Open Active Vocabulary.
+The `concepts` property used in the above example is defined in the JSON-LD context published as part of the Open Active Vocabulary.
 
 ### Describing Physical Activities
 

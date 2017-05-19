@@ -947,6 +947,17 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>The person who will be leading an event. E.g. a coach. This is a more specific role than an organiser or a contributor</td>
     </tr>    
+    <tr>
+      <td>[`oa:accessibilitySupport`](https://www.openactive.io/ns/#accessibilitySupport)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Used to specify the types of disabilities or impairments that are supported at an event</td>
+    </tr>    
+    <tr>
+      <td>[`oa:accessibilityInformation`](https://www.openactive.io/ns/#accessibilitySupport)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Provide additional, specific documentation for participants about how disabilities are, or can be supported at the Event.</td>
+    </tr>    
+
   </tbody>
 </table>
 
@@ -1243,6 +1254,31 @@ If the status property is not provided then applications should assume that a de
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "eventStatus": "http://schema.org/EventCancelled"
+}
+</code>
+</pre>
+
+### Describing support for disabilities at events
+
+This specification defines several ways to capture information from organisers about the types of support they provide for people with disabilities 
+or other impairments. This includes: 
+
+* listing the types of disability or impairment that are, or can be accommodated at an event using the [`oa:accessibilitySupport`](https://www.openactive.io/ns/#accessibilitySupport) property
+* providing additional notes for participants using the [`oa:accessibilityInformation`](https://www.openactive.io/ns/#accessibilityInformation) property
+
+Examples of using these are shown below:
+
+<pre class="example" title="Accessibility information"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "accessibilitySupport": ["Hearing Impairment", "Visual Impairment"],
+  "accessibilityInformation": "The location is fully accessible, please contact the organiser if you have questions"
 }
 </code>
 </pre>

@@ -118,8 +118,22 @@
                 "href": "https://www.openactive.io/opportunity-data-primer/",
                 "title": "Publishing Opportunity Data: A Primer",
                 "publisher": "Open Active Community Group",            
-            }                                  
-
+            },                                  
+            "OpenActive-Beta-Namespace": {
+                "href": "https://www.openactive.io/ns-beta/",
+                "title": "OpenActive Beta Namespace",
+                "publisher": "Open Active Community Group",            
+            },                                  
+            "OpenActive-Vocabulary": {
+                "href": "https://www.openactive.io/ns/",
+                "title": "OpenActive Vocabulary",
+                "publisher": "Open Active Community Group",            
+            },
+            "OpenActive-Activity-List": {
+                "href": "https://www.openactive.io/activity-list/",
+                "title": "OpenActive Activity List",
+                "publisher": "Open Active Community Group",            
+            }                        
           }
         };
     </script>
@@ -438,13 +452,12 @@ and data collection. Others may adopt a more complex hierarchical approach.
 <p>__Developing a standard activity list__</p>
 <p>This specification doesn't place any requirements on how applications manage 
 or use Physical Activities or Activity Lists. There is no requirement that applications that 
-implement this specification should adopt a single standardised list, 
-or agree on standard groupings. The intention here is to just capture a useful model that can represent the variety of data 
-currently in use.
+implement this specification must adopt a single standardised list, or agree on standard groupings. The intention 
+here is to just capture a useful model that can represent the variety of data currently in use.
 </p>
-<p>However there will be benefits to the physical activity sector in developing a 
-standard list of Physical Activities to improve discovery, reporting, etc. Defining that list is 
-outside the scope of this specification.
+<p>However there are benefits to the physical activity sector in convergence on a standard list of 
+activities in order to improve discovery, reporting, etc. The OpenActive Community Group are developing 
+a standard list as a separate activity. For more information see [[OpenActive-Activity-List]].
 </div>
 
 ## Events
@@ -621,7 +634,7 @@ Places.
 Both standards are widely used, and can be used to publish data in a variety of structured formats, including 
 [[JSON-LD]]. 
 
-The __[*Open Active Vocabulary*](https://www.openactive.io/ns/)__ is a custom vocabulary designed to support the publication of 
+The __[*Open Active Vocabulary*](https://www.openactive.io/ns/)__ [[OpenActive-Vocabulary]] is a custom vocabulary designed to support the publication of 
 opportunity data. It defines a number of new terms that extend SKOS and Schema.org to cover additional 
 requirements highlighted in this specification.
 
@@ -646,7 +659,7 @@ In the following sections all referenced terms have been qualified using their n
 source vocabulary in which they have been defined. Terms have also been linked to their definitions.
 </p>
 <p>
-The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://www.openactive.io/ns/oa.jsonld) defined by [the OpenActive Vocabulary](https://www.openactive.io/ns/#term-definitions). 
+The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://www.openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]]. 
 </p>
 <p>
 The context removes the need to use explicit namespace prefixes in the JSON documents. The context also maps the JSON-LD [`@type`](https://www.w3.org/TR/json-ld/#specifying-the-type) and [`@id`](https://www.w3.org/TR/json-ld/#node-identifiers) properties to simple keys (`type` and `id`). This further limits the amount of JSON-LD syntax exposed to developers.
@@ -656,7 +669,7 @@ The context removes the need to use explicit namespace prefixes in the JSON docu
 ## Data Model Overview
 
 The following table provides a high-level summary of how the concepts introduced in the previous sections map to 
-definitions in SKOS, Schema.org and the Open Active Vocabulary. 
+definitions in SKOS, Schema.org and the Open Active Vocabulary ([[OpenActive-Vocabulary]]). 
 
 <table>
   <thead>
@@ -1055,10 +1068,11 @@ This specifies that the event will involve Tai Chi. Multiple activities can be s
 </code>
 </pre>
 
-The Physical Activities used to describe an event may be drawn from a standard Activity List. In this case it is useful to make this clear in 
-the opportunity data. In the following example the Physical Activity associated with the Event is shown as a structured value. This allows 
-more information to be provided, including its identifier, its label and alternative labels, and the identifier of the Activity List from which 
-it has been drawn:
+The Physical Activities used to describe an event may be drawn from a standard Activity List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]). 
+
+In this case it is useful to make this clear in the opportunity data. In the following example the Physical Activity associated with the Event 
+is shown as a structured value. This allows more information to be provided, including its identifier, its label and alternative labels, and the 
+identifier of the Activity List from which it has been drawn:
 
 <pre class="example" title="Using activities from an Activity List"><code>
 {
@@ -1070,11 +1084,11 @@ it has been drawn:
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "activity": {
-    "id": "http://example.org/activity-list#tai-chi",
+    "id": "https://www.openactive.io/activity-list/#c16df6ed-a4a0-4275-a8c3-1c8cff56856f",
     "type": "Concept",
-    "prefLabel": "Tai chi",
+    "prefLabel": "Tai Chi",
     "altLabel": "Tai-chi",
-    "inScheme": "http://example.org/activity-list"
+    "inScheme": "https://www.openactive.io/activity-list/"
   }
 }
 </code>
@@ -1579,11 +1593,14 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
 
-List of Physical Activities are controlled vocabularies that can be published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. This will cover all the requirements [outlined in the concept model](#physical-activities), allowing:
+List of Physical Activities are controlled vocabularies published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. That 
+standard covers all the requirements [outlined in the concept model](#physical-activities), allowing:
 
 * activities to be organised into hierarchies to capture broader-narrow relationships, e.g. "Martial Arts" and "Judo"
 * sharing of alternative labels to support search and indexing
 * the sharing of standard codes to support data integration
+
+The [[OpenActive-Activity-List]] provides an openly licensed standard activity list that can be used by publishers. But where a publisher needs to publish their own list, then they can use the properties defined in the SKOS specification, as follows:
 
 <table>
   <thead>
@@ -1631,7 +1648,7 @@ The following example illustrates the basic structure of an activity list:
 </code>
 </pre>
 
-The `concepts` property used in the above example is defined in the JSON-LD context published as part of the Open Active Vocabulary.
+The `concepts` property used in the above example is defined in the JSON-LD context published as part of the Open Active Vocabulary ([[OpenActive-Vocabulary]]).
 
 ### Describing Physical Activities
 
@@ -1734,7 +1751,8 @@ some evolution in practice
 Proposed changes to the specification will also be communicated in advance of their formal release, through the sharing of public Editor's Drafts. 
 This will provide opportunities for both publishers and users of the data to update their applications. 
 
-To support additional testing and deployment of new properties, a "beta" namespace will be defined to
+To support additional testing and experimentation around new properties, a "beta" namespace has been defined to allow the community to explore 
+extensions to this specification in a controlled way. For more information on the process supporting that see [[OpenActive-Beta-Namespace]].
 
 Regardless of the type of extension, activity can continue to be co-ordinated within the Open Active Community Group as the primary forum 
 for standardising the publication of opportunity data.

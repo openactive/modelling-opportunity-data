@@ -13,15 +13,16 @@
           shortName:            "modelling-opportunity-data",
 
           // if you wish the publication date to be other than today, set this
-          publishDate:  "2017-03-28",
+          // publishDate:  "2009-08-06",
 
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
           // previousPublishDate:  "1977-03-15",
-          // previousMaturity:  "WD",
-          
+          previousMaturity:  "ED",
+          previousPublishDate:  "2017-03-28",
+
           // if there a publicly available Editor's Draft, this is the link
-          edDraftURI:   "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
+          edDraftURI:           "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
           previousURI:  "https://www.openactive.io/modelling-opportunity-data",
           //prevED:  "https://www.openactive.io/spec-template/",
           //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
@@ -78,7 +79,7 @@
           wg:           "Openactive Community Group",
 
           // URI of the public WG page
-          wgURI:        "http://www.w3.org/community/openactive/",
+          wgURI:        "https://www.w3.org/community/openactive/",
 
           // name (with the @w3c.org) of the public mailing to which comments are due
           wgPublicList: "public-openactive",
@@ -88,7 +89,6 @@
           // This is important for Rec-track documents, do not copy a patent URI from a random
           // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
           // Team Contact.
-          wgPatentURI:  "",
           maxTocLevel: 4,
           preProcess: [ ] ,
           alternateFormats: [ {uri: "diff-previous.html", label: "diff to previous version"} ],
@@ -113,7 +113,13 @@
                 "title": "SKOS Simple Knowledge Organization System Primer",
                 "status": "NOTE",
                 "publisher": "W3C",            
-            }
+            },
+            "Publishing-Opportunity-Data": {
+                "href": "https://www.openactive.io/opportunity-data-primer/",
+                "title": "Publishing Opportunity Data: A Primer",
+                "publisher": "Open Active Community Group",            
+            }                                  
+
           }
         };
     </script>
@@ -121,14 +127,6 @@
     <script 
      src='https://www.w3.org/Tools/respec/respec-w3c-common' 
      class='remove'></script>
-
-    <!--    
-    <script src='https://www.openactive.io/respec/builds/respec-w3c-common.js' class='remove'></script>
-    -->
-    
-    <!-- <script src='/builds/respec-w3c-common.js' class='remove'></script>-->
-
-    <!-- <script src='/node_modules/requirejs/require.js' data-main='/js/profile-w3c-common' async class='remove'></script> -->
 
     <style>
     table {border-collapse: collapse; border: 1px solid #bec9d9}
@@ -190,17 +188,17 @@ systems and applications that consume opportunity data.
 The specification is an output of the [Openactive Community Group](http://www.w3.org/community/openactive/) 
 and serves as a common reference point for other specifications and outputs of that activity.
 
-The data model introduced in this document has been mapped to existing standards and vocabularies, including 
-SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. 
+Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the 
+[[Publishing-Opportunity-Data]] primer which provides a number of additional examples. 
 
-This existing work provides a useful existing framework around which the 
-[Openactive Community Group](http://www.w3.org/community/openactive/) can build custom data standards.
+The data model introduced in this document has been mapped to existing standards and vocabularies, including 
+SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a 
+useful existing framework around which the 
+[Openactive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.
+
     </section>
 
     <section id='sotd'>
-The purpose of this document is to represent an early draft to prompt feedback. 
-It will evolve based on discussion within the community.
-
 Contributions to this document are not only welcomed but are actively solicited and 
 should be made via [GitHub Issues](https://github.com/openactive/modelling-opportunity-data/issues) 
 and pull requests. The source code is available on [GitHub](https://github.com/openactive/modelling-opportunity-data).
@@ -508,16 +506,16 @@ In addition to their names, some systems may have additional information about o
 E.g. links to their web sites, photos, logos or contact details.
 
 <div class="note">
-<p>__Applications should not publish personal data without permission__</p>
+<p>__Applications must not publish personal data without permission__</p>
 <p>
 This specification provides a data model for publishing information about individual people, e.g. coaches, 
-volunteers, etc. However applications should respect privacy and data protection laws and must not publish 
+volunteers, etc. However applications <em class="rfc2119">MUST</em> respect privacy and data protection laws and must not publish 
 data about individuals without their consent.
 </p>
 <p>
 The ability to publish this type of data has been included because event organisers often choose to publicly 
 share some information about themselves to help advertise an event. E.g. their name and some background on 
-their qualifications or experience. But this information should not be published as open data without getting the 
+their qualifications or experience. But this information <em class="rfc2119">MUST</em> not be published as open data without getting the 
 consent of the individual concerned.
 </p>
 </div>
@@ -644,12 +642,14 @@ The rest of this specification make use of the following namespaces:
 
 <div class="note">
 <p>
-In the following sections all referenced terms have been qualified using their namespace prefix. This helps to highlight the 
-source vocabulary in which they are defined. Terms are also linked to their definitions.
+In the following sections all referenced terms have been qualified using their namespace prefix. This highlights the 
+source vocabulary in which they have been defined. Terms have also been linked to their definitions.
 </p>
 <p>
-The examples in each section use [[JSON-LD]] syntax and make use of [the terms declared in the OpenActive Vocabulary](https://www.openactive.io/ns/#term-definitions). 
-This feature of [[JSON-LD]] removes the need to use explicit namespace prefixes.
+The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://www.openactive.io/ns/oa.jsonld) defined by [the OpenActive Vocabulary](https://www.openactive.io/ns/#term-definitions). 
+</p>
+<p>
+The context removes the need to use explicit namespace prefixes in the JSON documents. The context also maps the JSON-LD [`@type`](https://www.w3.org/TR/json-ld/#specifying-the-type) and [`@id`](https://www.w3.org/TR/json-ld/#node-identifiers) properties to simple keys (`type` and `id`). This further limits the amount of JSON-LD syntax exposed to developers.
 </p>
 </div>
 
@@ -717,8 +717,6 @@ definitions in SKOS, Schema.org and the Open Active Vocabulary.
 
 ## Identifying and Linking Resources
 
-__Issue: Redraft this section to clarify role of `schema:url`, `@id` and `schema:identifier`__
-
 This specification adopts the same approach as Schema.org and encourages the use of URLs as unique identifiers for resources.
 
 Information about Events, Places, Organizations and other types of resources should already have been published online to 
@@ -737,11 +735,10 @@ If there are several different URLs that may be used to identify a resource, it 
 This specification provides two related properties for identifying resources:
 
 * `@id` - is used to [assign a globally unique URI to a resource](https://www.w3.org/TR/json-ld/#node-identifiers). This may resolve to further machine-readable 
- information about the resource. When supplied, this URI should be stable and unchanging over time. Applications harvesting and 
+ information about the resource. When supplied, this URI <em class="rfc2119">MUST</em> be stable and unchanging over time. Applications harvesting and 
  indexing opportunity data <em class="rfc2119">SHOULD</em> use this as a unique identifier for the resource
 * [`schema:url`](http://schema.org/url) - provides a link to a public web page about the resource. Further machine-readable metadata 
-may be discoverable from that web page. Applications must be able to use this URL as a means for providing users with a link to more information 
- about a resource.
+<em class="rfc2119">MAY</em> be discoverable from that web page. Applications <em class="rfc2119">MUST</em> be able to use this URL as a means for providing users with a link to more information about a resource.
 
 In short, the `@id` property provides a unique identifier while the `schema:url` provides a means to provide a link to 
 a public web page about a resource. 
@@ -879,6 +876,21 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>A [`schema:Person`]((https://schema.org/Person), e.g. a coach, staff member or volunteer who will be helping to run the event.</td>
     </tr>
     <tr>
+      <td>[`schema:maximumAttendeeCapacity`](http://schema.org/maximumAttendeeCapacity)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>The maximum capacity of the event</td>
+    </tr>
+    <tr>
+      <td>[`schema:remainingAttendeeCapacity`](http://schema.org/remainingAttendeeCapacity)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>The number of places that are still available for the event</td>
+    </tr>
+    <tr>
+      <td>[`schema:eventStatus`](http://schema.org/eventStatus)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>The status of an event. Can be used to indicate rescheduled or cancelled events</td>
+    </tr>
+    <tr>
       <td>`schema:schedule`</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>A [`schema:Person`]((https://schema.org/Person), e.g. a coach, staff member or volunteer who will be helping to run the event.
@@ -916,13 +928,49 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is restricted to male, female or a mixed audience. If a gender restriction isn't specified then applications 
-      should assume that an event is suitable for a mixed audience</td>
+      <em class="rfc2119">SHOULD</em> assume that an event is suitable for a mixed audience</td>
     </tr>
     <tr>
       <td>[`oa:programme`](https://www.openactive.io/ns/#programme)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event will be organised according to a specific Programme</td>
     </tr>
+    <tr>
+      <td>[`oa:attendeeInstructions`](https://www.openactive.io/ns/#attendeeInstructions)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Provides additional notes and instructions for event attendees. E.g. more information on how to find the event, what to bring, etc.</td>
+    </tr>
+    <tr>
+      <td>[`oa:leader`](https://www.openactive.io/ns/#leader)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Refers to a person (`schema:Person`) who will be leading an event. E.g. a coach. This is a more specific role than an organiser or a contributor</td>
+    </tr>    
+    <tr>
+      <td>[`oa:accessibilitySupport`](https://www.openactive.io/ns/#accessibilitySupport)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Used to specify the types of disabilities or impairments that are supported at an event</td>
+    </tr>    
+    <tr>
+      <td>[`oa:accessibilityInformation`](https://www.openactive.io/ns/#accessibilitySupport)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Provide additional, specific documentation for participants about how disabilities are, or can be supported at the Event.</td>
+    </tr>    
+    <tr>
+      <td>[`oa:isCoached`](https://www.openactive.io/ns/#isCoached)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A boolean property that indicates whether an Event will be coached. This flag allows an Event to be marked as being coached without having to specify a named individual as a coach. This addresses both privacy concerns and also scenarios where the actual coach may only be decided on the day.</td>
+    </tr>    
+    <tr>
+      <td>[`oa:level`](https://www.openactive.io/ns/#level)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A general purpose property for specifying the suitability of an event for different participant “levels”. E.g. beginner/intermediate/advanced. Or in the case of martial arts, specific belt requirements. Values <em class="rfc2119">SHOULD</em> ideally be drawn from a controlled vocabulary.</td>
+    </tr>    
+    <tr>
+      <td>[`oa:meetingPoint`](https://www.openactive.io/ns/#meetingPoint)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Instructions for the attendees of an Event about where they should meet the organizer or leader at the start of the event. Some larger locations may have several possible meeting points, so this property provides additional more specific directions.</td>
+    </tr>    
+
 
   </tbody>
 </table>
@@ -936,6 +984,7 @@ The following example shows a simple event description, including its start time
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
+  "attendeeInstructions": "Please wear trainers and comfortable clothing",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M"
 }
@@ -951,6 +1000,7 @@ This basic description can be improve by providing information about its locatio
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
+  "attendeeInstructions": "Please wear trainers and comfortable clothing",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "organizer": {
@@ -1034,7 +1084,9 @@ Again, multiple activities can be specified by specifying an array of values.
 
 ### Categorising events
 
-The [`oa:category`](https://www.openactive.io/ns/#category) property can be used to associate an Event with one or more tags that provide more detail about the event.
+The [`oa:category`](https://www.openactive.io/ns/#category) property can be used to associate an Event with one or more tags that provide some extra context about an event. This might include general information on the intensity and suitability. While this property can be used to add any arbitrary tags to an Event, a common use case is the need to tag an event as being suitable for a specific type of audience, e.g. Beginners. Where this information is available, the [`oa:level`](https://www.openactive.io/ns/#level) property can be used in preference to [`oa:category`](https://www.openactive.io/ns/#category). 
+
+If an application does not distinguish between different types of tags associated with an Event, then it <em class="rfc2119">SHOULD</em> use the more general [`oa:category`](https://www.openactive.io/ns/#category) property.
 
 <pre class="example" title="Tagging an Event"><code>
 {
@@ -1045,18 +1097,27 @@ The [`oa:category`](https://www.openactive.io/ns/#category) property can be used
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "category": ["Beginner", "Low intensity"]
+  "category": ["Suitable for all", "Low intensity"],
+  "level": ["Beginner"]
 }
 </code>
 </pre>
+
+Applications publish data using the [`oa:category`](https://www.openactive.io/ns/#category) and [`oa:level`](https://www.openactive.io/ns/#level) properties <em class="rfc2119">MAY</em> use values either from a controlled vocabulary or more free-form user entered labels. 
+
+Where an application is using a controlled vocabulary it <em class="rfc2119">SHOULD</em> publish that vocabulary as structured data.
+
+<div class="note">
+In future, the OpenActive Community Group may decide to define and recommend some controlled vocabularies for use in these properties. At present the values of these properties are left deliberately open to encourage publiation of open data that may inform future standardisation.
+</div>
 
 ### Describing Event Suitability
 
 There are a variety of ways in which the suitability of an event for specific audiences can be expressed. This includes specifying that 
 an event is:
 
-* suited for a specific age range
-* suited for people within a specific height or weight rage
+* suited for a specific age, height or age range
+* suited for people with specific levels of experience
 * restricted to a male, female or mixed audience
 
 The following example illustrates how to indicate that an event it targeted as a specific age range (over 60s) but is open to a mixed 
@@ -1080,7 +1141,7 @@ audience:
 An Event involving a climbing activity might be limited to people within a specific age and/or weight range. The following example illustrates 
 how to use these properties:
 
-<pre class="example" title="Age and gender example"><code>
+<pre class="example" title="Adding age, height and weight ranges"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Event",
@@ -1110,7 +1171,7 @@ Events can be associated with a Programme using the [`oa:programme`](https://www
   "description": "A rowing class for beginners",
   "startDate": "2017-04-01T08:00:00",
   "duration": "PT60M",
-  "category": ["Beginner"],
+  "level": ["Beginner"],
   "programme": "Learn to Row"
 }
 </code>
@@ -1127,7 +1188,7 @@ If more information about the programme is available, then this can be included 
   "description": "A rowing class for beginners",
   "startDate": "2017-04-01T08:00:00",
   "duration": "PT60M",
-  "category": ["Beginner"],
+  "level": ["Beginner"],
   "programme": {
     "name": "Learn to Row",
     "url": "https://www.britishrowing.org/go-rowing/learn-to-row/",
@@ -1174,6 +1235,79 @@ a Tai Chi class that occurs every Weds at 7pm
 </code>
 </pre>
 
+### Describing event availability
+
+Schema.org provides a couple of basic properties for describing the maximum ([`schema:maximumAttendeeCapacity`](http://schema.org/maximumAttendeeCapacity)) and remaining capacity ([`schema:remainingAttendeeCapacity`](http://schema.org/remainingAttendeeCapacity)) for an [`schema:Event`](https://schema.org/Event). 
+
+These properties can be used to provide some basic availability information for scheduled events. These are illustrated in the following example which states that a Tai chi class can be attended by up to 20 people and that there are 4 spaces remaining.
+
+<pre class="example" title="Basic event availability"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "maximumAttendeeCapacity": 20,
+  "remainingAttendeeCapacity": 4
+}
+</code>
+</pre>
+
+### Indicating the status of an event
+
+An [`schema:Event`](https://schema.org/Event) may occasionally be rescheduled or cancelled. Schema.org provides the [`schema:eventStatus`](http://schema.org/eventStatus) property for indicating the current status of an event.
+
+The property can have several standardised values which are defined by the [`schema:EventStatusType`](http://schema.org/EventStatusType) enumeration. The property values should therefore be one of the following URIs:
+
+* Cancelled: `http://schema.org/EventCancelled`
+* Postponed: `http://schema.org/EventPostponed`
+* Rescheduled: `http://schema.org/EventRescheduled`
+* Scheduled: `http://schema.org/EventScheduled`
+
+If the status property is not provided then applications <em class="rfc2119">SHOULD</em> assume that a default "scheduled" status. The following example shows a Tai chi class that has been cancelled:
+
+<pre class="example" title="A cancelled event"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "eventStatus": "http://schema.org/EventCancelled"
+}
+</code>
+</pre>
+
+### Describing support for disabilities at events
+
+This specification defines several ways to capture information from organisers about the types of support they provide for people with disabilities 
+or other impairments. This includes: 
+
+* listing the types of disability or impairment that are, or can be accommodated at an event using the [`oa:accessibilitySupport`](https://www.openactive.io/ns/#accessibilitySupport) property
+* providing additional notes for participants using the [`oa:accessibilityInformation`](https://www.openactive.io/ns/#accessibilityInformation) property
+
+Examples of using these are shown below:
+
+<pre class="example" title="Accessibility information"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "accessibilitySupport": ["Hearing Impairment", "Visual Impairment"],
+  "accessibilityInformation": "The location is fully accessible, please contact the organiser if you have questions"
+}
+</code>
+</pre>
+
 ## Describing Locations (<code>schema:Place</code> and <code>schema:PostalAddress</code>)
 
 Schema.org takes a flexible approach towards defining the locations for an [`schema:Event`](https://schema.org/Event). 
@@ -1187,9 +1321,10 @@ The legal values for the [`schema:location`](https://schema.org/location) proper
 While all three forms are allowed by Schema.org, applications that are publish opportunity data <em class="rfc2119">SHOULD</em> either
 specify an [`schema:PostalAddress`](https://schema.org/PostalAddress) or a more details [`schema:Place`](https://schema.org/Place) description.
 
+
 ### Describing Addresses
 
-Schema.org provides the following properties for publishing address data using the [`schema:PostalAddress`](https://schema.org/PostalAddress) type:
+Schema.org provides the following properties for publishing address data using the [`schema:PostalAddress`](https://schema.org/PostalAddress) type.
 
 <table>
   <thead>
@@ -1223,7 +1358,8 @@ Schema.org provides the following properties for publishing address data using t
 
 The following example shows how to markup a simple address:
 
-<pre class="example" title="An Address"><code>
+<pre class="example" title="An Address">
+<code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "PostalAddress",
@@ -1232,14 +1368,17 @@ The following example shows how to markup a simple address:
   "region": "Somerset",
   "postalCode": "BA2 4ET"
 }
-</code></pre>
+</code>
+</pre>
+
 
 ### Describing Places
 
 In order to provide additional information, e.g. the name of the location or its geographic co-ordinates, then the [`schema:Place`](https://schema.org/Place) 
-type should be used instead.
+type <em class="rfc2119">MUST</em> be used instead.
 
 The following table lists the properties that can be used to provide descriptions of a [`schema:Place`](https://schema.org/Place) 
+
 <table>
   <thead>
     <th>Property</th>
@@ -1270,8 +1409,7 @@ The following table lists the properties that can be used to provide description
     <tr>
       <td>[`schema:address`](https://schema.org/address)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
-      <td>The street address of the location, expressed as a [`schema:PostalAddress`](https://schema.org/PostalAddress). See the following section for more information on 
-      describing [`schema:PostalAddress`](https://schema.org/PostalAddress) resources</td>
+      <td>The street address of the location, expressed as a [`schema:PostalAddress`](https://schema.org/PostalAddress). See the following section for more information on describing [`schema:PostalAddress`](https://schema.org/PostalAddress) resources</td>
     </tr>
     <tr>
       <td>[`schema:geo`](https://schema.org/geo)</td>
@@ -1281,8 +1419,7 @@ The following table lists the properties that can be used to provide description
     <tr>
       <td>[`schema:containedInPlace`](https://schema.org/containedInPlace)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that this Place is part of a larger location. Can be used to allow, e.g. a pitch or other facility to be related to a parent location such as a 
-      Leisure Centre</td>
+      <td>Indicates that this Place is part of a larger location. Can be used to allow, e.g. a pitch or other facility to be related to a parent location such as a Leisure Centre</td>
     </tr>
     <tr>
       <td>[`schema:containsPlace`](https://schema.org/containsPlace)</td>
@@ -1373,14 +1510,20 @@ Facilities available at a location can be expressed using the containment proper
 ## Describing Organisers (<code>schema:Person</code> and <code>schema:Organization</code>)
 
 <div class="note">
-<p>__Applications should not publish personal data without permission__</p>
+<p><strong>Applications must not publish personal data without permission</strong></p>
 <p>
-While the [`schema:Person`](https://schema.org/Person) type allows a variety of information to be published about a 
-person, applications should not publish this information as open data without consent.
+While the <a href="https://schema.org/Person"><code>schema:Person</code></a> type allows a variety of information to be published about a 
+person, applications <em class="rfc2119">MUST</em> not publish this information as open data without consent.
 </p>
 </div>
 
 To describe the people and organisations involving in organising Events, Schema.org provides the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`](https://schema.org/Organization) types.
+
+People and organisations can be associated with an Event using the [`schema:organizer`](http://schema.org/organizer), [`schema:contributor`](http://schema.org/contributor) or [`oa:leader`](https://www.openactive.io/ns/#leader) properties. These allow some flexibility in defining how a person or organisation is associated with an event. For example an event may be:
+
+* organized by an club (`schema:organizer`)
+* be lead by a specific coach (`oa:leader`) 
+* and involve other named participants (`oa:contributor`)
 
 Both of the types support a common set of properties that capture the basic information required for publishing opportunity data.
 
@@ -1434,11 +1577,9 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 </code>
 </pre>
 
-
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
 
-List of Physical Activities are controlled vocabularies that can be published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. 
-This will cover all the requirements [outlined in the concept model](#physical-activities), allowing:
+List of Physical Activities are controlled vocabularies that can be published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. This will cover all the requirements [outlined in the concept model](#physical-activities), allowing:
 
 * activities to be organised into hierarchies to capture broader-narrow relationships, e.g. "Martial Arts" and "Judo"
 * sharing of alternative labels to support search and indexing
@@ -1469,6 +1610,8 @@ This will cover all the requirements [outlined in the concept model](#physical-a
   </tbody>   
 </table>
 
+The following example illustrates the basic structure of an activity list:
+
 <pre class="example" title="Publishing an activity list"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
@@ -1476,7 +1619,7 @@ This will cover all the requirements [outlined in the concept model](#physical-a
   "url": "http://www.example.org/activity-list",
   "title": "Activity List",
   "description": "An example activity list",
-  "inScheme": [{
+  "concepts": [{
     "type": "Concept",
     "prefLabel": "Martial Arts",
     "narrower": {
@@ -1488,7 +1631,7 @@ This will cover all the requirements [outlined in the concept model](#physical-a
 </code>
 </pre>
 
-The `inScheme` property used in the above example is defined in the JSON-LD context published as part of the Open Active Vocabulary.
+The `concepts` property used in the above example is defined in the JSON-LD context published as part of the Open Active Vocabulary.
 
 ### Describing Physical Activities
 
@@ -1560,30 +1703,69 @@ type of resource.
 
 ## Extending the Model
 
-The previous sections described how to publish opportunity data using a combination of existing and new vocabularies. 
-But this approach may not address every requirement. Specific applications may need custom extensions and the community may want to 
-revise or improve the core model in future.
+The previous sections describe how to publish opportunity data using a combination of existing and new vocabularies. 
+But this approach may not address every requirement. Specific applications may need custom extensions and the community may need to 
+revise or improve the core model presented here. 
 
-With this in mind, this section briefly outlines an approach to handling extensions and revisions to this model.
+Future versions of the specification may have a wider scope, e.g. to support description of facilities, equipment, 
+event booking or accreditation schemes for sporting organisations.
 
-Firstly, where SKOS or Schema.org define additional properties that are not referenced in this specification, then data publishers are 
-free to use them. For example an application may wish to share reviews of events, places or clubs. The [`schema:review`](https://schema.org/review) property 
-and related model can be used for this purpose, without requiring revisions to the Open Active Vocabulary.
+With this in mind, the following sections briefly outline some expected ways in which this specification and the practice of 
+publishing of opportunity data may evolve.
 
-This specification defines only loose conformance criteria, in the form of recommended properties. Consumers of opportunity data 
-should be liberal in what they accept from data publishers, to allow the use of additional properties in this way. Over time this specification may 
-be revised to reference more of these properties if and when they become widely used.
+To support changing practice, consumers of opportunity data <em class="rfc2119">SHOULD</em> be liberal in what they accept 
+from data publishers, to allow the use of additional properties.
 
-Secondly there may be a need to define new vocabulary relevant to broad needs of the open active community. An example is the need to 
-support publication of data related to event booking. This may require revisions to this specification, e.g. to support the sharing of 
-pricing and related information, in addition to an API specification to support bookings.
- 
-Finally, there may be a need for new vocabulary to support the needs for specific applications or user communities. For example there may be 
-a need for a standard way to describe the characteristics of cycle tracks or orienteering trails. These extensions might be included in this 
-data model or may be better described in other custom vocabularies, or even proposed as extensions to Schema.org.
+### Versioning Policy
 
-Regardless of the type of extension, this activity can continue to be co-ordinated within the Open Active Community Group which can provide 
-an ongoing forum for this type of standardisation activity.
+The broad goal is to ensure that future versions of this specification remain backwards compatible. This will ensure that 
+published data remains valid. 
+
+New types of resource, relationships and properties can easily be added to extend the model without impacting existing data. 
+Potential breaking changes would include changing the definitions of existing properties, or removing them from the specification.
+
+To avoid this, the goal will be to:
+
+* evolve the definitions of existing properties to broadly retain their current meaning and legal values.
+* deprecate, rather than remove properties that are judged, based on implementation experience, to be less useful or confusing. Deprecated properties will be clearly marked in both the human and machine-readable versions of the OpenActive namespace.
+* ensure that conformance criteria are loosely defined, balancing the need to be able to validate data against a desire to allow 
+some evolution in practice
+
+Proposed changes to the specification will also be communicated in advance of their formal release, through the sharing of public Editor's Drafts. 
+This will provide opportunities for both publishers and users of the data to update their applications. 
+
+To support additional testing and deployment of new properties, a "beta" namespace will be defined to
+
+Regardless of the type of extension, activity can continue to be co-ordinated within the Open Active Community Group as the primary forum 
+for standardising the publication of opportunity data.
+
+### Relationship with Schema.org and SKOS
+
+This specification draws heavily on [[SCHEMA-ORG]] and [[SKOS]] to define its core data model. Both of these specifications define additional 
+properties that are not directly referenced in this document.
+
+However data publishers are free to use any additional types and properties where useful. [[SCHEMA-ORG]] in particular provides a source of a 
+wide range of additional properties for describing Events, Places, Organisations, etc. 
+
+For example an application may wish to share reviews of events, places or clubs. The [`schema:review`](https://schema.org/review) property 
+and its related data model can be used for this purpose, without requiring revisions to this specification.
+
+### Defining Custom Vocabularies
+
+There may be a need for new vocabulary to support the needs of specific applications or user communities. Where these are widely relevant 
+then these extensions might be included in this data model. 
+
+In other circumstances its expected that additional data models and specifications will be produced to support the needs of those 
+communities. For example it may be useful to define standard models for describing the characteristics of cycle tracks or 
+orienteering trails. These would be better defined either as custom vocabularies or proposed as [[SCHEMA-ORG]] extensions. 
+
+Where an application or community is defining a custom vocabulary then they <em class="rfc2119">SHOULD</em>:
+
+* publish documentation that describes the custom properties, types and controlled vocabularies being used
+* create a custom [[JSON-LD]] schema that provides a machine-readable definition of the properties
+* share the documentation and schema with the OpenActive community group
+
+[[JSON-LD]] allows data to be [published with reference to multiple contexts](https://www.w3.org/TR/json-ld/#advanced-context-usage). This will help clarify for reusers where a dataset is combining this specification with one or more custom vocabularies.
   </section>
 
     </section>

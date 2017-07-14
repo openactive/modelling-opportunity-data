@@ -22,7 +22,7 @@
           previousPublishDate:  "2017-03-28",
 
           // if there a publicly available Editor's Draft, this is the link
-          edDraftURI:           "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
+          edDraftURI:   "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
           previousURI:  "https://www.openactive.io/modelling-opportunity-data",
           //prevED:  "https://www.openactive.io/spec-template/",
           //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
@@ -228,7 +228,7 @@ data has enormous potential to increase people's participation in physical activ
 
 ## Categories of Physical Activity Data
 
-There are several different categories of data that relevant to physical activities. 
+There are several different categories of data that are relevant to physical activities. 
 This data covers different parts of [the data spectrum](http://theodi.org/data-spectrum) 
 and is represented in the following diagram.
 
@@ -282,7 +282,7 @@ At present the physical activity sector does not have a standard list of physica
 The specification should allow data providers to share the lists they have and support the 
 sector in moving towards a standardised list of physical activities
 
-### Support variety of sources
+### Support a variety of sources
 
 Opportunity data is collected and held in a variety of different tools, platforms and websites. 
 There is variation in the amount of detail held about individual events so the specification must 
@@ -298,7 +298,7 @@ data formats or APIs. Ideally opportunity data could be published as JSON, XML, 
 ### Create an extensible framework
 
 This specification should support extensions to allow it to be customised and revised to meet future 
-requirements, as well as needs of specific communities of data publisher and consumer.
+requirements, as well as the needs of specific communities of data publishers and consumers.
 
 ## Scope
 
@@ -408,10 +408,14 @@ One method of grouping activities is to define "broader" and "narrower" relation
 For example Judo, Karate and Kendo are all more specific examples of the broader activity of 
 "Martial Arts".
 
- * Martial Arts
-  * Karate
-  * Kendo
-  * Judo
+<ul>
+<li>Martial Arts
+<ul><li>Karate</li>
+<li>Kendo</li>
+<li>Judo</li>
+</ul>
+</li>
+</ul>
 
 This type of grouping could also be used to describe the disciplines associated with 
 Physical Activities. For example olympic and open water swimming.
@@ -420,13 +424,19 @@ An Activity List might also group Physical Activities into collections. For exam
 swimming, water aerobics, and water polo might all be classified as "Water Sports".
 Water polo and football might also be grouped into a collection of "Team Sports".
 
- * Team Sports
-  * Football
-  * Water Polo
- * Water Sports
-  * Swimming
-  * Water Aerobics
-  * Water Polo
+<ul>
+<li>Team Sports
+<ul><li>Football</li>
+<li>Water Polo</li>
+</ul>
+</li>
+<li>Water Sports
+<ul><li>Swimming</li>
+<li>Water Aerobics</li>
+<li>Water Polo</li>
+</ul>
+</li>
+</ul>
 
 An Activity List may include any number of collections of Physical Activities. As shown in the 
 example above, an individual Physical Activity might be present in more than one grouping. 
@@ -508,7 +518,8 @@ formalising these categories.
 ## Organisers (Persons and Organizations)
 
 Events have __*organisers*__. An event organiser might be a __*Person*__ or an __*Organization*__. 
-The organiser of an event is the person or organisation who arranged and/or hosts the event.
+The organiser of an event is the person or organisation who arranged and/or hosts the event. The organizer 
+will be the person or organisation who is ultimately responsible for an Event.
 
 Examples of organisers might be coaches, or a local sports club.
 
@@ -613,6 +624,24 @@ type of opportunity. For example:
 * have other descriptive attributes, such as suitability for particular types of participants, fitness levels, etc.
 
 In this specification this type of self-guided activities will be referred to as __*Activity Opportunities*__.
+
+## Offers
+
+Some opportunities are freely available for anyone to attend. Others are only available to members or 
+paying attendees.
+
+An __*Offer*__ is used to describe the terms under which a participant can pay to attend an event.
+
+<div class="note">
+<p>
+The concept of an Offer is taken from Schema.org, which itself references the [Good Relations](http://www.heppnetz.de/projects/goodrelations/) 
+vocabulary for ecommerce. The data model described in a later section is not intended as a 
+complete specification. The concept is introduced in this version of specification to highlight 
+the support available in Schema.org for associating offers with events. Later versions of the specification 
+will explore the area of booking in more detail.
+</p>
+</div>
+
 
   </section>
 
@@ -724,7 +753,13 @@ definitions in SKOS, Schema.org and the Open Active Vocabulary ([[OpenActive-Voc
       <td>[`oa:ActivityOpportunity`](https://www.openactive.io/ns/#ActivityOpportunity)</td>
       <td>An opportunity to carry out an activity at a location, at a time of the participants 
       choosing.</td>
-    <tr>    
+    <tr>
+    <tr>
+      <td>Offer</td>
+      <td>[`schema:Offer`](http://schema.org/Offer)</td>
+      <td>Schema.org provides an existing model for describing offers to pay to participate in 
+      an Event.</td>
+    <tr>        
   </tbody>
 </table>  
 
@@ -745,21 +780,24 @@ If there are several different URLs that may be used to identify a resource, it 
 * a stable link that will resolve to a public web page, accessible to both web browsers and applications
 * a consistent link that will allow reusers to rely on the URL as an identifier, e.g. to merge in updated data
 
-This specification provides two related properties for identifying resources:
+This specification provides three properties for identifying resources:
 
 * `@id` - is used to [assign a globally unique URI to a resource](https://www.w3.org/TR/json-ld/#node-identifiers). This may resolve to further machine-readable 
  information about the resource. When supplied, this URI <em class="rfc2119">MUST</em> be stable and unchanging over time. Applications harvesting and 
- indexing opportunity data <em class="rfc2119">SHOULD</em> use this as a unique identifier for the resource
+ indexing opportunity data <em class="rfc2119">SHOULD</em> use this as the unique identifier for the resource
 * [`schema:url`](http://schema.org/url) - provides a link to a public web page about the resource. Further machine-readable metadata 
-<em class="rfc2119">MAY</em> be discoverable from that web page. Applications <em class="rfc2119">MUST</em> be able to use this URL as a means for providing users with a link to more information about a resource.
+<em class="rfc2119">MAY</em> be discoverable from that web page. Applications <em class="rfc2119">MUST</em> be able to use this URL as a means for providing users with a link to more information about a resource
+* [`schema:identifier`](http://schema.org/identifier) - provides a means of sharing non-URI identifiers for a resource, e.g. a company or 
+registration number for an Organization, or an internal identifier for an Event. Applications <em class="rfc2119">MAY</em> use this 
+as a unique identifier for the resource, if there is no `@id` available.
 
-In short, the `@id` property provides a unique identifier while the `schema:url` provides a means to provide a link to 
+In short, the `@id` property provides a unique global identifier, while the `schema:url` provides a means to provide a link to 
 a public web page about a resource. 
 
 If applicable then publishers may choose to use the same URI for these two properties. If an `@id` property is not provided then 
 applications <em class="rfc2119">MAY</em> choose to rely on the value of this property as a unique identifier.
 
-The option to use two different URls is useful when there is a need to distinguish between a unique identifier and a 
+The option to use two different URLs is useful when there is a need to distinguish between a unique identifier and a 
 public resource. For example a platform hosting opportunity data may need to assign a unique identifier to a resource 
 that is separate to its public web page.
 
@@ -776,9 +814,6 @@ that is separate to its public web page.
 
 In the above example the `@id` property provides a unique identifier across the hosting application. But the public URL for the 
 Event uses a separate, customer-specific domain.
-
-If a publisher has existing non-URI identifiers for a resource, e.g. a company or registration number for an Organization, then 
-this can be provided using the [`schema:identifier`](http://schema.org/identifier) property.
 
 ## Required and Optional Properties
 
@@ -812,9 +847,19 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
   </thead>
   <tbody>
     <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>
+    <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>A URL to a web page (or section of a page) that describes the event</td>
+    </tr>
+    <tr>
+      <td>[`schema:identifier`](http://schema.org/identifier)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A local identifier for the resource</td>
     </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
@@ -829,7 +874,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`schema:image`](https://schema.org/image)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>An image or photo that depicts the event, e.g. a photo taken at a previously run event</td>
+      <td>An image or photo that depicts the event, e.g. a photo taken at a previous event</td>
     </tr>
     <tr>
       <td>[`schema:startDate`](https://schema.org/startDate)</td>
@@ -880,7 +925,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`schema:organizer`](https://schema.org/organizer)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
-      <td>The organizer or host of an event. An organizer might be an [`schema:Organization`](https://schema.org/Organization) or 
+      <td>The person or organization ultimately responsible for an event. An organizer might be an [`schema:Organization`](https://schema.org/Organization) or 
       a [`schema:Person`]((https://schema.org/Person).</td>
     </tr>
     <tr>
@@ -904,6 +949,18 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>The status of an event. Can be used to indicate rescheduled or cancelled events</td>
     </tr>
     <tr>
+      <td>[`schema:subEvent`](http://schema.org/subEvent)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Relates a parent event to a child event. Properties describing the parent event can be assumed to apply to the child, unless otherwise specified. 
+      A child event might be a specific instance of an Event within a schedule</td>
+    </tr>
+    <tr>
+      <td>[`schema:superEvent`](http://schema.org/superEvent)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Relates a child event to a parent event. Properties describing the parent event can be assumed to apply to the child, unless otherwise specified. 
+      A parent event might specify a recurring schedule, of which the child event is one specific instance</td>
+    </tr>
+    <tr>
       <td>`schema:schedule`</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>A [`schema:Person`]((https://schema.org/Person), e.g. a coach, staff member or volunteer who will be helping to run the event.
@@ -924,18 +981,6 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Indicates that an event is suitable for a specific age range. If only a single age is specified then this is assumed to be a minimum age. 
       Age ranges can be specified as follows: 18-30</td>
-    </tr>
-    <tr>
-      <td>[`oa:heightRange`](https://www.openactive.io/ns/#heightRange)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that an event is suitable for a people within a specific range of heights. Heights are specified in metres. 
-      If only a single height is specified, this is assumed to be a minimum height. Height ranges can be specified as follows: 1-1.4</td>
-    </tr>
-    <tr>
-      <td>[`oa:weightRange`](https://www.openactive.io/ns/#weightRange)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that an event is suitable for a people within a specific range of weights. Weights are specified in kilograms. 
-      If only a single weight is specified, this is assumed to be a minimum weight. Weight ranges can be specified as follows: 45-125</td>
     </tr>
     <tr>
       <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
@@ -1004,7 +1049,7 @@ The following example shows a simple event description, including its start time
 </code>
 </pre>
 
-This basic description can be improve by providing information about its location and organizer.
+This basic description can be improved by providing information about its location and organizer.
 
 <pre class="example" title="Adding a venue and an organizer"><code>
 {
@@ -1130,7 +1175,7 @@ In future, the OpenActive Community Group may decide to define and recommend som
 There are a variety of ways in which the suitability of an event for specific audiences can be expressed. This includes specifying that 
 an event is:
 
-* suited for a specific age, height or age range
+* suited for a specific age range
 * suited for people with specific levels of experience
 * restricted to a male, female or mixed audience
 
@@ -1147,26 +1192,6 @@ audience:
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "ageRange": 60,
-  "genderRestriction": "mixed"
-}
-</code>
-</pre>
-
-An Event involving a climbing activity might be limited to people within a specific age and/or weight range. The following example illustrates 
-how to use these properties:
-
-<pre class="example" title="Adding age, height and weight ranges"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Climbing adventure",
-  "description": "A tree top climbing adventure",
-  "startDate": "2017-03-22T10:00:00",
-  "duration": "PT60M",
-  "ageRange": 10,
-  "heightRange": 1.4,
-  "weightRange": "45-125",
   "genderRestriction": "mixed"
 }
 </code>
@@ -1221,8 +1246,7 @@ If more information about the programme is available, then this can be included 
 
 There is a discussion under way in the Schema.org community to extend their model to cover recurring events. The [proposal](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) 
 is to add a new `schema:eventSchedule` property that will refer to a [recurrence rule](http://www.kanzaki.com/docs/ical/rrule.html) as defined in the iCalendar specification. The 
-assumption is that this proposal will be expected and this specification will then recommend use of the `schema:eventSchedule` property. The following section is written on that basis but 
-is subsequent to change.
+assumption is that this proposal will be expected and this specification will then recommend use of the `schema:eventSchedule` property. The following section is written on that basis but is subsequent to change.
 </div>
 
 The following example illustrates basic usage of the [`schema:eventSchedule`](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) property. The data describes 
@@ -1401,6 +1425,16 @@ The following table lists the properties that can be used to provide description
   </thead>
   <tbody>
     <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>
+    <tr>
+      <td>[`schema:identifier`](http://schema.org/identifier)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A local identifier for the resource</td>
+    </tr>    
+    <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>A URL to a web page (or section of a page) that describes the Place</td>
@@ -1539,7 +1573,13 @@ People and organisations can be associated with an Event using the [`schema:orga
 * be lead by a specific coach (`oa:leader`) 
 * and involve other named participants (`oa:contributor`)
 
-Both of the types support a common set of properties that capture the basic information required for publishing opportunity data.
+To help ensure that publishers apply these properties in consistent ways, it is recommended that:
+
+* For events taking place in a gym, the organizer should be listed as the gym (an [`schema:Organization`](https://schema.org/Organization))
+* For "user generated" events in a booking system, the organizer should be the account under which the events were created, rather than the booking system. The instructor for the event can be specified as the `oa:leader` or `oa:contributor`
+* For franchised events (e.g. Clubbercise), the organiser should be the franchisee, as they are ultimately responsible for organising that specific event
+
+Both the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`](https://schema.org/Organization) types support a common set of properties that capture the basic information required for publishing opportunity data.
 
 <table>
   <thead>
@@ -1548,6 +1588,16 @@ Both of the types support a common set of properties that capture the basic info
     <th>Notes</th>
   </thead>
   <tbody>
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>
+    <tr>
+      <td>[`schema:identifier`](http://schema.org/identifier)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A local identifier for the resource</td>
+    </tr>  
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
@@ -1593,6 +1643,7 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
 
+
 List of Physical Activities are controlled vocabularies published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. That 
 standard covers all the requirements [outlined in the concept model](#physical-activities), allowing:
 
@@ -1609,6 +1660,11 @@ The [[OpenActive-Activity-List]] provides an openly licensed standard activity l
     <th>Notes</th>
   </thead>
   <tbody>
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>
     <tr>
       <td>[`dc:title`](http://purl.org/dc/terms/title)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
@@ -1694,6 +1750,8 @@ The following properties from the [[SKOS]] specification can be used to describe
   </tbody>   
 </table>
 
+The following markup illustrates how to describe a single activity.
+
 <pre class="example" title="Publishing an activity list"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
@@ -1705,6 +1763,71 @@ The following properties from the [[SKOS]] specification can be used to describe
 }
 </code>
 </pre>
+
+## Describing Offers (<code>schema:Offer</code>)
+
+To indicate that a `schema:Event` is only available to paid attendees, opportunity data provides may include details of the offers available to 
+participants. The [`schema:Offer`](http://schema.org/Offer) type provides some basic properties for indicating the price and availability of 
+Offers.
+
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>  
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>
+    <tr>
+      <td>[`schema:identifier`](http://schema.org/identifier)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A local identifier for the resource</td>
+    </tr>  
+    <tr>
+      <td>[`schema:name`](https://schema.org/name)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The name of the offer suitable for display to participants</td>
+    </tr>
+    <tr>
+      <td>[`schema:price`](https://schema.org/price)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The offer price available to participants</td>
+    </tr>
+    <tr>
+      <td>[`schema:priceCurrency`](https://schema.org/priceCurrency)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The currency of the offer price.</td>
+    </tr>
+  </tbody>   
+</table>
+
+The following example shows an event which offers a price for attending a single session.
+
+<pre class="example" title="Describing an Offer"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "duration": "PT60M",
+  "offers": [{
+    "name": "Single session",
+    "price": "5",
+    "priceCurrency": "GBP"
+  }]  
+}
+</code>
+</pre>
+
+<div class="note">
+Schema.org provides [additional properties for describing Offers](http://schema.org/Offer). The above model highlights the properties 
+that support the most common, basic use case. Future versions of this specification may include more detail around describing offers.
+</div>
 
 ## Describing Activity Opportunities (<code>oa:ActivityOpportunity</code>)
 

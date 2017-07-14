@@ -1305,7 +1305,9 @@ The property can have several standardised values which are defined by the [`sch
 * Rescheduled: `http://schema.org/EventRescheduled`
 * Scheduled: `http://schema.org/EventScheduled`
 
-If the status property is not provided then applications <em class="rfc2119">SHOULD</em> assume that a default "scheduled" status. The following example shows a Tai chi class that has been cancelled:
+If the status property is not provided then applications <em class="rfc2119">SHOULD</em> assume a default value of `http://schema.org/EventScheduled`.
+
+The following example shows a Tai chi class that has been cancelled:
 
 <pre class="example" title="A cancelled event"><code>
 {

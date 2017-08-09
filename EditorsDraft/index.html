@@ -1121,8 +1121,7 @@ This specifies that the event will involve Tai Chi. Multiple activities can be s
 The Physical Activities used to describe an event may be drawn from a standard Activity List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]). 
 
 In this case it is useful to make this clear in the opportunity data. In the following example the Physical Activity associated with the Event 
-is shown as a structured value. This allows more information to be provided, including its identifier, its label and alternative labels, and the 
-identifier of the Activity List from which it has been drawn:
+is shown as a structured value. This allows more information to be provided, including its identifier, its label and a reference to the identifier of the Activity List from which it has been drawn:
 
 <pre class="example" title="Using activities from an Activity List"><code>
 {
@@ -1137,14 +1136,15 @@ identifier of the Activity List from which it has been drawn:
     "id": "https://www.openactive.io/activity-list/#c16df6ed-a4a0-4275-a8c3-1c8cff56856f",
     "type": "Concept",
     "prefLabel": "Tai Chi",
-    "altLabel": "Tai-chi",
     "inScheme": "https://www.openactive.io/activity-list/"
   }
 }
 </code>
 </pre>
 
-Again, multiple activities can be specified by specifying an array of values.
+Applications could include additional information, e.g. alternate labels for convenience of consumers.
+
+And, as shown in the earlier example, multiple activities can be specified by specifying an array of objects.
 
 ### Categorising events
 
@@ -1242,16 +1242,18 @@ If more information about the programme is available, then this can be included 
 </code>
 </pre>
 
-### Describing Scheduled events
+### Describing scheduled events
 
 <div class="note">
 **Schema.org support for recurring events**
 
 **[Issue 2](https://github.com/openactive/modelling-opportunity-data/issues/2)**: Schema.org support for recurring events
 
-There is a discussion under way in the Schema.org community to extend their model to cover recurring events. The [proposal](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) 
-is to add a new `schema:eventSchedule` property that will refer to a [recurrence rule](http://www.kanzaki.com/docs/ical/rrule.html) as defined in the iCalendar specification. The 
-assumption is that this proposal will be expected and this specification will then recommend use of the `schema:eventSchedule` property. The following section is written on that basis but is subsequent to change.
+This specification relies on some pending changes to Schema.org that will add recurrence rules to Events. The [proposal](https://github.com/schemaorg/schemaorg/pull/1693) has been accepted, but is not yet formally part of the model.
+
+We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. 
+On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that 
+this is an area that may change in future versions.
 </div>
 
 The following example illustrates basic usage of the [`schema:eventSchedule`](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) property. The data describes 

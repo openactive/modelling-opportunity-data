@@ -1220,10 +1220,11 @@ If more information about the programme is available, then this can be included 
 
 **[Issue 2](https://github.com/openactive/modelling-opportunity-data/issues/2)**: Schema.org support for recurring events
 
-There is a discussion under way in the Schema.org community to extend their model to cover recurring events. The [proposal](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) 
-is to add a new `schema:eventSchedule` property that will refer to a [recurrence rule](http://www.kanzaki.com/docs/ical/rrule.html) as defined in the iCalendar specification. The 
-assumption is that this proposal will be expected and this specification will then recommend use of the `schema:eventSchedule` property. The following section is written on that basis but 
-is subsequent to change.
+This specification relies on some pending changes to Schema.org that will add recurrence rules to Events. The [proposal](https://github.com/schemaorg/schemaorg/pull/1693) has been accepted, but is not yet formally part of the model.
+
+We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. 
+On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that 
+this is an area that may change in future versions.
 </div>
 
 The following example illustrates basic usage of the [`schema:eventSchedule`](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) property. The data describes 

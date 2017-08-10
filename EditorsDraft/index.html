@@ -164,10 +164,6 @@
       background-size: 25px auto !important;
       background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
     }
-    body.toc-sidebar #toc {
-      background-size: 25px auto !important;
-      background-attachment: fixed !important;
-    }
     h1 {
       font-family: 'Open Sans',sans-serif !important;
       font-weight: 300 !important;
@@ -183,10 +179,23 @@
     code {
         color: #C83500;
     }
+    em.rfc2119 { 
+      font-variant: small-caps;
+    }
+
     </style>
 
   </head>
   <body >
+    <style>
+    body {
+      background-size: 25px auto !important;
+    }
+    body.toc-sidebar #toc {
+      background-size: 25px auto !important;
+      background-attachment: fixed !important;
+    }
+    </style>
     <section id='abstract'>
 This specification introduces a data model to support the publication of data describing 
 opportunities for people to engage in physical activities ("opportunity data"). This model 

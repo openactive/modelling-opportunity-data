@@ -37,7 +37,7 @@
           editors: [
               { name: "Leigh Dodds", url: "http://ldodds.com",
                 company: "Open Data Institute", companyURL: "http://opendata.institute/",
-                w3cid: "55359" },
+                w3cid: 55359 },
           ],
 
           // authors, add as many as you like.
@@ -155,11 +155,7 @@
     .wd {color: #005A9C; background-color: #EE9999}
     .ed, .fpwd  {color: #005A9C; background-color: #FF7777}
     code {white-space: pre;}
-    </style>
 
-  </head>
-  <body >
-    <style>
     html {
       background-image: none !important;
     }
@@ -167,10 +163,6 @@
       background: white top left fixed no-repeat !important;
       background-size: 25px auto !important;
       background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
-    }
-    body.toc-sidebar #toc {
-      background-size: 25px auto !important;
-      background-attachment: fixed !important;
     }
     h1 {
       font-family: 'Open Sans',sans-serif !important;
@@ -186,6 +178,22 @@
     }
     code {
         color: #C83500;
+    }
+    em.rfc2119 { 
+      font-variant: small-caps;
+    }
+
+    </style>
+
+  </head>
+  <body >
+    <style>
+    body {
+      background-size: 25px auto !important;
+    }
+    body.toc-sidebar #toc {
+      background-size: 25px auto !important;
+      background-attachment: fixed !important;
     }
     </style>
     <section id='abstract'>
@@ -268,7 +276,7 @@ publication of all of these different types of data
 
 ### Support discovery of opportunities
 
-The aims of OpenActive project is to encourage people to be more physically active. This means 
+The aim of the OpenActive initiative is to encourage people to be more physically active. This means 
 that this specification should focus on the data that will help people discover these 
 opportunities. 
 
@@ -304,7 +312,7 @@ requirements, as well as the needs of specific communities of data publishers an
 ## Scope
 
 This specification defines a data model for opportunity data. This reflects the goal of 
-[the OpenActive project](https://www.openactive.io/) whose aim is to 
+[the OpenActive initiative](https://www.openactive.io/) whose aim is to 
 encourage the publishing and reuse of open data that might help people to become 
 more active.
 
@@ -606,14 +614,14 @@ programme (Back to Netball).
 
 ## Activity Opportunities
 
-Not all opportunities to be physically activity are organised Events. Some opportunities are self-directed 
+Not all opportunities to be physically active are organised Events. Some opportunities are self-directed 
 for example: 
 
 * following a designated walking route
 * using a permanent (or temporary) orienteering course
 * going for a ride on a mountain bike trail
 
-The common elements here is that facilities are provided for use at a time of the participants choosing 
+The common elements here are that facilities are provided for use at a time of the participants choosing 
 (within limits of opening hours or availability), rather than at a time or schedule specified by the 
 organiser.
 
@@ -811,7 +819,7 @@ that is separate to its public web page.
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Event",
-  "id": "http://host.opportunity-data.com/id/12345"
+  "id": "http://host.opportunity-data.com/id/12345",
   "url": "http://my-leisure-centre.example.org/events/1",
   "name": "Tai chi Class"
 }
@@ -969,7 +977,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>`schema:schedule`</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>A schedule defines a repeating time period used to describe a regularly occuring Event.
+      <td>A schedule defines a repeating time period used to describe a regularly occurring Event.
       **Note: this is a draft Schema.org property. See [Issue]((https://github.com/openactive/modelling-opportunity-data/issues/2)) for discussion.</td>
     </tr>
     <tr>
@@ -1087,7 +1095,7 @@ This basic description can be improved by providing information about its locati
 
 ### Relating Events to Physical Activities
 
-The [`oa:activity`](https://www.openactive.io/ns/#activity) property allows an event to be associated with one or more Physical Activities. It's simplest usage is as follows:
+The [`oa:activity`](https://www.openactive.io/ns/#activity) property allows an event to be associated with one or more Physical Activities. Its simplest usage is as follows:
 
 <pre class="example" title="Specifying activities"><code>
 {
@@ -1366,8 +1374,7 @@ The legal values for the [`schema:location`](https://schema.org/location) proper
 * a [`schema:PostalAddress`](https://schema.org/PostalAddress) 
 * a more fully defined [`schema:Place`](https://schema.org/Place) or one of its sub-types such as a [`schema:CivicStructure`](https://schema.org/CivicStructure) or [`schema:EventVenue`](https://schema.org/EventVenue)
 
-While all three forms are allowed by Schema.org, applications that are publish opportunity data <em class="rfc2119">SHOULD</em> either
-specify an [`schema:PostalAddress`](https://schema.org/PostalAddress) or a more details [`schema:Place`](https://schema.org/Place) description.
+While all three forms are allowed by Schema.org, applications that publish opportunity data <em class="rfc2119">SHOULD</em> either specify a [`schema:PostalAddress`](https://schema.org/PostalAddress) or a more detailed [`schema:Place`](https://schema.org/Place) description.
 
 
 ### Describing Addresses
@@ -1581,7 +1588,7 @@ To describe the people and organisations involving in organising Events, Schema.
 People and organisations can be associated with an Event using the [`schema:organizer`](http://schema.org/organizer), [`schema:contributor`](http://schema.org/contributor) or [`oa:leader`](https://www.openactive.io/ns/#leader) properties. These allow some flexibility in defining how a person or organisation is associated with an event. For example an event may be:
 
 * organized by an club (`schema:organizer`)
-* be lead by a specific coach (`oa:leader`) 
+* be led by a specific coach (`oa:leader`) 
 * and involve other named participants (`oa:contributor`)
 
 To help ensure that publishers apply these properties in consistent ways, it is recommended that:

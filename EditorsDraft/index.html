@@ -76,7 +76,7 @@
           //localBiblio: {},
 
           // name of the WG
-          wg:           "Openactive Community Group",
+          wg:           "OpenActive Community Group",
 
           // URI of the public WG page
           wgURI:        "https://www.w3.org/community/openactive/",
@@ -155,12 +155,17 @@
     .wd {color: #005A9C; background-color: #EE9999}
     .ed, .fpwd  {color: #005A9C; background-color: #FF7777}
     code {white-space: pre;}
-    
+    </style>
+
+  </head>
+  <body >
+    <style>
     html {
       background-image: none !important;
     }
     body {
       background: white top left fixed no-repeat !important;
+      background-size: 25px auto !important;
       background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
     }
     body.toc-sidebar #toc {
@@ -182,11 +187,7 @@
     code {
         color: #C83500;
     }
-
     </style>
-
-  </head>
-  <body>
     <section id='abstract'>
 This specification introduces a data model to support the publication of data describing 
 opportunities for people to engage in physical activities ("opportunity data"). This model 
@@ -199,7 +200,7 @@ introducing them to the key concepts relevant to that sector.
 The model may also be useful in guiding the development of both new and existing booking 
 systems and applications that consume opportunity data.
 
-The specification is an output of the [Openactive Community Group](http://www.w3.org/community/openactive/) 
+The specification is an output of the [OpenActive Community Group](http://www.w3.org/community/openactive/) 
 and serves as a common reference point for other specifications and outputs of that activity.
 
 Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the 
@@ -208,7 +209,7 @@ Developers looking for a quick primer on the model and how to use it to structur
 The data model introduced in this document has been mapped to existing standards and vocabularies, including 
 SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a 
 useful existing framework around which the 
-[Openactive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.
+[OpenActive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.
 
     </section>
 
@@ -221,7 +222,7 @@ and pull requests. The source code is available on [GitHub](https://github.com/o
     <section class="informative">
 # Introduction
 
-The [W3C Openactive Community Group](http://www.w3.org/community/openactive/) was 
+The [W3C OpenActive Community Group](http://www.w3.org/community/openactive/) was 
 established with the objective of facilitating the sharing and use of 
 physical activity data. This data is currently largely closed. Open publishing of this 
 data has enormous potential to increase people's participation in physical activities.
@@ -314,7 +315,7 @@ The following items are therefore out of scope for this specification:
 * personal information, demographics and other information about event participants 
 * APIs for publishing and discovering opportunity data
 
-The [Openactive Community Group](http://www.w3.org/community/openactive/) may produce 
+The [OpenActive Community Group](http://www.w3.org/community/openactive/) may produce 
 additional specifications that address these areas.
 
 ## Structure of this document
@@ -1172,7 +1173,7 @@ Applications publish data using the [`oa:category`](https://www.openactive.io/ns
 Where an application is using a controlled vocabulary it <em class="rfc2119">SHOULD</em> publish that vocabulary as structured data.
 
 <div class="note">
-In future, the OpenActive Community Group may decide to define and recommend some controlled vocabularies for use in these properties. At present the values of these properties are left deliberately open to encourage publiation of open data that may inform future standardisation.
+In future, the OpenActive Community Group may decide to define and recommend some controlled vocabularies for use in these properties. At present the values of these properties are left deliberately open to encourage publication of open data that may inform future standardisation.
 </div>
 
 ### Describing Event Suitability
@@ -1926,7 +1927,7 @@ Where an application or community is defining a custom vocabulary then they <em 
     Acknowledgements
     ================
 
-    The editors thank [all members](http://www.w3.org/community/openactive/participants) of the Openactive CG for contributions of various kinds.
+    The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
     </section>
   </body>
 </html>

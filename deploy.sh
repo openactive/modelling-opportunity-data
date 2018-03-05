@@ -14,7 +14,7 @@ git clone -b develop "https://github.com/w3c/respec.git"
 
 cd respec
 #reset to version that was working?
-git reset --hard 556037964642ac0209af9599f04d835949d5f4cc
+git reset --hard 250324c3b256e2b9055d2fd239a3c32c260e2bf6
 
 npm install
 

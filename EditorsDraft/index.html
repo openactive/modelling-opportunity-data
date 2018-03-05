@@ -2,7 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
   <head>
     <meta charset='utf-8'/>
-    <title>Modelling Opportunity Data 1.0</title>
+    <title>Modelling Opportunity Data 1.1</title>
 
     <script type="text/javascript" class='remove'>
         var respecConfig = {
@@ -19,7 +19,7 @@
           // and its maturity status
           // previousPublishDate:  "1977-03-15",
           previousMaturity:  "ED",
-          previousPublishDate:  "2017-03-28",
+          previousPublishDate:  "2017-08-10",
 
           // if there a publicly available Editor's Draft, this is the link
           edDraftURI:   "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
@@ -614,6 +614,13 @@ programme (Back to Netball).
 
 ## Activity Opportunities
 
+<div class="issue" title="Discussion: remove of Activity Opportunities?">
+The following concept is now similar to the Amenity Use product described below. Should we remove this from the model and 
+perhaps come up with a better name?
+
+Please comment on <a href="https://github.com/openactive/modelling-opportunity-data/issues/64">this github issue</a> if you have suggestions.
+</div>
+
 Not all opportunities to be physically active are organised Events. Some opportunities are self-directed 
 for example: 
 
@@ -651,7 +658,36 @@ will explore the area of booking in more detail.
 </p>
 </div>
 
+## Amenity Use
 
+<div class="issue" title="Modelling of facilities">
+Please comment on <a href="https://github.com/openactive/modelling-opportunity-data/issues/62">this github issue</a> if you have feedback on this approach
+</div>
+
+Not all opportunities to be physically active are scheduled Events. Leisure centres and other locations often provide 
+facilities (e.g. squash courts, pitches) or equipment (e.g. table tennis tables) that are available for use by participants.
+We jointly refer to both facilities and equipment as __amenities__.
+
+To manage demand amenities are usually available for hire at specific times of day. These are sometimes referred to as "slots".
+
+Within a leisure centre, an individual amenity might be configured for use in several, often mutually exclusive ways. 
+For example an individual sports hall might be used as either a single indoor 5-a-side pitch, or as two separate badminton courts. 
+
+Rather than model the complexity of these configurations, this model takes a more product centred view which reflects the 
+key use case of supporting the discovery of opportunities.
+
+__Amenity Use__ refers to a product that is offered to potential participants. It reflects the availability of 
+an amenity (e.g. a specific configuration of a facility or piece of equipment) for hire or use at a specific time and place.
+
+The following properties will help to describe the specific product and amenity being offered:
+
+* basic descriptive attributes of the product, such as its name, description, etc
+* the activity or activities that can be performed using the amenity
+* the location of the amenity
+* an offer to use the amenity, for a specific price
+* the times ("slots") at which the product is available, including any associated offers
+
+As the use of amenity is a self-directed activity it will differ from an Event in that is will not be lead, coached, etc. 
   </section>
 
   <section>
@@ -1106,7 +1142,7 @@ The [`oa:activity`](https://www.openactive.io/ns/#activity) property allows an e
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "oa:activity": "Tai chi"
+  "activity": "Tai chi"
 }
 </code>
 </pre>
@@ -1847,6 +1883,161 @@ The following example shows an event which offers a price for attending a single
 Schema.org provides [additional properties for describing Offers](http://schema.org/Offer). The above model highlights the properties 
 that support the most common, basic use case. Future versions of this specification may include more detail around describing offers.
 </div>
+
+
+## Describing Amenity Use (<code>oa:AmenityUse</code>)
+
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>
+    <tr>
+      <td>[`schema:url`](https://schema.org/url)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URL to a web page (or section of a page) that describes the product</td>
+    </tr>
+    <tr>
+      <td>[`schema:identifier`](http://schema.org/identifier)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A local identifier for the product</td>
+    </tr>
+    <tr>
+      <td>[`schema:name`](https://schema.org/name)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The name of the product or service</td>
+    </tr>
+    <tr>
+      <td>[`schema:description`](https://schema.org/description)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>A free text description of the product or service</td>
+    </tr>
+    <tr>
+      <td>[`schema:image`](https://schema.org/image)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>An image or photo that depicts the product, e.g. a photo of the facility or equipment</td>
+    </tr>
+    <tr>
+      <td>[`oa:activity`](https://schema.org/location)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Specifies the physical activity or activities that can be performed when the amenity is used.</td>
+    </tr>
+    <tr>
+      <td>[`schema:location`](https://schema.org/location)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Use of an amenity always takes place at a specific Place. When the amenity being used is a piece of equipment, then the location 
+should be the location, e.g. the leisure centre, at which the equipment will be used. When the amenity is a facility such as a 
+football pitch, then it is recommended that the location property provides a description of the specific facility being used</td>
+    </tr>
+    <tr>
+      <td>[`schema:events`](https://schema.org/events)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Describes one or more upcoming Events ("slots") during which the amenity can be used. E.g. a list of hourly slots during which a 
+      football pitch might be hired. Only minimal information need be provided about each event, e.g. identifiers, start time, duration, 
+      event status, and any associated offers. This will be sufficient to allow data users to build a timetable of slots, with an availability 
+      status, price, etc. This data should also be sufficient to support booking use cases.</td>
+    </tr>
+    <tr>
+      <td>[`schema:offers`](https://schema.org/offers)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Describes a generic offer to use the amenity, e.g to indicate it is available for a set price, or may be used for free. Where offers 
+      might vary based on time of day (e.g. peak pricing) then this information should be associated with the specific event ("slot")</td>
+    </tr>
+
+  </tbody>
+</table>   
+
+The following example illustrates how to use these properties to describe the availability of a table tennis table. The table is available for 
+use at a specific time.
+
+<pre class="example" title="Describing use of equipment"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "AmenityUse",
+  "url": "http://www.example.org/amenity/1",
+  "name": "Table Tennis Table",
+  "description": "Table tennis tables are available to hire for thirty minute slots",
+  "activity": "Table Tennis",
+  "location": {
+    "type": "Place",
+    "name": "Example Leisure Centre",
+    "address": {
+      "type": "PostalAddress",
+      "streetAddress": "1 High Street",
+      "addressLocality": "Bristol",
+      "postalCode": "BS1 4SD"
+  },
+  "offers": [{
+   "name": "30 minute hire",
+    "price": "10",
+    "priceCurrency": "GBP"
+  }],
+  "events": [{
+    "type: "Event",
+    "startDate": "2018-03-01T10:00:00",
+    "duration": "PT30M",
+    "eventStatus": "http://openactive.io/ns#Available"
+  }]
+}
+</code></pre>
+
+<p>
+The slot during which the table tennis table is available has an [`eventStatus`](https://schema.org/eventStatus) with a custom value. The 
+[[OpenActive-Vocabulary]] defines two custom [`EventStatusType`](https://schema.org/EventStatusType) types that provide for general "Available" and 
+"Unavailable" statuses.
+</p>
+
+<p>In the above example the equipment can be hired for a single price, regardless of the time. The following example illustrates how to 
+use offers to describe peak pricing for use of a football pitch</p>
+
+<pre class="example" title="Describing use of a facility with peak pricing"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "AmenityUse",
+  "url": "http://www.example.org/amenity/1",
+  "name": "Sports Village Pitches",
+  "description": "7-a-side astroturf pitches available at the Sports Village",
+  "activity": "Football",
+  "location": {
+    "type": "SportsActivityLocation",
+    "name": "Astroturf Pitch",
+    "address": {
+      "type": "PostalAddress",
+      "streetAddress": "1 High Street",
+      "addressLocality": "Bristol",
+      "postalCode": "BS1 4SD"
+  },
+  "events": [{
+    "type: "Event",
+    "startDate": "2018-03-01T10:00:00",
+    "duration": "PT60M",
+    "eventStatus": "http://openactive.io/ns#Available",
+    "offers": [{
+        "price": "30",
+        "priceCurrency": "GBP"
+    }]
+  },{
+    "type: "Event",
+    "startDate": "2018-03-01T17:00:00",
+    "duration": "PT60M",
+    "eventStatus": "http://openactive.io/ns#Available",
+    "offers": [{
+        "price": "60",
+        "priceCurrency": "GBP"
+    }]
+  }]
+}
+</code></pre>
+
+
+<p></p>
 
 ## Describing Activity Opportunities (<code>oa:ActivityOpportunity</code>)
 

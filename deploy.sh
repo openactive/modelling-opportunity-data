@@ -10,11 +10,12 @@ git config --global push.default matching
 rm -rf respec || exit 0;
 
 # get existing gh-pages
-git clone -b develop "https://github.com/w3c/respec.git"
+#git clone -b develop "https://github.com/w3c/respec.git"
+git clone -b develop "https://github.com/openactive/respec.git"
 
 cd respec
 #reset to version that was working?
-git reset --hard 250324c3b256e2b9055d2fd239a3c32c260e2bf6
+#git reset --hard 250324c3b256e2b9055d2fd239a3c32c260e2bf6
 
 npm install
 

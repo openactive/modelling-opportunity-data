@@ -3,6 +3,8 @@ dist: trusty
 language: node_js
 node_js:
 - lts/*
+addons:
+  chrome: stable
 script: bash ./deploy.sh
 branches:
   only:

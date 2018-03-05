@@ -1,7 +1,8 @@
 sudo: false
+dist: trusty
 language: node_js
 node_js:
-  - "6"
+- lts/*
 script: bash ./deploy.sh
 branches:
   only:

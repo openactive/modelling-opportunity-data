@@ -54,7 +54,7 @@ cp -r ../Latest/* .
 cd ..
 
 respec2html "file://$PWD/EditorsDraft/index.html" "$PWD/out/EditorsDraft/index.html" "EditorsDraft"
-#respec2html "file://$PWD/Latest/index.html" "$PWD/out/Latest/index.html" "Latest"
+respec2html "file://$PWD/Latest/index.html" "$PWD/out/Latest/index.html" "Latest"
 cp "$PWD/out/Latest/index.html" out/index.html
 
 cd out

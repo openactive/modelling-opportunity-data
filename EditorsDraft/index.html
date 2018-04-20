@@ -1032,8 +1032,8 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`oa:ageRange`](https://www.openactive.io/ns/#ageRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that an event is suitable for a specific age range. If only a single age is specified then this is assumed to be a minimum age. 
-      Age ranges can be specified as follows: 18-30</td>
+      <td>Indicates that an event is suitable for a specific age range. Specified as a [QuantifiedValue](http://schema.org/QuantitativeValue) with 
+      [minValue](http://schema.org/minValue) and [maxValue](http://schema.org/maxValue) properties</td>
     </tr>
     <tr>
       <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
@@ -1232,23 +1232,39 @@ an event is:
 * suited for people with specific levels of experience
 * restricted to a male, female or mixed audience
 
-The following example illustrates how to indicate that an event it targeted as a specific age range (over 60s) but is open to a mixed 
-audience:
+#### Age Ranges
 
-<pre class="example" title="Age and gender example"><code>
+Age ranges are specified using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) property. The value is a 
+[`schema:QuantifiedValue`](http://schema.org/QuantitativeValue) which should have [minValue](http://schema.org/minValue) or [maxValue](http://schema.org/maxValue) properties. These properties specify an inclusive minimum and maximum age range for participants.
+
+Data publishers using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) property MUST ensure that it has:
+
+* a `type` of [`schema:QuantifiedValue`](http://schema.org/QuantitativeValue)
+* at least one of the `minValue` or `maxValue`properties
+
+Data consumers SHOULD assume that:
+
+* if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
+* if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
+* if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
+
+
+The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
+
+<pre class="example" title="Age range example"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "ageRange": 60,
-  "genderRestriction": "mixed"
+  "ageRange": {
+     "type": "QuantifiedValues",
+     "minValue": 60
+  }
 }
 </code>
 </pre>
+
 
 ### Adding programmes
 

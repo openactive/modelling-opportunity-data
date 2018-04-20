@@ -1038,7 +1038,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that an event is restricted to male, female or a mixed audience. If a gender restriction isn't specified then applications 
+      <td>Indicates that an event is restricted to Male, Female or a Mixed audience. Values should be one of the three URIs defined by this specification (see below). If a gender restriction isn't specified then applications 
       <em class="rfc2119">SHOULD</em> assume that an event is suitable for a mixed audience</td>
     </tr>
     <tr>
@@ -1229,7 +1229,7 @@ There are a variety of ways in which the suitability of an event for specific au
 an event is:
 
 * suited for a specific age range
-* suited for people with specific levels of experience
+* suited for people with specific levels of experience ([`oa:level`](https://www.openactive.io/ns/#level))
 * restricted to a male, female or mixed audience
 
 #### Age Ranges
@@ -1261,6 +1261,29 @@ The following example illustrates how to specify an Event that is suitable for p
      "type": "QuantifiedValues",
      "minValue": 60
   }
+}
+</code>
+</pre>
+
+#### Gender Restriction
+
+Attendance at some events is limited to certain audiences. For example a female only gym class. The [`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction) property can be used to specify these restrictions.
+
+The property MUST use one of the following values:
+
+* `https://www.openactive.io/ns/Mixed` indicating that the event has no restrictions
+* `https://www.openactive.io/ns/Male` indicating that the event is restricted to the male gender
+* `https://www.openactive.io/ns/Female` indicating that the event is restricted to the female gender
+
+Data consumers SHOULD assume that if `genderRestriction` is not supplied for an Event, then the default value is `https://www.openactive.io/ns/Mixed`.
+
+<pre class="example" title="Gender restriction example"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Gym class",
+  "genderRestriction": "https://www.openactive.io/ns/Female"
 }
 </code>
 </pre>

@@ -661,36 +661,37 @@ will explore the area of booking in more detail.
 </p>
 </div>
 
-## Amenity Use
+## Facility Use
 
 <div class="issue" title="Modelling of facilities">
 Please comment on <a href="https://github.com/openactive/modelling-opportunity-data/issues/62">this github issue</a> if you have feedback on this approach
 </div>
 
 Not all opportunities to be physically active are scheduled Events. Leisure centres and other locations often provide 
-facilities (e.g. squash courts, pitches) or equipment (e.g. table tennis tables) that are available for use by participants.
-We jointly refer to both facilities and equipment as __amenities__.
+facilities (e.g. squash courts, pitches, table tennis tables) that are available for use by participants.
 
-To manage demand amenities are usually available for hire at specific times of day. These are sometimes referred to as "slots".
+To manage demand facilities are usually available for hire at specific times of day. These are sometimes referred to as "slots".
 
-Within a leisure centre, an individual amenity might be configured for use in several, often mutually exclusive ways. 
+Within a leisure centre, an individual facilities might be configured for use in several, often mutually exclusive ways. 
 For example an individual sports hall might be used as either a single indoor 5-a-side pitch, or as two separate badminton courts. 
 
-Rather than model the complexity of these configurations, this model takes a more product centred view which reflects the 
+Rather than model the complexity of these configurations, which is outside our requirements, this model takes a more product centred view which reflects the 
 key use case of supporting the discovery of opportunities.
 
-__Amenity Use__ refers to a product that is offered to potential participants. It reflects the availability of 
-an amenity (e.g. a specific configuration of a facility or piece of equipment) for hire or use at a specific time and place.
+__Facility Use__ refers to a product that is offered to potential participants. It reflects the availability of 
+an facility (e.g. a pitch or court) for hire or use at a specific time and place.
 
-The following properties will help to describe the specific product and amenity being offered:
+The following properties will help to describe the specific product and facility being offered:
 
 * basic descriptive attributes of the product, such as its name, description, etc
-* the activity or activities that can be performed using the amenity
-* the location of the amenity
-* an offer to use the amenity, for a specific price
+* the activity or activities for which the facility is to be used
+* the location of the facility
+* an offer to use the facility, for a specific price
 * the times ("slots") at which the product is available, including any associated offers
 
-As the use of amenity is a self-directed activity it will differ from an Event in that is will not be lead, coached, etc. 
+Facilities may be offered for use at a single price at any time of day, or the price may vary depending on the time ("slot") it is used. 
+
+As the use of facility is a self-directed activity it will differ from an Event in that is will not be lead, coached, etc. 
   </section>
 
   <section>
@@ -1032,13 +1033,13 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`oa:ageRange`](https://www.openactive.io/ns/#ageRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that an event is suitable for a specific age range. If only a single age is specified then this is assumed to be a minimum age. 
-      Age ranges can be specified as follows: 18-30</td>
+      <td>Indicates that an event is suitable for a specific age range. Specified as a [QuantifiedValue](http://schema.org/QuantitativeValue) with 
+      [minValue](http://schema.org/minValue) and [maxValue](http://schema.org/maxValue) properties</td>
     </tr>
     <tr>
       <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that an event is restricted to male, female or a mixed audience. If a gender restriction isn't specified then applications 
+      <td>Indicates that an event is restricted to Male, Female or a Mixed audience. Values should be one of the three URIs defined by this specification (see below). If a gender restriction isn't specified then applications 
       <em class="rfc2119">SHOULD</em> assume that an event is suitable for a mixed audience</td>
     </tr>
     <tr>
@@ -1229,26 +1230,65 @@ There are a variety of ways in which the suitability of an event for specific au
 an event is:
 
 * suited for a specific age range
-* suited for people with specific levels of experience
+* suited for people with specific levels of experience ([`oa:level`](https://www.openactive.io/ns/#level))
 * restricted to a male, female or mixed audience
 
-The following example illustrates how to indicate that an event it targeted as a specific age range (over 60s) but is open to a mixed 
-audience:
+#### Age Ranges
 
-<pre class="example" title="Age and gender example"><code>
+Age ranges are specified using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) property. The value is a 
+[`schema:QuantifiedValue`](http://schema.org/QuantitativeValue) which should have [minValue](http://schema.org/minValue) or [maxValue](http://schema.org/maxValue) properties. These properties specify an inclusive minimum and maximum age range for participants.
+
+Data publishers using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) property MUST ensure that it has:
+
+* a `type` of [`schema:QuantifiedValue`](http://schema.org/QuantitativeValue)
+* at least one of the `minValue` or `maxValue`properties
+
+Data consumers SHOULD assume that:
+
+* if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
+* if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
+* if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
+
+
+The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
+
+<pre class="example" title="Age range example"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "ageRange": 60,
-  "genderRestriction": "mixed"
+  "ageRange": {
+     "type": "QuantifiedValues",
+     "minValue": 60
+  }
 }
 </code>
 </pre>
+
+#### Gender Restriction
+
+Attendance at some events is limited to certain audiences. For example a female only gym class. The [`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction) property can be used to specify these restrictions.
+
+The property MUST use one of the following values:
+
+* `https://www.openactive.io/ns/Mixed` indicating that the event has no restrictions
+* `https://www.openactive.io/ns/Male` indicating that the event is restricted to the male gender
+* `https://www.openactive.io/ns/Female` indicating that the event is restricted to the female gender
+
+Data consumers SHOULD assume that if `genderRestriction` is not supplied for an Event, then the default value is `https://www.openactive.io/ns/Mixed`.
+
+<pre class="example" title="Gender restriction example"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Gym class",
+  "genderRestriction": "https://www.openactive.io/ns/Female"
+}
+</code>
+</pre>
+
 
 ### Adding programmes
 
@@ -1888,7 +1928,7 @@ that support the most common, basic use case. Future versions of this specificat
 </div>
 
 
-## Describing Amenity Use (<code>oa:AmenityUse</code>)
+## Describing Facility Use (<code>oa:FacilityUse</code>)
 
 <table>
   <thead>
@@ -1960,11 +2000,11 @@ football pitch, then it is recommended that the location property provides a des
 The following example illustrates how to use these properties to describe the availability of a table tennis table. The table is available for 
 use at a specific time.
 
-<pre class="example" title="Describing use of equipment"><code>
+<pre class="example" title="Describing use of a facility"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "AmenityUse",
-  "url": "http://www.example.org/amenity/1",
+  "type": "FacilityUse",
+  "url": "http://www.example.org/facility-use/1",
   "name": "Table Tennis Table",
   "description": "Table tennis tables are available to hire for thirty minute slots",
   "activity": "Table Tennis",
@@ -1993,9 +2033,15 @@ use at a specific time.
 
 <p>
 The slot during which the table tennis table is available has an [`eventStatus`](https://schema.org/eventStatus) with a custom value. The 
-[[OpenActive-Vocabulary]] defines two custom [`EventStatusType`](https://schema.org/EventStatusType) types that provide for general "Available" and 
-"Unavailable" statuses.
+[[OpenActive-Vocabulary]] defines two custom [`EventStatusType`](https://schema.org/EventStatusType) types that can be used to indicate some more 
+general statuses: provide for general "Available" and "Unavailable" statuses.
 </p>
+
+<ul>
+ <li><code>https://www.openactive.io/ns#Available</code></li>
+ <li><code>https://www.openactive.io/ns#Unavailable</code></li>
+
+</ul>
 
 <p>In the above example the equipment can be hired for a single price, regardless of the time. The following example illustrates how to 
 use offers to describe peak pricing for use of a football pitch</p>
@@ -2034,10 +2080,21 @@ use offers to describe peak pricing for use of a football pitch</p>
     "offers": [{
         "price": "60",
         "priceCurrency": "GBP"
+        "inventoryLevel": 2
     }]
   }]
 }
 </code></pre>
+
+<p>The above example also uses the [`schema:inventoryLevel`](http://schema.org/inventoryLevel) property to indicate that currently there are two pitches available.</p>
+
+<div class="note">
+<p>
+The community group feels that the data model proposed in this section adequately covers the primary use cases relating to publishing data on opportunities to hire and use facilities</p>
+<p>However we recognise that there may be some consequences on the volume of data shared via [RPDE feeds](https://www.openactive.io/realtime-paged-data-exchange/). Specifically, for multi-use facilities the booking of mutually exclusive configurations will end up increasing the volume of updates that need to be communicated to users.
+</p>
+<p>The community group has documented this issue and [requests feedback from publishers and users](https://github.com/openactive/modelling-opportunity-data/issues/73) based on implementation feedback before deciding how to address the issue.</p>
+</div>
 
 
 <p></p>

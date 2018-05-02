@@ -1248,7 +1248,7 @@ Data consumers SHOULD assume that:
 * if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
 * if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
 * if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
-
+* if an `ageRange` is provided with a value of 0, and there is no `maxValue` property then the Event is suitable for all
 
 The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
 
@@ -1259,8 +1259,24 @@ The following example illustrates how to specify an Event that is suitable for p
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "ageRange": {
-     "type": "QuantifiedValues",
+     "type": "QuantifiedValue",
      "minValue": 60
+  }
+}
+</code>
+</pre>
+
+The following example illustrates an Event that is suitable for all ages. This is indicated by providing an `minValue` property with a value of zero and no `maxValue` property.
+
+<pre class="example" title="Age range - suitable for all example"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Exercise in the park",
+  "ageRange": {
+     "type": "QuantifiedValue",
+     "minValue": 0
   }
 }
 </code>

@@ -1317,7 +1317,7 @@ Events can be associated with a Programme using the [`oa:programme`](https://www
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
   "description": "A rowing class for beginners",
-  "startDate": "2017-04-01T08:00:00",
+  "startDate": "2017-04-01T08:00:00Z",
   "duration": "PT60M",
   "level": ["Beginner"],
   "programme": "Learn to Row"
@@ -1334,7 +1334,7 @@ If more information about the programme is available, then this can be included 
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
   "description": "A rowing class for beginners",
-  "startDate": "2017-04-01T08:00:00",
+  "startDate": "2017-04-01T08:00:00Z",
   "duration": "PT60M",
   "level": ["Beginner"],
   "programme": {
@@ -1360,7 +1360,7 @@ On that basis we have included the terms in specification. The following section
 this is an area that may change in future versions.
 </div>
 
-The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Weds at 7pm
+The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
 
 <pre class="example" title="Adding an event schedule"><code>
 {
@@ -2080,7 +2080,7 @@ use offers to describe peak pricing for use of a football pitch</p>
   },
   "events": [{
     "type: "Event",
-    "startDate": "2018-03-01T10:00:00",
+    "startDate": "2018-03-01T10:00:00Z",
     "duration": "PT60M",
     "eventStatus": "http://openactive.io/ns#Available",
     "offers": [{
@@ -2089,7 +2089,7 @@ use offers to describe peak pricing for use of a football pitch</p>
     }]
   },{
     "type: "Event",
-    "startDate": "2018-03-01T17:00:00",
+    "startDate": "2018-03-01T17:00:00Z",
     "duration": "PT60M",
     "eventStatus": "http://openactive.io/ns#Available",
     "offers": [{

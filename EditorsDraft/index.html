@@ -1360,8 +1360,7 @@ On that basis we have included the terms in specification. The following section
 this is an area that may change in future versions.
 </div>
 
-The following example illustrates basic usage of the [`schema:eventSchedule`](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) property. The data describes 
-a Tai Chi class that occurs every Weds at 7pm
+The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Weds at 7pm
 
 <pre class="example" title="Adding an event schedule"><code>
 {
@@ -1375,10 +1374,10 @@ a Tai Chi class that occurs every Weds at 7pm
      "type": "Schedule",
      "startDate": "2017-01-01",
      "endDate": "2017-12-31",
-     "frequency": "weekly",
+     "repeatFrequency": "P1W",
      "byDay": "http://schema.org/Wednesday",
-     "startTime": "19:00",
-     "endTime": "20:00"
+     "startTime": "19:00Z",
+     "endTime": "20:00Z"
   }  
 }
 </code>

@@ -1286,13 +1286,13 @@ The following example illustrates an Event that is suitable for all ages. This i
 
 Attendance at some events is limited to certain audiences. For example a female only gym class. The [`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction) property can be used to specify these restrictions.
 
-The property MUST use one of the following values:
+Data publishers using this property MUST use one of the following values:
 
-* `https://www.openactive.io/ns/Mixed` indicating that the event has no restrictions
-* `https://www.openactive.io/ns/Male` indicating that the event is restricted to the male gender
-* `https://www.openactive.io/ns/Female` indicating that the event is restricted to the female gender
+* `https://www.openactive.io/ns#Mixed` indicating that the event has no restrictions
+* `https://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
+* `https://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
 
-Data consumers SHOULD assume that if `genderRestriction` is not supplied for an Event, then the default value is `https://www.openactive.io/ns/Mixed`.
+If the `genderRestriction` property is not supplied for an Event, then data consumers SHOULD NOT assume a default value, the value should be treated as `null`. When searching or filtering for gender restricted Events, data consumers SHOULD remove Events with a `null` value. Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
 
 <pre class="example" title="Gender restriction example"><code>
 {
@@ -1300,7 +1300,7 @@ Data consumers SHOULD assume that if `genderRestriction` is not supplied for an 
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Gym class",
-  "genderRestriction": "https://www.openactive.io/ns/Female"
+  "genderRestriction": "https://www.openactive.io/ns#Female"
 }
 </code>
 </pre>

@@ -1596,6 +1596,11 @@ The following table lists the properties that can be used to provide description
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Specifies the opening hours of a location. The value of this property is a [`schema:OpeningHoursSpecification`](http://schema.org/OpeningHoursSpecification).</td>
     </tr>
+    <tr>
+      <td>[`schema:amenityFeature`](https://schema.org/amenityFeature)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) objects. See "Describing Amenities" for more information.</td>
+    </tr>    
   </tbody>   
 </table>
 
@@ -1641,6 +1646,62 @@ A more precise geographical location can be provided by adding a [`schema:geo`](
   }
 }
 </code></pre>
+
+### Describing Amenities
+
+It can be useful to describe the amenities (e.g. characteristics, services or other features) available at a location. 
+
+Schema.org provides the [`schema:amenityFeature`](http://schema.org/amenityFeature) property for specifying an list of amenities that are available or unavailable at a specific [`schema:Place`](http://schema.org/Place). The value of a the property is an array of objects that describe the individual amenities. 
+
+To improve consistency in how amenities are published, this specification defines some common types of amenities:
+
+* [`ChangingRooms`](https://www.openactive.io/ns#ChangingRooms)
+* [`Showers`](https://www.openactive.io/ns#Showers)
+* [`PublicToilets`](https://www.openactive.io/ns#PublicToilets)
+* [`Lockers`](https://www.openactive.io/ns#Lockers)
+* [`Towels`](https://www.openactive.io/ns#Towels)
+* [`Creche`](https://www.openactive.io/ns#Creche)
+* [`Parking`](https://www.openactive.io/ns#Parking)
+* [`BabyChanging`](https://www.openactive.io/ns#BabyChanging)
+
+Publishers SHOULD use one of these types when applicable. If there is no pre-defined type then data publishers MUST use the more generic [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) type. 
+
+This avoids the need for data consumers to have to rely on the `name` value to identify common amenities that may otherwise be named differently (e.g. "Changing Rooms, "Changing Facilities", etc).
+
+<pre class="example" title="Amenity example"><code>
+{
+  "type": "Place",
+  "amenityFeature": [
+     {
+        "type": "ChangingRooms",
+        "name": "Changing Facilities",
+        "value": true
+     }
+  ]
+}
+</code></pre>
+
+Publishers MUST include the `type`, `name` and `value` properties for each amenity. A `value` of `false` indicates that a specific amenity is not available.
+
+Additional information MAY be provided about each of the amenities, using properties from the [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) type. For example, specifying opening hours ([`schema:hoursAvailable`](http://schema.org/hoursAvailable)) or to add a description ([`schema:description`](http://schema.org/description)).
+
+The list of pre-defined amenties MAY be revised in future specifications based on feedback from the community. 
+
+In the meantime additional types of amenities can be specified using the more generic [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) type as shown below:
+
+<pre class="example" title="Generic amenity type example"><code>
+{
+  "type": "Place",
+  "amenityFeature": [
+     {
+        "type": "LocationFeatureSpecification",
+        "name": "Outdoor seating",
+        "value": true
+     }
+  ]
+}
+</code></pre>
+
 
 ### Describing Facilities
 

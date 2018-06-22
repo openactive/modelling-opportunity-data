@@ -580,16 +580,14 @@ This specification uses __*Place*__ as a general concept to refer to all types o
 The concept of Place therefore covers general outdoor areas such as parks, event venues (e.g. a Leisure centre) 
 and facilities within a venue (e.g. a squash court, running track, etc). Facilities are contained in Places.
 
+A __Sports Activity Location__ is a type of Place that is used to describe a facilities within a broader 
+Place. 
+
 Places may have additional descriptive properties, for example:
 
 * a name
 * an address and/or geographic coordinates
 * opening hours
-* a list of __*equipment*__ that is available for people to use at that location
-
-To help distinguish between equipment and facilities: facilities will be fixed features of a location, e.g. 
-squash courts or a walking trail; equipment will be items like table tennis tables that may be moved around 
-a facility.
 
 ## Programmes
 
@@ -616,13 +614,6 @@ discovering Events based on either the general activity (e.g. Running) or a spec
 programme (Back to Netball).
 
 ## Activity Opportunities
-
-<div class="issue" title="Discussion: remove of Activity Opportunities?">
-The following concept is now similar to the Amenity Use product described below. Should we remove this from the model and 
-perhaps come up with a better name?
-
-Please comment on <a href="https://github.com/openactive/modelling-opportunity-data/issues/64">this github issue</a> if you have suggestions.
-</div>
 
 Not all opportunities to be physically active are organised Events. Some opportunities are self-directed 
 for example: 
@@ -661,35 +652,43 @@ will explore the area of booking in more detail.
 </p>
 </div>
 
-## Facility Use
+## Facility Use and Slots
 
-<div class="issue" title="Modelling of facilities">
-Please comment on <a href="https://github.com/openactive/modelling-opportunity-data/issues/62">this github issue</a> if you have feedback on this approach
-</div>
-
-Not all opportunities to be physically active are scheduled Events. Leisure centres and other locations often provide 
+Not all opportunities to be physically active are scheduled Events. Leisure centres and other locations also provide 
 facilities (e.g. squash courts, pitches, table tennis tables) that are available for use by participants.
 
-To manage demand facilities are usually available for hire at specific times of day. These are sometimes referred to as "slots".
+To manage demand these facilities are usually available for hire at specific times of day. These are referred to as __Slots__.
+A Slot is an opportunity to use a facility at a specific time and a specific duration, e.g. from 10am for 30 minutes
 
-Within a leisure centre, an individual facilities might be configured for use in several, often mutually exclusive ways. 
+Some facilities are permanent parts of a leisure centre (or other Place). For example tennis courts, football pitches, etc.
+
+But many leisure centres have flexibility to reconfigure their spaces to support different, often mutually exclusive ways. 
 For example an individual sports hall might be used as either a single indoor 5-a-side pitch, or as two separate badminton courts. 
 
-Rather than model the complexity of these configurations, which is outside our requirements, this model takes a more product centred view which reflects the 
-key use case of supporting the discovery of opportunities.
+Modelling the potential configurations of these spaces is outside the scope of this specification. The community group has 
+chosen to take a more user centred view of describing opportunities to use facilities. This supports our 
+primary use case of enabling the discovery of opportunities.
 
-__Facility Use__ refers to a product that is offered to potential participants. It reflects the availability of 
-an facility (e.g. a pitch or court) for hire or use at a specific time and place.
+A __Facility Use__ is a product that is offered to potential participants. It reflects the ability to use or hire a 
+facility at a specific location. A platform can publish data about the range of products on offer at a location, updating 
+their availability as facilities are booked by participants.
 
-The following properties will help to describe the specific product and facility being offered:
+The following properties will help to describe the specific Facility Use product on offer:
 
 * basic descriptive attributes of the product, such as its name, description, etc
 * the activity or activities for which the facility is to be used
 * the location of the facility
 * an offer to use the facility, for a specific price
-* the times ("slots") at which the product is available, including any associated offers
+* the Slots during which the product is available, including any associated offers
 
-Facilities may be offered for use at a single price at any time of day, or the price may vary depending on the time ("slot") it is used. 
+Some facility use products are opportunities to use a individual, identifiable facility, e.g. Tennis Court 1. 
+These are referred to a as __Individual Facility Uses__. The location of these products will be a __Sports Activity Location__.
+
+Otherwise, a Facility Use will describe an oppirtunity to use less permanent facilities, e.g. a table tennis table that will be moved into a sports hall on demand, or for an unnamed facility that will be allocated by a platform during booking. In this case the 
+location will be for the Place in which the facility is available.
+
+Facilities may be offered for use at a single price at any time of day, or the price may vary depending on on which Slot 
+is used. 
 
 As the use of facility is a self-directed activity it will differ from an Event in that is will not be lead, coached, etc. 
   </section>
@@ -1017,8 +1016,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>`schema:schedule`</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>A schedule defines a repeating time period used to describe a regularly occurring Event.
-      **Note: this is a draft Schema.org property. See [Issue]((https://github.com/openactive/modelling-opportunity-data/issues/2)) for discussion.</td>
+      <td>A schedule defines a repeating time period used to describe a regularly occurring Event.</td>
     </tr>
     <tr>
       <td>[`oa:activity`](https://www.openactive.io/ns/#activity)</td>
@@ -1940,9 +1938,7 @@ The following markup illustrates how to describe a single activity.
 
 ## Describing Offers (<code>schema:Offer</code>)
 
-To indicate that a `schema:Event` is only available to paid attendees, opportunity data provides may include details of the offers available to 
-participants. The [`schema:Offer`](http://schema.org/Offer) type provides some basic properties for indicating the price and availability of 
-Offers.
+To indicate that a `schema:Event` is only available to paid attendees, opportunity data provides may include details of the offers available to participants. The [`schema:Offer`](http://schema.org/Offer) type provides some basic properties for indicating the price and availability of Offers.
 
 <table>
   <thead>
@@ -2003,8 +1999,103 @@ Schema.org provides [additional properties for describing Offers](http://schema.
 that support the most common, basic use case. Future versions of this specification may include more detail around describing offers.
 </div>
 
+<p></p>
 
-## Describing Facility Use (<code>oa:FacilityUse</code>)
+## Describing Slots (<code>oa:Slot</code>)
+
+A Slot is an opportunity to use a facility at a specific time and for a 
+specified duration. A Slot is therefore a specific type of Event, although 
+it has a more constrained set of properties.
+
+A series of Slots describes a calendar during which a facility is available 
+for use.
+
+Slots are always associated with a [`oa:FacilityUse`](https://www.openactive.io/ns/#FacilityUse) 
+product which may link to more detail about the facility on offer and the costs 
+for hire.
+
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>  
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>  
+    <tr>
+      <td>[`schema:identifier`](http://schema.org/identifier)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A local identifier for the resource</td>
+    </tr>  
+    <tr>
+      <td>[`oa:facilityUse`](https://www.openactive.io/ns/#facilityUse)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>
+      <p>Links a specific Slot with the <code>oa:FacilityUse</code> of which it is a part.
+      </p>
+    </tr>
+    <tr>
+      <td>[`schema:startDate`](https://schema.org/startDate)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>
+      <p>The start date and time of the slot. Can be specified as a [`schema:Date`](https://schema.org/Date) or
+      [`schema:DateTime`](https://schema.org/DateTime).
+      </p>
+    </tr>
+    <tr>
+      <td>[`schema:endDate`](https://schema.org/endDate)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>
+      <p>
+      The end date and time of the event. Can be specified as a [`schema:Date`](https://schema.org/Date) or
+      [`schema:DateTime`](https://schema.org/DateTime)
+      </p>
+    </tr>
+    <tr>
+      <td>[`schema:duration`](https://schema.org/duration)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>The duration of the event given in [[ISO8601]] format.</td>
+    </tr>
+    <tr>
+      <td>[`schema:offers`](https://schema.org/offers)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Describes offers to book and use this specific slot. If unspecified, then a client SHOULD use offers associated with the 
+      related Facility Use.</td>
+    </tr>
+    <tr>
+      <td>[`oa:remainingUses`](https://www.openactive.io/ns/#remainingUses)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>
+      <p>Used to indicate the availability of this Slot. Where a Slot describes the opportunity to use 
+      a single facility this property should have a value of 0 or 1. Where a Slot describes the opportunity to 
+      use one of several facilities, which will be allocated during booking, then the property specific how many 
+      such facilities are remaining, and may then have a value greater than 1.</p>
+    </tr>
+    <tr>
+      <td>[`oa:maximumUses`](https://www.openactive.io/ns/#maximumUses)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>
+      <p>Where a Slot describes the opportunity to 
+      use one of several facilities, which will be allocated during booking, then this value can be used to indicate how 
+      many facilities might be available.</p>
+    </tr>    
+  </tbody>   
+</table>
+
+Examples of describing a Slot are given in the next section.
+
+## Describing Facility Use (<code>oa:FacilityUse</code>, <code>oa:IndividualFacilityUse</code>)
+
+A Facility Use is a product. It describes an opportunity to use either one of 
+a group of facilities (<code>oa:FacilityUse</code>) or a individual facility 
+(<code>oa:IndividualFacilityUse</code>). 
+
+The opportunity to use a facility is divided into a calendar of Slots, which 
+allow a participant to use that facility for a specified time and duration.
 
 <table>
   <thead>
@@ -2044,30 +2135,40 @@ that support the most common, basic use case. Future versions of this specificat
       <td>An image or photo that depicts the product, e.g. a photo of the facility or equipment</td>
     </tr>
     <tr>
-      <td>[`oa:activity`](https://schema.org/location)</td>
+      <td>[`oa:activity`](https://www.openactive.io/ns/#activity)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Specifies the physical activity or activities that can be performed when the amenity is used.</td>
+      <td>Specifies the physical activity or activities that can be performed when the facility is used.</td>
     </tr>
     <tr>
       <td>[`schema:location`](https://schema.org/location)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Use of an amenity always takes place at a specific Place. When the amenity being used is a piece of equipment, then the location 
-should be the location, e.g. the leisure centre, at which the equipment will be used. When the amenity is a facility such as a 
-football pitch, then it is recommended that the location property provides a description of the specific facility being used</td>
+      <td>The location of the facility being used. This will either be a generic location, e.g. a leisure centre or sports hall for equipment or more temporary spaces, or a specific <code>schema:SportsActivityLocation</code> when describing opportunities to use 
+      a specific identifiable facility (<code>oa:IndividualFacilityUse</code>)</td>
     </tr>
     <tr>
       <td>[`schema:events`](https://schema.org/events)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Describes one or more upcoming Events ("slots") during which the amenity can be used. E.g. a list of hourly slots during which a 
+      <td>Describes one or more upcoming slots (<code>oa:Slot</code>) during which the product can be used. E.g. a list of hourly slots during which a 
       football pitch might be hired. Only minimal information need be provided about each event, e.g. identifiers, start time, duration, 
       event status, and any associated offers. This will be sufficient to allow data users to build a timetable of slots, with an availability 
-      status, price, etc. This data should also be sufficient to support booking use cases.</td>
+      status, price, etc.</td>
     </tr>
     <tr>
       <td>[`schema:offers`](https://schema.org/offers)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Describes a generic offer to use the amenity, e.g to indicate it is available for a set price, or may be used for free. Where offers 
+      <td>Describes a generic offer to use a facility, e.g to indicate it is available for a set price, or may be used for free. Where offers 
       might vary based on time of day (e.g. peak pricing) then this information should be associated with the specific event ("slot")</td>
+    </tr>
+    <tr>
+      <td>[`schema:hoursAvailable`](https://schema.org/hoursAvailable)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Specifies the hours during which this product is available. The value of this property is a schema:OpeningHoursSpecification.</td>
+    </tr>
+    <tr>
+      <td>[`oa:individualFacilityUses`](https://www.openactive.io/ns/#individualFacilityUses)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Links a <code>oa:FacilityUse</code> product, describing a general opportunity to, e.g. book and play tennis at a leisure centre with an array of <code>oa:IndividualFacilityUse</code> products that provide a more detailed description about an opportunity to book, e.g. individual tennis courts. This allows a platform to publish both a general product and time-table as well as more detailed 
+      products for individual facilities.</td>
     </tr>
 
   </tbody>

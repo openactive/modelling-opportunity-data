@@ -1286,9 +1286,9 @@ Attendance at some events is limited to certain audiences. For example a female 
 
 Data publishers using this property MUST use one of the following values:
 
-* `https://www.openactive.io/ns#Mixed` indicating that the event has no restrictions
-* `https://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
-* `https://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
+* `http://www.openactive.io/ns#None` indicating that the event has no restrictions
+* `http://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
+* `http://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
 
 If the `genderRestriction` property is not supplied for an Event, then data consumers SHOULD NOT assume a default value, the value should be treated as `null`. When searching or filtering for gender restricted Events, data consumers SHOULD remove Events with a `null` value. Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
 
@@ -1298,7 +1298,7 @@ If the `genderRestriction` property is not supplied for an Event, then data cons
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Gym class",
-  "genderRestriction": "https://www.openactive.io/ns#Female"
+  "genderRestriction": "http://www.openactive.io/ns#Female"
 }
 </code>
 </pre>

@@ -2165,7 +2165,7 @@ allow a participant to use that facility for a specified time and duration.
       <td>Specifies the hours during which this product is available. The value of this property is a schema:OpeningHoursSpecification.</td>
     </tr>
     <tr>
-      <td>[`oa:individualFacilityUses`](https://www.openactive.io/ns/#individualFacilityUses)</td>
+      <td>[`oa:individualFacilityUses`](https://www.openactive.io/"htns/#individualFacilityUses)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Links a <code>oa:FacilityUse</code> product, describing a general opportunity to, e.g. book and play tennis at a leisure centre with an array of <code>oa:IndividualFacilityUse</code> products that provide a more detailed description about an opportunity to book, e.g. individual tennis courts. This allows a platform to publish both a general product and time-table as well as more detailed 
       products for individual facilities.</td>
@@ -2174,15 +2174,22 @@ allow a participant to use that facility for a specified time and duration.
   </tbody>
 </table>   
 
-The following example illustrates how to use these properties to describe the availability of a table tennis table. The table is available for 
-use at a specific time.
+The following example describes opportunities to use table tennis facilities at 
+a leisure centre. By default use of a table is for 30 minutes and costs ten 
+pounds.
+
+However at specific times the cost to use a table increases. This is indicated 
+by offers associated with the second Slot.
+
+In both cases a maximum of four tables are available. In the example, only one 
+table remains for use in the first slot, while the second has three. 
 
 <pre class="example" title="Describing use of a facility"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "FacilityUse",
   "url": "http://www.example.org/facility-use/1",
-  "name": "Table Tennis Table",
+  "name": "Example Leisure Centre Table Tennis",
   "description": "Table tennis tables are available to hire for thirty minute slots",
   "activity": "Table Tennis",
   "location": {
@@ -2193,77 +2200,97 @@ use at a specific time.
       "streetAddress": "1 High Street",
       "addressLocality": "Bristol",
       "postalCode": "BS1 4SD"
+    }  
   },
-  "offers": [{
-   "name": "30 minute hire",
-    "price": "10",
-    "priceCurrency": "GBP"
-  }],
-  "events": [{
-    "type: "Event",
-    "startDate": "2018-03-01T10:00:00Z",
-    "duration": "PT30M",
-    "eventStatus": "http://openactive.io/ns#Available"
-  }]
+  "offers": [
+      {
+        "name": "30 minute hire",
+        "price": "10",
+        "priceCurrency": "GBP"
+      }
+  ],
+  "events": [
+      {
+        "type": "Slot",   
+        "id": "http://www.example.org/facility-use/slots/1",
+        "facilityUse": "http://www.example.org/facility-use/1",
+        "startDate": "2018-03-01T10:00:00Z",   
+        "duration": "PT30M",   
+        "remainingUses": 1,
+        "maximumUses": 4
+      },
+      {
+        "type": "Slot",   
+        "id": "http://www.example.org/facility-use/slots/2",
+        "facilityUse": "http://www.example.org/facility-use/1",
+        "startDate": "2018-03-01T11:00:00Z",   
+        "duration": "PT30M",   
+        "remainingUses": 3,
+        "maximumUses": 4,
+         "offers": [
+           {
+              "name": "30 minute hire",
+              "price": "15",
+              "priceCurrency": "GBP"
+           }
+         ]
+      }
+  ] 
 }
 </code></pre>
 
-<p>
-The slot during which the table tennis table is available has an [`eventStatus`](https://schema.org/eventStatus) with a custom value. The 
-[[OpenActive-Vocabulary]] defines two custom [`EventStatusType`](https://schema.org/EventStatusType) types that can be used to indicate some more 
-general statuses: provide for general "Available" and "Unavailable" statuses.
-</p>
+<p>The following example shows how to use the data model to publish opportunities 
+to hire a specific tennis court. As this is an <code>oa:IndividualFacilityUse</code> 
+the location field provides more detail on the location. The example describes 
+two Slots, but the second is no longer available.</p>
 
-<ul>
- <li><code>https://www.openactive.io/ns#Available</code></li>
- <li><code>https://www.openactive.io/ns#Unavailable</code></li>
-
-</ul>
-
-<p>In the above example the equipment can be hired for a single price, regardless of the time. The following example illustrates how to 
-use offers to describe peak pricing for use of a football pitch</p>
-
-<pre class="example" title="Describing use of a facility with peak pricing"><code>
+<pre class="example" title="Describing use of an individual facility"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "AmenityUse",
-  "url": "http://www.example.org/amenity/1",
-  "name": "Sports Village Pitches",
-  "description": "7-a-side astroturf pitches available at the Sports Village",
-  "activity": "Football",
+  "type": "IndividualFacilityUse",
+  "url": "http://www.example.org/facility-use/2",
+  "name": "Play Tenns on the Main Tennis Court",
+  "description": "Tennis courts are available for 30 min sessions",
+  "image": [
+     "http://example.org/images/1.jpg"
+  ],
+  "activity": "Tennis",
   "location": {
     "type": "SportsActivityLocation",
-    "name": "Astroturf Pitch",
-    "address": {
-      "type": "PostalAddress",
-      "streetAddress": "1 High Street",
-      "addressLocality": "Bristol",
-      "postalCode": "BS1 4SD"
+    "name": "Main Tennis Court",
+    "containedInPlace": {
+       "type": "Place",
+       "name": "Example Leisure Centre",
+       "address": {
+         "type": "PostalAddress",
+         "streetAddress": "1 High Street",
+         "addressLocality": "Bristol",
+         "postalCode": "BS1 4SD"
+       }  
+    }
   },
-  "events": [{
-    "type: "Event",
-    "startDate": "2018-03-01T10:00:00Z",
-    "duration": "PT60M",
-    "eventStatus": "http://openactive.io/ns#Available",
-    "offers": [{
-        "price": "30",
-        "priceCurrency": "GBP"
-    }]
-  },{
-    "type: "Event",
-    "startDate": "2018-03-01T17:00:00Z",
-    "duration": "PT60M",
-    "eventStatus": "http://openactive.io/ns#Available",
-    "offers": [{
-        "price": "60",
-        "priceCurrency": "GBP"
-        "inventoryLevel": 2
-    }]
-  }]
+  "events": [
+      {
+        "type": "Slot",   
+        "id": "http://www.example.org/facility-use/slots/1",
+        "facilityUse": "http://www.example.org/facility-use/1",
+        "startDate": "2018-03-01T10:00:00Z",   
+        "duration": "PT30M",   
+        "remainingUses": 1,
+        "maximumUses": 1
+      },
+      {
+        "type": "Slot",   
+        "id": "http://www.example.org/facility-use/slots/1",
+        "facilityUse": "http://www.example.org/facility-use/1",
+        "startDate": "2018-03-01T11:00:00Z",   
+        "duration": "PT30M",   
+        "remainingUses": 0,
+        "maximumUses": 1
+      }
+  ] 
 }
 </code></pre>
-
-<p>The above example also uses the [`schema:inventoryLevel`](http://schema.org/inventoryLevel) property to indicate that currently there are two pitches available.</p>
 
 <div class="note">
 <p>
@@ -2272,7 +2299,6 @@ The community group feels that the data model proposed in this section adequatel
 </p>
 <p>The community group has documented this issue and [requests feedback from publishers and users](https://github.com/openactive/modelling-opportunity-data/issues/73) based on implementation feedback before deciding how to address the issue.</p>
 </div>
-
 
 <p></p>
 

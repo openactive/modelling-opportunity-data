@@ -2,7 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
   <head>
     <meta charset='utf-8'/>
-    <title>Modelling Opportunity Data 1.1</title>
+    <title>Modelling Opportunity Data 1.0</title>
 
     <script type="text/javascript" class='remove'>
         var respecConfig = {
@@ -13,17 +13,17 @@
           shortName:            "modelling-opportunity-data",
 
           // if you wish the publication date to be other than today, set this
-          publishDate:  "2018-06-29",
+          publishDate:  "2017-08-10",
 
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
           // previousPublishDate:  "1977-03-15",
           previousMaturity:  "ED",
-          previousPublishDate:  "2017-08-10",
+          previousPublishDate:  "2017-03-28",
 
           // if there a publicly available Editor's Draft, this is the link
           edDraftURI:   "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
-          previousURI:  "https://www.openactive.io/modelling-opportunity-data/1.0/",
+          previousURI:  "https://www.openactive.io/modelling-opportunity-data",
           //prevED:  "https://www.openactive.io/spec-template/",
           //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
           //testSuiteURI: "https://www.openactive.io/endpoint-validator/",
@@ -57,7 +57,7 @@
                 href: "https://github.com/openactive/modelling-opportunity-data/issues/"
             }, {
                 key: "Version",
-                value: "Candidate Specification"
+                value: "1.0"
             }
           ],
 
@@ -139,11 +139,12 @@
     </script>
 
 	<script src='https://www.openactive.io/respec/builds/respec-w3c-common.js' class='remove'></script>
-    <!--
+
+	<!--
     <script 
      src='https://www.w3.org/Tools/respec/respec-w3c-common' 
      class='remove'></script>
-   -->
+    -->
 
     <style>
     table {border-collapse: collapse; border: 1px solid #bec9d9}
@@ -580,14 +581,16 @@ This specification uses __*Place*__ as a general concept to refer to all types o
 The concept of Place therefore covers general outdoor areas such as parks, event venues (e.g. a Leisure centre) 
 and facilities within a venue (e.g. a squash court, running track, etc). Facilities are contained in Places.
 
-A __Sports Activity Location__ is a type of Place that is used to describe a facilities within a broader 
-Place. 
-
 Places may have additional descriptive properties, for example:
 
 * a name
 * an address and/or geographic coordinates
 * opening hours
+* a list of __*equipment*__ that is available for people to use at that location
+
+To help distinguish between equipment and facilities: facilities will be fixed features of a location, e.g. 
+squash courts or a walking trail; equipment will be items like table tennis tables that may be moved around 
+a facility.
 
 ## Programmes
 
@@ -652,45 +655,7 @@ will explore the area of booking in more detail.
 </p>
 </div>
 
-## Facility Use and Slots
 
-Not all opportunities to be physically active are scheduled Events. Leisure centres and other locations also provide 
-facilities (e.g. squash courts, pitches, table tennis tables) that are available for use by participants.
-
-To manage demand these facilities are usually available for hire at specific times of day. These are referred to as __Slots__.
-A Slot is an opportunity to use a facility at a specific time and a specific duration, e.g. from 10am for 30 minutes
-
-Some facilities are permanent parts of a leisure centre (or other Place). For example tennis courts, football pitches, etc.
-
-But many leisure centres have flexibility to reconfigure their spaces to support different, often mutually exclusive ways. 
-For example an individual sports hall might be used as either a single indoor 5-a-side pitch, or as two separate badminton courts. 
-
-Modelling the potential configurations of these spaces is outside the scope of this specification. The community group has 
-chosen to take a more user centred view of describing opportunities to use facilities. This supports our 
-primary use case of enabling the discovery of opportunities.
-
-A __Facility Use__ is a product that is offered to potential participants. It reflects the ability to use or hire a 
-facility at a specific location. A platform can publish data about the range of products on offer at a location, updating 
-their availability as facilities are booked by participants.
-
-The following properties will help to describe the specific Facility Use product on offer:
-
-* basic descriptive attributes of the product, such as its name, description, etc
-* the activity or activities for which the facility is to be used
-* the location of the facility
-* an offer to use the facility, for a specific price
-* the Slots during which the product is available, including any associated offers
-
-Some facility use products are opportunities to use a individual, identifiable facility, e.g. Tennis Court 1. 
-These are referred to a as __Individual Facility Uses__. The location of these products will be a __Sports Activity Location__.
-
-Otherwise, a Facility Use will describe an oppirtunity to use less permanent facilities, e.g. a table tennis table that will be moved into a sports hall on demand, or for an unnamed facility that will be allocated by a platform during booking. In this case the 
-location will be for the Place in which the facility is available.
-
-Facilities may be offered for use at a single price at any time of day, or the price may vary depending on on which Slot 
-is used. 
-
-As the use of facility is a self-directed activity it will differ from an Event in that is will not be lead, coached, etc. 
   </section>
 
   <section>
@@ -1016,7 +981,8 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>`schema:schedule`</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>A schedule defines a repeating time period used to describe a regularly occurring Event.</td>
+      <td>A schedule defines a repeating time period used to describe a regularly occurring Event.
+      **Note: this is a draft Schema.org property. See [Issue]((https://github.com/openactive/modelling-opportunity-data/issues/2)) for discussion.</td>
     </tr>
     <tr>
       <td>[`oa:activity`](https://www.openactive.io/ns/#activity)</td>
@@ -1031,13 +997,13 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`oa:ageRange`](https://www.openactive.io/ns/#ageRange)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that an event is suitable for a specific age range. Specified as a [QuantifiedValue](http://schema.org/QuantitativeValue) with 
-      [minValue](http://schema.org/minValue) and [maxValue](http://schema.org/maxValue) properties</td>
+      <td>Indicates that an event is suitable for a specific age range. If only a single age is specified then this is assumed to be a minimum age. 
+      Age ranges can be specified as follows: 18-30</td>
     </tr>
     <tr>
       <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Indicates that an event is restricted to Male, Female or a Mixed audience. Values should be one of the three URIs defined by this specification (see below). If a gender restriction isn't specified then applications 
+      <td>Indicates that an event is restricted to male, female or a mixed audience. If a gender restriction isn't specified then applications 
       <em class="rfc2119">SHOULD</em> assume that an event is suitable for a mixed audience</td>
     </tr>
     <tr>
@@ -1144,7 +1110,7 @@ The [`oa:activity`](https://www.openactive.io/ns/#activity) property allows an e
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "activity": "Tai chi"
+  "oa:activity": "Tai chi"
 }
 </code>
 </pre>
@@ -1228,81 +1194,26 @@ There are a variety of ways in which the suitability of an event for specific au
 an event is:
 
 * suited for a specific age range
-* suited for people with specific levels of experience ([`oa:level`](https://www.openactive.io/ns/#level))
+* suited for people with specific levels of experience
 * restricted to a male, female or mixed audience
 
-#### Age Ranges
+The following example illustrates how to indicate that an event it targeted as a specific age range (over 60s) but is open to a mixed 
+audience:
 
-Age ranges are specified using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) property. The value is a 
-[`schema:QuantifiedValue`](http://schema.org/QuantitativeValue) which should have [minValue](http://schema.org/minValue) or [maxValue](http://schema.org/maxValue) properties. These properties specify an inclusive minimum and maximum age range for participants.
-
-Data publishers using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) property MUST ensure that it has:
-
-* a `type` of [`schema:QuantifiedValue`](http://schema.org/QuantitativeValue)
-* at least one of the `minValue` or `maxValue`properties
-
-Data consumers SHOULD assume that:
-
-* if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
-* if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
-* if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
-* if an `ageRange` is provided with a `minValue` of 0, and there is no `maxValue` property then the Event is suitable for all
-
-The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
-
-<pre class="example" title="Age range example"><code>
+<pre class="example" title="Age and gender example"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
-  "ageRange": {
-     "type": "QuantifiedValue",
-     "minValue": 60
-  }
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "ageRange": 60,
+  "genderRestriction": "mixed"
 }
 </code>
 </pre>
-
-The following example illustrates an Event that is suitable for all ages. This is indicated by providing an `minValue` property with a value of zero and no `maxValue` property.
-
-<pre class="example" title="Age range - suitable for all example"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Exercise in the park",
-  "ageRange": {
-     "type": "QuantifiedValue",
-     "minValue": 0
-  }
-}
-</code>
-</pre>
-
-#### Gender Restriction
-
-Attendance at some events is limited to certain audiences. For example a female only gym class. The [`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction) property can be used to specify these restrictions.
-
-Data publishers using this property MUST use one of the following values:
-
-* `https://www.openactive.io/ns#None` indicating that the event has no restrictions
-* `https://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
-* `https://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
-
-If the `genderRestriction` property is not supplied for an Event, then data consumers SHOULD NOT assume a default value, the value should be treated as `null`. When searching or filtering for gender restricted Events, data consumers SHOULD remove Events with a `null` value. Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
-
-<pre class="example" title="Gender restriction example"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Gym class",
-  "genderRestriction": "http://www.openactive.io/ns#Female"
-}
-</code>
-</pre>
-
 
 ### Adding programmes
 
@@ -1315,7 +1226,7 @@ Events can be associated with a Programme using the [`oa:programme`](https://www
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
   "description": "A rowing class for beginners",
-  "startDate": "2017-04-01T08:00:00Z",
+  "startDate": "2017-04-01T08:00:00",
   "duration": "PT60M",
   "level": ["Beginner"],
   "programme": "Learn to Row"
@@ -1332,7 +1243,7 @@ If more information about the programme is available, then this can be included 
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
   "description": "A rowing class for beginners",
-  "startDate": "2017-04-01T08:00:00Z",
+  "startDate": "2017-04-01T08:00:00",
   "duration": "PT60M",
   "level": ["Beginner"],
   "programme": {
@@ -1358,7 +1269,8 @@ On that basis we have included the terms in specification. The following section
 this is an area that may change in future versions.
 </div>
 
-The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
+The following example illustrates basic usage of the [`schema:eventSchedule`](https://github.com/schemaorg/schemaorg/issues/1457#issuecomment-286423792) property. The data describes 
+a Tai Chi class that occurs every Weds at 7pm
 
 <pre class="example" title="Adding an event schedule"><code>
 {
@@ -1372,10 +1284,10 @@ The following example illustrates basic usage of the [`schema:eventSchedule`](ht
      "type": "Schedule",
      "startDate": "2017-01-01",
      "endDate": "2017-12-31",
-     "repeatFrequency": "P1W",
+     "frequency": "weekly",
      "byDay": "http://schema.org/Wednesday",
-     "startTime": "19:00Z",
-     "endTime": "20:00Z"
+     "startTime": "19:00",
+     "endTime": "20:00"
   }  
 }
 </code>
@@ -1594,11 +1506,6 @@ The following table lists the properties that can be used to provide description
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Specifies the opening hours of a location. The value of this property is a [`schema:OpeningHoursSpecification`](http://schema.org/OpeningHoursSpecification).</td>
     </tr>
-    <tr>
-      <td>[`schema:amenityFeature`](https://schema.org/amenityFeature)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) objects. See "Describing Amenities" for more information.</td>
-    </tr>    
   </tbody>   
 </table>
 
@@ -1644,62 +1551,6 @@ A more precise geographical location can be provided by adding a [`schema:geo`](
   }
 }
 </code></pre>
-
-### Describing Amenities
-
-It can be useful to describe the amenities (e.g. characteristics, services or other features) available at a location. 
-
-Schema.org provides the [`schema:amenityFeature`](http://schema.org/amenityFeature) property for specifying an list of amenities that are available or unavailable at a specific [`schema:Place`](http://schema.org/Place). The value of a the property is an array of objects that describe the individual amenities. 
-
-To improve consistency in how amenities are published, this specification defines some common types of amenities:
-
-* [`ChangingRooms`](https://www.openactive.io/ns#ChangingRooms)
-* [`Showers`](https://www.openactive.io/ns#Showers)
-* [`PublicToilets`](https://www.openactive.io/ns#PublicToilets)
-* [`Lockers`](https://www.openactive.io/ns#Lockers)
-* [`Towels`](https://www.openactive.io/ns#Towels)
-* [`Creche`](https://www.openactive.io/ns#Creche)
-* [`Parking`](https://www.openactive.io/ns#Parking)
-* [`BabyChanging`](https://www.openactive.io/ns#BabyChanging)
-
-Publishers SHOULD use one of these types when applicable. If there is no pre-defined type then data publishers MUST use the more generic [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) type. 
-
-This avoids the need for data consumers to have to rely on the `name` value to identify common amenities that may otherwise be named differently (e.g. "Changing Rooms, "Changing Facilities", etc).
-
-<pre class="example" title="Amenity example"><code>
-{
-  "type": "Place",
-  "amenityFeature": [
-     {
-        "type": "ChangingRooms",
-        "name": "Changing Facilities",
-        "value": true
-     }
-  ]
-}
-</code></pre>
-
-Publishers MUST include the `type`, `name` and `value` properties for each amenity. A `value` of `false` indicates that a specific amenity is not available.
-
-Additional information MAY be provided about each of the amenities, using properties from the [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) type. For example, specifying opening hours ([`schema:hoursAvailable`](http://schema.org/hoursAvailable)) or to add a description ([`schema:description`](http://schema.org/description)).
-
-The list of pre-defined amenties MAY be revised in future specifications based on feedback from the community. 
-
-In the meantime additional types of amenities can be specified using the more generic [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) type as shown below:
-
-<pre class="example" title="Generic amenity type example"><code>
-{
-  "type": "Place",
-  "amenityFeature": [
-     {
-        "type": "LocationFeatureSpecification",
-        "name": "Outdoor seating",
-        "value": true
-     }
-  ]
-}
-</code></pre>
-
 
 ### Describing Facilities
 
@@ -1890,11 +1741,6 @@ The following properties from the [[SKOS]] specification can be used to describe
   </thead>
   <tbody>
     <tr>
-      <td>`@id`</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>A URI providing a unique identifier for the resource</td>
-    </tr>  
-    <tr>
       <td>[`skos:prefLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Preferred label for referring to the physical activity. The preferred labels should be used when publishing data about the activities involved in an event.</td>
@@ -1933,7 +1779,7 @@ The following markup illustrates how to describe a single activity.
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Concept",
-  "id": "http://www.example.org/activity-list#tai-chi",
+  "url": "http://www.example.org/activity-list#tai-chi",
   "prefLabel": "Tai Chi",
   "altLabel": "Tai-Chi",
   "inScheme": "http://www.example.org/activity-list"
@@ -1943,7 +1789,9 @@ The following markup illustrates how to describe a single activity.
 
 ## Describing Offers (<code>schema:Offer</code>)
 
-To indicate that a `schema:Event` is only available to paid attendees, opportunity data provides may include details of the offers available to participants. The [`schema:Offer`](http://schema.org/Offer) type provides some basic properties for indicating the price and availability of Offers.
+To indicate that a `schema:Event` is only available to paid attendees, opportunity data provides may include details of the offers available to 
+participants. The [`schema:Offer`](http://schema.org/Offer) type provides some basic properties for indicating the price and availability of 
+Offers.
 
 <table>
   <thead>
@@ -2003,309 +1851,6 @@ The following example shows an event which offers a price for attending a single
 Schema.org provides [additional properties for describing Offers](http://schema.org/Offer). The above model highlights the properties 
 that support the most common, basic use case. Future versions of this specification may include more detail around describing offers.
 </div>
-
-<p></p>
-
-## Describing Slots (<code>oa:Slot</code>)
-
-A Slot is an opportunity to use a facility at a specific time and for a 
-specified duration. A Slot is therefore a specific type of Event, although 
-it has a more constrained set of properties.
-
-A series of Slots describes a calendar during which a facility is available 
-for use.
-
-Slots are always associated with a [`oa:FacilityUse`](https://www.openactive.io/ns/#FacilityUse) 
-product which may link to more detail about the facility on offer and the costs 
-for hire.
-
-<table>
-  <thead>
-    <th>Property</th>
-    <th>Status</th>
-    <th>Notes</th>
-  </thead>
-  <tbody>  
-    <tr>
-      <td>`@id`</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>A URI providing a unique identifier for the resource</td>
-    </tr>  
-    <tr>
-      <td>[`schema:identifier`](http://schema.org/identifier)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>A local identifier for the resource</td>
-    </tr>  
-    <tr>
-      <td>[`oa:facilityUse`](https://www.openactive.io/ns/#facilityUse)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>
-      <p>Links a specific Slot with the <code>oa:FacilityUse</code> of which it is a part.
-      </p>
-    </tr>
-    <tr>
-      <td>[`schema:startDate`](https://schema.org/startDate)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>
-      <p>The start date and time of the slot. Can be specified as a [`schema:Date`](https://schema.org/Date) or
-      [`schema:DateTime`](https://schema.org/DateTime).
-      </p>
-    </tr>
-    <tr>
-      <td>[`schema:endDate`](https://schema.org/endDate)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>
-      <p>
-      The end date and time of the event. Can be specified as a [`schema:Date`](https://schema.org/Date) or
-      [`schema:DateTime`](https://schema.org/DateTime)
-      </p>
-    </tr>
-    <tr>
-      <td>[`schema:duration`](https://schema.org/duration)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>The duration of the event given in [[ISO8601]] format.</td>
-    </tr>
-    <tr>
-      <td>[`schema:offers`](https://schema.org/offers)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Describes offers to book and use this specific slot. If unspecified, then a client SHOULD use offers associated with the 
-      related Facility Use.</td>
-    </tr>
-    <tr>
-      <td>[`oa:remainingUses`](https://www.openactive.io/ns/#remainingUses)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>
-      <p>Used to indicate the availability of this Slot. Where a Slot describes the opportunity to use 
-      a single facility this property should have a value of 0 or 1. Where a Slot describes the opportunity to 
-      use one of several facilities, which will be allocated during booking, then the property specific how many 
-      such facilities are remaining, and may then have a value greater than 1.</p>
-    </tr>
-    <tr>
-      <td>[`oa:maximumUses`](https://www.openactive.io/ns/#maximumUses)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>
-      <p>Where a Slot describes the opportunity to 
-      use one of several facilities, which will be allocated during booking, then this value can be used to indicate how 
-      many facilities might be available.</p>
-    </tr>    
-  </tbody>   
-</table>
-
-Examples of describing a Slot are given in the next section.
-
-## Describing Facility Use (<code>oa:FacilityUse</code>, <code>oa:IndividualFacilityUse</code>)
-
-A Facility Use is a product. It describes an opportunity to use either one of 
-a group of facilities (<code>oa:FacilityUse</code>) or a individual facility 
-(<code>oa:IndividualFacilityUse</code>). 
-
-The opportunity to use a facility is divided into a calendar of Slots, which 
-allow a participant to use that facility for a specified time and duration.
-
-<table>
-  <thead>
-    <th>Property</th>
-    <th>Status</th>
-    <th>Notes</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>`@id`</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>A URI providing a unique identifier for the resource</td>
-    </tr>
-    <tr>
-      <td>[`schema:url`](https://schema.org/url)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>A URL to a web page (or section of a page) that describes the product</td>
-    </tr>
-    <tr>
-      <td>[`schema:identifier`](http://schema.org/identifier)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>A local identifier for the product</td>
-    </tr>
-    <tr>
-      <td>[`schema:name`](https://schema.org/name)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>The name of the product or service</td>
-    </tr>
-    <tr>
-      <td>[`schema:description`](https://schema.org/description)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
-      <td>A free text description of the product or service</td>
-    </tr>
-    <tr>
-      <td>[`schema:image`](https://schema.org/image)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>An image or photo that depicts the product, e.g. a photo of the facility or equipment</td>
-    </tr>
-    <tr>
-      <td>[`oa:activity`](https://www.openactive.io/ns/#activity)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Specifies the physical activity or activities that can be performed when the facility is used.</td>
-    </tr>
-    <tr>
-      <td>[`schema:location`](https://schema.org/location)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>The location of the facility being used. This will either be a generic location, e.g. a leisure centre or sports hall for equipment or more temporary spaces, or a specific <code>schema:SportsActivityLocation</code> when describing opportunities to use 
-      a specific identifiable facility (<code>oa:IndividualFacilityUse</code>)</td>
-    </tr>
-    <tr>
-      <td>[`schema:event`](https://schema.org/events)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>An array of one or more upcoming slots (<code>oa:Slot</code>) during which the product can be used. E.g. a list of hourly slots during which a 
-      football pitch might be hired. Only minimal information need be provided about each event, e.g. identifiers, start time, duration, 
-      event status, and any associated offers. This will be sufficient to allow data users to build a timetable of slots, with an availability 
-      status, price, etc.</td>
-    </tr>
-    <tr>
-      <td>[`schema:offers`](https://schema.org/offers)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Describes a generic offer to use a facility, e.g to indicate it is available for a set price, or may be used for free. Where offers 
-      might vary based on time of day (e.g. peak pricing) then this information should be associated with the specific event ("slot")</td>
-    </tr>
-    <tr>
-      <td>[`schema:hoursAvailable`](https://schema.org/hoursAvailable)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Specifies the hours during which this product is available. The value of this property is a schema:OpeningHoursSpecification.</td>
-    </tr>
-    <tr>
-      <td>[`oa:individualFacilityUses`](https://www.openactive.io/"htns/#individualFacilityUses)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Links a <code>oa:FacilityUse</code> product, describing a general opportunity to, e.g. book and play tennis at a leisure centre with an array of <code>oa:IndividualFacilityUse</code> products that provide a more detailed description about an opportunity to book, e.g. individual tennis courts. This allows a platform to publish both a general product and time-table as well as more detailed 
-      products for individual facilities.</td>
-    </tr>
-
-  </tbody>
-</table>   
-
-The following example describes opportunities to use table tennis facilities at 
-a leisure centre. By default use of a table is for 30 minutes and costs ten 
-pounds.
-
-However at specific times the cost to use a table increases. This is indicated 
-by offers associated with the second Slot.
-
-In both cases a maximum of four tables are available. In the example, only one 
-table remains for use in the first slot, while the second has three. 
-
-<pre class="example" title="Describing use of a facility"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "FacilityUse",
-  "url": "http://www.example.org/facility-use/1",
-  "name": "Example Leisure Centre Table Tennis",
-  "description": "Table tennis tables are available to hire for thirty minute slots",
-  "activity": "Table Tennis",
-  "location": {
-    "type": "Place",
-    "name": "Example Leisure Centre",
-    "address": {
-      "type": "PostalAddress",
-      "streetAddress": "1 High Street",
-      "addressLocality": "Bristol",
-      "postalCode": "BS1 4SD"
-    }  
-  },
-  "offers": [
-      {
-        "name": "30 minute hire",
-        "price": "10",
-        "priceCurrency": "GBP"
-      }
-  ],
-  "event": [
-      {
-        "type": "Slot",   
-        "id": "http://www.example.org/facility-use/slots/1",
-        "facilityUse": "http://www.example.org/facility-use/1",
-        "startDate": "2018-03-01T10:00:00Z",   
-        "duration": "PT30M",   
-        "remainingUses": 1,
-        "maximumUses": 4
-      },
-      {
-        "type": "Slot",   
-        "id": "http://www.example.org/facility-use/slots/2",
-        "facilityUse": "http://www.example.org/facility-use/1",
-        "startDate": "2018-03-01T11:00:00Z",   
-        "duration": "PT30M",   
-        "remainingUses": 3,
-        "maximumUses": 4,
-         "offers": [
-           {
-              "name": "30 minute hire",
-              "price": "15",
-              "priceCurrency": "GBP"
-           }
-         ]
-      }
-  ] 
-}
-</code></pre>
-
-<p>The following example shows how to use the data model to publish opportunities 
-to hire a specific tennis court. As this is an <code>oa:IndividualFacilityUse</code> 
-the location field provides more detail on the location. The example describes 
-two Slots, but the second is no longer available.</p>
-
-<pre class="example" title="Describing use of an individual facility"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "IndividualFacilityUse",
-  "url": "http://www.example.org/facility-use/2",
-  "name": "Play Tenns on the Main Tennis Court",
-  "description": "Tennis courts are available for 30 min sessions",
-  "image": [
-     "http://example.org/images/1.jpg"
-  ],
-  "activity": "Tennis",
-  "location": {
-    "type": "SportsActivityLocation",
-    "name": "Main Tennis Court",
-    "containedInPlace": {
-       "type": "Place",
-       "name": "Example Leisure Centre",
-       "address": {
-         "type": "PostalAddress",
-         "streetAddress": "1 High Street",
-         "addressLocality": "Bristol",
-         "postalCode": "BS1 4SD"
-       }  
-    }
-  },
-  "event": [
-      {
-        "type": "Slot",   
-        "id": "http://www.example.org/facility-use/slots/1",
-        "facilityUse": "http://www.example.org/facility-use/1",
-        "startDate": "2018-03-01T10:00:00Z",   
-        "duration": "PT30M",   
-        "remainingUses": 1,
-        "maximumUses": 1
-      },
-      {
-        "type": "Slot",   
-        "id": "http://www.example.org/facility-use/slots/1",
-        "facilityUse": "http://www.example.org/facility-use/1",
-        "startDate": "2018-03-01T11:00:00Z",   
-        "duration": "PT30M",   
-        "remainingUses": 0,
-        "maximumUses": 1
-      }
-  ] 
-}
-</code></pre>
-
-<div class="note">
-<p>
-The community group feels that the data model proposed in this section adequately covers the primary use cases relating to publishing data on opportunities to hire and use facilities</p>
-<p>However we recognise that there may be some consequences on the volume of data shared via [RPDE feeds](https://www.openactive.io/realtime-paged-data-exchange/). Specifically, for multi-use facilities the booking of mutually exclusive configurations will end up increasing the volume of updates that need to be communicated to users.
-</p>
-<p>The community group has documented this issue and [requests feedback from publishers and users](https://github.com/openactive/modelling-opportunity-data/issues/73) based on implementation feedback before deciding how to address the issue.</p>
-</div>
-
-<p></p>
 
 ## Describing Activity Opportunities (<code>oa:ActivityOpportunity</code>)
 

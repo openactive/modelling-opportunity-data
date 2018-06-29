@@ -1246,7 +1246,7 @@ Data consumers SHOULD assume that:
 * if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
 * if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
 * if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
-* if an `ageRange` is provided with a value of 0, and there is no `maxValue` property then the Event is suitable for all
+* if an `ageRange` is provided with a `minValue` of 0, and there is no `maxValue` property then the Event is suitable for all
 
 The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
 
@@ -2146,9 +2146,9 @@ allow a participant to use that facility for a specified time and duration.
       a specific identifiable facility (<code>oa:IndividualFacilityUse</code>)</td>
     </tr>
     <tr>
-      <td>[`schema:events`](https://schema.org/events)</td>
+      <td>[`schema:event`](https://schema.org/events)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Describes one or more upcoming slots (<code>oa:Slot</code>) during which the product can be used. E.g. a list of hourly slots during which a 
+      <td>An array of one or more upcoming slots (<code>oa:Slot</code>) during which the product can be used. E.g. a list of hourly slots during which a 
       football pitch might be hired. Only minimal information need be provided about each event, e.g. identifiers, start time, duration, 
       event status, and any associated offers. This will be sufficient to allow data users to build a timetable of slots, with an availability 
       status, price, etc.</td>
@@ -2209,7 +2209,7 @@ table remains for use in the first slot, while the second has three.
         "priceCurrency": "GBP"
       }
   ],
-  "events": [
+  "event": [
       {
         "type": "Slot",   
         "id": "http://www.example.org/facility-use/slots/1",
@@ -2269,7 +2269,7 @@ two Slots, but the second is no longer available.</p>
        }  
     }
   },
-  "events": [
+  "event": [
       {
         "type": "Slot",   
         "id": "http://www.example.org/facility-use/slots/1",

@@ -1246,7 +1246,7 @@ Data consumers SHOULD assume that:
 * if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
 * if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
 * if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
-* if an `ageRange` is provided with a value of 0, and there is no `maxValue` property then the Event is suitable for all
+* if an `ageRange` is provided with a `minValue` of 0, and there is no `maxValue` property then the Event is suitable for all
 
 The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
 
@@ -1286,9 +1286,9 @@ Attendance at some events is limited to certain audiences. For example a female 
 
 Data publishers using this property MUST use one of the following values:
 
-* `http://www.openactive.io/ns#None` indicating that the event has no restrictions
-* `http://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
-* `http://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
+* `https://www.openactive.io/ns#None` indicating that the event has no restrictions
+* `https://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
+* `https://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
 
 If the `genderRestriction` property is not supplied for an Event, then data consumers SHOULD NOT assume a default value, the value should be treated as `null`. When searching or filtering for gender restricted Events, data consumers SHOULD remove Events with a `null` value. Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
 
@@ -1890,6 +1890,11 @@ The following properties from the [[SKOS]] specification can be used to describe
   </thead>
   <tbody>
     <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>  
+    <tr>
       <td>[`skos:prefLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Preferred label for referring to the physical activity. The preferred labels should be used when publishing data about the activities involved in an event.</td>
@@ -1928,7 +1933,7 @@ The following markup illustrates how to describe a single activity.
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Concept",
-  "url": "http://www.example.org/activity-list#tai-chi",
+  "id": "http://www.example.org/activity-list#tai-chi",
   "prefLabel": "Tai Chi",
   "altLabel": "Tai-Chi",
   "inScheme": "http://www.example.org/activity-list"
@@ -2146,9 +2151,9 @@ allow a participant to use that facility for a specified time and duration.
       a specific identifiable facility (<code>oa:IndividualFacilityUse</code>)</td>
     </tr>
     <tr>
-      <td>[`schema:events`](https://schema.org/events)</td>
+      <td>[`schema:event`](https://schema.org/events)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Describes one or more upcoming slots (<code>oa:Slot</code>) during which the product can be used. E.g. a list of hourly slots during which a 
+      <td>An array of one or more upcoming slots (<code>oa:Slot</code>) during which the product can be used. E.g. a list of hourly slots during which a 
       football pitch might be hired. Only minimal information need be provided about each event, e.g. identifiers, start time, duration, 
       event status, and any associated offers. This will be sufficient to allow data users to build a timetable of slots, with an availability 
       status, price, etc.</td>
@@ -2209,7 +2214,7 @@ table remains for use in the first slot, while the second has three.
         "priceCurrency": "GBP"
       }
   ],
-  "events": [
+  "event": [
       {
         "type": "Slot",   
         "id": "http://www.example.org/facility-use/slots/1",
@@ -2269,7 +2274,7 @@ two Slots, but the second is no longer available.</p>
        }  
     }
   },
-  "events": [
+  "event": [
       {
         "type": "Slot",   
         "id": "http://www.example.org/facility-use/slots/1",

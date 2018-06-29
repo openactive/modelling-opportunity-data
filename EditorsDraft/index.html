@@ -1890,6 +1890,11 @@ The following properties from the [[SKOS]] specification can be used to describe
   </thead>
   <tbody>
     <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>  
+    <tr>
       <td>[`skos:prefLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Preferred label for referring to the physical activity. The preferred labels should be used when publishing data about the activities involved in an event.</td>
@@ -1928,7 +1933,7 @@ The following markup illustrates how to describe a single activity.
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "Concept",
-  "url": "http://www.example.org/activity-list#tai-chi",
+  "id": "http://www.example.org/activity-list#tai-chi",
   "prefLabel": "Tai Chi",
   "altLabel": "Tai-Chi",
   "inScheme": "http://www.example.org/activity-list"

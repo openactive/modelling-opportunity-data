@@ -51,7 +51,6 @@ cp -r ../1.0 .
 cp -r ../Latest .
 cp -r ../EditorsDraft .
 cp -r ../Latest/* .
-cp -r ../1.0/* .
 
 cd ..
 

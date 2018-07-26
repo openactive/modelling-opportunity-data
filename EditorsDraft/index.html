@@ -1524,147 +1524,113 @@ Examples of using these are shown below:
 </code>
 </pre>
 
-## Describing Locations (<code>schema:Place</code> and <code>schema:PostalAddress</code>)
+## Describing Locations (<code>schema:Place</code>)
 
-Schema.org takes a flexible approach towards defining the locations for an [`schema:Event`](https://schema.org/Event). 
+This specification recommends use of the [`schema:Place`](https://schema.org/Place) 
+and [`schema:SportsActivityLocation`](https://schema.org/SportsActivityLocation) 
+types for describing locations. 
 
-The legal values for the [`schema:location`](https://schema.org/location) property include:
+The [`schema:location`](https://schema.org/location) property can be used to 
+relate an [`schema:Event`](https://schema.org/Event) 
+or [`oa:FacilityUse`](https://www.openactive.io/ns#FacilityUse) to a Place.
 
-* a simple textual description
-* a [`schema:PostalAddress`](https://schema.org/PostalAddress) 
-* a more fully defined [`schema:Place`](https://schema.org/Place) or one of its sub-types such as a [`schema:CivicStructure`](https://schema.org/CivicStructure) or [`schema:EventVenue`](https://schema.org/EventVenue)
-
-While all three forms are allowed by Schema.org, applications that publish opportunity data <em class="rfc2119">SHOULD</em> either specify a [`schema:PostalAddress`](https://schema.org/PostalAddress) or a more detailed [`schema:Place`](https://schema.org/Place) description.
-
-
-### Describing Addresses
-
-Schema.org provides the following properties for publishing address data using the [`schema:PostalAddress`](https://schema.org/PostalAddress) type.
+The following table lists a number of properties that can be used to 
+describe a [`schema:Place`](https://schema.org/Place) 
 
 <table>
   <thead>
     <th>Property</th>
     <th>Status</th>
-    <th>Notes</th>
-  </thead>
-  <tbody>  
-    <tr>
-      <td>[`schema:streetAddress`](https://schema.org/streetAddress)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Street address</td>
-    </tr>
-    <tr>
-      <td>[`schema:addressLocality`](https://schema.org/addressLocality)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Town or other area</td>
-    </tr>
-    <tr>
-      <td>[`schema:region`](https://schema.org/region)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Region</td>
-    </tr>
-    <tr>
-      <td>[`schema:postalCode`](https://schema.org/postalCode)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>Postcode</td>
-    </tr>
-  </tbody>   
-</table>
-
-The following example shows how to markup a simple address:
-
-<pre class="example" title="An Address">
-<code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "PostalAddress",
-  "streetAddress": "North Parade Road",
-  "addressLocality": "Bath",
-  "region": "Somerset",
-  "postalCode": "BA2 4ET"
-}
-</code>
-</pre>
-
-
-### Describing Places
-
-In order to provide additional information, e.g. the name of the location or its geographic co-ordinates, then the [`schema:Place`](https://schema.org/Place) 
-type <em class="rfc2119">MUST</em> be used instead.
-
-The following table lists the properties that can be used to provide descriptions of a [`schema:Place`](https://schema.org/Place) 
-
-<table>
-  <thead>
-    <th>Property</th>
-    <th>Status</th>
+    <th>Format</th>
     <th>Notes</th>
   </thead>
   <tbody>
     <tr>
-      <td>`@id`</td>
+      <td>`@type`</td>
       <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>A type of Place as defined by Schema.org</td>
+    </tr>
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>URI</td>
       <td>A URI providing a unique identifier for the resource</td>
     </tr>
     <tr>
       <td>[`schema:identifier`](http://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String or Number</td>
       <td>A local identifier for the resource</td>
     </tr>    
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>URI</td>
       <td>A URL to a web page (or section of a page) that describes the Place</td>
     </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
       <td>The name of the Place</td>
     </tr>
     <tr>
       <td>[`schema:description`](https://schema.org/description)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
       <td>A free text description of the Place</td>
     </tr>
     <tr>
       <td>[`schema:image`](https://schema.org/image)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>An image or photo that depicts the place</td>
+      <td>Array of [`schema:ImageObject`](https://schema.org/ImageObject)</td>
+      <td>One or more images or photos that depicts the Place</td>
     </tr>
     <tr>
       <td>[`schema:address`](https://schema.org/address)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
-      <td>The street address of the location, expressed as a [`schema:PostalAddress`](https://schema.org/PostalAddress). See the following section for more information on describing [`schema:PostalAddress`](https://schema.org/PostalAddress) resources</td>
+      <td>String or [`schema:PostalAddress`](https://schema.org/PostalAddress)</td>
+      <td>The street address of the location, expressed as a [`schema:PostalAddress`](https://schema.org/PostalAddress).
+      Where possible publishers <em class="rfc2119">MUST</em> specify an address as 
+      an object. Publishers <em class="rfc2119">MUST</em> only use a String value 
+      if they only have a generic location name or free text field, e.g. "In Victoria Park, near the lake"</td>
     </tr>
     <tr>
       <td>[`schema:geo`](https://schema.org/geo)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>[`schema:GeoCoordinates`](https://schema.org/GeoCoordinates)</td>
       <td>The geographic co-ordinates, specified as a latitude and longitude of a Place</td>
     </tr>
     <tr>
       <td>[`schema:containedInPlace`](https://schema.org/containedInPlace)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>[`schema:Place`](https://schema.org/Place)</td>
       <td>Indicates that this Place is part of a larger location. Can be used to allow, e.g. a pitch or other facility to be related to a parent location such as a Leisure Centre</td>
     </tr>
     <tr>
       <td>[`schema:containsPlace`](https://schema.org/containsPlace)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Relates a Place to other locations and facilities that it contains. Schema.org provides a specific type of Place, called a 
-      [`schema:SportsActivityLocation`](https://schema.org/SportsActivityLocation) for describing facilities</td>
+      <td>Array of [`schema:Place`](https://schema.org/Place)</td>      
+      <td>Relates a Place to one or more other locations and facilities that 
+      it contains.</td>
     </tr>
     <tr>
       <td>[`schema:telephone`](https://schema.org/telephone)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
       <td>A contact telephone number for the location, e.g. for enquiries</td>
     </tr>
     <tr>
       <td>[`schema:openingHoursSpecification`](https://schema.org/openingHoursSpecification)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>Array of [`schema:OpeningHoursSpecification`](http://schema.org/OpeningHoursSpecification)</td>
       <td>Specifies the opening hours of a location. The value of this property is a [`schema:OpeningHoursSpecification`](http://schema.org/OpeningHoursSpecification).</td>
     </tr>
     <tr>
       <td>[`schema:amenityFeature`](https://schema.org/amenityFeature)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>Array of [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification)</td>
       <td>Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [`schema:LocationFeatureSpecification`](http://schema.org/LocationFeatureSpecification) objects. See "Describing Amenities" for more information.</td>
     </tr>    
   </tbody>   
@@ -1682,8 +1648,9 @@ This example illustrates a simple place description. Building on the previous ex
       "type": "PostalAddress",
       "streetAddress": "North Parade Road",
       "addressLocality": "Bath",
-      "region": "Somerset",
-      "postalCode": "BA2 4ET"
+      "addressRegion": "Somerset",
+      "postalCode": "BA2 4ET",
+      "addressCountry": "UK"
   },
   "telephone": "+44 (0)1225 486905"    
 }
@@ -1701,8 +1668,9 @@ A more precise geographical location can be provided by adding a [`schema:geo`](
       "type": "PostalAddress",
       "streetAddress": "North Parade Road",
       "addressLocality": "Bath",
-      "region": "Somerset",
-      "postalCode": "BA2 4ET"
+      "addressRegion": "Somerset",
+      "postalCode": "BA2 4ET",
+      "addressCountry": "UK"
   },
   "telephone": "+44 (0)1225 486905",
   "geo": {
@@ -1712,6 +1680,73 @@ A more precise geographical location can be provided by adding a [`schema:geo`](
   }
 }
 </code></pre>
+
+### Describing Addresses
+
+Schema.org provides the following properties for publishing address data using the [`schema:PostalAddress`](https://schema.org/PostalAddress) type.
+
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Format</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>  
+    <tr>
+      <td>`@type`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>PostalAddress</td>
+    </tr>  
+    <tr>
+      <td>[`schema:streetAddress`](https://schema.org/streetAddress)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Street address</td>
+    </tr>
+    <tr>
+      <td>[`schema:addressLocality`](https://schema.org/addressLocality)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Town or other area</td>
+    </tr>
+    <tr>
+      <td>[`schema:addressRegion`](https://schema.org/addressRegion)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Region</td>
+    </tr>
+    <tr>
+      <td>[`schema:postalCode`](https://schema.org/postalCode)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Postcode</td>
+    </tr>
+    <tr>
+      <td>[`schema:addressCountry`](https://schema.org/addressCountry)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>ISO 3166-1 alpha-2 country code</td>
+    </tr>    
+  </tbody>   
+</table>
+
+The following example shows how to markup a simple address:
+
+<pre class="example" title="An Address">
+<code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "PostalAddress",
+  "streetAddress": "North Parade Road",
+  "addressLocality": "Bath",
+  "addressRegion": "Somerset",
+  "postalCode": "BA2 4ET",
+  "addressCountry": "UK"
+}
+</code>
+</pre>
 
 ### Describing Amenities
 
@@ -1769,9 +1804,12 @@ In the meantime additional types of amenities can be specified using the more ge
 </code></pre>
 
 
-### Describing Facilities
+### Describing Facilities at a Location
 
-Facilities available at a location can be expressed using the containment properties ([`schema:containedInPlace`](https://schema.org/containedInPlace) and [`schema:containsPlace`](https://schema.org/containsPlace)). The following example illustrates how to describe that a Leisure Centre includes a gym:
+Facilities such as swimming pools, courts, etc available at a location can 
+be expressed using the containment properties 
+([`schema:containedInPlace`](https://schema.org/containedInPlace) 
+and [`schema:containsPlace`](https://schema.org/containsPlace)). The following example illustrates how to describe that a Leisure Centre includes a gym:
 
 <pre class="example" title="Describing a leisure centre"><code>
 {
@@ -1783,14 +1821,15 @@ Facilities available at a location can be expressed using the containment proper
       "type": "PostalAddress",
       "streetAddress": "North Parade Road",
       "addressLocality": "Bath",
-      "region": "Somerset",
-      "postalCode": "BA2 4ET"
+      "addressRegion": "Somerset",
+      "postalCode": "BA2 4ET",
+      "addressCountry": "UK"
   },
-  "containsPlace": {
+  "containsPlace": [{
     "type": "SportsActivityLocation",
     "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym",
     "name": "Gym"
-  }    
+  }]    
 }
 </code></pre>
 
@@ -1824,39 +1863,55 @@ Both the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`
   <thead>
     <th>Property</th>
     <th>Status</th>
+    <th>Format</th>
     <th>Notes</th>
   </thead>
   <tbody>
     <tr>
-      <td>`@id`</td>
+      <td>`@type`</td>
       <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Person or Organization</td>
+    </tr>
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>URI</td>
       <td>A URI providing a unique identifier for the resource</td>
     </tr>
     <tr>
       <td>[`schema:identifier`](http://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Number or String</td>
       <td>A local identifier for the resource</td>
     </tr>  
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em> for Organization. 
+      <em class="rfc2119">OPTIONAL</em> for Person</td>
+      <td>URL</td>
       <td>A URL to the homepage or other page about the organisation</td>
     </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
+      <td><em class="rfc2119">REQUIRED</em> for Organization. 
+      <em class="rfc2119">OPTIONAL</em> for Person</td>
+      <td>String</td>
       <td>The name of the organisation</td>
     </tr>
     <tr>
       <td>[`schema:description`](https://schema.org/description)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
       <td>A description of the organisation</td>
     </tr>
     <tr>
       <td>[`schema:logo`](https://schema.org/logo)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>The logo of an organisation</td>
+      <td>Array of [`schema:ImageObject`](https://schema.org/ImageObject)</td>
+      <td>Logo for an organization</td>
     </tr>
+
   </tbody>   
 </table>
 
@@ -1871,12 +1926,15 @@ The following example illustrates how to associate an [`schema:Organization`](ht
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "organizer": {
+  "organizer": [{
     "type": "Organization",
     "url": "http://example.org/clubs/1",
     "name": "Bath Tai Chi Club",
-    "logo": "http://www.example.org/clubs/1/logo.png"    
-  }
+    "logo": [{
+        "type": "ImageObject",
+        "url": "http://www.example.org/clubs/1/logo.png"
+    }]    
+  }]
 }
 </code>
 </pre>
@@ -1897,22 +1955,38 @@ The [[OpenActive-Activity-List]] provides an openly licensed standard activity l
   <thead>
     <th>Property</th>
     <th>Status</th>
+    <th>Format</th>
     <th>Notes</th>
   </thead>
   <tbody>
     <tr>
+      <td>`@type`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>ConceptScheme</td>
+    </tr>
+    <tr>
       <td>`@id`</td>
       <td><em class="rfc2119">REQUIRED</em></td>
+      <td>URL</td>      
       <td>A URI providing a unique identifier for the resource</td>
     </tr>
     <tr>
+      <td>[`schema:url`](https://schema.org/url)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>URL</td>
+      <td>A URL that links to the Activity List</td>
+    </tr>    
+    <tr>
       <td>[`dc:title`](http://purl.org/dc/terms/title)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
       <td>Title of the Activity List</td>
     </tr>
     <tr>
       <td>[`schema:description`](https://schema.org/description)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
       <td>Description of the activity list</td>
     </tr>
     <tr>
@@ -1920,6 +1994,12 @@ The [[OpenActive-Activity-List]] provides an openly licensed standard activity l
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Reference to the license under which the activity list has been published</td>
     </tr>
+    <tr>
+      <td>[`oa:concepts`](https://www.openactive.org/ns#concepts)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Array of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
+      <td>List of concepts that make up the list</td>
+    </tr>    
   </tbody>   
 </table>
 
@@ -1929,6 +2009,7 @@ The following example illustrates the basic structure of an activity list:
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
   "type": "ConceptScheme",
+  "id": "http://www.example.org/activity-list",
   "url": "http://www.example.org/activity-list",
   "title": "Activity List",
   "description": "An example activity list",
@@ -1944,8 +2025,6 @@ The following example illustrates the basic structure of an activity list:
 </code>
 </pre>
 
-The `concepts` property used in the above example is defined in the JSON-LD context published as part of the OpenActive Vocabulary ([[OpenActive-Vocabulary]]).
-
 ### Describing Physical Activities
 
 The following properties from the [[SKOS]] specification can be used to describe physical activities.
@@ -1954,42 +2033,56 @@ The following properties from the [[SKOS]] specification can be used to describe
   <thead>
     <th>Property</th>
     <th>Status</th>
+    <th>Format</th>
     <th>Notes</th>
   </thead>
   <tbody>
     <tr>
+      <td>`@type`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Concept</td>
+    </tr>  
+    <tr>
       <td>`@id`</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>URI</td>
       <td>A URI providing a unique identifier for the resource</td>
     </tr>  
     <tr>
       <td>[`skos:prefLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
       <td>Preferred label for referring to the physical activity. The preferred labels should be used when publishing data about the activities involved in an event.</td>
     </tr>
     <tr>
       <td>[`skos:altLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#altLabel)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of String</td>
       <td>Alternative labels for the physical activity</td>
     </tr>
     <tr>
       <td>[`skos:inScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#inScheme)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>URI</td>
       <td>Refers to the Activity List in which this physical activity is defined.</td>
     </tr>
     <tr>
       <td>[`skos:broader`](https://www.w3.org/2009/08/skos-reference/skos.html#broader)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>URI</td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi".</td>
     </tr>
     <tr>
       <td>[`skos:narrower`](https://www.w3.org/2009/08/skos-reference/skos.html#narrower)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>URI</td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts"</td>
     </tr>
     <tr>
       <td>[`skos:notation`](https://www.w3.org/2009/08/skos-reference/skos.html#notation)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
       <td>Provides a unique code or identifier for an activity</td>
     </tr>
   </tbody>   

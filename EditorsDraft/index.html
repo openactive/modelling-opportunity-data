@@ -2,7 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
   <head>
     <meta charset='utf-8'/>
-    <title>Modelling Opportunity Data 1.1</title>
+    <title>Modelling Opportunity Data 2.0</title>
 
     <script type="text/javascript" class='remove'>
         var respecConfig = {
@@ -19,7 +19,7 @@
           // and its maturity status
           // previousPublishDate:  "1977-03-15",
           previousMaturity:  "ED",
-          previousPublishDate:  "2017-08-10",
+          previousPublishDate:  "2018-07-29",
 
           // if there a publicly available Editor's Draft, this is the link
           edDraftURI:   "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
@@ -27,7 +27,7 @@
           //prevED:  "https://www.openactive.io/spec-template/",
           //previousURI:  "https://www.openactive.io/realtime-paged-data-exchange/0.2.3/",
           //testSuiteURI: "https://www.openactive.io/endpoint-validator/",
-          copyrightStart: 2017,
+          copyrightStart: 2018,
 
           // if this is a LCWD, uncomment and set the end of its review period
           // lcEnd: "2009-08-05",
@@ -129,6 +129,11 @@
                 "title": "OpenActive Vocabulary",
                 "publisher": "OpenActive Community Group",            
             },
+            "Open-Booking-API": {
+                "href": "https://www.openactive.io/open-booking-api/EditorsDraft/index.html",
+                "title": "OpenActive Open Booking API",
+                "publisher": "OpenActive Community Group",            
+            },            
             "OpenActive-Activity-List": {
                 "href": "https://www.openactive.io/activity-list/",
                 "title": "OpenActive Activity List",
@@ -139,11 +144,6 @@
     </script>
 
 	<script src='https://www.openactive.io/respec/builds/respec-w3c-common.js' class='remove'></script>
-    <!--
-    <script 
-     src='https://www.w3.org/Tools/respec/respec-w3c-common' 
-     class='remove'></script>
-   -->
 
     <style>
     table {border-collapse: collapse; border: 1px solid #bec9d9}
@@ -200,27 +200,27 @@
     }
     </style>
     <section id='abstract'>
-This specification introduces a data model to support the publication of data describing 
+<p>This specification introduces a data model to support the publication of data describing 
 opportunities for people to engage in physical activities ("opportunity data"). This model 
-covers description of activities, as well as the events and locations in which they take place. 
+covers description of activities, as well as the events and locations in which they take place.</p>
 
-The specification is intended to support the publication of opportunity data as open data 
+<p>The specification is intended to support the publication of opportunity data as open data 
 for anyone to access, use and share. It will also guide reusers of opportunity data, 
-introducing them to the key concepts relevant to that sector.
+introducing them to the key concepts relevant to that sector.</p>
 
-The model may also be useful in guiding the development of both new and existing booking 
-systems and applications that consume opportunity data.
+<p>The model may also be useful in guiding the development of both new and existing booking 
+systems and applications that consume opportunity data.</p>
 
-The specification is an output of the [OpenActive Community Group](http://www.w3.org/community/openactive/) 
-and serves as a common reference point for other specifications and outputs of that activity.
+<p>The specification is an output of the [OpenActive Community Group](http://www.w3.org/community/openactive/) 
+and serves as a common reference point for other specifications and outputs of that activity.</p>
 
-Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the 
-[[Publishing-Opportunity-Data]] primer which provides a number of additional examples. 
+<p>Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the 
+[[Publishing-Opportunity-Data]] primer which provides a number of additional examples.</p> 
 
-The data model introduced in this document has been mapped to existing standards and vocabularies, including 
+<p>The data model introduced in this document has been mapped to existing standards and vocabularies, including 
 SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a 
 useful existing framework around which the 
-[OpenActive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.
+[OpenActive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.</p>
 
     </section>
 
@@ -326,8 +326,11 @@ The following items are therefore out of scope for this specification:
 * personal information, demographics and other information about event participants 
 * APIs for publishing and discovering opportunity data
 
-The [OpenActive Community Group](http://www.w3.org/community/openactive/) may produce 
-additional specifications that address these areas.
+Support for third-party bookings is covered in the draft [[Open-Booking-API]] 
+specification.
+
+The [OpenActive Community Group](http://www.w3.org/community/openactive/) may 
+produce additional specifications that address the other areas.
 
 ## Structure of this document
 
@@ -613,28 +616,6 @@ participants. When participants are looking for opportunities they may be intere
 discovering Events based on either the general activity (e.g. Running) or a specific 
 programme (Back to Netball).
 
-## Activity Opportunities
-
-Not all opportunities to be physically active are organised Events. Some opportunities are self-directed 
-for example: 
-
-* following a designated walking route
-* using a permanent (or temporary) orienteering course
-* going for a ride on a mountain bike trail
-
-The common elements here are that facilities are provided for use at a time of the participants choosing 
-(within limits of opening hours or availability), rather than at a time or schedule specified by the 
-organiser.
-
-However many of the other aspects of describing an [Event](#event) are applicable to describing this 
-type of opportunity. For example:
-
-* they will involve one or more Physical Activities, e.g. mountain biking
-* take place in a location, e.g. "Victoria Park Mountain Bike Trail"
-* have other descriptive attributes, such as suitability for particular types of participants, fitness levels, etc.
-
-In this specification this type of self-guided activities will be referred to as __*Activity Opportunities*__.
-
 ## Offers
 
 Some opportunities are freely available for anyone to attend. Others are only available to members or 
@@ -801,12 +782,6 @@ definitions in SKOS, Schema.org and the OpenActive Vocabulary ([[OpenActive-Voca
       <td>[`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
       <td></td>
     <tr>    
-    <tr>
-      <td>Activity Opportunity</td>
-      <td>[`oa:ActivityOpportunity`](https://www.openactive.io/ns/#ActivityOpportunity)</td>
-      <td>An opportunity to carry out an activity at a location, at a time of the participants 
-      choosing.</td>
-    <tr>
     <tr>
       <td>Offer</td>
       <td>[`schema:Offer`](http://schema.org/Offer)</td>
@@ -2307,18 +2282,6 @@ The community group feels that the data model proposed in this section adequatel
 
 <p></p>
 
-## Describing Activity Opportunities (<code>oa:ActivityOpportunity</code>)
-
-As described earlier in this specification, an [Activity Opportunity](#activity-opportunity) is similar to an Event except it does not take 
-place at a specific time: individual participants will decide when they will take part in the physical activity.
-
-The [`oa:ActivityOpportunity`](https://www.openactive.io/ns/#ActivityOpportunity) type will be used to represent these opportunities. 
-
-Information about Activity Opportunities can be published using the same set of properties that have been identified for [Describing Events](#describing-events-code-schema-event-code-).
-
-However applications <em class="rfc2119">MUST</em> not use the `schema:schedule`, `schema:startDate` and `schema:endDate` properties on this 
-type of resource.
-
 ## Extending the Model
 
 The previous sections describe how to publish opportunity data using a combination of existing and new vocabularies. 
@@ -2336,11 +2299,13 @@ from data publishers, to allow the use of additional properties.
 
 ### Versioning Policy
 
-The broad goal is to ensure that future versions of this specification remain backwards compatible. This will ensure that 
-published data remains valid. 
+The broad goal is to ensure that future versions of this specification 
+remain backwards compatible. This will ensure that published data remains valid. 
 
-New types of resource, relationships and properties can easily be added to extend the model without impacting existing data. 
-Potential breaking changes would include changing the definitions of existing properties, or removing them from the specification.
+New types of resource, relationships and properties can easily be added to 
+extend the model without impacting existing data. Potential breaking changes 
+would include changing the definitions of existing properties, or removing 
+them from the specification.
 
 To avoid this, the goal will be to:
 
@@ -2348,26 +2313,48 @@ To avoid this, the goal will be to:
 * deprecate, rather than remove properties that are judged, based on implementation experience, to be less useful or confusing. Deprecated properties will be clearly marked in both the human and machine-readable versions of the OpenActive namespace.
 * ensure that conformance criteria are loosely defined, balancing the need to be able to validate data against a desire to allow 
 some evolution in practice
+* use version numbering to indicate potential for breaking changes. Minor versions, 
+e.g. 1.1, 2.1, etc should be backwards compatible. Major versions, e.g. 2.0, 3.0 
+are likely to include breaking changes.
 
-Proposed changes to the specification will also be communicated in advance of their formal release, through the sharing of public Editor's Drafts. 
-This will provide opportunities for both publishers and users of the data to update their applications. 
+Proposed changes to the specification will also be communicated in advance of 
+their formal release, through the sharing of public Editor's Drafts. This will 
+provide opportunities for both publishers and users of the data to update their applications. 
 
-To support additional testing and experimentation around new properties, a "beta" namespace has been defined to allow the community to explore 
-extensions to this specification in a controlled way. For more information on the process supporting that see [[OpenActive-Beta-Namespace]].
+To support additional testing and experimentation around new properties, 
+a "beta" namespace has been defined to allow the community to explore extensions 
+to this specification in a controlled way. For more information on the process supporting that see [[OpenActive-Beta-Namespace]].
 
-Regardless of the type of extension, activity can continue to be co-ordinated within the OpenActive Community Group as the primary forum 
-for standardising the publication of opportunity data.
+Regardless of the type of extension, activity can continue to be co-ordinated 
+within the OpenActive Community Group as the primary forum for standardising 
+the publication of opportunity data.
 
 ### Relationship with Schema.org and SKOS
 
-This specification draws heavily on [[SCHEMA-ORG]] and [[SKOS]] to define its core data model. Both of these specifications define additional 
-properties that are not directly referenced in this document.
+This specification draws heavily on [[SCHEMA-ORG]] and [[SKOS]] to define its 
+core data model. This is supplemented with additional custom types and properties 
+that capture additional requirements for the physical activity sector.
 
-However data publishers are free to use any additional types and properties where useful. [[SCHEMA-ORG]] in particular provides a source of a 
-wide range of additional properties for describing Events, Places, Organisations, etc. 
+The [[SCHEMA-ORG]] and [[SKOS]] specifications define additional properties 
+that are not directly referenced in this document.
 
-For example an application may wish to share reviews of events, places or clubs. The [`schema:review`](https://schema.org/review) property 
-and its related data model can be used for this purpose, without requiring revisions to this specification.
+Rather than reflect the whole of these specification in this document, we have 
+chosen to include those types and properties that:
+
+* are necessary to document a basic framework for publishing opportunity data
+* are useful to highlight to encourage consistent usage across the community
+* have stricter conformance rules that used by [[SCHEMA-ORG]]. For example where 
+we have agreed to specific uses of properties to increase quality and consistency 
+in how data is being published
+
+However data publishers are free to use any additional types and properties 
+where useful. [[SCHEMA-ORG]] in particular provides a source of a wide range 
+of additional properties for describing Events, Places, Organisations, etc. 
+
+For example an application may wish to share reviews of events, places or 
+clubs. The [`schema:review`](https://schema.org/review) property and its 
+related data model can be used for this purpose, without requiring revisions 
+to this specification.
 
 ### Defining Custom Vocabularies
 

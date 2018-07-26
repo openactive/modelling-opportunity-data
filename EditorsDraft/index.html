@@ -768,6 +768,11 @@ definitions in SKOS, Schema.org and the OpenActive Vocabulary ([[OpenActive-Voca
       [`schema:EventVenue`](http://schema.org/EventVenue) and [`schema:SportsActivityLocation`](http://schema.org/SportsActivityLocation) which can be used where appropriate</td>
     <tr>
     <tr>
+      <td>Facility Use</td>
+      <td>[`schema:FacilityUse`](http://schema.org/FacilityUse)</td>
+      <td>Products that describe opportunities to use facilities in a location</td>
+    <tr>      
+    <tr>
       <td>Organization</td>
       <td>[`schema:Organization`](https://schema.org/Organization)</td>
       <td>Covers all types of organisations, including companies, clubs, etc</td>
@@ -811,7 +816,7 @@ If there are several different URLs that may be used to identify a resource, it 
 This specification provides three properties for identifying resources:
 
 * `@id` - is used to [assign a globally unique URI to a resource](https://www.w3.org/TR/json-ld/#node-identifiers). This may resolve to further machine-readable 
- information about the resource. When supplied, this URI <em class="rfc2119">MUST</em> be stable and unchanging over time. Applications harvesting and 
+ information about the resource, e.g. as a reference to an API endpoint. When supplied, this URI <em class="rfc2119">MUST</em> be stable and unchanging over time. Applications harvesting and 
  indexing opportunity data <em class="rfc2119">SHOULD</em> use this as the unique identifier for the resource
 * [`schema:url`](http://schema.org/url) - provides a link to a public web page about the resource. Further machine-readable metadata 
 <em class="rfc2119">MAY</em> be discoverable from that web page. Applications <em class="rfc2119">MUST</em> be able to use this URL as a means for providing users with a link to more information about a resource
@@ -823,7 +828,7 @@ In short, the `@id` property provides a unique global identifier, while the `sch
 a public web page about a resource. 
 
 If applicable then publishers may choose to use the same URI for these two properties. If an `@id` property is not provided then 
-applications <em class="rfc2119">MAY</em> choose to rely on the value of this property as a unique identifier.
+applications <em class="rfc2119">MAY</em> choose to rely on the value of the [`schema:url`](http://schema.org/url) property as a unique identifier.
 
 The option to use two different URLs is useful when there is a need to distinguish between a unique identifier and a 
 public resource. For example a platform hosting opportunity data may need to assign a unique identifier to a resource 

@@ -2321,14 +2321,6 @@ Proposed changes to the specification will also be communicated in advance of
 their formal release, through the sharing of public Editor's Drafts. This will 
 provide opportunities for both publishers and users of the data to update their applications. 
 
-To support additional testing and experimentation around new properties, 
-a "beta" namespace has been defined to allow the community to explore extensions 
-to this specification in a controlled way. For more information on the process supporting that see [[OpenActive-Beta-Namespace]].
-
-Regardless of the type of extension, activity can continue to be co-ordinated 
-within the OpenActive Community Group as the primary forum for standardising 
-the publication of opportunity data.
-
 ### Relationship with Schema.org and SKOS
 
 This specification draws heavily on [[SCHEMA-ORG]] and [[SKOS]] to define its 
@@ -2358,20 +2350,112 @@ to this specification.
 
 ### Defining Custom Vocabularies
 
-There may be a need for new vocabulary to support the needs of specific applications or user communities. Where these are widely relevant 
-then these extensions might be included in this data model. 
+Individual publishers, or members of the community may identify new requirements 
+for publishing opportunity data that are not covered by this specification or 
+[[SCHEMA-ORG]].
 
-In other circumstances its expected that additional data models and specifications will be produced to support the needs of those 
-communities. For example it may be useful to define standard models for describing the characteristics of cycle tracks or 
-orienteering trails. These would be better defined either as custom vocabularies or proposed as [[SCHEMA-ORG]] extensions. 
+These new requirements might result in:
 
-Where an application or community is defining a custom vocabulary then they <em class="rfc2119">SHOULD</em>:
+* submission of proposals to the OpenActive Community Group for revisions to this 
+specification
+* creation of new specifications that support the needs fo specific types of publisher. 
+For example a group of publishers might wish to define a detailed specification for 
+describing the characteristics of cycle tracks
+* creation of bespoke properties that support the needs of a specific publisher 
+and their data users
 
-* publish documentation that describes the custom properties, types and controlled vocabularies being used
-* create a custom [[JSON-LD]] schema that provides a machine-readable definition of the properties
-* share the documentation and schema with the OpenActive community group
+In all of these cases we encourage discussion of requirements and extensions via 
+the OpenActive Community Group, as the primary forum for standarding the 
+publication of opportunity data.
 
-[[JSON-LD]] allows data to be [published with reference to multiple contexts](https://www.w3.org/TR/json-ld/#advanced-context-usage). This will help clarify for reusers where a dataset is combining this specification with one or more custom vocabularies.
+#### Defining and Using Custom Namespaces
+
+The data model described in this specification is defined in 
+the [OpenActive JSON-LD context](https://www.openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]].
+
+They <em class="rfc2119">SHOULD</em> also:
+
+* publish public, human-readable documentation that describes their extension, 
+including any custom properties, types and controlled vocabularies that are 
+being used
+* share the documentation with the OpenActive community group
+* look for opportunities to align their data model with revisions to the  
+standard and other extensions defined in the community
+
+Publish <em class="rfc2119">MUST</em> also
+
+* avoid using names for custom types or properties that clash with the core 
+data model
+* publish a custom [JSON-LD context](https://www.w3.org/TR/json-ld/#the-context) to provide a machine-readable version of their 
+extension 
+* include a reference to their context in their published data
+
+A full tutorial on creating JSON-LD contexts is outside the scope of this specification. 
+
+The following example shows a simple custom JSON-LD context that defines a new namespace
+`ext` and three custom properties.
+
+<pre class="example" title="Example of a custom context"><code>
+{
+   "@context":{
+      "label":"http://www.w3.org/2000/01/rdf-schema#label",
+      "xsd":"http://www.w3.org/2001/XMLSchema#",
+      "ext":"http://example.org/jsonld#",
+      "id":"@id"
+   },
+   "ext:myCustomProperty":{
+      "id":"ext:myCustomProperty",
+      "label":"This is the label"
+   },
+   "ext:myNumericProperty":{
+      "id":"ext:myNumericProperty",
+      "label":"This is a property with a number value",
+      "@type":"xsd:integer"
+   },
+   "ext:myURLProperty":{
+      "id":"ext:myURLProperty",
+      "label":"This is a property with a URI value",
+      "@type":"@id"
+   }
+}
+</code></pre>
+
+[[JSON-LD]] allows data to be [published with reference to multiple contexts](https://www.w3.org/TR/json-ld/#advanced-context-usage). 
+
+Assuming that the previous JSON-LD context was published to `https://example.org/custom.jsonld`, then 
+the following example shows how to use this extension:
+
+<pre class="example" title="Example of a custom context"><code>
+{
+  "@context": [
+    "https://www.openactive.io/ns/oa.jsonld",
+    "https://example.org/custom.jsonld"
+  ],
+  "type": "Event",
+  "ext:myCustomProperty": "foo"
+}
+</code></pre>
+
+Publishers <em class="rfc2119">MUST NOT</em> use unprefixed property and type 
+names.
+
+Using a separate context and prefixed names will help to clarify for users when 
+a dataset is referencing one or more extensions.
+
+#### Beta Namespace
+
+The [[OpenActive-Beta-Namespace]] provides a custom namespace that can be used 
+by publishers experimenting with new properties that are likely to be added to 
+the core specification.
+
+It is defined as a convenience to help document properties that are in active 
+testing and review by the community. Publishers <em class="rfc2119">SHOULD NOT</em> 
+assume that properties in the `beta` namespace will either be added to the core 
+specification or be included in the namespace over the long term.
+
+Publishers needing additional custom properties <em class="rfc2119">SHOULD</em> 
+define their own namespace.
+
   </section>
 
     </section>

@@ -845,23 +845,30 @@ that is separate to its public web page.
 </code>
 </pre>
 
-In the above example the `@id` property provides a unique identifier across the hosting application. But the public URL for the 
-Event uses a separate, customer-specific domain.
+In the above example the `@id` property provides a unique identifier across 
+the hosting application. But the public URL for the Event uses a separate, 
+customer-specific domain.
 
 ## Required and Optional Properties
 
-The following sections include more detail about the properties available to describe each type of resource. Some 
-properties are considered to be essential to ensure the provision of a minimally useful set of information about each 
-resource. These <em class="rfc2119">REQUIRED</em> properties must be provided.
+The following sections include more detail about the properties available to 
+describe each type of resource. Some properties are considered to be essential 
+to ensure the provision of a minimally useful set of information about each 
+resource. These <em class="rfc2119">REQUIRED</em> properties 
+<em class="rfc2119">MUST</em> be provided.
 
-All other properties are considered to be optional but it is <em class="rfc2119">RECOMMENDED</em> that they 
-be provided where possible.
+All other properties are considered to be <em class="rfc2119">OPTIONAL</em>. 
+Some properties have been marked as <em class="rfc2119">RECOMMENDED</em>. 
+Publishers <em class="rfc2119">SHOULD</em> provide these properties if it is 
+feasible to do so, as they will improve the quality and usability of their data.
 
-Data publishers <em class="rfc2119">MAY</em> include additional properties, e.g. from Schema.org or other vocabularies 
-when helpful to describe their data. See the section on **Extending the Model** for more information.
+Data publishers <em class="rfc2119">MAY</em> include additional properties, 
+e.g. from Schema.org or other vocabularies when helpful to describe their data. 
+See the section on **Extending the Model** for more information.
 
-Applications that consume opportunity data <em class="rfc2119">MUST</em> ignore any properties that they don't 
-understand. This allows data publishing practices within the sector to evolve as required.
+Applications that consume opportunity data <em class="rfc2119">MUST</em> ignore 
+any properties that they don't understand. This allows data publishing practices 
+within the sector to evolve as required.
 
 ## Describing Events (<code>schema:Event</code>)
 

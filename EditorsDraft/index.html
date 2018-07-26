@@ -2110,34 +2110,60 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
   <thead>
     <th>Property</th>
     <th>Status</th>
+    <th>Format</th>
     <th>Notes</th>
   </thead>
   <tbody>  
     <tr>
-      <td>`@id`</td>
+      <td>`@type`</td>
       <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Offer</td>
+    </tr>
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>URI</td>
       <td>A URI providing a unique identifier for the resource</td>
     </tr>
     <tr>
       <td>[`schema:identifier`](http://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Number or String</td>
       <td>A local identifier for the resource</td>
     </tr>  
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
       <td>The name of the offer suitable for display to participants</td>
     </tr>
     <tr>
+      <td>[`schema:url`](https://schema.org/url)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>URL</td>
+      <td>A URL that a user can click on to start a booking process for this 
+      offer</td>
+    </tr>        
+    <tr>
       <td>[`schema:price`](https://schema.org/price)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Number</td>
       <td>The offer price available to participants</td>
     </tr>
     <tr>
       <td>[`schema:priceCurrency`](https://schema.org/priceCurrency)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
-      <td>The currency of the offer price.</td>
+      <td>String</td>
+      <td>The currency of the offer price. Specified as a 3-letter ISO 4217 value</td>
     </tr>
+    <tr>
+      <td>[`oa:ageRange`](https://www.openactive.io/ns/#ageRange)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>[`schema:QuantitativeValue`](https://schema.org/QuantitativeValue)</td>
+      <td>Indicates that an Offer is applicable to a specific age range. Specified as a [QuantitativeValue](http://schema.org/QuantitativeValue) with [minValue](http://schema.org/minValue) and [maxValue](http://schema.org/maxValue) properties. 
+      </td>
+    </tr>    
   </tbody>   
 </table>
 

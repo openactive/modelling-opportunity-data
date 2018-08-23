@@ -1535,7 +1535,7 @@ relate an [`schema:Event`](https://schema.org/Event)
 or [`oa:FacilityUse`](https://www.openactive.io/ns#FacilityUse) to a Place.
 
 The following table lists a number of properties that can be used to 
-describe a [`schema:Place`](https://schema.org/Place) 
+describe a [`schema:Place`](https://schema.org/Place).
 
 <table>
   <thead>
@@ -1636,7 +1636,7 @@ describe a [`schema:Place`](https://schema.org/Place)
   </tbody>   
 </table>
 
-This example illustrates a simple place description. Building on the previous example it adds the name, telephone number and website address for the leisure centre:
+The following example illustrates a simple place description including its name, address, telephone number and website.
 
 <pre class="example" title="Describing a leisure centre"><code>
 {
@@ -1653,31 +1653,6 @@ This example illustrates a simple place description. Building on the previous ex
       "addressCountry": "GB"
   },
   "telephone": "+44 (0)1225 486905"    
-}
-</code></pre>
-
-A more precise geographical location can be provided by adding a [`schema:geo`](https://schema.org/geo) property:
-
-<pre class="example" title="Locating a leisure centre"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Place",
-  "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
-  "name": "Bath Sports and Leisure Centre",
-  "address": {
-      "type": "PostalAddress",
-      "streetAddress": "North Parade Road",
-      "addressLocality": "Bath",
-      "addressRegion": "Somerset",
-      "postalCode": "BA2 4ET",
-      "addressCountry": "GB"
-  },
-  "telephone": "+44 (0)1225 486905",
-  "geo": {
-    "type": "GeoCoordinates",
-    "latitude": "51.3816123",
-    "longitude": "-2.3544367"
-  }
 }
 </code></pre>
 
@@ -1747,6 +1722,65 @@ The following example shows how to markup a simple address:
 }
 </code>
 </pre>
+
+### Describing Geographic Location
+
+A more precise geographical location can be provided for a [`schema:Place`](http://schema.org/Place) by adding a [`schema:geo`](https://schema.org/geo) property. The value of this property is a is a [`schema:GeoCoordinates`](http://schema.org/GeoCoordinates) object.
+
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Format</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>  
+    <tr>
+      <td>`@type`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>`GeoCoordinates`</td>
+    </tr>  
+    <tr>
+      <td>[`schema:latitude`](https://schema.org/latitude)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Number</td>
+      <td>Latitude</td>
+    </tr>  
+    <tr>
+      <td>[`schema:longitude`](https://schema.org/longitude)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>Number</td>
+      <td>Longitude</td>
+    </tr>  
+  </tbody>   
+</table>
+
+The following example illustrates how to use the 
+[`schema:geo`](https://schema.org/geo) property.
+
+<pre class="example" title="Locating a leisure centre"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Place",
+  "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
+  "name": "Bath Sports and Leisure Centre",
+  "address": {
+      "type": "PostalAddress",
+      "streetAddress": "North Parade Road",
+      "addressLocality": "Bath",
+      "addressRegion": "Somerset",
+      "postalCode": "BA2 4ET",
+      "addressCountry": "GB"
+  },
+  "telephone": "+44 (0)1225 486905",
+  "geo": {
+    "type": "GeoCoordinates",
+    "latitude": "51.3816123",
+    "longitude": "-2.3544367"
+  }
+}
+</code></pre>
 
 ### Describing Amenities
 

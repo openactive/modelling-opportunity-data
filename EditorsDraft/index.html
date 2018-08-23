@@ -862,6 +862,12 @@ Some properties have been marked as <em class="rfc2119">RECOMMENDED</em>.
 Publishers <em class="rfc2119">SHOULD</em> provide these properties if it is 
 feasible to do so, as they will improve the quality and usability of their data.
 
+Where data is not available to populate <em class="rfc2119">RECOMMENDED</em> and 
+<em class="rfc2119">OPTIONAL</em> properties, publishers 
+<em class="rfc2119">MUST</em> exclude these from their data. Published data 
+<em class="rfc2119">MUST</em> not include properties with null values, empty 
+strings or empty arrays.
+
 Data publishers <em class="rfc2119">MAY</em> include additional properties, 
 e.g. from Schema.org or other vocabularies when helpful to describe their data. 
 See the section on **Extending the Model** for more information.

@@ -961,7 +961,8 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>[`schema:duration`](https://schema.org/duration)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
-      <td>The duration of the event given in [[ISO8601]] format.</td>
+      <td>The duration of the event given in [[ISO8601]] format. Durations 
+      MUST NOT be zero length. If duration is unknown it should be omitted.</td>
     </tr>
     <tr>
       <td>[`schema:location`](https://schema.org/location)</td>
@@ -1101,6 +1102,16 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>Indicates that an Event is free to attend. Publishers supporting booking <em class="rfc2119">SHOULD</em> also 
       define a zero priced [`schema:Offer`](https://schema.org/Offer)</td>
     </tr>    
+    <tr>
+      <td>[`oa:isAccessibleWithoutBooking`](https://www.openactive.io/ns/#isAccessibleWithoutBooking)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Boolean</td>
+      <td>If this is `true` then a participant can turn up and participate on the 
+      day. There may also be opportunities for them to book in advance. If the 
+      property is `false` then a user MUST book in advance. In this case there 
+      MUST be at least one bookable Offer for the Event.</td>
+    </tr>    
+
     <tr>
       <td>[`schema:offers`](https://schema.org/offers)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
@@ -1465,7 +1476,8 @@ future events can be generated from some basic rules.
       <td>[`schema:duration`](https://schema.org/duration)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
-      <td>Specifies the duration of the Event as an [[ISO8601]] duration.</td>
+      <td>Specifies the duration of the Event as an [[ISO8601]] duration.  Durations 
+      MUST NOT be zero length. If duration is unknown it should be omitted.</td>
     </tr>     
     <tr>
       <td>[`schema:byDay`](https://pending.schema.org/byDay)</td>
@@ -1884,9 +1896,9 @@ Schema.org provides the [`schema:amenityFeature`](http://schema.org/amenityFeatu
 
 To improve consistency in how amenities are published, this specification defines some common types of amenities:
 
-* [`ChangingRooms`](https://www.openactive.io/ns#ChangingRooms)
+* [`ChangingFacilities`](https://www.openactive.io/ns#ChangingFacilities)
 * [`Showers`](https://www.openactive.io/ns#Showers)
-* [`PublicToilets`](https://www.openactive.io/ns#PublicToilets)
+* [`Toilets`](https://www.openactive.io/ns#Toilets)
 * [`Lockers`](https://www.openactive.io/ns#Lockers)
 * [`Towels`](https://www.openactive.io/ns#Towels)
 * [`Creche`](https://www.openactive.io/ns#Creche)
@@ -2391,7 +2403,8 @@ for hire.
       <td>[`schema:duration`](https://schema.org/duration)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>String</td>
-      <td>The duration of the event given in [[ISO8601]] format.</td>
+      <td>The duration of the event given in [[ISO8601]] format.  Durations 
+      MUST NOT be zero length.</td>
     </tr>
     <tr>
       <td>[`schema:offers`](https://schema.org/offers)</td>
@@ -2519,11 +2532,18 @@ allow a participant to use that facility for a specified time and duration.
       <td>Specifies the hours during which this product is available. The value of this property is a schema:OpeningHoursSpecification.</td>
     </tr>
     <tr>
-      <td>[`oa:individualFacilityUses`](https://www.openactive.io/"htns/#individualFacilityUses)</td>
+      <td>[`oa:individualFacilityUse`](https://www.openactive.io/ns/#individualFacilityUse)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Array of [`oa:IndividualFacilityUse`](https://www.openactive.io/"htns/#IndividualFacilityUse)</td>
       <td>Links a <code>oa:FacilityUse</code> product, describing a general opportunity to, e.g. book and play tennis at a leisure centre with an array of <code>oa:IndividualFacilityUse</code> products that provide a more detailed description about an opportunity to book, e.g. individual tennis courts. This allows a platform to publish both a general product and time-table as well as more detailed 
       products for individual facilities.</td>
+    </tr>
+    <tr>
+      <td>[`oa:groupFacilityUse`](https://www.openactive.io/ns/#groupFacilityUse)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>[`oa:FacilityUse`](https://www.openactive.io/ns/#FacilityUse)</td>
+      <td>Inverse of the [`oa:individualFacilityUse`](https://www.openactive.io/ns/#individualFacilityUse) property. Related an 
+      <code>oa:IndividualFacilityUse</code> (e.g. an opportunity to play tennis on a specific court) to a <code>oa:FacilityUse</code> (e.g. an opportunity to play tennis at a specific location).</td>
     </tr>
 
   </tbody>

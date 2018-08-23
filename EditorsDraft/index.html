@@ -1393,19 +1393,113 @@ is a [`schema:Brand`](http://schema.org/Brand) object.
 </code>
 </pre>
 
-### Describing scheduled events
+### Describing event schedules
 
-<div class="note">
-**Schema.org support for recurring events**
-
-**[Issue 2](https://github.com/openactive/modelling-opportunity-data/issues/2)**: Schema.org support for recurring events
-
+<div class="note" title="Schema.org support for recurring events">
+<p>
 This specification relies on some pending changes to Schema.org that will add recurrence rules to Events. The [proposal](https://github.com/schemaorg/schemaorg/pull/1693) has been accepted, but is not yet formally part of the model.
-
-We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. On that basis we have included the terms in 
-specification. The following section is written on that basis. However both 
-publishers and consumers should be aware that this is an area that may change in future versions.
+</p>
+<p>We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that this is an area that may change in future versions.</p>
 </div>
+
+For Events that take place at a regular time it can be useful to publish information 
+about the schedule rather than the individual events. Providing a schedule, rather 
+than a list of individual events means publishing less data and clarifies that 
+each weekly or monthly occurence of an Event is part of a longer series.
+
+The [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property can 
+be used to describe a [`schema:Schedule`](http://pending.schema.org/Schedule) for 
+an Event.
+
+A Schedule define a repeating calendar entry with sufficient information that 
+future events can be generated from some basic rules.
+
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Format</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>  
+    <tr>
+      <td>`@type`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>`Schedule`</td>
+    </tr>  
+    <tr>
+      <td>[`schema:repeatFrequency`](https://pending.schema.org/repeatFrequency)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>The frequency of the events, specified as an [[ISO8601]] duration, e.g. day, week, month</td>
+    </tr>  
+    <tr>
+      <td>[`schema:startDate`](https://schema.org/startDate)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Specifies the [`schema:Date`](http://schema.org/Date) from which the schedule 
+      is active</td>
+    </tr>  
+    <tr>
+      <td>[`schema:endDate`](https://schema.org/startDate)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>Specifies the [`schema:Date`](http://schema.org/Date) at which the schedule 
+      ends.</td>
+    </tr>  
+    <tr>
+      <td>[`schema:startTime`](https://schema.org/startTime)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Specifies the [`schema:Time`](http://schema.org/Time) at which the 
+      Events will take place.</td>
+    </tr>  
+    <tr>
+      <td>[`schema:endTime`](https://schema.org/endTime)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Specifies the [`schema:Time`](http://schema.org/Time) at which the Events will end</td>
+    </tr> 
+    <tr>
+      <td>[`schema:duration`](https://schema.org/duration)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>Specifies the duration of the Event as an [[ISO8601]] duration.</td>
+    </tr>     
+    <tr>
+      <td>[`schema:byDay`](https://pending.schema.org/byDay)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of [`schema:DayOfWeek`](https://schema.org/DayOfWeek)</td>
+      <td>Lists the day(s) of the week during which the Events will take place.</td>
+    </tr>  
+    <tr>
+      <td>[`schema:byMonth`](https://pending.schema.org/byMonth)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of Integers</td>
+      <td>Lists the month(s) of the year during which the Events will take place. January 
+      is the first month</td>
+    </tr>  
+    <tr>
+      <td>[`schema:byMonthDay`](https://pending.schema.org/byMonthDay)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of Integers</td>
+      <td>Lists the day(s) of the month on which an Event will take place</td>
+    </tr>      
+    <tr>
+      <td>[`schema:repeatCount`](https://pending.schema.org/repeatCount)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Number</td>
+      <td>Specifies that an Event will repeat the specified number of times</td>
+    </tr>
+    <tr>
+      <td>[`schema:exceptDate`](https://pending.schema.org/exceptDate)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of [`Date`](http://schema.org/Date) or [`DateTime`](http://schema.org/DateTime)</td>
+      <td>Defines a list of [`Date`](http://schema.org/Date) or [`DateTime`](http://schema.org/DateTime) during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a [`DateTime`](http://schema.org/DateTime) then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a [`Date`](http://schema.org/Date) then any event that is scheduled for that 24 hour period should be excluded from the schedule. This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.</td>
+    </tr>
+  </tbody>   
+</table>
 
 The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
 

@@ -1034,7 +1034,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     </tr>
     <tr>
       <td>[`oa:category`](https://www.openactive.io/ns/#category)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Array of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
       <td>Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.</td>
     </tr>
@@ -2057,6 +2057,12 @@ Both the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`
       <td>Array of [`schema:ImageObject`](https://schema.org/ImageObject)</td>
       <td>Logo for an organization</td>
     </tr>
+    <tr>
+      <td>[`schema:telephone`](https://schema.org/telephone)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>Telephone number of an organization</td>
+    </tr>
 
   </tbody>   
 </table>
@@ -2731,7 +2737,7 @@ that capture additional requirements for the physical activity sector.
 The [[SCHEMA-ORG]] and [[SKOS]] specifications define additional properties 
 that are not directly referenced in this document.
 
-Rather than reflect the whole of these specification in this document, we have 
+Rather than reflect the whole of these specifications in this document, we have 
 chosen to include those types and properties that:
 
 * are necessary to document a basic framework for publishing opportunity data

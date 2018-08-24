@@ -968,7 +968,8 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
       <td>The duration of the event given in [[ISO8601]] format. Durations 
-      MUST NOT be zero length. If duration is unknown it should be omitted.</td>
+      MUST NOT be zero length. If duration is unknown it should be omitted. A
+      duration MUST be provided if both a start and end date are available.</td>
     </tr>
     <tr>
       <td>[`schema:location`](https://schema.org/location)</td>
@@ -1030,7 +1031,8 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>[`oa:activity`](https://www.openactive.io/ns/#activity)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Array of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
-      <td>Specifies one or more physical activities that will take place during an event</td>
+      <td>Specifies one or more physical activities that will take place during an event. 
+      The activities SHOULD ideally be taken from an activity list.</td>
     </tr>
     <tr>
       <td>[`oa:category`](https://www.openactive.io/ns/#category)</td>
@@ -1049,8 +1051,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>[`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>[`oa:GenderRestrictionType`](https://www.openactive.io/ns/#GenderRestrictionType)</td>
-      <td>Indicates that an event is restricted to Male, Female or a Mixed audience. Values should be one of the three URIs defined by this specification (see below). If a gender restriction isn't specified then applications 
-      <em class="rfc2119">SHOULD</em> assume that an event is suitable for a mixed audience</td>
+      <td>Indicates that an event is restricted to Male, Female or a Mixed audience. Values should be one of the three URIs defined by this specification (see below).</td>
     </tr>
     <tr>
       <td>[`oa:programme`](https://www.openactive.io/ns/#programme)</td>
@@ -1105,8 +1106,11 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>[`schema:isAccessibleForFree`](https://schema.org/isAccessibleForFree)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>Boolean</td>
-      <td>Indicates that an Event is free to attend. Publishers supporting booking <em class="rfc2119">SHOULD</em> also 
-      define a zero priced [`schema:Offer`](https://schema.org/Offer)</td>
+      <td>Indicates that an Event is free to attend. If an Event is bookable in advance, then 
+      publishers <em class="rfc2119">SHOULD</em> also 
+      define a zero priced [`schema:Offer`](https://schema.org/Offer). If the only 
+      [`schema:Offer`](https://schema.org/Offer) for an Event is zero priced, then 
+      publishers SHOULD include this property with a value of `true`.</td>
     </tr>    
     <tr>
       <td>[`oa:isAccessibleWithoutBooking`](https://www.openactive.io/ns/#isAccessibleWithoutBooking)</td>
@@ -1115,7 +1119,9 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>If this is `true` then a participant can turn up and participate on the 
       day. There may also be opportunities for them to book in advance. If the 
       property is `false` then a user MUST book in advance. In this case there 
-      MUST be at least one bookable Offer for the Event.</td>
+      MUST be at least one bookable Offer for the Event. If this property is provided 
+      with a value of `false` then the MUST be at least one applicable Offer with 
+      an `@id` and/or `url` property.</td>
     </tr>    
 
     <tr>
@@ -1188,7 +1194,7 @@ This basic description can be improved by providing information about its locati
 <p>
 The [`oa:activity`](https://www.openactive.io/ns/#activity) property allows an 
 event to be associated with one or more Physical Activities. The Physical 
-Activities used to describe an event may be drawn from a standard Activity 
+Activities used to describe an event SHOULD be drawn from a standard Activity 
 List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]). 
 </p>
 
@@ -1385,6 +1391,22 @@ Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
 </code>
 </pre>
 
+<div class="note" title="Request for feedback">
+<p>The community group is aware of both the issues that arise from defining 
+standard terms for gender and the inclusivity issues that might arise from 
+restricting participation in events.</p>
+
+<p>We have standardised these terms to reflect the ways that events are currently 
+described. However there are many additional considerations that relate to how 
+gender is described and the ways that events might be advertised and run in order 
+for people to feel safe and included.</p>
+<p>
+We encourage the community to reflect on the approach outlined here and experiment 
+with alternative options. We have <a href="https://github.com/openactive/modelling-opportunity-data/issues/69#issuecomment-401336335"> outlined some of these options</a> and welcome feedback on how we can improve this area of the specification.
+</p>
+</div>
+
+
 ### Adding programmes
 
 Events can be associated with a Programme using the 
@@ -1483,7 +1505,8 @@ future events can be generated from some basic rules.
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
       <td>Specifies the duration of the Event as an [[ISO8601]] duration.  Durations 
-      MUST NOT be zero length. If duration is unknown it should be omitted.</td>
+      MUST NOT be zero length. If duration is unknown it should be omitted.  A
+      duration MUST be provided if both a start and end date are available.</td>
     </tr>     
     <tr>
       <td>[`schema:byDay`](https://pending.schema.org/byDay)</td>
@@ -1518,6 +1541,10 @@ future events can be generated from some basic rules.
     </tr>
   </tbody>   
 </table>
+
+While the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) 
+and [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties are 
+optional, one of these properties MUST be provided.
 
 The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
 
@@ -1868,6 +1895,9 @@ A more precise geographical location can be provided for a [`schema:Place`](http
   </tbody>   
 </table>
 
+Latitude and longitude values SHOULD be provided to a precision of at least 
+two decimal places in order to be useful to consumers.
+
 The following example illustrates how to use the 
 [`schema:geo`](https://schema.org/geo) property.
 
@@ -2199,7 +2229,9 @@ The following properties from the [[SKOS]] specification can be used to describe
       <td>`@id`</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>URI</td>
-      <td>A URI providing a unique identifier for the resource</td>
+      <td>A URI providing a unique identifier for the resource. If the activity 
+      is defined in a openly licensed activity list, then publishers SHOULD 
+      provide it's unique identifier.</td>
     </tr>  
     <tr>
       <td>[`skos:prefLabel`](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel)</td>
@@ -2217,7 +2249,9 @@ The following properties from the [[SKOS]] specification can be used to describe
       <td>[`skos:inScheme`](https://www.w3.org/2009/08/skos-reference/skos.html#inScheme)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>URI</td>
-      <td>Refers to the Activity List in which this physical activity is defined.</td>
+      <td>Refers to the Activity List in which this physical activity is defined. If 
+      an `@id` property is provided then publishers SHOULD provide this property to identify 
+      the activity list which defines the activity.</td>
     </tr>
     <tr>
       <td>[`skos:broader`](https://www.w3.org/2009/08/skos-reference/skos.html#broader)</td>
@@ -2512,7 +2546,8 @@ allow a participant to use that facility for a specified time and duration.
       <td>[`oa:activity`](https://www.openactive.io/ns/#activity)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Array of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
-      <td>Specifies the physical activity or activities that can be performed when the facility is used.</td>
+      <td>Specifies the physical activity or activities that can be performed when the facility is used. 
+      The activities SHOULD ideally be taken from an activity list.</td>
     </tr>
     <tr>
       <td>[`schema:location`](https://schema.org/location)</td>

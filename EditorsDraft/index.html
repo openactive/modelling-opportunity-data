@@ -495,16 +495,28 @@ may run as a standalone event on a particular date.
 
 Other events take place on a regular __schedule__. For example a weekly gym class may 
 run every Wednesday evening at 7pm. While a local walking club might meet on a Saturday 
-morning once a month.
-
-In order to simplify terminology we recommend the use of the term "Event" to 
-refer to both individual occurrences and regularly occurring events. 
+morning once a month. 
 
 It is useful to publish data about both individual Events and those with recurring schedules. 
 People looking for opportunities to be active will be interested in both specific questions 
 ("what can I do tomorrow") and more general information about scheduled activities.
 
-Regardless of whether an event takes place only once or happens on a regular schedule, there 
+For some scheduled events, participants may not have to commit to attending every 
+session. They can drop-in for individual classes, or build up a regular habit to 
+improve their fitness. For other events, like a course, there is might be an 
+expectation that a participant will attend every class.
+
+Some large scale events, such as a family fun day, might consist of a programme 
+of smaller scheduled events that take place over the course of a single or multiple 
+days. 
+
+In order to simplify terminology in this specification we use the term "Event" 
+to refer to all types of opportunities, including one-off and 
+regularly occurring events. However in the detailed data model we distinguish 
+between some types of events to allow data users to better present opportunities 
+to potential participants. 
+
+Regardless of what type of an event is being described, there 
 is a range of additional information that may help describe the event to potential participants. 
 This includes:
 
@@ -592,14 +604,14 @@ Places may have additional descriptive properties, for example:
 * an address and/or geographic coordinates
 * opening hours
 
-## Programmes
+## Programmes and Brands
 
 Events are often organised and run in a variety of different ways. This tailoring 
 might include adjusting the activity to a particular type of participant, demographic. 
 Or it could include running the event in a particular style, e.g. with a fixed routine 
 or sequence of activities.
 
-A __*Programme*__ describes a method of carrying out a Physical Activity. Some programmes are very loosely defined. 
+A __*Programme*__ describes a means of organising and running a Physical Activity. Some programmes are very loosely defined. 
 While others are more structured and may be run to a specific agenda or in a particular style.
 
 Programmes are often associated with branding or marketing that helps participants understand more about what they 
@@ -758,8 +770,10 @@ definitions in SKOS, Schema.org and the OpenActive Vocabulary ([[OpenActive-Voca
     <tr>
       <td>Event</td>
       <td>[`schema:Event`](https://schema.org/Event)</td>
-      <td>Schema.org provides a well defined model for Events already with properties that cover many 
-      of the core requirements for opportunity data</td>
+      <td>Schema.org provides a well defined model for Events with properties that cover many 
+      of the core requirements for opportunity data. This specification defines some 
+      additional types of Event and properties for describing them in the context of 
+      publishing opportunity data.</td>
     <tr>
     <tr>
       <td>Place</td>
@@ -783,9 +797,9 @@ definitions in SKOS, Schema.org and the OpenActive Vocabulary ([[OpenActive-Voca
       <td>An individual person</td>
     <tr>
     <tr>
-      <td>Programme</td>
-      <td>[`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
-      <td></td>
+      <td>Brand</td>
+      <td>[`schema:Brand`](https://schema.org/Brand)</td>
+      <td>The brand used to describe a programme of activities.</td>
     <tr>    
     <tr>
       <td>Offer</td>
@@ -1189,7 +1203,7 @@ This basic description can be improved by providing information about its locati
 }
 </code></pre>
 
-### Relating Events to Physical Activities
+### Relating events to Physical Activities
 
 <p>
 The [`oa:activity`](https://www.openactive.io/ns/#activity) property allows an 
@@ -1220,355 +1234,6 @@ List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]).
 <p>
 Applications could include additional information, e.g. alternate labels for convenience of consumers.
 </p>
-
-### Categorising events
-
-<p>
-The [`oa:category`](https://www.openactive.io/ns/#category) property can be 
-used to associate an Event with one or more tags that provide some extra 
-context about an event. This might include general information on the intensity 
-and suitability. While this property can be used to add any arbitrary tags to 
-an Event, a common use case is the need to tag an event as being suitable for 
-a specific type of audience, e.g. Beginners. Where this information is 
-available, the [`oa:level`](https://www.openactive.io/ns/#level) property 
-can be used in preference to [`oa:category`](https://www.openactive.io/ns/#category). 
-</p>
-<p>
-If an application does not distinguish between different types of tags 
-associated with an Event, then it <em class="rfc2119">SHOULD</em> use the 
-more general [`oa:category`](https://www.openactive.io/ns/#category) property.
-</p>
-
-<pre class="example" title="Tagging an Event"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "category": [{
-    "type: "Concept",
-    "prefLabel": "Suitable For All"
-    },
-    {
-    "type: "Concept",
-    "prefLabel": "Low Intensity"
-  }],
-  "level": [{
-    "type: "Concept",
-    "prefLabel": "Beginner"
-  }]
-}
-</code>
-</pre>
-
-<p>
-Where an application is using a controlled vocabulary it 
-<em class="rfc2119">SHOULD</em> publish that vocabulary as structured data.
-</p>
-
-<div class="note">
-In future, the OpenActive Community Group may decide to define and recommend 
-some controlled vocabularies for use in these properties. At present the 
-values of these properties are left deliberately open to encourage publication 
-of open data that may inform future standardisation.
-</div>
-
-### Describing Event Suitability
-
-<p>
-There are a variety of ways in which the suitability of an event for specific 
-audiences can be expressed. This includes specifying that 
-an event is:
-</p>
-
-* suited for a specific age range
-* suited for people with specific levels of experience ([`oa:level`](https://www.openactive.io/ns/#level))
-* restricted to a male, female or mixed audience
-
-#### Age Ranges
-
-<p>
-Age ranges are specified using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) property. 
-The value is a [`schema:QuantitativeValue`](http://schema.org/QuantitativeValue) 
-which should have [minValue](http://schema.org/minValue) or 
-[maxValue](http://schema.org/maxValue) properties. These properties specify an 
-inclusive minimum and maximum age range for participants.
-</p>
-
-<p>
-Data publishers using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) 
-property MUST ensure that it has:
-</p>
-
-* a `type` of [`schema:QuantitativeValue`](http://schema.org/QuantitativeValue)
-* at least one of the `minValue` or `maxValue`properties
-
-<p>
-Data consumers SHOULD assume that:
-</p>
-
-* if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
-* if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
-* if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
-* if an `ageRange` is provided with a `minValue` of 0, and there is no `maxValue` property then the Event is suitable for all
-
-<p>
-The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
-</p>
-
-<pre class="example" title="Age range example"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "ageRange": {
-     "type": "QuantitativeValue",
-     "minValue": 60
-  }
-}
-</code>
-</pre>
-
-<p>
-The following example illustrates an Event that is suitable for all ages. 
-This is indicated by providing an `minValue` property with a value of zero and 
-no `maxValue` property.
-</p>
-
-<pre class="example" title="Age range - suitable for all example"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Exercise in the park",
-  "ageRange": {
-     "type": "QuantitativeValue",
-     "minValue": 0
-  }
-}
-</code>
-</pre>
-
-#### Gender Restriction
-
-<p>
-Attendance at some events is limited to certain audiences. For example a 
-female only gym class. The [`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction) 
-property can be used to specify these restrictions.
-</p>
-
-<p>
-Data publishers using this property MUST use one of the following values:
-</p>
-
-* `https://www.openactive.io/ns#None` indicating that the event has no restrictions
-* `https://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
-* `https://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
-
-<p>
-If the `genderRestriction` property is not supplied for an Event, then data 
-consumers SHOULD NOT assume a default value, the value should be treated as 
-`null`. When searching or filtering for gender restricted Events, data 
-consumers SHOULD remove Events with a `null` value. 
-</p>
-
-<p>
-Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
-</p>
-
-<pre class="example" title="Gender restriction example"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Gym class",
-  "genderRestriction": "http://www.openactive.io/ns#Female"
-}
-</code>
-</pre>
-
-<div class="note" title="Request for feedback">
-<p>The community group is aware of both the issues that arise from defining 
-standard terms for gender and the inclusivity issues that might arise from 
-restricting participation in events.</p>
-
-<p>We have standardised these terms to reflect the ways that events are currently 
-described. However there are many additional considerations that relate to how 
-gender is described and the ways that events might be advertised and run in order 
-for people to feel safe and included.</p>
-<p>
-We encourage the community to reflect on the approach outlined here and experiment 
-with alternative options. We have <a href="https://github.com/openactive/modelling-opportunity-data/issues/69#issuecomment-401336335"> outlined some of these options</a> and welcome feedback on how we can improve this area of the specification.
-</p>
-</div>
-
-
-### Adding programmes
-
-Events can be associated with a Programme using the 
-[`oa:programme`](https://www.openactive.io/ns/#programme) property. A programme
-is a [`schema:Brand`](http://schema.org/Brand) object.
-
-<pre class="example" title="Tagging an Event"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Rowing Class",
-  "description": "A rowing class for beginners",
-  "startDate": "2017-04-01T08:00:00Z",
-  "duration": "PT60M",
-  "programme": {
-    "type": "Brand",
-    "name": "Learn to Row",
-    "url": "https://www.britishrowing.org/go-rowing/learn-to-row/",
-    "description": "Getting started in rowing couldn’t be easier!"
-  }
-}
-</code>
-</pre>
-
-### Describing event schedules
-
-<div class="note" title="Schema.org support for recurring events">
-<p>
-This specification relies on some pending changes to Schema.org that will add recurrence rules to Events. The [proposal](https://github.com/schemaorg/schemaorg/pull/1693) has been accepted, but is not yet formally part of the model.
-</p>
-<p>We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that this is an area that may change in future versions.</p>
-</div>
-
-For Events that take place at a regular time it can be useful to publish information 
-about the schedule rather than the individual events. Providing a schedule, rather 
-than a list of individual events means publishing less data and clarifies that 
-each weekly or monthly occurence of an Event is part of a longer series.
-
-The [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property can 
-be used to describe a [`schema:Schedule`](http://pending.schema.org/Schedule) for 
-an Event.
-
-A Schedule define a repeating calendar entry with sufficient information that 
-future events can be generated from some basic rules.
-
-<table>
-  <thead>
-    <th>Property</th>
-    <th>Status</th>
-    <th>Format</th>
-    <th>Notes</th>
-  </thead>
-  <tbody>  
-    <tr>
-      <td>`@type`</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>String</td>
-      <td>`Schedule`</td>
-    </tr>  
-    <tr>
-      <td>[`schema:repeatFrequency`](https://pending.schema.org/repeatFrequency)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>String</td>
-      <td>The frequency of the events, specified as an [[ISO8601]] duration, e.g. day, week, month</td>
-    </tr>  
-    <tr>
-      <td>[`schema:startDate`](https://schema.org/startDate)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>String</td>
-      <td>Specifies the [`schema:Date`](http://schema.org/Date) from which the schedule 
-      is active</td>
-    </tr>  
-    <tr>
-      <td>[`schema:endDate`](https://schema.org/startDate)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
-      <td>String</td>
-      <td>Specifies the [`schema:Date`](http://schema.org/Date) at which the schedule 
-      ends.</td>
-    </tr>  
-    <tr>
-      <td>[`schema:startTime`](https://schema.org/startTime)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>String</td>
-      <td>Specifies the [`schema:Time`](http://schema.org/Time) at which the 
-      Events will take place.</td>
-    </tr>  
-    <tr>
-      <td>[`schema:endTime`](https://schema.org/endTime)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
-      <td>String</td>
-      <td>Specifies the [`schema:Time`](http://schema.org/Time) at which the Events will end</td>
-    </tr> 
-    <tr>
-      <td>[`schema:duration`](https://schema.org/duration)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
-      <td>String</td>
-      <td>Specifies the duration of the Event as an [[ISO8601]] duration.  Durations 
-      MUST NOT be zero length. If duration is unknown it should be omitted.  A
-      duration MUST be provided if both a start and end date are available.</td>
-    </tr>     
-    <tr>
-      <td>[`schema:byDay`](https://pending.schema.org/byDay)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of [`schema:DayOfWeek`](https://schema.org/DayOfWeek)</td>
-      <td>Lists the day(s) of the week during which the Events will take place.</td>
-    </tr>  
-    <tr>
-      <td>[`schema:byMonth`](https://pending.schema.org/byMonth)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of Integers</td>
-      <td>Lists the month(s) of the year during which the Events will take place. January 
-      is the first month</td>
-    </tr>  
-    <tr>
-      <td>[`schema:byMonthDay`](https://pending.schema.org/byMonthDay)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of Integers</td>
-      <td>Lists the day(s) of the month on which an Event will take place</td>
-    </tr>      
-    <tr>
-      <td>[`schema:repeatCount`](https://pending.schema.org/repeatCount)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number</td>
-      <td>Specifies that an Event will repeat the specified number of times</td>
-    </tr>
-    <tr>
-      <td>[`schema:exceptDate`](https://pending.schema.org/exceptDate)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of [`Date`](http://schema.org/Date) or [`DateTime`](http://schema.org/DateTime)</td>
-      <td>Defines a list of [`Date`](http://schema.org/Date) or [`DateTime`](http://schema.org/DateTime) during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a [`DateTime`](http://schema.org/DateTime) then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a [`Date`](http://schema.org/Date) then any event that is scheduled for that 24 hour period should be excluded from the schedule. This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.</td>
-    </tr>
-  </tbody>   
-</table>
-
-While the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) 
-and [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties are 
-optional, one of these properties MUST be provided.
-
-The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
-
-<pre class="example" title="Adding an event schedule"><code>
-{
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "duration": "PT60M",
-  "eventSchedule": {
-     "type": "Schedule",
-     "startDate": "2017-01-01",
-     "endDate": "2017-12-31",
-     "repeatFrequency": "P1W",
-     "byDay": "http://schema.org/Wednesday",
-     "startTime": "19:00",
-     "endTime": "20:00",
-     "duration": "PT1H"
-  }  
-}
-</code>
-</pre>
 
 ### Describing event availability
 
@@ -1633,7 +1298,217 @@ The following example shows a Tai chi class that has been cancelled:
 </code>
 </pre>
 
-### Describing support for disabilities at events
+### Categorising events
+
+<p>
+The [`oa:category`](https://www.openactive.io/ns/#category) property can be 
+used to associate an Event with one or more tags that provide some extra 
+context about an event. This might include general information on the intensity 
+and suitability. While this property can be used to add any arbitrary tags to 
+an Event, a common use case is the need to tag an event as being suitable for 
+a specific type of audience, e.g. Beginners. Where this information is 
+available, the [`oa:level`](https://www.openactive.io/ns/#level) property 
+can be used in preference to [`oa:category`](https://www.openactive.io/ns/#category). 
+</p>
+<p>
+If an application does not distinguish between different types of tags 
+associated with an Event, then it <em class="rfc2119">SHOULD</em> use the 
+more general [`oa:category`](https://www.openactive.io/ns/#category) property.
+</p>
+
+<pre class="example" title="Tagging an Event"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "startDate": "2017-03-22T20:00:00-05:00",
+  "duration": "PT60M",
+  "category": [{
+    "type: "Concept",
+    "prefLabel": "Suitable For All"
+    },
+    {
+    "type: "Concept",
+    "prefLabel": "Low Intensity"
+  }],
+  "level": [{
+    "type: "Concept",
+    "prefLabel": "Beginner"
+  }]
+}
+</code>
+</pre>
+
+<p>
+Where an application is using a controlled vocabulary it 
+<em class="rfc2119">SHOULD</em> publish that vocabulary as structured data.
+</p>
+
+<div class="note">
+In future, the OpenActive Community Group may decide to define and recommend 
+some controlled vocabularies for use in these properties. At present the 
+values of these properties are left deliberately open to encourage publication 
+of open data that may inform future standardisation.
+</div>
+
+### Adding programmes
+
+Events can be associated with a Programme using the 
+[`oa:programme`](https://www.openactive.io/ns/#programme) property. A programme
+is a [`schema:Brand`](http://schema.org/Brand) object.
+
+<pre class="example" title="Tagging an Event"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Rowing Class",
+  "description": "A rowing class for beginners",
+  "startDate": "2017-04-01T08:00:00Z",
+  "duration": "PT60M",
+  "programme": {
+    "type": "Brand",
+    "name": "Learn to Row",
+    "url": "https://www.britishrowing.org/go-rowing/learn-to-row/",
+    "description": "Getting started in rowing couldn’t be easier!"
+  }
+}
+</code>
+</pre>
+
+### Describing the audience suitability of events
+
+<p>
+There are a variety of ways in which the suitability of an event for specific 
+audiences can be expressed. This includes specifying that 
+an event is:
+</p>
+
+* suited for a specific age range
+* suited for people with specific levels of experience ([`oa:level`](https://www.openactive.io/ns/#level))
+* restricted to a male, female or mixed audience
+
+#### Age ranges
+
+<p>
+Age ranges are specified using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) property. 
+The value is a [`schema:QuantitativeValue`](http://schema.org/QuantitativeValue) 
+which should have [minValue](http://schema.org/minValue) or 
+[maxValue](http://schema.org/maxValue) properties. These properties specify an 
+inclusive minimum and maximum age range for participants.
+</p>
+
+<p>
+Data publishers using the [`oa:ageRange`](https://www.openactive.io/ns/#ageRange) 
+property MUST ensure that it has:
+</p>
+
+* a `type` of [`schema:QuantitativeValue`](http://schema.org/QuantitativeValue)
+* at least one of the `minValue` or `maxValue`properties
+
+<p>
+Data consumers SHOULD assume that:
+</p>
+
+* if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
+* if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
+* if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
+* if an `ageRange` is provided with a `minValue` of 0, and there is no `maxValue` property then the Event is suitable for all
+
+<p>
+The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
+</p>
+
+<pre class="example" title="Age range example"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "ageRange": {
+     "type": "QuantitativeValue",
+     "minValue": 60
+  }
+}
+</code>
+</pre>
+
+<p>
+The following example illustrates an Event that is suitable for all ages. 
+This is indicated by providing an `minValue` property with a value of zero and 
+no `maxValue` property.
+</p>
+
+<pre class="example" title="Age range - suitable for all example"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Exercise in the park",
+  "ageRange": {
+     "type": "QuantitativeValue",
+     "minValue": 0
+  }
+}
+</code>
+</pre>
+
+#### Gender restrictions
+
+<p>
+Attendance at some events is limited to certain audiences. For example a 
+female only gym class. The [`oa:genderRestriction`](https://www.openactive.io/ns/#genderRestriction) 
+property can be used to specify these restrictions.
+</p>
+
+<p>
+Data publishers using this property MUST use one of the following values:
+</p>
+
+* `https://www.openactive.io/ns#None` indicating that the event has no restrictions
+* `https://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
+* `https://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
+
+<p>
+If the `genderRestriction` property is not supplied for an Event, then data 
+consumers SHOULD NOT assume a default value, the value should be treated as 
+`null`. When searching or filtering for gender restricted Events, data 
+consumers SHOULD remove Events with a `null` value. 
+</p>
+
+<p>
+Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
+</p>
+
+<pre class="example" title="Gender restriction example"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Gym class",
+  "genderRestriction": "http://www.openactive.io/ns#Female"
+}
+</code>
+</pre>
+
+<div class="note" title="Request for feedback">
+<p>The community group is aware of both the issues that arise from defining 
+standard terms for gender and the inclusivity issues that might arise from 
+restricting participation in events.</p>
+
+<p>We have standardised these terms to reflect the ways that events are currently 
+described. However there are many additional considerations that relate to how 
+gender is described and the ways that events might be advertised and run in order 
+for people to feel safe and included.</p>
+<p>
+We encourage the community to reflect on the approach outlined here and experiment 
+with alternative options. We have <a href="https://github.com/openactive/modelling-opportunity-data/issues/69#issuecomment-401336335"> outlined some of these options</a> and welcome feedback on how we can improve this area of the specification.
+</p>
+</div>
+
+#### Describing support for disabilities
 
 <p>
 This specification defines several ways to capture information from organisers 
@@ -1659,6 +1534,400 @@ Examples of using these are shown below:
   "duration": "PT60M",
   "accessibilitySupport": ["Hearing Impairment", "Visual Impairment"],
   "accessibilityInformation": "The location is fully accessible, please contact the organiser if you have questions"
+}
+</code>
+</pre>
+
+### Parent-child relationships between Events
+
+Events are often related to one another in parent-child relationships. For 
+example a whole day event (the parent) might consist of a programme of 
+shorter events such as individual races that take place at 
+different times of the day (the children).
+
+This type of relationship between events can be described using the 
+[`schema:subEvent`](https://schema.org/subEvent) and [`schema:superEvent`](https://schema.org/superEvent) 
+properties.
+
+<pre class="example" title="Parent-child Events"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "HeadlineEvent",
+  "url": "http://www.example.org/events/1",
+  "name": "Aquathlon Day",
+  "description": "A day of aquathlon races",
+  "startDate": "2018-09-01T09:00:00-05:00",
+  "endDate": "2018-09-01T17:00:00-05:00",  
+  "duration": "P1D",
+  "subEvent": [
+    {
+      "type": "Event",
+      "url": "http://www.example.org/events/2",
+      "name": "Aquathlon Sprint",
+      "startDate": "2018-09-01T10:00:00-05:00" 
+    },
+    {
+      "type": "Event",
+      "url": "http://www.example.org/events/2",
+      "name": "Aquathlon Long Course",
+      "startDate": "2018-09-01T14:00:00-05:00" 
+    }    
+  ]
+}
+</code>
+</pre>
+
+The `HeadlineEvent` type used in this example is described in the following 
+section.
+
+When not otherwise specified on the child event, a consumer MAY assume that 
+some properties that describe the parent (`schema:superEvent`) event, such as 
+its location, organizer or audience suitability, also applies to the child. 
+This is referred to as "__property inheritance__". 
+
+If a child Event provides a property with the same name as its parent 
+(e.g. `startDate`) then consumers MUST use the value provided for the child and 
+not the parent.
+
+However consumers MUST NOT assume that Offers provided for a parent event are 
+automatically inherited by child events. Some types of event (see below) do 
+allow for inheritance of Offers. This is covered further in the next section.
+
+Some properties are never inherited. These include `@type`, `@id`, `schema:url`, 
+`schema:identifier` and `schema:eventSchedule`.
+
+<div class="note" title="Grouping events">
+Events may also be related together in other ways, e.g. as a regular series like 
+the Olympic Games or the London Marathon. This specification does not yet document 
+how to describe series or other groups of Events. However we expect that 
+future versions may recommend use of the draft 
+Schema.org [`EventSeries`](https://pending.schema.org/EventSeries) type. Publishers 
+MAY wish to experiment with using this property in their data.
+</div>
+
+### Types of event
+
+[`schema:Event`](https://schema.org/Event) provides a useful default type for 
+describing Events.
+
+However in practice it can be useful to distinguish between some specific types 
+of Event. This gives data consumers more context that can help them index and 
+recommended Events to potential participants. Recognising additional types of 
+Event can also be useful in defining additional conformance and validation 
+rules that guide how data is published and used.
+
+This specification defines several sub-types of Event. These are described in 
+the following sections. Unless otherwise specified:
+
+* all of the properties defined for [`schema:Event`](https://schema.org/Event) 
+can applied to each sub-type
+* properties have the same status (e.g. REQUIRED) as for the generic type
+* the property inheritance rules defined in the previous section apply to each 
+sub-type
+
+Where publishers are unsure whether a sub-type applies they SHOULD use the 
+generic [`schema:Event`](https://schema.org/Event) type. Publishers MUST NOT use 
+any of these sub-types to describe other forms of Event.
+
+When data consumers encounter a new sub-type of Event, they SHOULD treat it as if 
+it were of the generic [`schema:Event`](https://schema.org/Event) type. New sub-types 
+might be defined in future versions of this specification or as custom types by 
+individual publishers.
+
+#### Regular sessions (`SessionSeries` and `ScheduledSession`)
+
+Many organisers run regularly scheduled Events, e.g. a weekly exercise class or 
+a monthly ride of a cycle club. 
+
+These can be thought of as two distinct types of Event:
+
+* [`oa:SessionSeries`](https://www.openactive.io/ns/#SessionSeries) - the overall series of events, e.g. Wednesday Yoga
+* [`oa:ScheduledSession`](https://www.openactive.io/ns/#ScheduledSession) - the individual sessions, e.g. Wednesday Yoga 
+on 5th September 2018
+
+The following example illustrates how these types are used.
+
+<pre class="example" title="Scheduled Series"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "ScheduledSeries",
+  "url": "http://www.example.org/events/1",
+  "name": "Wednesday Yoga",
+  "description": "A day of aquathlon races",
+  "startDate": "2018-01-01",
+  "endDate": "2018-12-31"
+  "subEvent": [
+    {
+      "type": "ScheduledSession",
+      "url": "http://www.example.org/events/2",
+      "startDate": "2018-09-05T18:00:00-05:00",
+      "endDate": "2018-09-05T19:00:00-05:00",
+      "duration": "PT1H"       
+    },
+    ...    
+  ]
+}
+</code>
+</pre>
+
+Publishers SHOULD use the [`oa:SessionSeries`](https://www.openactive.io/ns/#SessionSeries) type for describing Events that 
+occur on a regular schedule. The child events of 
+a [`oa:SessionSeries`](https://www.openactive.io/ns/#SessionSeries)provided in a `subEvent` property MUST all be 
+of the [`oa:ScheduledSession`](https://www.openactive.io/ns/#ScheduledSession) type.
+
+In addition to the normal rules around property inheritance, data consumers 
+MAY also assume that Offers provided for a [`oa:SessionSeries`](https://www.openactive.io/ns/#SessionSeries) also apply to 
+their child events, of type [`oa:ScheduledSession`](https://www.openactive.io/ns/#ScheduledSession). 
+
+This is in the only time that Offers may be inherited between types. This is 
+permitted here as the parent Event exists to describe a series of sessions. The 
+individual sessions MAY have additional properties and consumers MUST use these 
+where provided.
+
+#### Headline events (`HeadlineEvent`)
+
+The ability to describe parent-child relationships between Events provides a 
+useful way to publish an event programme for a whole day or multi-day event, 
+such as a mass participation event, family fun day, etc.
+
+To help distinguish programmed events from the "headline" event itself, this 
+specification defines the [`oa:HeadlineEvent`](https://www.openactive.io/ns/#HeadlineEvent)
+type.
+
+<pre class="example" title="Headline Events"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "HeadlineEvent",
+  "url": "http://www.example.org/events/1",
+  "name": "Aquathlon Day",
+  "description": "A day of aquathlon races",
+  "startDate": "2018-09-01T09:00:00-05:00",
+  "endDate": "2018-09-01T17:00:00-05:00",  
+  "duration": "P1D",
+  "subEvent": [
+    {
+      "type": "Event",
+      "url": "http://www.example.org/events/2",
+      "name": "Aquathlon Sprint",
+      "startDate": "2018-09-01T10:00:00-05:00" 
+    },
+    {
+      "type": "Event",
+      "url": "http://www.example.org/events/2",
+      "name": "Aquathlon Long Course",
+      "startDate": "2018-09-01T14:00:00-05:00" 
+    }    
+  ]
+}
+</code>
+</pre>
+
+The [`oa:HeadlineEvent`](https://www.openactive.io/ns/#HeadlineEvent) is mainly 
+provided as a means for data consumers to treat these types of events differently 
+from [`oa:SessionSeries`](https://www.openactive.io/ns/#HeadlineEvent). 
+
+For example a web application might display a 
+[`oa:HeadlineEvent`](https://www.openactive.io/ns/#HeadlineEvent) with a custom page 
+that includes a summary of its programme of activities.
+
+A [`oa:HeadlineEvent`](https://www.openactive.io/ns/#HeadlineEvent) is an event in 
+its own right, and MUST NOT have an `schema:eventSchedule` property. Publishers 
+MUST provide a start date and optionally end date and duration for the event.
+
+As with the generic type, any Offers provided for a 
+[`oa:HeadlineEvent`](https://www.openactive.io/ns/#HeadlineEvent) apply to that 
+Event, they are not inherited by individual child events. However a publisher 
+MAY provide Offers for individual events in the programme if they are individually 
+ticketed.
+
+#### Courses (`CourseInstance`)
+
+Schema.org defines a [`Course`](https://pending.schema.org/Course) as an education 
+course that is run at different times and places. The course might consist of one or 
+more individual classes.
+
+These instances of a course are described using the 
+[`schema:CourseInstance`](https://pending.schema.org/CourseInstance) type.
+
+Publishers SHOULD use the [`schema:CourseInstance`](https://pending.schema.org/CourseInstance) 
+type when describing courses of any duration.
+
+<pre class="example" title="Course Instance"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "CourseInstance",
+  "url": "http://www.example.org/events/1",
+  "name": "Sailing Course",
+  "description": "A ten week sailing course",
+  "startDate": "2018-08-30",
+  "endDate": "2018-11-08"
+  "subEvent": [
+    {
+      "type": "Event",
+      "url": "http://www.example.org/events/2",
+      "startDate": "2018-08-30T09:00:00-05:00",
+      "endDate": "2018-08-30T10:00:00-05:00",
+      "duration": "PT1H"       
+    },
+    ...    
+  ]
+}
+</code>
+</pre>
+
+A [`schema:CourseInstance`](https://pending.schema.org/CourseInstance) MUST have 
+either a `subEvent` property AND/or an `eventSchedule` property that provides 
+information about the individual classes.
+
+Child events of a [`schema:CourseInstance`](https://pending.schema.org/CourseInstance) 
+SHOULD be of the generic `schema:Event` type.
+
+A participant will typically pay to attend a whole course. So, as with the 
+generic type, any Offers provided for a [[`schema:CourseInstance`](https://pending.schema.org/CourseInstance) 
+apply to the whole course any not the individual classes. However a publisher 
+MAY provide Offers for individual events in the programme if they are individually 
+ticketed.
+
+<div class="note" title="Status of CourseInstance">
+[`schema:CourseInstance`](https://pending.schema.org/CourseInstance) is currently 
+a draft Schema.org property. As a result, both publishers and consumers should be aware 
+that its definition may need to change in future versions of this specification.
+</div>
+
+### Describing event schedules
+
+<div class="note" title="Schema.org support for recurring events">
+<p>
+This specification relies on some pending changes to Schema.org that will add recurrence rules to Events. The [proposal](https://github.com/schemaorg/schemaorg/pull/1693) has been accepted, but is not yet formally part of the model.
+</p>
+<p>We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that this is an area that may change in future versions.</p>
+</div>
+
+For Events that take place at a regular time it can be useful to publish information 
+about the schedule rather than the individual events. Providing a schedule, rather 
+than a list of individual events means publishing less data and clarifies that 
+each weekly or monthly occurence of an Event is part of a longer series.
+
+The [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property can 
+be used to describe a [`schema:Schedule`](http://pending.schema.org/Schedule) for 
+an Event.
+
+A Schedule define a repeating calendar entry with sufficient information that 
+future events can be generated from some basic rules.
+
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Format</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>  
+    <tr>
+      <td>`@type`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>`Schedule`</td>
+    </tr>  
+    <tr>
+      <td>[`schema:repeatFrequency`](https://pending.schema.org/repeatFrequency)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>The frequency of the events, specified as an [[ISO8601]] duration, e.g. day, week, month</td>
+    </tr>  
+    <tr>
+      <td>[`schema:startDate`](https://schema.org/startDate)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>Specifies the [`schema:Date`](http://schema.org/Date) from which the schedule 
+      is active</td>
+    </tr>  
+    <tr>
+      <td>[`schema:endDate`](https://schema.org/startDate)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>Specifies the [`schema:Date`](http://schema.org/Date) at which the schedule 
+      ends.</td>
+    </tr>  
+    <tr>
+      <td>[`schema:startTime`](https://schema.org/startTime)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>Specifies the [`schema:Time`](http://schema.org/Time) at which the 
+      Events will take place.</td>
+    </tr>  
+    <tr>
+      <td>[`schema:endTime`](https://schema.org/endTime)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>Specifies the [`schema:Time`](http://schema.org/Time) at which the Events will end</td>
+    </tr> 
+    <tr>
+      <td>[`schema:duration`](https://schema.org/duration)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>Specifies the duration of the Event as an [[ISO8601]] duration.  Durations 
+      MUST NOT be zero length. If duration is unknown it should be omitted.  A
+      duration MUST be provided if both a start and end date are available.</td>
+    </tr>     
+    <tr>
+      <td>[`schema:byDay`](https://pending.schema.org/byDay)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of [`schema:DayOfWeek`](https://schema.org/DayOfWeek)</td>
+      <td>Lists the day(s) of the week during which the Events will take place.</td>
+    </tr>  
+    <tr>
+      <td>[`schema:byMonth`](https://pending.schema.org/byMonth)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of Integers</td>
+      <td>Lists the month(s) of the year during which the Events will take place. January 
+      is the first month</td>
+    </tr>  
+    <tr>
+      <td>[`schema:byMonthDay`](https://pending.schema.org/byMonthDay)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of Integers</td>
+      <td>Lists the day(s) of the month on which an Event will take place</td>
+    </tr>      
+    <tr>
+      <td>[`schema:repeatCount`](https://pending.schema.org/repeatCount)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Number</td>
+      <td>Specifies that an Event will repeat the specified number of times</td>
+    </tr>
+    <tr>
+      <td>[`schema:exceptDate`](https://pending.schema.org/exceptDate)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of [`Date`](http://schema.org/Date) or [`DateTime`](http://schema.org/DateTime)</td>
+      <td>Defines a list of [`Date`](http://schema.org/Date) or [`DateTime`](http://schema.org/DateTime) during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a [`DateTime`](http://schema.org/DateTime) then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a [`Date`](http://schema.org/Date) then any event that is scheduled for that 24 hour period should be excluded from the schedule. This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.</td>
+    </tr>
+  </tbody>   
+</table>
+
+While the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) 
+and [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties are 
+optional, one of these properties SHOULD be provided.
+
+The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
+
+<pre class="example" title="Adding an event schedule"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "Event",
+  "url": "http://www.example.org/events/1",
+  "name": "Tai chi Class",
+  "description": "A tai chi class intended for beginners",
+  "duration": "PT60M",
+  "eventSchedule": {
+     "type": "Schedule",
+     "startDate": "2017-01-01",
+     "endDate": "2017-12-31",
+     "repeatFrequency": "P1W",
+     "byDay": "http://schema.org/Wednesday",
+     "startTime": "19:00",
+     "endTime": "20:00",
+     "duration": "PT1H"
+  }  
 }
 </code>
 </pre>

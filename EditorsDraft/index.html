@@ -1581,29 +1581,23 @@ The `HeadlineEvent` type used in this example is described in the following
 section.
 
 When not otherwise specified on the child event, a consumer MAY assume that 
-some properties that describe the parent (`schema:superEvent`) event, such as 
-its location, organizer or audience suitability, also applies to the child. 
-This is referred to as "__property inheritance__". 
+some properties that describe the parent (`schema:superEvent`) event also 
+apply to the child. This might include properties such as the location, 
+organizer or audience suitability of an Event. This is referred to as "__property inheritance__". 
+
+Some properties are never inherited. These properties are `@type`, `@id`, `schema:url`, 
+`schema:identifier` and `schema:eventSchedule`. A consumer MUST NOT assume that 
+these properties apply to child events.
 
 If a child Event provides a property with the same name as its parent 
 (e.g. `startDate`) then consumers MUST use the value provided for the child and 
-not the parent.
+not that of the parent.
 
-However consumers MUST NOT assume that Offers provided for a parent event are 
-automatically inherited by child events. Some types of event (see below) do 
-allow for inheritance of Offers. This is covered further in the next section.
-
-Some properties are never inherited. These include `@type`, `@id`, `schema:url`, 
-`schema:identifier` and `schema:eventSchedule`.
-
-<div class="note" title="Grouping events">
-Events may also be related together in other ways, e.g. as a regular series like 
-the Olympic Games or the London Marathon. This specification does not yet document 
-how to describe series or other groups of Events. However we expect that 
-future versions may recommend use of the draft 
-Schema.org [`EventSeries`](https://pending.schema.org/EventSeries) type. Publishers 
-MAY wish to experiment with using this property in their data.
-</div>
+By default the `offers` property, listing the Offers available to participate in 
+an Event are also not inherited. Consumers MUST NOT assume that any Offers 
+provided for a parent event are automatically applicable to child events. However 
+some types of event MAY allow for inheritance of offers. This is discussed in the 
+following sections.
 
 ### Types of event
 
@@ -1713,7 +1707,7 @@ type.
     },
     {
       "type": "Event",
-      "url": "http://www.example.org/events/2",
+      "url": "http://www.example.org/events/3",
       "name": "Aquathlon Long Course",
       "startDate": "2018-09-01T14:00:00-05:00" 
     }    
@@ -1790,11 +1784,121 @@ ticketed.
 
 <div class="note" title="Status of CourseInstance">
 [`schema:CourseInstance`](https://pending.schema.org/CourseInstance) is currently 
-a draft Schema.org property. As a result, both publishers and consumers should be aware 
+a draft Schema.org type. As a result, both publishers and consumers should be aware 
 that its definition may need to change in future versions of this specification.
 </div>
 
-### Describing event schedules
+#### Grouping together events (`EventSeries`)
+
+All of the previous examples of event types provide a means of grouping together 
+events:
+
+* `schema:CourseInstance` defines a group of classes
+* `oa:ScheduledSeries` groups together a series of regular events
+* `oa:HeadlineEvent` groups together a programme events occuring as part of a large 
+Event
+
+More broadly, other properties of a set of Events can be used to group them together 
+in useful ways. For example Events might be grouped based on:
+
+* their `schema:organizer` to identify all Events organisations by a specific 
+person or organisation
+* their `schema:place` to list all Events taking place at a specific location
+* their `oa:programmee` to identify Events that are part of the same Brand
+* their `oa:activity` to define a list of Events that involve the same physical 
+activity
+
+Data consumers are encouraged to use all of the information available about Events 
+to provide useful ways for participants to discover opportunities to be active. 
+Data publishers should expect that events published as open data might be 
+organised and presented in a number of different ways.
+
+However it can also be useful for publishers to identify that a set of Events are 
+related to one another in some way and provide information about that set.
+
+The Schema.org [`EventSeries`](https://pending.schema.org/EventSeries) type can 
+be used to group together related events. This allows the publisher to provide 
+this grouping for data consumers, along with additional information such as 
+images, a common description, etc.
+
+The following example illustrates using this type to group together adult swimming 
+sessions available from two different locations at different dates and times.
+
+<pre class="example" title="Event Series"><code>
+{
+  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "type": "EventSeries",
+  "url": "http://www.example.org/events/1",
+  "name": "Swim For Adults",
+  "description": "Adult swimming session",
+  "activity": [{
+  "type": "Concept",
+  "prefLabel": "Swimming",
+  }],
+  "subEvent": [
+    {
+      "type": "ScheduledSession",
+      "url": "http://www.example.org/events/2",
+      "name": "Swim For Adults",
+      "location": {
+        "type": "Place",
+        "name": "ExampleCo Gym"
+        ...
+      },
+      "eventSchedule": {
+        "type": "Schedule",
+        "startDate": "2017-01-01",
+        "endDate": "2017-12-31",
+        "repeatFrequency": "P1W",
+        "byDay": "http://schema.org/Wednesday",
+        "startTime": "19:00",
+        "endTime": "20:00",
+        "duration": "PT1H"
+      }        
+    },
+    {
+      "type": "ScheduledSession",
+      "url": "http://www.example.org/events/2",
+      "name": "Swim For Adults",
+      "location": {
+        "type": "Place",
+        "name": "A. N. Other Gym"
+        ...
+      },
+      "eventSchedule": {
+        "type": "Schedule",
+        "startDate": "2017-01-01",
+        "endDate": "2017-12-31",
+        "repeatFrequency": "P1W",
+        "byDay": "http://schema.org/Thursday",
+        "startTime": "18:00",
+        "endTime": "20:00",
+        "duration": "PT2H"
+      }        
+    }, 
+  ]
+}
+</code>
+</pre>
+
+The [`schema:EventSeries`](https://pending.schema.org/EventSeries) type can be used 
+as a parent for any type of event, including the generic [`schema:Event`](https://www.schema.org/Event) 
+type.
+
+<div class="note" title="Grouping CourseInstance">
+We note however that when grouping together [`schema:CourseInstance`](https://pending.schema.org/CourseInstance) 
+events, it may be more appropriate to describe associate them with a 
+[`schema:Course`](https://schema.org/Course). Although unlike [`schema:EventSeries`](https://pending.schema.org/EventSeries) 
+this is not a type of event.
+</div>
+
+<div class="note" title="Status of EventSeries">
+[`schema:EventSeries`](https://pending.schema.org/EventSeries) is currently 
+a draft Schema.org type. As a result, both publishers and consumers should be aware 
+that its definition may need to change in future versions of this specification.
+</div>
+
+### Publishing event schedules
 
 <div class="note" title="Schema.org support for recurring events">
 <p>
@@ -1803,17 +1907,28 @@ This specification relies on some pending changes to Schema.org that will add re
 <p>We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that this is an area that may change in future versions.</p>
 </div>
 
-For Events that take place at a regular time it can be useful to publish information 
-about the schedule rather than the individual events. Providing a schedule, rather 
-than a list of individual events means publishing less data and clarifies that 
-each weekly or monthly occurence of an Event is part of a longer series.
+The previous section has described several methods for publishing lists of upcoming 
+events, e.g. an `oa:SessionSeries` with a list of its upcoming `oa:ScheduledSession`, 
+or a [`schema:EventSeries`](https://pending.schema.org/EventSeries) and a list of 
+Events.
+
+Using the `schema:subEvent` property in this way allows a publisher to publish 
+a calendar of forthcoming events. This can also be useful when there may be minor variations 
+in the details of each Event. For example an alternate location, time, etc. 
+
+However when Events occur to a precise schedule, it can be useful to publish 
+information about the schedule itself rather than listing each individual event. 
+Describing the schedule means publishing less data as data consumers will be 
+able to calculate when a future event will take place. 
 
 The [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property can 
-be used to describe a [`schema:Schedule`](http://pending.schema.org/Schedule) for 
-an Event.
+be used to associate a [`schema:Event`] (or one of its sub-types) with a 
+[`schema:Schedule`](http://pending.schema.org/Schedule).
 
-A Schedule define a repeating calendar entry with sufficient information that 
-future events can be generated from some basic rules.
+Based on the [iCalendar](https://icalendar.org/) specification, a 
+[`schema:Schedule`](http://pending.schema.org/Schedule) define a repeating 
+calendar entry. A data consumer can apply these rules to generate future instances 
+of an event, e.g. to populate a calendar
 
 <table>
   <thead>
@@ -1901,19 +2016,59 @@ future events can be generated from some basic rules.
       <td>Array of [`Date`](http://schema.org/Date) or [`DateTime`](http://schema.org/DateTime)</td>
       <td>Defines a list of [`Date`](http://schema.org/Date) or [`DateTime`](http://schema.org/DateTime) during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a [`DateTime`](http://schema.org/DateTime) then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a [`Date`](http://schema.org/Date) then any event that is scheduled for that 24 hour period should be excluded from the schedule. This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.</td>
     </tr>
+    <tr>
+      <td>[`oa:scheduledEventType`](https://www.openactive.io/ns/#scheduledEventType)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Specifies the type that a data consumer should assign to Events that are 
+      generated from this schedule.</td>
+    </tr>    
+    <tr>
+      <td>[`oa:urlTemplate`](https://www.openactive.io/ns/#urlTemplate)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>An [[RFC6570]] compliant URI template that can be used to generate 
+      a unique URL (`schema:url`) for every event described by the schedule (see below for more 
+      information). This property is REQUIRED if the data provider wants to provide 
+      participants with a unique URL to book to attend an event.</td>
+    </tr>    
+    <tr>
+      <td>[`oa:idTemplate`](https://www.openactive.io/ns/#idTemplate)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>An [[RFC6570]] compliant URI template that can be used to generate 
+      a unique identifier (`@id`) for every event described by the schedule (see below for more 
+      information). This property is REQUIRED if the data provider is supporting 
+      third-party booking via the [[Open-Booking-API]].</td>
+    </tr>
   </tbody>   
 </table>
 
-While the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) 
-and [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties are 
-optional, one of these properties SHOULD be provided.
+A [`schema:Schedule`](http://pending.schema.org/Schedule) currently has few 
+required properties. This is to allow for publishers to provide partial schedules, 
+e.g. "repeats on a Tuesday" alongside an explicit list of forthcoming events via the 
+[`subEvent`](https://schema.org/subEvent) property.
+
+In practice we recommend that publishers provide as much detail in possible to 
+allow data consumers to reliably expand a schedule into a calendar of events. 
+Specifically we recommend that publisher SHOULD provide:
+
+* one of the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) 
+and [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties
+* an [`schema:endDate`](https://schema.org/endDate) to indicate if a schedule has 
+a known end time
+* a [`schema:startTime`](https://schema.org/startTime) and [`schema:endTime`](https://schema.org/endTime) 
+property to indicate when the events will take place
+
+For Events that are intended to be bookable then publishers SHOULD also provide 
+the [`oa:idTemplate`](https://www.openactive.io/ns/#idTemplate) and [`oa:urlTemplate`](https://www.openactive.io/ns/#urlTemplate) properties.
 
 The following example illustrates basic usage of the [`schema:eventSchedule`](http://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](http://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
 
 <pre class="example" title="Adding an event schedule"><code>
 {
   "@context": "https://www.openactive.io/ns/oa.jsonld",
-  "type": "Event",
+  "type": "SessionSeries",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
@@ -1926,11 +2081,92 @@ The following example illustrates basic usage of the [`schema:eventSchedule`](ht
      "byDay": "http://schema.org/Wednesday",
      "startTime": "19:00",
      "endTime": "20:00",
-     "duration": "PT1H"
+     "duration": "PT1H",
+     "scheduledEventType": "ScheduledSession"
   }  
 }
 </code>
 </pre>
+
+#### Generating URLs and identifiers for scheduled events
+
+This specification uses the `schema:url` property to provide participants with 
+deep links into websites and booking systems. It is a REQUIRED property for 
+every Event.
+
+The `@id` property of an Event provides a unique stable identifier for an Event. 
+It is a RECOMMENDED property that, as described in the [[Open-Booking-API]], MAY provide an entry point 
+into an API that allows retrieval of current information about an Event and a 
+means to carry out third-party bookings.
+
+A data consumer therefore needs a reliable way to generate `schema:url` and `@id` 
+properties for individual Events in a schedule. To achieve these we rely on URL 
+templates defined in [[RFC6570]]. 
+
+The [`oa:idTemplate`](https://www.openactive.io/ns/#idTemplate) and 
+[`oa:urlTemplate`](https://www.openactive.io/ns/#urlTemplate) properties of 
+a [`schema:Schedule`](http://pending.schema.org/Schedule) provide URL templates 
+that can be expanded out into the appropriate `@id` and `schema:url` property values.
+
+To apply these templates correctly, data consumers MUST support Level 1 (simple 
+variable substitution) of [[RFC6570]]. Only two variables need to be substitutable 
+into the templates: `startDate` and `endDate`.
+
+Publishers MUST ensure that values for these properties are valid according to 
+the Level 1 processing rules for [[RFC6570]]. Publishers MUST NOT use additional 
+syntax or substitution rules from [RFC6570]].
+
+To convert a `Schedule` into an instance of an `Event` a data consumer MUST therefore 
+do the following:
+
+1. Generate an Event object with a `@type` property that matches the value of the `schema:scheduledEventType` 
+provided in the `Schedule`
+2. Use the rules defined in the `Schedule` to calculate the `schema:startDate` and `schema:endDate` of 
+the next event and assign these to the new Event object
+3. Take the `oa:idTemplate` property (if provided) and subsitute the `startDate` variable with the 
+calculated value of `schema:startDate`. Do the same for `endDate` and `schema:endDate`. Use the resulting 
+string as the value of the `@id` property for the event
+4. Take the `oa:urlTemplate` property (if provided) and subsitute the `startDate` variable with the 
+calculated value of `schema:startDate`. Do the same for `endDate` and `schema:endDate`. Use the resulting 
+string as the value of the `schema:url` property for the event
+
+Other than complying with [[RFC6570]] publishers are free to provide additional 
+information in their URL templates to ensure that identifiers and URLs are unique. 
+For example by including the `identifier` for the parent event.
+
+Publishers MAY use templated that generate URIs that result in redirects. 
+Data consumers SHOULD be prepared to follow redirects from generated `schema:url` or `@id` properties.
+
+#### Providing status updates for scheduled events
+
+In the section on [Indicating the status of an event](#indicating-the-status-of-an-event) 
+we note that events are sometimes cancelled, rescheduled or postponed. It is important 
+that data publishers provide status updates on events as a data consumer may need 
+to notify a user of changes.
+
+When a publisher is providing a [`schema:Schedule`](http://pending.schema.org/Schedule) for upcoming events rather than 
+an explicit list of upcoming events, a data consumer needs to be able to identify 
+when an upcoming event has had a status change.
+
+To handle this we recommend that publishers SHOULD provide details of the updated event:
+
+* via their RPDE feed(s), allowing all consumers to receive updates on the status of an individual events
+* via an API, e.g. as described in the [[Open-Booking-API]], allowing 
+authorised data consumers to confirm the event status during booking, or to receive 
+notifications of changes
+
+For cancelled Events, publishers SHOULD NOT just amend a `Schedule` to add a new 
+`schema:exceptDate` that removes the event from the schedule.
+
+For data consumers to be able to associate an updated event description with a 
+event they have generated from a [`schema:Schedule`](http://pending.schema.org/Schedule) 
+a publisher MUST use the same identifier (`@id`) for the event as a consumer may 
+have generated from an [`oa:idTemplate`](https://www.openactive.io/ns/#idTemplate) 
+provided in the schedule. 
+
+If no [`oa:idTemplate`](https://www.openactive.io/ns/#idTemplate) was 
+provided then consumers do not have a reliable means to determine status changes. 
+They MAY attempt to use other means, e.g. matching based on date, time, location, etc.
 
 ## Describing Locations (<code>schema:Place</code>)
 

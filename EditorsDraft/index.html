@@ -57,7 +57,7 @@
                 href: "https://github.com/openactive/modelling-opportunity-data/issues/"
             }, {
                 key: "Version",
-                value: "Editors Draft"
+                value: "Candidate Specification"
             }
           ],
 
@@ -135,7 +135,7 @@
                 "publisher": "OpenActive Community Group",            
             },            
             "OpenActive-Activity-List": {
-                "href": "https://www.openactive.io/activity-list/",
+                "href": "https://www.openactive.io/activity-list",
                 "title": "OpenActive Activity List",
                 "publisher": "OpenActive Community Group",            
             }                        
@@ -734,7 +734,7 @@ In the following sections all referenced terms have been qualified using their n
 source vocabulary in which they have been defined. Terms have also been linked to their definitions.
 </p>
 <p>
-The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://www.openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]]. 
+The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]]. 
 </p>
 <p>
 The context removes the need to use explicit namespace prefixes in the JSON documents. The context also maps the JSON-LD [`@type`](https://www.w3.org/TR/json-ld/#specifying-the-type) and [`@id`](https://www.w3.org/TR/json-ld/#node-identifiers) properties to simple keys (`type` and `id`). This further limits the amount of JSON-LD syntax exposed to developers.
@@ -850,7 +850,7 @@ that is separate to its public web page.
 
 <pre class="example" title="Simple event description"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "id": "http://host.opportunity-data.com/id/12345",
   "url": "http://my-leisure-centre.example.org/events/1",
@@ -1036,7 +1036,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>Relates a child event to a parent event. Properties describing the parent event can be assumed to apply to the child, unless otherwise specified. A parent event might specify a recurring schedule, of which the child event is one specific instance</td>
     </tr>
     <tr>
-      <td>`schema:schedule`</td>
+      <td>`schema:eventSchedule`</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>[`schema:Schedule`](https://pending.schema.org/Schedule)</td>
       <td>A schedule defines a repeating time period used to describe a regularly occurring Event.</td>
@@ -1161,7 +1161,7 @@ The following example shows a simple event description, including its start time
 
 <pre class="example" title="Simple event description"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1177,7 +1177,7 @@ This basic description can be improved by providing information about its locati
 
 <pre class="example" title="Adding a venue and an organizer"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1197,6 +1197,8 @@ This basic description can be improved by providing information about its locati
       "type": "PostalAddress",
       "streetAddress": "1 High Street",
       "addressLocality": "Bristol",
+      "addressCountry": "GB",
+      "addressRegion": "Somerset",
       "postalCode": "BS1 4SD"
     }
   }  
@@ -1214,7 +1216,7 @@ List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]).
 
 <pre class="example" title="Using activities from an Activity List"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1222,10 +1224,10 @@ List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]).
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "activity": [{
-    "id": "https://www.openactive.io/activity-list/#c16df6ed-a4a0-4275-a8c3-1c8cff56856f",
+    "id": "https://www.openactive.io/activity-list#c16df6ed-a4a0-4275-a8c3-1c8cff56856f",
     "type": "Concept",
     "prefLabel": "Tai Chi",
-    "inScheme": "https://www.openactive.io/activity-list/"
+    "inScheme": "https://www.openactive.io/activity-list"
   }]
 }
 </code>
@@ -1248,7 +1250,7 @@ These properties can be used to provide some basic availability information for 
 
 <pre class="example" title="Basic event availability"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1286,7 +1288,7 @@ The following example shows a Tai chi class that has been cancelled:
 
 <pre class="example" title="A cancelled event"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1318,7 +1320,7 @@ more general [`oa:category`](https://www.openactive.io/ns/#category) property.
 
 <pre class="example" title="Tagging an Event"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1326,15 +1328,15 @@ more general [`oa:category`](https://www.openactive.io/ns/#category) property.
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
   "category": [{
-    "type: "Concept",
+    "type": "Concept",
     "prefLabel": "Suitable For All"
     },
     {
-    "type: "Concept",
+    "type": "Concept",
     "prefLabel": "Low Intensity"
   }],
   "level": [{
-    "type: "Concept",
+    "type": "Concept",
     "prefLabel": "Beginner"
   }]
 }
@@ -1361,7 +1363,7 @@ is a [`schema:Brand`](http://schema.org/Brand) object.
 
 <pre class="example" title="Tagging an Event"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Rowing Class",
@@ -1423,7 +1425,7 @@ The following example illustrates how to specify an Event that is suitable for p
 
 <pre class="example" title="Age range example"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1443,7 +1445,7 @@ no `maxValue` property.
 
 <pre class="example" title="Age range - suitable for all example"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Exercise in the park",
@@ -1467,9 +1469,9 @@ property can be used to specify these restrictions.
 Data publishers using this property MUST use one of the following values:
 </p>
 
-* `https://www.openactive.io/ns#None` indicating that the event has no restrictions
-* `https://www.openactive.io/ns#Male` indicating that the event is restricted to the male gender
-* `https://www.openactive.io/ns#Female` indicating that the event is restricted to the female gender
+* `https://openactive.io/ns#None` indicating that the event has no restrictions
+* `https://openactive.io/ns#Male` indicating that the event is restricted to the male gender
+* `https://openactive.io/ns#Female` indicating that the event is restricted to the female gender
 
 <p>
 If the `genderRestriction` property is not supplied for an Event, then data 
@@ -1484,11 +1486,11 @@ Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
 
 <pre class="example" title="Gender restriction example"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Gym class",
-  "genderRestriction": "http://www.openactive.io/ns#Female"
+  "genderRestriction": "https://openactive.io/ns#Female"
 }
 </code>
 </pre>
@@ -1525,7 +1527,7 @@ Examples of using these are shown below:
 
 <pre class="example" title="Accessibility information"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -1551,7 +1553,7 @@ properties.
 
 <pre class="example" title="Parent-child Events"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "HeadlineEvent",
   "url": "http://www.example.org/events/1",
   "name": "Aquathlon Day",
@@ -1643,7 +1645,7 @@ The following example illustrates how these types are used.
 
 <pre class="example" title="Scheduled Series"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "ScheduledSeries",
   "url": "http://www.example.org/events/1",
   "name": "Wednesday Yoga",
@@ -1690,7 +1692,7 @@ type.
 
 <pre class="example" title="Headline Events"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "HeadlineEvent",
   "url": "http://www.example.org/events/1",
   "name": "Aquathlon Day",
@@ -1748,7 +1750,7 @@ type when describing courses of any duration.
 
 <pre class="example" title="Course Instance"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "CourseInstance",
   "url": "http://www.example.org/events/1",
   "name": "Sailing Course",
@@ -1822,18 +1824,19 @@ this grouping for data consumers, along with additional information such as
 images, a common description, etc.
 
 The following example illustrates using this type to group together adult swimming 
-sessions available from two different locations at different dates and times.
+sessions available from two different locations at different dates and times. 
+Event schedules are described further in the following section.
 
 <pre class="example" title="Event Series"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "EventSeries",
   "url": "http://www.example.org/events/1",
   "name": "Swim For Adults",
   "description": "Adult swimming session",
   "activity": [{
   "type": "Concept",
-  "prefLabel": "Swimming",
+  "prefLabel": "Swimming"
   }],
   "subEvent": [
     {
@@ -1850,7 +1853,7 @@ sessions available from two different locations at different dates and times.
         "startDate": "2017-01-01",
         "endDate": "2017-12-31",
         "repeatFrequency": "P1W",
-        "byDay": "http://schema.org/Wednesday",
+        "byDay": ["http://schema.org/Wednesday"],
         "startTime": "19:00",
         "endTime": "20:00",
         "duration": "PT1H"
@@ -1870,12 +1873,12 @@ sessions available from two different locations at different dates and times.
         "startDate": "2017-01-01",
         "endDate": "2017-12-31",
         "repeatFrequency": "P1W",
-        "byDay": "http://schema.org/Thursday",
+        "byDay": ["http://schema.org/Thursday"],
         "startTime": "18:00",
         "endTime": "20:00",
         "duration": "PT2H"
       }        
-    }, 
+    } 
   ]
 }
 </code>
@@ -2067,7 +2070,7 @@ The following example illustrates basic usage of the [`schema:eventSchedule`](ht
 
 <pre class="example" title="Adding an event schedule"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "SessionSeries",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -2078,7 +2081,7 @@ The following example illustrates basic usage of the [`schema:eventSchedule`](ht
      "startDate": "2017-01-01",
      "endDate": "2017-12-31",
      "repeatFrequency": "P1W",
-     "byDay": "http://schema.org/Wednesday",
+     "byDay": ["http://schema.org/Wednesday"],
      "startTime": "19:00",
      "endTime": "20:00",
      "duration": "PT1H",
@@ -2284,7 +2287,7 @@ The following example illustrates a simple place description including its name,
 
 <pre class="example" title="Describing a leisure centre"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
@@ -2356,7 +2359,7 @@ The following example shows how to markup a simple address:
 <pre class="example" title="An Address">
 <code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "PostalAddress",
   "streetAddress": "North Parade Road",
   "addressLocality": "Bath",
@@ -2408,7 +2411,7 @@ The following example illustrates how to use the
 
 <pre class="example" title="Locating a leisure centre"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
@@ -2452,6 +2455,7 @@ This avoids the need for data consumers to have to rely on the `name` value to i
 
 <pre class="example" title="Amenity example"><code>
 {
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Place",
   "amenityFeature": [
      {
@@ -2473,6 +2477,7 @@ In the meantime additional types of amenities can be specified using the more ge
 
 <pre class="example" title="Generic amenity type example"><code>
 {
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Place",
   "amenityFeature": [
      {
@@ -2494,7 +2499,7 @@ and [`schema:containsPlace`](https://schema.org/containsPlace)). The following e
 
 <pre class="example" title="Describing a leisure centre"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Place",
   "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
   "name": "Bath Sports and Leisure Centre",
@@ -2606,7 +2611,7 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 
 <pre class="example" title="Specifying an organiser"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
@@ -2682,7 +2687,7 @@ The [[OpenActive-Activity-List]] provides an openly licensed standard activity l
       <td>Reference to the license under which the activity list has been published</td>
     </tr>
     <tr>
-      <td>[`oa:concepts`](https://www.openactive.org/ns#concepts)</td>
+      <td>[`oa:concept`](https://www.openactive.org/ns#concept)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>Array of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
       <td>List of concepts that make up the list</td>
@@ -2694,13 +2699,13 @@ The following example illustrates the basic structure of an activity list:
 
 <pre class="example" title="Publishing an activity list"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "ConceptScheme",
   "id": "http://www.example.org/activity-list",
   "url": "http://www.example.org/activity-list",
   "title": "Activity List",
   "description": "An example activity list",
-  "concepts": [{
+  "concept": [{
     "type": "Concept",
     "prefLabel": "Martial Arts",
     "narrower": {
@@ -2783,11 +2788,11 @@ The following markup illustrates how to describe a single activity.
 
 <pre class="example" title="Publishing an activity list"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Concept",
   "id": "http://www.example.org/activity-list#tai-chi",
   "prefLabel": "Tai Chi",
-  "altLabel": "Tai-Chi",
+  "altLabel": ["Tai-Chi"],
   "inScheme": "http://www.example.org/activity-list"
 }
 </code>
@@ -2862,15 +2867,16 @@ The following example shows an event which offers a price for attending a single
 
 <pre class="example" title="Describing an Offer"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "Event",
   "url": "http://www.example.org/events/1",
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "duration": "PT60M",
   "offers": [{
+    "type": "Offer",
     "name": "Single session",
-    "price": "5",
+    "price": 5,
     "priceCurrency": "GBP"
   }]  
 }
@@ -3113,7 +3119,7 @@ table remains for use in the first slot, while the second has three.
 
 <pre class="example" title="Describing use of a facility"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "FacilityUse",
   "url": "http://www.example.org/facility-use/1",
   "name": "Example Leisure Centre Table Tennis",
@@ -3126,13 +3132,16 @@ table remains for use in the first slot, while the second has three.
       "type": "PostalAddress",
       "streetAddress": "1 High Street",
       "addressLocality": "Bristol",
-      "postalCode": "BS1 4SD"
+      "addressRegion": "Somerset",
+      "postalCode": "BS1 4SD",
+      "addressCountry": "GB"
     }  
   },
-  "offers": [
+  "offer": [
       {
+        "type": "Offer",
         "name": "30 minute hire",
-        "price": "10",
+        "price": 10,
         "priceCurrency": "GBP"
       }
   ],
@@ -3154,13 +3163,14 @@ table remains for use in the first slot, while the second has three.
         "duration": "PT30M",   
         "remainingUses": 3,
         "maximumUses": 4,
-         "offers": [
+        "offer": [
            {
+              "type": "Offer",
               "name": "30 minute hire",
-              "price": "15",
+              "price": 15,
               "priceCurrency": "GBP"
            }
-         ]
+        ]
       }
   ] 
 }
@@ -3173,13 +3183,16 @@ two Slots, but the second is no longer available.</p>
 
 <pre class="example" title="Describing use of an individual facility"><code>
 {
-  "@context": "https://www.openactive.io/ns/oa.jsonld",
+  "@context": "https://openactive.io/ns/oa.jsonld",
   "type": "IndividualFacilityUse",
   "url": "http://www.example.org/facility-use/2",
   "name": "Play Tenns on the Main Tennis Court",
   "description": "Tennis courts are available for 30 min sessions",
   "image": [
-     "http://example.org/images/1.jpg"
+     {
+       "type": "ImageObject",
+       "url": "http://example.org/images/1.jpg"
+     }  
   ],
   "activity": "Tennis",
   "location": {
@@ -3192,7 +3205,9 @@ two Slots, but the second is no longer available.</p>
          "type": "PostalAddress",
          "streetAddress": "1 High Street",
          "addressLocality": "Bristol",
-         "postalCode": "BS1 4SD"
+         "addressRegion": "Somerset",
+         "postalCode": "BS1 4SD",
+         "addressCountry": "GB"
        }  
     }
   },
@@ -3318,7 +3333,7 @@ publication of opportunity data.
 #### Defining and Using Custom Namespaces
 
 The data model described in this specification is defined in 
-the [OpenActive JSON-LD context](https://www.openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]].
+the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]].
 
 They <em class="rfc2119">SHOULD</em> also:
 
@@ -3375,7 +3390,7 @@ the following example shows how to use this extension:
 <pre class="example" title="Example of a custom context"><code>
 {
   "@context": [
-    "https://www.openactive.io/ns/oa.jsonld",
+    "https://openactive.io/ns/oa.jsonld",
     "https://example.org/custom.jsonld"
   ],
   "type": "Event",

@@ -1840,7 +1840,7 @@ Event schedules are described further in the following section.
   }],
   "subEvent": [
     {
-      "type": "ScheduledSession",
+      "type": "SessionSeries",
       "url": "http://www.example.org/events/2",
       "name": "Swim For Adults",
       "location": {
@@ -1856,11 +1856,12 @@ Event schedules are described further in the following section.
         "byDay": ["http://schema.org/Wednesday"],
         "startTime": "19:00",
         "endTime": "20:00",
-        "duration": "PT1H"
+        "duration": "PT1H",
+        "scheduledEventType": "ScheduledSession"
       }        
     },
     {
-      "type": "ScheduledSession",
+      "type": "SessionSeries",
       "url": "http://www.example.org/events/2",
       "name": "Swim For Adults",
       "location": {
@@ -1876,7 +1877,8 @@ Event schedules are described further in the following section.
         "byDay": ["http://schema.org/Thursday"],
         "startTime": "18:00",
         "endTime": "20:00",
-        "duration": "PT2H"
+        "duration": "PT2H",
+        "scheduledEventType": "ScheduledSession"
       }        
     } 
   ]

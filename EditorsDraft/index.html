@@ -2243,7 +2243,7 @@ describe a [`schema:Place`](https://schema.org/Place).
       <td>The street address of the location, expressed as a [`schema:PostalAddress`](https://schema.org/PostalAddress).
       Where possible publishers <em class="rfc2119">MUST</em> specify an address as 
       an object. Publishers <em class="rfc2119">MUST</em> only use a String value 
-      if they only have a generic location name or free text field, e.g. "In Victoria Park, near the lake"</td>
+      if all have is a generic location name, e.g. "In Victoria Park, near the lake"</td>
     </tr>
     <tr>
       <td>[`schema:geo`](https://schema.org/geo)</td>
@@ -3181,7 +3181,7 @@ table remains for use in the first slot, while the second has three.
 
 <p>The following example shows how to use the data model to publish opportunities 
 to hire a specific tennis court. As this is an <code>oa:IndividualFacilityUse</code> 
-the location field provides more detail on the location. The example describes 
+the location property provides more detail on the location. The example describes 
 two Slots, but the second is no longer available.</p>
 
 <pre class="example" title="Describing use of an individual facility"><code>

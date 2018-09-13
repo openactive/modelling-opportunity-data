@@ -2851,9 +2851,10 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
     </tr>
     <tr>
       <td>[`schema:priceCurrency`](https://schema.org/priceCurrency)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
-      <td>The currency of the offer price. Specified as a 3-letter ISO 4217 value</td>
+      <td>The currency of the offer price. Specified as a 3-letter ISO 4217 value. If an Offer has a zero price, then 
+      this property is not required. Otherwise the currency MUST be specified.</td>
     </tr>
     <tr>
       <td>[`oa:ageRange`](https://openactive.io/ageRange)</td>

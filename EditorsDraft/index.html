@@ -3048,6 +3048,12 @@ allow a participant to use that facility for a specified time and duration.
       <td>A free text description of the product or service</td>
     </tr>
     <tr>
+      <td>[`schema:provider`](https://schema.org/provider)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>[`schema:Organization`](https://schema.org/Organization)</td>
+      <td>The organisation responsible for providing the facility</td>
+    </tr>
+    <tr>
       <td>[`schema:image`](https://schema.org/image)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Array of [`schema:ImageObject`](https://schema.org/ImageObject)</td>
@@ -3067,6 +3073,30 @@ allow a participant to use that facility for a specified time and duration.
       <td>The location of the facility being used. This will either be a generic location, e.g. a leisure centre or sports hall for equipment or more temporary spaces, or a specific <code>schema:SportsActivityLocation</code> when describing opportunities to use 
       a specific identifiable facility (<code>oa:IndividualFacilityUse</code>)</td>
     </tr>
+    <tr>
+      <td>[`oa:accessibilitySupport`](https://openactive.io/accessibilitySupport)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of String or [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
+      <td>Used to specify the types of disabilities or impairments that are supported at a facility</td>
+    </tr>    
+    <tr>
+      <td>[`oa:accessibilityInformation`](https://openactive.io/accessibilitySupport)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Provide additional, specific documentation for participants about how disabilities are, or can be supported at a facility.</td>
+    </tr>  
+    <tr>
+      <td>[`oa:attendeeInstructions`](https://openactive.io/attendeeInstructions)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Provides additional notes and instructions for users of a facility. E.g. more information on how to find it, what to bring, etc.</td>
+    </tr>   
+    <tr>
+      <td>[`oa:category`](https://openactive.io/category)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of String or [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
+      <td>Provides a set of tags that help categorise and describe a facility.</td>
+    </tr>       
     <tr>
       <td>[`schema:event`](https://schema.org/events)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
@@ -3125,6 +3155,10 @@ table remains for use in the first slot, while the second has three.
   "name": "Example Leisure Centre Table Tennis",
   "description": "Table tennis tables are available to hire for thirty minute slots",
   "activity": "Table Tennis",
+  "provider": {
+    "type": "Organization",
+    "name": "Leisure Centre Ltd"
+  },
   "location": {
     "type": "Place",
     "name": "Example Leisure Centre",
@@ -3195,6 +3229,10 @@ two Slots, but the second is no longer available.</p>
      }  
   ],
   "activity": "Tennis",
+  "provider": {
+    "type": "Organization",
+    "name": "Leisure Centre Ltd"
+  },
   "location": {
     "type": "SportsActivityLocation",
     "name": "Main Tennis Court",

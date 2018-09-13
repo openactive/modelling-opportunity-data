@@ -1051,7 +1051,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`oa:category`](https://openactive.io/category)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
+      <td>Array of String or [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
       <td>Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.</td>
     </tr>
     <tr>
@@ -1327,14 +1327,9 @@ more general [`oa:category`](https://openactive.io/category) property.
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "category": [{
-    "type": "Concept",
-    "prefLabel": "Suitable For All"
-    },
-    {
-    "type": "Concept",
-    "prefLabel": "Low Intensity"
-  }],
+  "category": [
+    "Suitable For All", "Low Intensity"
+  ],
   "level": [{
     "type": "Concept",
     "prefLabel": "Beginner"
@@ -1344,8 +1339,10 @@ more general [`oa:category`](https://openactive.io/category) property.
 </pre>
 
 <p>
-Where an application is using a controlled vocabulary it 
-<em class="rfc2119">SHOULD</em> publish that vocabulary as structured data.
+Category tags can be specified as either a simple array of string values or as 
+Concepts. This allows publishers to include values from a controlled vocabulary if they use 
+one in their application. In this case the vocabulary 
+<em class="rfc2119">SHOULD</em> also be published as structured data.
 </p>
 
 <div class="note">

@@ -834,8 +834,7 @@ This specification provides three properties for identifying resources:
  indexing opportunity data <em class="rfc2119">SHOULD</em> use this as the unique identifier for the resource
 * [`schema:url`](https://schema.org/url) - provides a link to a public web page about the resource. Further machine-readable metadata 
 <em class="rfc2119">MAY</em> be discoverable from that web page. Applications <em class="rfc2119">MUST</em> be able to use this URL as a means for providing users with a link to more information about a resource
-* [`schema:identifier`](https://schema.org/identifier) - provides a means of sharing non-URI identifiers for a resource, e.g. a company or 
-registration number for an Organization, or an internal identifier for an Event. Applications <em class="rfc2119">MAY</em> use this 
+* [`schema:identifier`](https://schema.org/identifier) - provides a means of sharing other identifiers for a resource, e.g. a company or registration number for an Organization, or an internal identifier for an Event. Other public identifiers can be via a [`schema:PropertyValue`](https://schema.org/PropertyValue). Applications <em class="rfc2119">MAY</em> use this 
 as a unique identifier for the resource, if there is no `@id` available.
 
 In short, the `@id` property provides a unique global identifier, while the `schema:url` provides a means to provide a link to 
@@ -930,8 +929,9 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>
-      <td>A local identifier for the resource</td>
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
     </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
@@ -2206,9 +2206,10 @@ describe a [`schema:Place`](https://schema.org/Place).
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>String or Number</td>
-      <td>A local identifier for the resource</td>
-    </tr>    
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
+    </tr>   
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
@@ -2567,9 +2568,10 @@ Both the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>
-      <td>A local identifier for the resource</td>
-    </tr>  
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
+    </tr>
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">RECOMMENDED</em> for Organization. 
@@ -2824,9 +2826,10 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>
-      <td>A local identifier for the resource</td>
-    </tr>  
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
+    </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
@@ -2926,9 +2929,10 @@ for hire.
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>
-      <td>A local identifier for the resource</td>
-    </tr>  
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
+    </tr>
     <tr>
       <td>[`oa:facilityUse`](https://openactive.io/facilityUse)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
@@ -3032,8 +3036,9 @@ allow a participant to use that facility for a specified time and duration.
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>      
-      <td>A local identifier for the product</td>
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
     </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>

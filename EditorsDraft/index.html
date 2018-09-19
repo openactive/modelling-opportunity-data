@@ -2634,7 +2634,6 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
 
-
 List of Physical Activities are controlled vocabularies published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. That 
 standard covers all the requirements [outlined in the concept model](#physical-activities), allowing:
 
@@ -2767,13 +2766,13 @@ The following properties from the [[SKOS]] specification can be used to describe
     <tr>
       <td>[`skos:broader`](https://www.w3.org/2009/08/skos-reference/skos.html#broader)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>URI</td>
+      <td>Array of URI</td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi".</td>
     </tr>
     <tr>
       <td>[`skos:narrower`](https://www.w3.org/2009/08/skos-reference/skos.html#narrower)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>URI</td>
+      <td>Array of URI</td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts"</td>
     </tr>
     <tr>

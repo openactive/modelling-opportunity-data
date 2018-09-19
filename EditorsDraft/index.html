@@ -2021,7 +2021,7 @@ of an event, e.g. to populate a calendar
     </tr>
     <tr>
       <td>[`oa:scheduledEventType`](https://openactive.io/scheduledEventType)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
       <td>Specifies the type that a data consumer should assign to Events that are 
       generated from this schedule.</td>
@@ -2061,6 +2061,9 @@ Specifically we recommend that publisher SHOULD provide:
 a known end time
 * a [`schema:startTime`](https://schema.org/startTime) and [`schema:endTime`](https://schema.org/endTime) 
 property to indicate when the events will take place
+* a [`oa:scheduledEventType`] that will indicate the type of Event that this schedule generates. This is important to ensure 
+that data consumers can properly apply rules for parent-child relationships between 
+events
 
 For Events that are intended to be bookable then publishers SHOULD also provide 
 the [`oa:idTemplate`](https://openactive.io/idTemplate) and [`oa:urlTemplate`](https://openactive.io/urlTemplate) properties.

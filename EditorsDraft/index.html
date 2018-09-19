@@ -1990,8 +1990,9 @@ of an event, e.g. to populate a calendar
     <tr>
       <td>[`schema:byDay`](https://pending.schema.org/byDay)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of [`schema:DayOfWeek`](https://schema.org/DayOfWeek)</td>
-      <td>Lists the day(s) of the week during which the Events will take place.</td>
+      <td>Array of [`schema:DayOfWeek`](https://schema.org/DayOfWeek) or Array of String</td>
+      <td>Lists the day(s) of the week during which the Events will take place. When using 
+      string values, this <em class="rfc2119">MUST</em> conform to <a href="https://icalendar.org/iCalendar-RFC-5545/3-3-10-recurrence-rule.html">iCal BYDAY rule</a>.</td>
     </tr>  
     <tr>
       <td>[`schema:byMonth`](https://pending.schema.org/byMonth)</td>

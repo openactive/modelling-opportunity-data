@@ -989,7 +989,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       [`schema:DateTime`](https://schema.org/DateTime).
       </p>
       <p>While this property is marked as <em class="rfc2119">OPTIONAL</em>, a data publisher <em class="rfc2119">MUST</em> 
-      provide either a [`schema:startDate`](https://schema.org/startDate) or specify a [`schema:schedule`](https://pending.schema.org/Schedule) for an event. 
+      provide either a [`schema:startDate`](https://schema.org/startDate) or an [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) for an event. 
       </td>
     </tr>
     <tr>
@@ -1666,10 +1666,10 @@ The following example illustrates how these types are used.
 <pre class="example" title="Scheduled Series"><code>
 {
   "@context": "https://openactive.io/",
-  "type": "ScheduledSeries",
+  "type": "SessionSeries",
   "url": "http://www.example.org/events/1",
   "name": "Wednesday Yoga",
-  "description": "A day of aquathlon races",
+  "description": "Yoga on a Wednesday",
   "startDate": "2018-01-01",
   "endDate": "2018-12-31"
   "subEvent": [
@@ -1701,6 +1701,25 @@ Where an [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) is p
 a [`oa:SessionSeries`](https://openactive.io/SessionSeries) then it MUST include a 
 [`oa:scheduledEventType`](https://openactive.io/scheduledEventType) property with a value 
 of [`oa:ScheduledSession`](https://openactive.io/ScheduledSession)
+
+In addition to the above, there are some other changes that apply to these type 
+that override conformance rules defined for [`schema:Event`](https://schema.org/Event).
+
+For an [`oa:ScheduledSession`](https://openactive.io/ScheduledSession):
+
+* it MUST NOT have either a [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) or a [`schema:subEvent`](https://schema.org/subEvent). They are individual instances 
+of events.
+* the `schema:startDate` property is REQUIRED. This will either be explicitly provided or derived as part of generating it 
+from a `Schedule`
+* The `schema:url` property is RECOMMENDED
+* The `schema:eventStatus` property is RECOMMENDED
+* The `schema:description`, `schema:image`, `schema:organizer`, `oa:ageRange`, `oa:genderRestriction` and `oa:level` properties 
+are OPTIONAL. This information can be provided and inherited from the parent `oa:SessionSeries`
+
+For an [`oa:SessionSeries`](https://openactive.io/SessionSeries):
+
+* The `schema:startDate` and `schema:endDate` properties are OPTIONAL
+* The `schema:eventStatus` property is OPTIONAL
 
 In addition to the normal rules around property inheritance, data consumers 
 MAY also assume that Offers provided for a [`oa:SessionSeries`](https://openactive.io/SessionSeries) also apply to 
@@ -1759,7 +1778,7 @@ that includes a summary of its programme of activities.
 
 A [`oa:HeadlineEvent`](https://openactive.io/HeadlineEvent) is an event in 
 its own right, and MUST NOT have an `schema:eventSchedule` property. Publishers 
-MUST provide a start date and optionally end date and duration for the event.
+MUST provide a `schema:startDate`. 
 
 As with the generic type, any Offers provided for a 
 [`oa:HeadlineEvent`](https://openactive.io/HeadlineEvent) apply to that 
@@ -1920,6 +1939,9 @@ Event schedules are described further in the following section.
 The [`schema:EventSeries`](https://pending.schema.org/EventSeries) type can be used 
 as a parent for any type of event, including the generic [`schema:Event`](https://www.schema.org/Event) 
 type.
+
+The `schema:location`, `schema:startDate` and `schema:endDate` propertes are 
+only RECOMMENDED.
 
 <div class="note" title="Grouping CourseInstance">
 We note however that when grouping together [`schema:CourseInstance`](https://pending.schema.org/CourseInstance) 

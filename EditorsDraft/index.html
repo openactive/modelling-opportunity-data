@@ -1548,7 +1548,7 @@ This type of relationship between events can be described using the
 [`schema:subEvent`](https://schema.org/subEvent) and [`schema:superEvent`](https://schema.org/superEvent) 
 properties. Note on each occasion within this specification that a relationship is 
 represented using [`schema:subEvent`](https://schema.org/subEvent], the inverse is also 
-possible using [`schema:superEvent`](https://schema.org/superEvent] and conformance rules MUST be adapted accordingly.
+possible using [`schema:superEvent`](https://schema.org/superEvent) and conformance rules MUST be adapted accordingly.
 
 <pre class="example" title="Parent-child Events"><code>
 {
@@ -1667,12 +1667,23 @@ The following example illustrates how these types are used.
 
 Publishers SHOULD use the [`oa:SessionSeries`](https://openactive.io/SessionSeries) type for describing Events that 
 occur on a regular schedule. The child events of 
-a [`oa:SessionSeries`](https://openactive.io/SessionSeries)provided in a `subEvent` property MUST all be 
+a [`oa:SessionSeries`](https://openactive.io/SessionSeries) provided in a [`schema:subEvent`](https://schema.org/subEvent) property MUST all be 
 of the [`oa:ScheduledSession`](https://openactive.io/ScheduledSession) type.
+
+As an [`oa:SessionSeries`](https://openactive.io/SessionSeries) is intended to be 
+a parent for other events, then it MUST have either a [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) which 
+describes the schedule for the subevents, OR must be explicitly associated with 
+those events via a [`schema:subEvent`](https://schema.org/subEvent) (or [`schema:superEvent`](https://schema.org/superEvent)) 
+property.
+
+Where an [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) is provided for 
+a [`oa:SessionSeries`](https://openactive.io/SessionSeries) then it MUST include a 
+[`oa:scheduledEventType`](https://openactive.io/scheduledEventType) property with a value 
+of [`oa:ScheduledSession`](https://openactive.io/ScheduledSession)
 
 In addition to the normal rules around property inheritance, data consumers 
 MAY also assume that Offers provided for a [`oa:SessionSeries`](https://openactive.io/SessionSeries) also apply to 
-their child events, of type [`oa:ScheduledSession`](https://openactive.io/ScheduledSession). 
+their child events, of type [`oa:ScheduledSession`](https://openactive.io/ScheduledSession).  
 
 This is in the only time that Offers may be inherited between types. This is 
 permitted here as the parent Event exists to describe a series of sessions. The 

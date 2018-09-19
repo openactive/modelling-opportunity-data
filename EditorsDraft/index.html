@@ -834,8 +834,7 @@ This specification provides three properties for identifying resources:
  indexing opportunity data <em class="rfc2119">SHOULD</em> use this as the unique identifier for the resource
 * [`schema:url`](https://schema.org/url) - provides a link to a public web page about the resource. Further machine-readable metadata 
 <em class="rfc2119">MAY</em> be discoverable from that web page. Applications <em class="rfc2119">MUST</em> be able to use this URL as a means for providing users with a link to more information about a resource
-* [`schema:identifier`](https://schema.org/identifier) - provides a means of sharing non-URI identifiers for a resource, e.g. a company or 
-registration number for an Organization, or an internal identifier for an Event. Applications <em class="rfc2119">MAY</em> use this 
+* [`schema:identifier`](https://schema.org/identifier) - provides a means of sharing other identifiers for a resource, e.g. a company or registration number for an Organization, or an internal identifier for an Event. Other public identifiers can be via a [`schema:PropertyValue`](https://schema.org/PropertyValue). Applications <em class="rfc2119">MAY</em> use this 
 as a unique identifier for the resource, if there is no `@id` available.
 
 In short, the `@id` property provides a unique global identifier, while the `schema:url` provides a means to provide a link to 
@@ -890,6 +889,35 @@ Applications that consume opportunity data <em class="rfc2119">MUST</em> ignore
 any properties that they don't understand. This allows data publishing practices 
 within the sector to evolve as required.
 
+## Controlled Vocabularies
+
+When the value of a property might be one of a fixed set of values, it can be useful 
+to publish that list of values as a "controlled vocabulary". 
+
+This allows a publisher to publish the list of values, with supporting documentation 
+and definitions in a machine-readable format. We use the existing [[SKOS]] 
+standard as a means of publishing these vocabularies.
+
+A number of properties in this data model allow data publishers to use values 
+from a controlled vocabulary, e.g. `oa:activity`, `oa:level`, `oa:category`, etc.
+
+Publishers <em class="rfc2119">SHOULD</em> publish the controlled vocabularies referenced from 
+their data in a machine-readable format, under an open licence.
+
+The Open Active Community group MAY create and recommend the use of specific 
+controlled vocabularies to help improve the consistency of how data is published.
+
+Publishers SHOULD use values from standard vocabularies where available.
+
+For example, the community group is developing a controlled vocabulary that defines 
+a standard activity list. Values from this vocabulary can be used in the `oa:activity` 
+property. 
+
+The OpenActive Community Group may decide to define and recommend 
+some controlled vocabularies for use in these properties. At present the 
+values of these properties are left deliberately open to encourage publication 
+of open data that may inform future standardisation.
+
 ## Describing Events (<code>schema:Event</code>)
 
 <p>
@@ -930,8 +958,9 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>
-      <td>A local identifier for the resource</td>
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
     </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
@@ -960,7 +989,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       [`schema:DateTime`](https://schema.org/DateTime).
       </p>
       <p>While this property is marked as <em class="rfc2119">OPTIONAL</em>, a data publisher <em class="rfc2119">MUST</em> 
-      provide either a [`schema:startDate`](https://schema.org/startDate) or specify a [`schema:schedule`](https://pending.schema.org/Schedule) for an event. 
+      provide either a [`schema:startDate`](https://schema.org/startDate) or an [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) for an event. 
       </td>
     </tr>
     <tr>
@@ -994,9 +1023,9 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     </tr>
     <tr>
       <td>[`schema:organizer`](https://schema.org/organizer)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
-      <td>Array of [`schema:Person`](https://schema.org/Person) or [`schema:Organization`](https://schema.org/Organization)</td>
-      <td>One or more people or organizations responsible for running an event. An organizer might be an [`schema:Organization`](https://schema.org/Organization) or 
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>[`schema:Person`](https://schema.org/Person) or [`schema:Organization`](https://schema.org/Organization)</td>
+      <td>The person or organization responsible for running an event. An organizer might be an [`schema:Organization`](https://schema.org/Organization) or 
       a [`schema:Person`]((https://schema.org/Person).</td>
     </tr>
     <tr>
@@ -1007,13 +1036,13 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     </tr>
     <tr>
       <td>[`schema:maximumAttendeeCapacity`](https://schema.org/maximumAttendeeCapacity)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Integer</td>
       <td>The maximum capacity of the event</td>
     </tr>
     <tr>
       <td>[`schema:remainingAttendeeCapacity`](https://schema.org/remainingAttendeeCapacity)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Integer</td>
       <td>The number of places that are still available for the event</td>
     </tr>
@@ -1051,7 +1080,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     <tr>
       <td>[`oa:category`](https://openactive.io/category)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
+      <td>Array of String or [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
       <td>Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.</td>
     </tr>
     <tr>
@@ -1140,7 +1169,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
 
     <tr>
       <td>[`schema:offers`](https://schema.org/offers)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Array of [`schema:Offer`](https://schema.org/Offer)</td>
       <td>Provides one or more offers to book and participate in an Event</td>
     </tr>    
@@ -1327,14 +1356,9 @@ more general [`oa:category`](https://openactive.io/category) property.
   "description": "A tai chi class intended for beginners",
   "startDate": "2017-03-22T20:00:00-05:00",
   "duration": "PT60M",
-  "category": [{
-    "type": "Concept",
-    "prefLabel": "Suitable For All"
-    },
-    {
-    "type": "Concept",
-    "prefLabel": "Low Intensity"
-  }],
+  "category": [
+    "Suitable For All", "Low Intensity"
+  ],
   "level": [{
     "type": "Concept",
     "prefLabel": "Beginner"
@@ -1344,16 +1368,10 @@ more general [`oa:category`](https://openactive.io/category) property.
 </pre>
 
 <p>
-Where an application is using a controlled vocabulary it 
-<em class="rfc2119">SHOULD</em> publish that vocabulary as structured data.
+Category tags can be specified as either a simple array of string values or as 
+Concepts. This allows publishers to include values from a controlled vocabulary if they use 
+one in their application.
 </p>
-
-<div class="note">
-In future, the OpenActive Community Group may decide to define and recommend 
-some controlled vocabularies for use in these properties. At present the 
-values of these properties are left deliberately open to encourage publication 
-of open data that may inform future standardisation.
-</div>
 
 ### Adding programmes
 
@@ -1549,7 +1567,9 @@ different times of the day (the children).
 
 This type of relationship between events can be described using the 
 [`schema:subEvent`](https://schema.org/subEvent) and [`schema:superEvent`](https://schema.org/superEvent) 
-properties.
+properties. Note on each occasion within this specification that a relationship is 
+represented using [`schema:subEvent`](https://schema.org/subEvent], the inverse is also 
+possible using [`schema:superEvent`](https://schema.org/superEvent) and conformance rules MUST be adapted accordingly.
 
 <pre class="example" title="Parent-child Events"><code>
 {
@@ -1646,10 +1666,10 @@ The following example illustrates how these types are used.
 <pre class="example" title="Scheduled Series"><code>
 {
   "@context": "https://openactive.io/",
-  "type": "ScheduledSeries",
+  "type": "SessionSeries",
   "url": "http://www.example.org/events/1",
   "name": "Wednesday Yoga",
-  "description": "A day of aquathlon races",
+  "description": "Yoga on a Wednesday",
   "startDate": "2018-01-01",
   "endDate": "2018-12-31"
   "subEvent": [
@@ -1668,12 +1688,42 @@ The following example illustrates how these types are used.
 
 Publishers SHOULD use the [`oa:SessionSeries`](https://openactive.io/SessionSeries) type for describing Events that 
 occur on a regular schedule. The child events of 
-a [`oa:SessionSeries`](https://openactive.io/SessionSeries)provided in a `subEvent` property MUST all be 
+a [`oa:SessionSeries`](https://openactive.io/SessionSeries) provided in a [`schema:subEvent`](https://schema.org/subEvent) property MUST all be 
 of the [`oa:ScheduledSession`](https://openactive.io/ScheduledSession) type.
+
+As an [`oa:SessionSeries`](https://openactive.io/SessionSeries) is intended to be 
+a parent for other events, then it MUST have either a [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) which 
+describes the schedule for the subevents, OR must be explicitly associated with 
+those events via a [`schema:subEvent`](https://schema.org/subEvent) (or [`schema:superEvent`](https://schema.org/superEvent)) 
+property.
+
+Where an [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) is provided for 
+a [`oa:SessionSeries`](https://openactive.io/SessionSeries) then it MUST include a 
+[`oa:scheduledEventType`](https://openactive.io/scheduledEventType) property with a value 
+of [`oa:ScheduledSession`](https://openactive.io/ScheduledSession)
+
+In addition to the above, there are some other changes that apply to these type 
+that override conformance rules defined for [`schema:Event`](https://schema.org/Event).
+
+For an [`oa:ScheduledSession`](https://openactive.io/ScheduledSession):
+
+* it MUST NOT have either a [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) or a [`schema:subEvent`](https://schema.org/subEvent). They are individual instances 
+of events.
+* the `schema:startDate` property is REQUIRED. This will either be explicitly provided or derived as part of generating it 
+from a `Schedule`
+* The `schema:url` property is RECOMMENDED
+* The `schema:eventStatus` property is RECOMMENDED
+* The `schema:description`, `schema:image`, `schema:organizer`, `oa:ageRange`, `oa:genderRestriction` and `oa:level` properties 
+are OPTIONAL. This information can be provided and inherited from the parent `oa:SessionSeries`
+
+For an [`oa:SessionSeries`](https://openactive.io/SessionSeries):
+
+* The `schema:startDate` and `schema:endDate` properties are OPTIONAL
+* The `schema:eventStatus` property is OPTIONAL
 
 In addition to the normal rules around property inheritance, data consumers 
 MAY also assume that Offers provided for a [`oa:SessionSeries`](https://openactive.io/SessionSeries) also apply to 
-their child events, of type [`oa:ScheduledSession`](https://openactive.io/ScheduledSession). 
+their child events, of type [`oa:ScheduledSession`](https://openactive.io/ScheduledSession).  
 
 This is in the only time that Offers may be inherited between types. This is 
 permitted here as the parent Event exists to describe a series of sessions. The 
@@ -1728,7 +1778,7 @@ that includes a summary of its programme of activities.
 
 A [`oa:HeadlineEvent`](https://openactive.io/HeadlineEvent) is an event in 
 its own right, and MUST NOT have an `schema:eventSchedule` property. Publishers 
-MUST provide a start date and optionally end date and duration for the event.
+MUST provide a `schema:startDate`. 
 
 As with the generic type, any Offers provided for a 
 [`oa:HeadlineEvent`](https://openactive.io/HeadlineEvent) apply to that 
@@ -1890,6 +1940,9 @@ The [`schema:EventSeries`](https://pending.schema.org/EventSeries) type can be u
 as a parent for any type of event, including the generic [`schema:Event`](https://www.schema.org/Event) 
 type.
 
+The `schema:location`, `schema:startDate` and `schema:endDate` propertes are 
+only RECOMMENDED.
+
 <div class="note" title="Grouping CourseInstance">
 We note however that when grouping together [`schema:CourseInstance`](https://pending.schema.org/CourseInstance) 
 events, it may be more appropriate to describe associate them with a 
@@ -1993,8 +2046,9 @@ of an event, e.g. to populate a calendar
     <tr>
       <td>[`schema:byDay`](https://pending.schema.org/byDay)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of [`schema:DayOfWeek`](https://schema.org/DayOfWeek)</td>
-      <td>Lists the day(s) of the week during which the Events will take place.</td>
+      <td>Array of [`schema:DayOfWeek`](https://schema.org/DayOfWeek) or Array of String</td>
+      <td>Lists the day(s) of the week during which the Events will take place. When using 
+      string values, this <em class="rfc2119">MUST</em> conform to <a href="https://icalendar.org/iCalendar-RFC-5545/3-3-10-recurrence-rule.html">iCal BYDAY rule</a>.</td>
     </tr>  
     <tr>
       <td>[`schema:byMonth`](https://pending.schema.org/byMonth)</td>
@@ -2023,7 +2077,7 @@ of an event, e.g. to populate a calendar
     </tr>
     <tr>
       <td>[`oa:scheduledEventType`](https://openactive.io/scheduledEventType)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
       <td>Specifies the type that a data consumer should assign to Events that are 
       generated from this schedule.</td>
@@ -2058,12 +2112,14 @@ In practice we recommend that publishers provide as much detail in possible to
 allow data consumers to reliably expand a schedule into a calendar of events. 
 Specifically we recommend that publisher SHOULD provide:
 
-* one of the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) 
-and [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties
+* where an event occurs on a specific day, day of the month, or month, include one of the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) or [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties
 * an [`schema:endDate`](https://schema.org/endDate) to indicate if a schedule has 
 a known end time
 * a [`schema:startTime`](https://schema.org/startTime) and [`schema:endTime`](https://schema.org/endTime) 
 property to indicate when the events will take place
+* a [`oa:scheduledEventType`] that will indicate the type of Event that this schedule generates. This is important to ensure 
+that data consumers can properly apply rules for parent-child relationships between 
+events
 
 For Events that are intended to be bookable then publishers SHOULD also provide 
 the [`oa:idTemplate`](https://openactive.io/idTemplate) and [`oa:urlTemplate`](https://openactive.io/urlTemplate) properties.
@@ -2209,9 +2265,10 @@ describe a [`schema:Place`](https://schema.org/Place).
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>String or Number</td>
-      <td>A local identifier for the resource</td>
-    </tr>    
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
+    </tr>   
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
@@ -2243,7 +2300,7 @@ describe a [`schema:Place`](https://schema.org/Place).
       <td>The street address of the location, expressed as a [`schema:PostalAddress`](https://schema.org/PostalAddress).
       Where possible publishers <em class="rfc2119">MUST</em> specify an address as 
       an object. Publishers <em class="rfc2119">MUST</em> only use a String value 
-      if they only have a generic location name or free text field, e.g. "In Victoria Park, near the lake"</td>
+      if all have is a generic location name, e.g. "In Victoria Park, near the lake"</td>
     </tr>
     <tr>
       <td>[`schema:geo`](https://schema.org/geo)</td>
@@ -2570,9 +2627,10 @@ Both the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>
-      <td>A local identifier for the resource</td>
-    </tr>  
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
+    </tr>
     <tr>
       <td>[`schema:url`](https://schema.org/url)</td>
       <td><em class="rfc2119">RECOMMENDED</em> for Organization. 
@@ -2634,7 +2692,6 @@ The following example illustrates how to associate an [`schema:Organization`](ht
 </pre>
 
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
-
 
 List of Physical Activities are controlled vocabularies published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. That 
 standard covers all the requirements [outlined in the concept model](#physical-activities), allowing:
@@ -2768,13 +2825,13 @@ The following properties from the [[SKOS]] specification can be used to describe
     <tr>
       <td>[`skos:broader`](https://www.w3.org/2009/08/skos-reference/skos.html#broader)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>URI</td>
+      <td>Array of URI</td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi".</td>
     </tr>
     <tr>
       <td>[`skos:narrower`](https://www.w3.org/2009/08/skos-reference/skos.html#narrower)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>URI</td>
+      <td>Array of URI</td>
       <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts"</td>
     </tr>
     <tr>
@@ -2827,9 +2884,10 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>
-      <td>A local identifier for the resource</td>
-    </tr>  
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
+    </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
@@ -2851,9 +2909,10 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
     </tr>
     <tr>
       <td>[`schema:priceCurrency`](https://schema.org/priceCurrency)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
-      <td>The currency of the offer price. Specified as a 3-letter ISO 4217 value</td>
+      <td>The currency of the offer price. Specified as a 3-letter ISO 4217 value. If an Offer has a zero price, then 
+      this property is not required. Otherwise the currency MUST be specified.</td>
     </tr>
     <tr>
       <td>[`oa:ageRange`](https://openactive.io/ageRange)</td>
@@ -2928,9 +2987,10 @@ for hire.
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>
-      <td>A local identifier for the resource</td>
-    </tr>  
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
+    </tr>
     <tr>
       <td>[`oa:facilityUse`](https://openactive.io/facilityUse)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
@@ -2967,7 +3027,7 @@ for hire.
     </tr>
     <tr>
       <td>[`schema:offers`](https://schema.org/offers)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Array of [`schema:Offer`](https://schema.org/Offer)</td>
       <td>Describes offers to book and use this specific slot. If unspecified, then a client SHOULD use offers associated with the 
       related Facility Use.</td>
@@ -2984,7 +3044,7 @@ for hire.
     </tr>
     <tr>
       <td>[`oa:maximumUses`](https://openactive.io/maximumUses)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Number</td>
       <td>
       <p>Where a Slot describes the opportunity to 
@@ -3034,8 +3094,9 @@ allow a participant to use that facility for a specified time and duration.
     <tr>
       <td>[`schema:identifier`](https://schema.org/identifier)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Number or String</td>      
-      <td>A local identifier for the product</td>
+      <td>Number, String, [`schema:PropertyValue`](https://schema.org/PropertyValue) or 
+      an array of [`schema:PropertyValue`](https://schema.org/PropertyValue)</td>
+      <td>A local identifier for the resource.</td>
     </tr>
     <tr>
       <td>[`schema:name`](https://schema.org/name)</td>
@@ -3048,6 +3109,12 @@ allow a participant to use that facility for a specified time and duration.
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
       <td>A free text description of the product or service</td>
+    </tr>
+    <tr>
+      <td>[`schema:provider`](https://schema.org/provider)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>[`schema:Organization`](https://schema.org/Organization)</td>
+      <td>The organisation responsible for providing the facility</td>
     </tr>
     <tr>
       <td>[`schema:image`](https://schema.org/image)</td>
@@ -3069,6 +3136,30 @@ allow a participant to use that facility for a specified time and duration.
       <td>The location of the facility being used. This will either be a generic location, e.g. a leisure centre or sports hall for equipment or more temporary spaces, or a specific <code>schema:SportsActivityLocation</code> when describing opportunities to use 
       a specific identifiable facility (<code>oa:IndividualFacilityUse</code>)</td>
     </tr>
+    <tr>
+      <td>[`oa:accessibilitySupport`](https://openactive.io/accessibilitySupport)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of String or [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
+      <td>Used to specify the types of disabilities or impairments that are supported at a facility</td>
+    </tr>    
+    <tr>
+      <td>[`oa:accessibilityInformation`](https://openactive.io/accessibilitySupport)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Provide additional, specific documentation for participants about how disabilities are, or can be supported at a facility.</td>
+    </tr>  
+    <tr>
+      <td>[`oa:attendeeInstructions`](https://openactive.io/attendeeInstructions)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Provides additional notes and instructions for users of a facility. E.g. more information on how to find it, what to bring, etc.</td>
+    </tr>   
+    <tr>
+      <td>[`oa:category`](https://openactive.io/category)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of String or [`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
+      <td>Provides a set of tags that help categorise and describe a facility.</td>
+    </tr>       
     <tr>
       <td>[`schema:event`](https://schema.org/events)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
@@ -3127,6 +3218,10 @@ table remains for use in the first slot, while the second has three.
   "name": "Example Leisure Centre Table Tennis",
   "description": "Table tennis tables are available to hire for thirty minute slots",
   "activity": "Table Tennis",
+  "provider": {
+    "type": "Organization",
+    "name": "Leisure Centre Ltd"
+  },
   "location": {
     "type": "Place",
     "name": "Example Leisure Centre",
@@ -3180,7 +3275,7 @@ table remains for use in the first slot, while the second has three.
 
 <p>The following example shows how to use the data model to publish opportunities 
 to hire a specific tennis court. As this is an <code>oa:IndividualFacilityUse</code> 
-the location field provides more detail on the location. The example describes 
+the location property provides more detail on the location. The example describes 
 two Slots, but the second is no longer available.</p>
 
 <pre class="example" title="Describing use of an individual facility"><code>
@@ -3197,6 +3292,10 @@ two Slots, but the second is no longer available.</p>
      }  
   ],
   "activity": "Tennis",
+  "provider": {
+    "type": "Organization",
+    "name": "Leisure Centre Ltd"
+  },
   "location": {
     "type": "SportsActivityLocation",
     "name": "Main Tennis Court",

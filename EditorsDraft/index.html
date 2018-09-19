@@ -889,6 +889,35 @@ Applications that consume opportunity data <em class="rfc2119">MUST</em> ignore
 any properties that they don't understand. This allows data publishing practices 
 within the sector to evolve as required.
 
+## Controlled Vocabularies
+
+When the value of a property might be one of a fixed set of values, it can be useful 
+to publish that list of values as a "controlled vocabulary". 
+
+This allows a publisher to publish the list of values, with supporting documentation 
+and definitions in a machine-readable format. We use the existing [[SKOS]] 
+standard as a means of publishing these vocabularies.
+
+A number of properties in this data model allow data publishers to use values 
+from a controlled vocabulary, e.g. `oa:activity`, `oa:level`, `oa:category`, etc.
+
+Publishers <em class="rfc2119">SHOULD</em> publish the controlled vocabularies referenced from 
+their data in a machine-readable format, under an open licence.
+
+The Open Active Community group MAY create and recommend the use of specific 
+controlled vocabularies to help improve the consistency of how data is published.
+
+Publishers SHOULD use values from standard vocabularies where available.
+
+For example, the community group is developing a controlled vocabulary that defines 
+a standard activity list. Values from this vocabulary can be used in the `oa:activity` 
+property. 
+
+The OpenActive Community Group may decide to define and recommend 
+some controlled vocabularies for use in these properties. At present the 
+values of these properties are left deliberately open to encourage publication 
+of open data that may inform future standardisation.
+
 ## Describing Events (<code>schema:Event</code>)
 
 <p>
@@ -1341,16 +1370,8 @@ more general [`oa:category`](https://openactive.io/category) property.
 <p>
 Category tags can be specified as either a simple array of string values or as 
 Concepts. This allows publishers to include values from a controlled vocabulary if they use 
-one in their application. In this case the vocabulary 
-<em class="rfc2119">SHOULD</em> also be published as structured data.
+one in their application.
 </p>
-
-<div class="note">
-In future, the OpenActive Community Group may decide to define and recommend 
-some controlled vocabularies for use in these properties. At present the 
-values of these properties are left deliberately open to encourage publication 
-of open data that may inform future standardisation.
-</div>
 
 ### Adding programmes
 

@@ -2180,7 +2180,7 @@ Publishers that are able to provide the required detail for a more complete
 In cases where a [`oa:PartialSchedule`](https://openactive.io/PartialSchedule) includes 
 enough information to generate a forthcoming calendar of events, then data consumers 
 should consider how to present this information in a way that will make it clear 
-to end users that the event details may be subsequent to change.
+to end users that the event details may be subject to change.
 </div> 
 
 #### Generating URLs and identifiers for scheduled events
@@ -3036,7 +3036,7 @@ interpretation are:
 
 These two properties can be combined to describe the full range of options available 
 to participants. Some combinations are restricted, for example a publisher 
-MUST NOT specific a `oa:prepayment` option if there advanced booking is not available.
+MUST NOT specify a `oa:prepayment` option if there advanced booking is not available.
 
 <p></p>
 
@@ -3147,7 +3147,7 @@ Examples of describing a Slot are given in the next section.
 
 ## Describing Facility Use (<code>oa:FacilityUse</code>, <code>oa:IndividualFacilityUse</code>)
 
-A Facility Use is a [product](https://schema.org/Product). It describes an opportunity to use either one of 
+A Facility Use is a subclass of [`schema:Product`](https://schema.org/Product). It describes an opportunity to use either one of 
 a group of facilities (<code>oa:FacilityUse</code>) or a individual facility 
 (<code>oa:IndividualFacilityUse</code>). 
 

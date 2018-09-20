@@ -904,7 +904,7 @@ from a controlled vocabulary, e.g. `oa:activity`, `oa:level`, `oa:category`, etc
 Publishers <em class="rfc2119">SHOULD</em> publish the controlled vocabularies referenced from 
 their data in a machine-readable format, under an open licence.
 
-The Open Active Community group MAY create and recommend the use of specific 
+The OpenActive Community group MAY create and recommend the use of specific 
 controlled vocabularies to help improve the consistency of how data is published.
 
 Publishers SHOULD use values from standard vocabularies where available.
@@ -1070,6 +1070,16 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       <td>[`schema:Schedule`](https://pending.schema.org/Schedule)</td>
       <td>A schedule defines a repeating time period used to describe a regularly occurring Event.</td>
     </tr>
+    <tr>
+      <td>[`oa:schedulingNote`](https://openactive.io/schedulingNote)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Provides a note from an organizer relating to how this Event is scheduled. 
+      For example "This event doesn't run during school holidays", or "This is a regular 
+      weekly session". Where possible publishers SHOULD provide machine-readable descriptions of 
+      schedules via the `schema:eventSchedule` property.</td>
+    </tr>
+
     <tr>
       <td>[`oa:activity`](https://openactive.io/activity)</td>
       <td><em class="rfc2119">REQUIRED</em></td>
@@ -2024,14 +2034,14 @@ of an event, e.g. to populate a calendar
     </tr>  
     <tr>
       <td>[`schema:startTime`](https://schema.org/startTime)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td><em class="rfc2119">REQUIRED</em></td>
       <td>String</td>
       <td>Specifies the [`schema:Time`](https://schema.org/Time) at which the 
       Events will take place.</td>
     </tr>  
     <tr>
       <td>[`schema:endTime`](https://schema.org/endTime)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td><em class="rfc2119">REQUIRED</em></td>
       <td>String</td>
       <td>Specifies the [`schema:Time`](https://schema.org/Time) at which the Events will end</td>
     </tr> 
@@ -2077,7 +2087,7 @@ of an event, e.g. to populate a calendar
     </tr>
     <tr>
       <td>[`oa:scheduledEventType`](https://openactive.io/scheduledEventType)</td>
-      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td><em class="rfc2119">REQUIRED</em></td>
       <td>String</td>
       <td>Specifies the type that a data consumer should assign to Events that are 
       generated from this schedule.</td>
@@ -2103,26 +2113,22 @@ of an event, e.g. to populate a calendar
   </tbody>   
 </table>
 
-A [`schema:Schedule`](https://pending.schema.org/Schedule) currently has few 
-required properties. This is to allow for publishers to provide partial schedules, 
-e.g. "repeats on a Tuesday" alongside an explicit list of forthcoming events via the 
-[`subEvent`](https://schema.org/subEvent) property.
+A [`schema:Schedule`](https://pending.schema.org/Schedule) is defined as having a number of required fields that will support the creation of events from the schedule it describes. As a minimum a data user will need to be provided with:
 
-In practice we recommend that publishers provide as much detail in possible to 
-allow data consumers to reliably expand a schedule into a calendar of events. 
-Specifically we recommend that publisher SHOULD provide:
-
-* where an event occurs on a specific day, day of the month, or month, include one of the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) or [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties
-* an [`schema:endDate`](https://schema.org/endDate) to indicate if a schedule has 
-a known end time
+* the [`schema:repeatFrequency`](https://schema.org/repeatFrequency) at 
+which the events will occur
 * a [`schema:startTime`](https://schema.org/startTime) and [`schema:endTime`](https://schema.org/endTime) 
-property to indicate when the events will take place
-* a [`oa:scheduledEventType`] that will indicate the type of Event that this schedule generates. This is important to ensure 
+properties to indicate when the events will take place
+* the [`oa:scheduledEventType`] that will indicate the type of Event that this schedule generates. This is important to ensure 
 that data consumers can properly apply rules for parent-child relationships between 
 events
 
+While marked as optional, publishers also need to provide additional information about the frequency, e.g. whether the event occurs on a specific day, day of the month, or month, by including one of the [`schema:byDay`](https://pending.schema.org/byDay), [`schema:byMonth`](https://pending.schema.org/byMonth) or [`schema:byMonthDay`](https://pending.schema.org/byMonthDay) properties
+
 For Events that are intended to be bookable then publishers SHOULD also provide 
 the [`oa:idTemplate`](https://openactive.io/idTemplate) and [`oa:urlTemplate`](https://openactive.io/urlTemplate) properties.
+
+In practice we recommend that publishers provide as much detail in possible to allow data consumers to reliably expand a schedule into a calendar of events. 
 
 The following example illustrates basic usage of the [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](https://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
 
@@ -2148,6 +2154,34 @@ The following example illustrates basic usage of the [`schema:eventSchedule`](ht
 }
 </code>
 </pre>
+
+#### Partial schedules
+
+There are cases when a system may only capture partial information about event 
+scheduling from its organizers, e.g. only that an event will run every Wednesday 
+but not its specific timing. Perhaps because these may 
+vary or the organizer needs to regularly confirm that events will actually run.
+
+While information on partial schedules can be provided as text via 
+the [`oa:schedulingNote`](https://openactive.io/schedulingNote) property, it 
+would be useful to have this in machine readable format where possible. 
+
+To support this publishers SHOULD use the [`oa:PartialSchedule`](https://openactive.io/PartialSchedule) type 
+for publishing partially defined schedules. This type is identical to `schema:Schedule` but has no 
+required properties.
+
+Publishers providing a [`oa:PartialSchedule`](https://openactive.io/PartialSchedule) MUST provide information on 
+the actual events as they are confirmed via the [`subEvent`](https://schema.org/subEvent) property.
+
+Publishers that are able to provide the required detail for a more complete 
+`schema:Schedule` SHOULD use that instead.
+
+<div class="note">
+In cases where a [`oa:PartialSchedule`](https://openactive.io/PartialSchedule) includes 
+enough information to generate a forthcoming calendar of events, then data consumers 
+should consider how to present this information in a way that will make it clear 
+to end users that the event details may be subsequent to change.
+</div> 
 
 #### Generating URLs and identifiers for scheduled events
 
@@ -2921,6 +2955,22 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
       <td>Indicates that an Offer is applicable to a specific age range. Specified as a [QuantitativeValue](https://schema.org/QuantitativeValue) with [minValue](https://schema.org/minValue) and [maxValue](https://schema.org/maxValue) properties. 
       </td>
     </tr>    
+    <tr>
+      <td>[`oa:advanceBooking`](https://openactive.io/advanceBooking)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Indicates whether to accept this offer, a participant must book in advance, 
+      whether they must pay on attending, or have option to do either.
+      </td>
+    </tr>    
+    <tr>
+      <td>[`oa:prepayment`](https://openactive.io/prepayment)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Indicates whether to accept this offer, a participant must pay in advance, 
+      pay when attending, or have the option to do either.
+      </td>
+    </tr>    
   </tbody>   
 </table>
 
@@ -2948,6 +2998,45 @@ The following example shows an event which offers a price for attending a single
 Schema.org provides [additional properties for describing Offers](https://schema.org/Offer). The above model highlights the properties 
 that support the most common, basic use case. Future versions of this specification may include more detail around describing offers.
 </div>
+
+### Advance booking and prepayment
+
+This specification defines two new properties that can be used to describe 
+whether advance booking and prepayment is supported for an Offer.
+
+The legal values for the [`oa:advanceBooking`](https://openactive.io/advanceBooking) and 
+[`oa:prepayment`](https://openactive.io/prepayment) properties and their 
+interpretation are:
+
+<table>
+  <thead>
+    <th>Value</th>
+    <th>`oa:advanceBooking`</th>
+    <th>`oa:prepayment`</th>
+  </thead>
+  <tbody>  
+    <tr>
+      <td>https://openactive.io/Required</td>
+      <td>Participants must book in advance</td>
+      <td>Participants must pay in advance</td>
+    </tr>
+    <tr>
+      <td>https://openactive.io/Optional</td>
+      <td>Participants have the option to book in advance</td>
+      <td>Participants may pay in advance or pay on arrival</td>
+    </tr>
+    <tr>
+      <td>https://openactive.io/None</td>
+      <td>Advance booking is not available. Users must turn up</td>
+      <td>Prepayment is not available. Users may be able to book in advance but 
+      must pay on the door</td>
+    </tr>        
+  </tbody>
+</table>
+
+These two properties can be combined to describe the full range of options available 
+to participants. Some combinations are restricted, for example a publisher 
+MUST NOT specific a `oa:prepayment` option if there advanced booking is not available.
 
 <p></p>
 
@@ -3058,7 +3147,7 @@ Examples of describing a Slot are given in the next section.
 
 ## Describing Facility Use (<code>oa:FacilityUse</code>, <code>oa:IndividualFacilityUse</code>)
 
-A Facility Use is a product. It describes an opportunity to use either one of 
+A Facility Use is a [product](https://schema.org/Product). It describes an opportunity to use either one of 
 a group of facilities (<code>oa:FacilityUse</code>) or a individual facility 
 (<code>oa:IndividualFacilityUse</code>). 
 
@@ -3190,7 +3279,7 @@ allow a participant to use that facility for a specified time and duration.
       products for individual facilities.</td>
     </tr>
     <tr>
-      <td>[`oa:groupFacilityUse`](https://openactive.io/groupFacilityUse)</td>
+      <td>[`oa:aggregateFacilityUse`](https://openactive.io/aggregateFacilityUse)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
       <td>[`oa:FacilityUse`](https://openactive.io/FacilityUse)</td>
       <td>Inverse of the [`oa:individualFacilityUse`](https://openactive.io/individualFacilityUse) property. Related an 

@@ -2958,17 +2958,19 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
     <tr>
       <td>[`oa:advanceBooking`](https://openactive.io/advanceBooking)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>String</td>
+      <td>[`oa:RequiredStatusType`](https://openactive.io/RequiredStatusType)</td>
       <td>Indicates whether to accept this offer, a participant must book in advance, 
       whether they must pay on attending, or have option to do either.
+      Values MUST be one of the three URIs defined by this specification (see below).
       </td>
     </tr>    
     <tr>
       <td>[`oa:prepayment`](https://openactive.io/prepayment)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>String</td>
+      <td>[`oa:RequiredStatusType`](https://openactive.io/RequiredStatusType)</td>
       <td>Indicates whether to accept this offer, a participant must pay in advance, 
       pay when attending, or have the option to do either.
+      Values MUST be one of the three URIs defined by this specification (see below).
       </td>
     </tr>    
   </tbody>   

@@ -2955,6 +2955,22 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
       <td>Indicates that an Offer is applicable to a specific age range. Specified as a [QuantitativeValue](https://schema.org/QuantitativeValue) with [minValue](https://schema.org/minValue) and [maxValue](https://schema.org/maxValue) properties. 
       </td>
     </tr>    
+    <tr>
+      <td>[`oa:advanceBooking`](https://openactive.io/advanceBooking)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Indicates whether to accept this offer, a participant must book in advance, 
+      whether they must pay on attending, or have option to do either.
+      </td>
+    </tr>    
+    <tr>
+      <td>[`oa:prepayment`](https://openactive.io/prepayment)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>String</td>
+      <td>Indicates whether to accept this offer, a participant must pay in advance, 
+      pay when attending, or have the option to do either.
+      </td>
+    </tr>    
   </tbody>   
 </table>
 
@@ -2982,6 +2998,45 @@ The following example shows an event which offers a price for attending a single
 Schema.org provides [additional properties for describing Offers](https://schema.org/Offer). The above model highlights the properties 
 that support the most common, basic use case. Future versions of this specification may include more detail around describing offers.
 </div>
+
+### Advance booking and prepayment
+
+This specification defines two new properties that can be used to describe 
+whether advance booking and prepayment is supported for an Offer.
+
+The legal values for the [`oa:advanceBooking`](https://openactive.io/advanceBooking) and 
+[`oa:prepayment`](https://openactive.io/prepayment) properties and their 
+interpretation are:
+
+<table>
+  <thead>
+    <th>Value</th>
+    <th>`oa:advanceBooking`</th>
+    <th>`oa:prepayment`</th>
+  </thead>
+  <tbody>  
+    <tr>
+      <td>https://openactive.io/Required</td>
+      <td>Participants must book in advance</td>
+      <td>Participants must pay in advance</td>
+    </tr>
+    <tr>
+      <td>https://openactive.io/Optional</td>
+      <td>Participants have the option to book in advance</td>
+      <td>Participants may pay in advance or pay on arrival</td>
+    </tr>
+    <tr>
+      <td>https://openactive.io/None</td>
+      <td>Advance booking is not available. Users must turn up</td>
+      <td>Prepayment is not available. Users may be able to book in advance but 
+      must pay on the door</td>
+    </tr>        
+  </tbody>
+</table>
+
+These two properties can be combined to describe the full range of options available 
+to participants. Some combinations are restricted, for example a publisher 
+MUST NOT specific a `oa:prepayment` option if there advanced booking is not available.
 
 <p></p>
 

@@ -1383,28 +1383,82 @@ Concepts. This allows publishers to include values from a controlled vocabulary 
 one in their application.
 </p>
 
-### Adding programmes
+### Adding programmes (`schema:Brand`)
 
 Events can be associated with a Programme using the 
 [`oa:programme`](https://openactive.io/programme) property. A programme
 is a [`schema:Brand`](https://schema.org/Brand) object.
 
-<pre class="example" title="Tagging an Event"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Rowing Class",
-  "description": "A rowing class for beginners",
-  "startDate": "2017-04-01T08:00:00Z",
-  "duration": "PT60M",
-  "programme": {
-    "type": "Brand",
-    "name": "Learn to Row",
-    "url": "https://www.britishrowing.org/go-rowing/learn-to-row/",
-    "description": "Getting started in rowing couldn’t be easier!"
+<table>
+  <thead>
+    <th>Property</th>
+    <th>Status</th>
+    <th>Format</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`@type`</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>Brand</td>
+    </tr>
+    <tr>
+      <td>`@id`</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>URI</td>
+      <td>A URI providing a unique identifier for the resource</td>
+    </tr>
+    <tr>
+      <td>[`schema:name`](https://schema.org/name)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>String</td>
+      <td>The name of the programme</td>
+    </tr>
+    <tr>
+      <td>[`schema:url`](https://schema.org/url)</td>
+      <td><em class="rfc2119">REQUIRED</em></td>
+      <td>URL</td>
+      <td>A URL to the homepage or other page about the programme</td>
+    </tr>
+    <tr>
+      <td>[`schema:description`](https://schema.org/description)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>String</td>
+      <td>A description of the programme</td>
+    </tr>
+    <tr>
+      <td>[`schema:logo`](https://schema.org/logo)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>[`schema:ImageObject`](https://schema.org/ImageObject)</td>
+      <td>Logo for the programme</td>
+    </tr>
+  </tbody>   
+</table>
+
+
+
+<pre class="example" title="Adding a programme"><code>
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Back to Netball",
+    "description": "A slightly more energetic way to get back in to Netball if you’ve had a break from the sport or for those who’d like to give something new a go. This is based on the traditional 7 a-side netball game and involves running and jumping. It’s a fun light hearted session, where we do netball skills (a bit of fitness – not too much!) and match play. We have players of all ages and abilities ranging from players in their 20’s through to 50’s!",
+    "attendeeInstructions": "Just wear proper trainers, comfy clothes and bring a drink.",
+    "startDate": "2017-04-01T08:00:00Z",
+    "duration": "PT60M",
+    "programme": {
+      "type": "Brand",
+      "name": "Back to Netball", 
+      "url": "https://www.englandnetball.co.uk/backtonetball/",
+      "description": "Running across England since 2010, over 60,000 women have taken part in Back to Netball and realised the benefits of getting involved.",
+      "logo": {
+        "type": "ImageObject",
+        "url": "http://hertsnetball.co.uk/js/plugins/imagemanager/files/B2N_logo.jpg"
+      }
+    }
   }
-}
 </code>
 </pre>
 
@@ -2688,14 +2742,20 @@ Both the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`
     <tr>
       <td>[`schema:logo`](https://schema.org/logo)</td>
       <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Array of [`schema:ImageObject`](https://schema.org/ImageObject)</td>
-      <td>Logo for an organization</td>
+      <td>[`schema:ImageObject`](https://schema.org/ImageObject)</td>
+      <td>Logo for the organization</td>
     </tr>
     <tr>
       <td>[`schema:telephone`](https://schema.org/telephone)</td>
       <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>String</td>
-      <td>Telephone number of an organization</td>
+      <td>Telephone number of the organization</td>
+    </tr>
+    <tr>
+      <td>[`schema:sameAs`](https://schema.org/sameAs)</td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
+      <td>Array of String</td>
+      <td>Lists the URL(s) of the official social media profile pages associated with the organization</td>
     </tr>
 
   </tbody>   

@@ -989,7 +989,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       [`schema:DateTime`](https://schema.org/DateTime).
       </p>
       <p>While this property is marked as <em class="rfc2119">OPTIONAL</em>, a data publisher <em class="rfc2119">MUST</em> 
-      provide either a [`schema:startDate`](https://schema.org/startDate) or an [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) for an event. 
+      provide either a [`schema:startDate`](https://schema.org/startDate) or at least one [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) for an event. 
       </td>
     </tr>
     <tr>
@@ -1066,7 +1066,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
     </tr>
     <tr>
       <td>`schema:eventSchedule`</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of <em class="rfc2119">OPTIONAL</em></td>
       <td>[`schema:Schedule`](https://pending.schema.org/Schedule)</td>
       <td>A schedule defines a repeating time period used to describe a regularly occurring Event.</td>
     </tr>
@@ -1962,17 +1962,19 @@ Event schedules are described further in the following section.
         "name": "ExampleCo Gym"
         ...
       },
-      "eventSchedule": {
-        "type": "Schedule",
-        "startDate": "2017-01-01",
-        "endDate": "2017-12-31",
-        "repeatFrequency": "P1W",
-        "byDay": ["https://schema.org/Wednesday"],
-        "startTime": "19:00",
-        "endTime": "20:00",
-        "duration": "PT1H",
-        "scheduledEventType": "ScheduledSession"
-      }        
+      "eventSchedule": [
+        {
+          "type": "Schedule",
+          "startDate": "2017-01-01",
+          "endDate": "2017-12-31",
+          "repeatFrequency": "P1W",
+          "byDay": [ "https://schema.org/Wednesday" ],
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "duration": "PT1H",
+          "scheduledEventType": "ScheduledSession"
+        }
+      ]
     },
     {
       "type": "SessionSeries",
@@ -1983,17 +1985,19 @@ Event schedules are described further in the following section.
         "name": "A. N. Other Gym"
         ...
       },
-      "eventSchedule": {
-        "type": "Schedule",
-        "startDate": "2017-01-01",
-        "endDate": "2017-12-31",
-        "repeatFrequency": "P1W",
-        "byDay": ["https://schema.org/Thursday"],
-        "startTime": "18:00",
-        "endTime": "20:00",
-        "duration": "PT2H",
-        "scheduledEventType": "ScheduledSession"
-      }        
+      "eventSchedule": [
+        {
+          "type": "Schedule",
+          "startDate": "2017-01-01",
+          "endDate": "2017-12-31",
+          "repeatFrequency": "P1W",
+          "byDay": [ "https://schema.org/Thursday" ],
+          "startTime": "18:00",
+          "endTime": "20:00",
+          "duration": "PT2H",
+          "scheduledEventType": "ScheduledSession"
+        }
+      ]
     } 
   ]
 }
@@ -2194,17 +2198,19 @@ The following example illustrates basic usage of the [`schema:eventSchedule`](ht
   "name": "Tai chi Class",
   "description": "A tai chi class intended for beginners",
   "duration": "PT60M",
-  "eventSchedule": {
-     "type": "Schedule",
-     "startDate": "2017-01-01",
-     "endDate": "2017-12-31",
-     "repeatFrequency": "P1W",
-     "byDay": ["https://schema.org/Wednesday"],
-     "startTime": "19:00",
-     "endTime": "20:00",
-     "duration": "PT1H",
-     "scheduledEventType": "ScheduledSession"
-  }  
+  "eventSchedule": [
+    {
+      "type": "Schedule",
+      "startDate": "2017-01-01",
+      "endDate": "2017-12-31",
+      "repeatFrequency": "P1W",
+      "byDay": [ "https://schema.org/Wednesday" ],
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "duration": "PT1H",
+      "scheduledEventType": "ScheduledSession"
+    }
+  ]
 }
 </code>
 </pre>
@@ -2234,7 +2240,7 @@ Publishers that are able to provide the required detail for a more complete
 In cases where a [`oa:PartialSchedule`](https://openactive.io/PartialSchedule) includes 
 enough information to generate a forthcoming calendar of events, then data consumers 
 should consider how to present this information in a way that will make it clear 
-to end users that the event details may be subsequent to change.
+to end users that the event details may be subject to change.
 </div> 
 
 #### Generating URLs and identifiers for scheduled events
@@ -3100,7 +3106,7 @@ interpretation are:
 
 These two properties can be combined to describe the full range of options available 
 to participants. Some combinations are restricted, for example a publisher 
-MUST NOT specific a `oa:prepayment` option if there advanced booking is not available.
+MUST NOT specify a `oa:prepayment` option if there advanced booking is not available.
 
 <p></p>
 
@@ -3211,7 +3217,7 @@ Examples of describing a Slot are given in the next section.
 
 ## Describing Facility Use (<code>oa:FacilityUse</code>, <code>oa:IndividualFacilityUse</code>)
 
-A Facility Use is a [product](https://schema.org/Product). It describes an opportunity to use either one of 
+A Facility Use is a subclass of [`schema:Product`](https://schema.org/Product). It describes an opportunity to use either one of 
 a group of facilities (<code>oa:FacilityUse</code>) or a individual facility 
 (<code>oa:IndividualFacilityUse</code>). 
 

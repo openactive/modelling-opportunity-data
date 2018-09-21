@@ -848,13 +848,13 @@ public resource. For example a platform hosting opportunity data may need to ass
 that is separate to its public web page.
 
 <pre class="example" title="Simple event description"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "id": "http://host.opportunity-data.com/id/12345",
-  "url": "http://my-leisure-centre.example.org/events/1",
-  "name": "Tai chi Class"
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "id": "http://host.opportunity-data.com/id/12345",
+    "url": "http://my-leisure-centre.example.org/events/1",
+    "name": "Tai chi Class"
+  }
 </code>
 </pre>
 
@@ -1199,49 +1199,49 @@ The following example shows a simple event description, including its start time
 </p>
 
 <pre class="example" title="Simple event description"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "attendeeInstructions": "Please wear trainers and comfortable clothing",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M"
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "attendeeInstructions": "Please wear trainers and comfortable clothing",
+    "startDate": "2017-03-22T20:00:00-05:00",
+    "duration": "PT60M"
+  }
 </code>
 </pre>
 
 This basic description can be improved by providing information about its location and organizer.
 
 <pre class="example" title="Adding a venue and an organizer"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "attendeeInstructions": "Please wear trainers and comfortable clothing",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "organizer": [{
-    "type": "Organization",
-    "url": "http://example.org/orgs/bristol-tai-chi",
-    "name": "Bristol Tai Chi"  
-  }],
-  "location": {
-    "type": "Place",
-    "name": "ExampleCo Gym",
-    "address": {
-      "type": "PostalAddress",
-      "streetAddress": "1 High Street",
-      "addressLocality": "Bristol",
-      "addressCountry": "GB",
-      "addressRegion": "Somerset",
-      "postalCode": "BS1 4SD"
-    }
-  }  
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "attendeeInstructions": "Please wear trainers and comfortable clothing",
+    "startDate": "2017-03-22T20:00:00-05:00",
+    "duration": "PT60M",
+    "organizer": [{
+      "type": "Organization",
+      "url": "http://example.org/orgs/bristol-tai-chi",
+      "name": "Bristol Tai Chi"  
+    }],
+    "location": {
+      "type": "Place",
+      "name": "ExampleCo Gym",
+      "address": {
+        "type": "PostalAddress",
+        "streetAddress": "1 High Street",
+        "addressLocality": "Bristol",
+        "addressCountry": "GB",
+        "addressRegion": "Somerset",
+        "postalCode": "BS1 4SD"
+      }
+    }  
+  }
 </code></pre>
 
 ### Relating events to Physical Activities
@@ -1254,21 +1254,21 @@ List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]).
 </p>
 
 <pre class="example" title="Using activities from an Activity List"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "activity": [{
-    "id": "https://openactive.io/activity-list#c16df6ed-a4a0-4275-a8c3-1c8cff56856f",
-    "type": "Concept",
-    "prefLabel": "Tai Chi",
-    "inScheme": "https://openactive.io/activity-list"
-  }]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "startDate": "2017-03-22T20:00:00-05:00",
+    "duration": "PT60M",
+    "activity": [{
+      "id": "https://openactive.io/activity-list#c16df6ed-a4a0-4275-a8c3-1c8cff56856f",
+      "type": "Concept",
+      "prefLabel": "Tai Chi",
+      "inScheme": "https://openactive.io/activity-list"
+    }]
+  }
 </code>
 </pre>
 
@@ -1288,17 +1288,17 @@ These properties can be used to provide some basic availability information for 
 </p>
 
 <pre class="example" title="Basic event availability"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "maximumAttendeeCapacity": 20,
-  "remainingAttendeeCapacity": 4
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "startDate": "2017-03-22T20:00:00-05:00",
+    "duration": "PT60M",
+    "maximumAttendeeCapacity": 20,
+    "remainingAttendeeCapacity": 4
+  }
 </code>
 </pre>
 
@@ -1326,16 +1326,16 @@ The following example shows a Tai chi class that has been cancelled:
 </p>
 
 <pre class="example" title="A cancelled event"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "eventStatus": "https://schema.org/EventCancelled"
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "startDate": "2017-03-22T20:00:00-05:00",
+    "duration": "PT60M",
+    "eventStatus": "https://schema.org/EventCancelled"
+  }
 </code>
 </pre>
 
@@ -1358,22 +1358,22 @@ more general [`oa:category`](https://openactive.io/category) property.
 </p>
 
 <pre class="example" title="Tagging an Event"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "category": [
-    "Suitable For All", "Low Intensity"
-  ],
-  "level": [{
-    "type": "Concept",
-    "prefLabel": "Beginner"
-  }]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "startDate": "2017-03-22T20:00:00-05:00",
+    "duration": "PT60M",
+    "category": [
+      "Suitable For All", "Low Intensity"
+    ],
+    "level": [{
+      "type": "Concept",
+      "prefLabel": "Beginner"
+    }]
+  }
 </code>
 </pre>
 
@@ -1506,16 +1506,16 @@ The following example illustrates how to specify an Event that is suitable for p
 </p>
 
 <pre class="example" title="Age range example"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "ageRange": {
-     "type": "QuantitativeValue",
-     "minValue": 60
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "ageRange": {
+       "type": "QuantitativeValue",
+       "minValue": 60
+    }
   }
-}
 </code>
 </pre>
 
@@ -1526,16 +1526,16 @@ no `maxValue` property.
 </p>
 
 <pre class="example" title="Age range - suitable for all example"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Exercise in the park",
-  "ageRange": {
-     "type": "QuantitativeValue",
-     "minValue": 0
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Exercise in the park",
+    "ageRange": {
+       "type": "QuantitativeValue",
+       "minValue": 0
+    }
   }
-}
 </code>
 </pre>
 
@@ -1551,9 +1551,9 @@ property can be used to specify these restrictions.
 Data publishers using this property MUST use one of the following values:
 </p>
 
-* `https://openactive.io/None` indicating that the event has no restrictions
-* `https://openactive.io/Male` indicating that the event is restricted to the male gender
-* `https://openactive.io/Female` indicating that the event is restricted to the female gender
+* `https://openactive.io/NoRestriction` indicating that the event has no restrictions
+* `https://openactive.io/MaleOnly` indicating that the event is restricted to the male gender
+* `https://openactive.io/FemaleOnly` indicating that the event is restricted to the female gender
 
 <p>
 If the `genderRestriction` property is not supplied for an Event, then data 
@@ -1567,13 +1567,13 @@ Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
 </p>
 
 <pre class="example" title="Gender restriction example"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Gym class",
-  "genderRestriction": "https://openactive.io/Female"
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Gym class",
+    "genderRestriction": "https://openactive.io/FemaleOnly"
+  }
 </code>
 </pre>
 
@@ -1608,17 +1608,17 @@ Examples of using these are shown below:
 </p>
 
 <pre class="example" title="Accessibility information"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "accessibilitySupport": ["Hearing Impairment", "Visual Impairment"],
-  "accessibilityInformation": "The location is fully accessible, please contact the organiser if you have questions"
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "startDate": "2017-03-22T20:00:00-05:00",
+    "duration": "PT60M",
+    "accessibilitySupport": ["Hearing Impairment", "Visual Impairment"],
+    "accessibilityInformation": "The location is fully accessible, please contact the organiser if you have questions"
+  }
 </code>
 </pre>
 
@@ -1636,30 +1636,30 @@ represented using [`schema:subEvent`](https://schema.org/subEvent], the inverse 
 possible using [`schema:superEvent`](https://schema.org/superEvent) and conformance rules MUST be adapted accordingly.
 
 <pre class="example" title="Parent-child Events"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "HeadlineEvent",
-  "url": "http://www.example.org/events/1",
-  "name": "Aquathlon Day",
-  "description": "A day of aquathlon races",
-  "startDate": "2018-09-01T09:00:00-05:00",
-  "endDate": "2018-09-01T17:00:00-05:00",  
-  "duration": "P1D",
-  "subEvent": [
-    {
-      "type": "Event",
-      "url": "http://www.example.org/events/2",
-      "name": "Aquathlon Sprint",
-      "startDate": "2018-09-01T10:00:00-05:00" 
-    },
-    {
-      "type": "Event",
-      "url": "http://www.example.org/events/2",
-      "name": "Aquathlon Long Course",
-      "startDate": "2018-09-01T14:00:00-05:00" 
-    }    
-  ]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "HeadlineEvent",
+    "url": "http://www.example.org/events/1",
+    "name": "Aquathlon Day",
+    "description": "A day of aquathlon races",
+    "startDate": "2018-09-01T09:00:00-05:00",
+    "endDate": "2018-09-01T17:00:00-05:00",  
+    "duration": "P1D",
+    "subEvent": [
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/2",
+        "name": "Aquathlon Sprint",
+        "startDate": "2018-09-01T10:00:00-05:00" 
+      },
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/2",
+        "name": "Aquathlon Long Course",
+        "startDate": "2018-09-01T14:00:00-05:00" 
+      }    
+    ]
+  }
 </code>
 </pre>
 
@@ -1728,25 +1728,25 @@ on 5th September 2018
 The following example illustrates how these types are used.
 
 <pre class="example" title="Scheduled Series"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "SessionSeries",
-  "url": "http://www.example.org/events/1",
-  "name": "Wednesday Yoga",
-  "description": "Yoga on a Wednesday",
-  "startDate": "2018-01-01",
-  "endDate": "2018-12-31"
-  "subEvent": [
-    {
-      "type": "ScheduledSession",
-      "url": "http://www.example.org/events/2",
-      "startDate": "2018-09-05T18:00:00-05:00",
-      "endDate": "2018-09-05T19:00:00-05:00",
-      "duration": "PT1H"       
-    },
-    ...    
-  ]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "SessionSeries",
+    "url": "http://www.example.org/events/1",
+    "name": "Wednesday Yoga",
+    "description": "Yoga on a Wednesday",
+    "startDate": "2018-01-01",
+    "endDate": "2018-12-31"
+    "subEvent": [
+      {
+        "type": "ScheduledSession",
+        "url": "http://www.example.org/events/2",
+        "startDate": "2018-09-05T18:00:00-05:00",
+        "endDate": "2018-09-05T19:00:00-05:00",
+        "duration": "PT1H"       
+      },
+      ...    
+    ]
+  }
 </code>
 </pre>
 
@@ -1805,30 +1805,30 @@ specification defines the [`oa:HeadlineEvent`](https://openactive.io/HeadlineEve
 type.
 
 <pre class="example" title="Headline Events"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "HeadlineEvent",
-  "url": "http://www.example.org/events/1",
-  "name": "Aquathlon Day",
-  "description": "A day of aquathlon races",
-  "startDate": "2018-09-01T09:00:00-05:00",
-  "endDate": "2018-09-01T17:00:00-05:00",  
-  "duration": "P1D",
-  "subEvent": [
-    {
-      "type": "Event",
-      "url": "http://www.example.org/events/2",
-      "name": "Aquathlon Sprint",
-      "startDate": "2018-09-01T10:00:00-05:00" 
-    },
-    {
-      "type": "Event",
-      "url": "http://www.example.org/events/3",
-      "name": "Aquathlon Long Course",
-      "startDate": "2018-09-01T14:00:00-05:00" 
-    }    
-  ]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "HeadlineEvent",
+    "url": "http://www.example.org/events/1",
+    "name": "Aquathlon Day",
+    "description": "A day of aquathlon races",
+    "startDate": "2018-09-01T09:00:00-05:00",
+    "endDate": "2018-09-01T17:00:00-05:00",  
+    "duration": "P1D",
+    "subEvent": [
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/2",
+        "name": "Aquathlon Sprint",
+        "startDate": "2018-09-01T10:00:00-05:00" 
+      },
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/3",
+        "name": "Aquathlon Long Course",
+        "startDate": "2018-09-01T14:00:00-05:00" 
+      }    
+    ]
+  }
 </code>
 </pre>
 
@@ -1863,25 +1863,25 @@ Publishers SHOULD use the [`schema:CourseInstance`](https://pending.schema.org/C
 type when describing courses of any duration.
 
 <pre class="example" title="Course Instance"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "CourseInstance",
-  "url": "http://www.example.org/events/1",
-  "name": "Sailing Course",
-  "description": "A ten week sailing course",
-  "startDate": "2018-08-30",
-  "endDate": "2018-11-08"
-  "subEvent": [
-    {
-      "type": "Event",
-      "url": "http://www.example.org/events/2",
-      "startDate": "2018-08-30T09:00:00-05:00",
-      "endDate": "2018-08-30T10:00:00-05:00",
-      "duration": "PT1H"       
-    },
-    ...    
-  ]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "CourseInstance",
+    "url": "http://www.example.org/events/1",
+    "name": "Sailing Course",
+    "description": "A ten week sailing course",
+    "startDate": "2018-08-30",
+    "endDate": "2018-11-08"
+    "subEvent": [
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/2",
+        "startDate": "2018-08-30T09:00:00-05:00",
+        "endDate": "2018-08-30T10:00:00-05:00",
+        "duration": "PT1H"       
+      },
+      ...    
+    ]
+  }
 </code>
 </pre>
 
@@ -1942,65 +1942,65 @@ sessions available from two different locations at different dates and times.
 Event schedules are described further in the following section.
 
 <pre class="example" title="Event Series"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "EventSeries",
-  "url": "http://www.example.org/events/1",
-  "name": "Swim For Adults",
-  "description": "Adult swimming session",
-  "activity": [{
-  "type": "Concept",
-  "prefLabel": "Swimming"
-  }],
-  "subEvent": [
-    {
-      "type": "SessionSeries",
-      "url": "http://www.example.org/events/2",
-      "name": "Swim For Adults",
-      "location": {
-        "type": "Place",
-        "name": "ExampleCo Gym"
-        ...
+  {
+    "@context": "https://openactive.io/",
+    "type": "EventSeries",
+    "url": "http://www.example.org/events/1",
+    "name": "Swim For Adults",
+    "description": "Adult swimming session",
+    "activity": [{
+    "type": "Concept",
+    "prefLabel": "Swimming"
+    }],
+    "subEvent": [
+      {
+        "type": "SessionSeries",
+        "url": "http://www.example.org/events/2",
+        "name": "Swim For Adults",
+        "location": {
+          "type": "Place",
+          "name": "ExampleCo Gym"
+          ...
+        },
+        "eventSchedule": [
+          {
+            "type": "Schedule",
+            "startDate": "2017-01-01",
+            "endDate": "2017-12-31",
+            "repeatFrequency": "P1W",
+            "byDay": [ "https://schema.org/Wednesday" ],
+            "startTime": "19:00",
+            "endTime": "20:00",
+            "duration": "PT1H",
+            "scheduledEventType": "ScheduledSession"
+          }
+        ]
       },
-      "eventSchedule": [
-        {
-          "type": "Schedule",
-          "startDate": "2017-01-01",
-          "endDate": "2017-12-31",
-          "repeatFrequency": "P1W",
-          "byDay": [ "https://schema.org/Wednesday" ],
-          "startTime": "19:00",
-          "endTime": "20:00",
-          "duration": "PT1H",
-          "scheduledEventType": "ScheduledSession"
-        }
-      ]
-    },
-    {
-      "type": "SessionSeries",
-      "url": "http://www.example.org/events/2",
-      "name": "Swim For Adults",
-      "location": {
-        "type": "Place",
-        "name": "A. N. Other Gym"
-        ...
-      },
-      "eventSchedule": [
-        {
-          "type": "Schedule",
-          "startDate": "2017-01-01",
-          "endDate": "2017-12-31",
-          "repeatFrequency": "P1W",
-          "byDay": [ "https://schema.org/Thursday" ],
-          "startTime": "18:00",
-          "endTime": "20:00",
-          "duration": "PT2H",
-          "scheduledEventType": "ScheduledSession"
-        }
-      ]
-    } 
-  ]
-}
+      {
+        "type": "SessionSeries",
+        "url": "http://www.example.org/events/2",
+        "name": "Swim For Adults",
+        "location": {
+          "type": "Place",
+          "name": "A. N. Other Gym"
+          ...
+        },
+        "eventSchedule": [
+          {
+            "type": "Schedule",
+            "startDate": "2017-01-01",
+            "endDate": "2017-12-31",
+            "repeatFrequency": "P1W",
+            "byDay": [ "https://schema.org/Thursday" ],
+            "startTime": "18:00",
+            "endTime": "20:00",
+            "duration": "PT2H",
+            "scheduledEventType": "ScheduledSession"
+          }
+        ]
+      } 
+    ]
+  }
 </code>
 </pre>
 
@@ -2191,27 +2191,27 @@ In practice we recommend that publishers provide as much detail in possible to a
 The following example illustrates basic usage of the [`schema:eventSchedule`](https://pending.schema.org/eventSchedule) property to associate an `Event` with a [`schema:Schedule`](https://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
 
 <pre class="example" title="Adding an event schedule"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "SessionSeries",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "duration": "PT60M",
-  "eventSchedule": [
-    {
-      "type": "Schedule",
-      "startDate": "2017-01-01",
-      "endDate": "2017-12-31",
-      "repeatFrequency": "P1W",
-      "byDay": [ "https://schema.org/Wednesday" ],
-      "startTime": "19:00",
-      "endTime": "20:00",
-      "duration": "PT1H",
-      "scheduledEventType": "ScheduledSession"
-    }
-  ]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "SessionSeries",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "duration": "PT60M",
+    "eventSchedule": [
+      {
+        "type": "Schedule",
+        "startDate": "2017-01-01",
+        "endDate": "2017-12-31",
+        "repeatFrequency": "P1W",
+        "byDay": [ "https://schema.org/Wednesday" ],
+        "startTime": "19:00",
+        "endTime": "20:00",
+        "duration": "PT1H",
+        "scheduledEventType": "ScheduledSession"
+      }
+    ]
+  }
 </code>
 </pre>
 
@@ -2439,21 +2439,21 @@ describe a [`schema:Place`](https://schema.org/Place).
 The following example illustrates a simple place description including its name, address, telephone number and website.
 
 <pre class="example" title="Describing a leisure centre"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Place",
-  "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
-  "name": "Bath Sports and Leisure Centre",
-  "address": {
-      "type": "PostalAddress",
-      "streetAddress": "North Parade Road",
-      "addressLocality": "Bath",
-      "addressRegion": "Somerset",
-      "postalCode": "BA2 4ET",
-      "addressCountry": "GB"
-  },
-  "telephone": "+44 (0)1225 486905"    
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Place",
+    "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
+    "name": "Bath Sports and Leisure Centre",
+    "address": {
+        "type": "PostalAddress",
+        "streetAddress": "North Parade Road",
+        "addressLocality": "Bath",
+        "addressRegion": "Somerset",
+        "postalCode": "BA2 4ET",
+        "addressCountry": "GB"
+    },
+    "telephone": "+44 (0)1225 486905"    
+  }
 </code></pre>
 
 ### Describing Addresses
@@ -2509,19 +2509,17 @@ Schema.org provides the following properties for publishing address data using t
 
 The following example shows how to markup a simple address:
 
-<pre class="example" title="An Address">
-<code>
-{
-  "@context": "https://openactive.io/",
-  "type": "PostalAddress",
-  "streetAddress": "North Parade Road",
-  "addressLocality": "Bath",
-  "addressRegion": "Somerset",
-  "postalCode": "BA2 4ET",
-  "addressCountry": "GB"
-}
-</code>
-</pre>
+<pre class="example" title="An Address"><code>
+  {
+    "@context": "https://openactive.io/",
+    "type": "PostalAddress",
+    "streetAddress": "North Parade Road",
+    "addressLocality": "Bath",
+    "addressRegion": "Somerset",
+    "postalCode": "BA2 4ET",
+    "addressCountry": "GB"
+  }
+</code></pre>
 
 ### Describing Geographic Location
 
@@ -2563,26 +2561,26 @@ The following example illustrates how to use the
 [`schema:geo`](https://schema.org/geo) property.
 
 <pre class="example" title="Locating a leisure centre"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Place",
-  "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
-  "name": "Bath Sports and Leisure Centre",
-  "address": {
-      "type": "PostalAddress",
-      "streetAddress": "North Parade Road",
-      "addressLocality": "Bath",
-      "addressRegion": "Somerset",
-      "postalCode": "BA2 4ET",
-      "addressCountry": "GB"
-  },
-  "telephone": "+44 (0)1225 486905",
-  "geo": {
-    "type": "GeoCoordinates",
-    "latitude": 51.3816123,
-    "longitude": -2.3544367
+  {
+    "@context": "https://openactive.io/",
+    "type": "Place",
+    "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
+    "name": "Bath Sports and Leisure Centre",
+    "address": {
+        "type": "PostalAddress",
+        "streetAddress": "North Parade Road",
+        "addressLocality": "Bath",
+        "addressRegion": "Somerset",
+        "postalCode": "BA2 4ET",
+        "addressCountry": "GB"
+    },
+    "telephone": "+44 (0)1225 486905",
+    "geo": {
+      "type": "GeoCoordinates",
+      "latitude": 51.3816123,
+      "longitude": -2.3544367
+    }
   }
-}
 </code></pre>
 
 ### Describing Amenities
@@ -2607,17 +2605,17 @@ Publishers SHOULD use one of these types when applicable. If there is no pre-def
 This avoids the need for data consumers to have to rely on the `name` value to identify common amenities that may otherwise be named differently (e.g. "Changing Rooms, "Changing Facilities", etc).
 
 <pre class="example" title="Amenity example"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Place",
-  "amenityFeature": [
-     {
-        "type": "ChangingRooms",
-        "name": "Changing Facilities",
-        "value": true
-     }
-  ]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Place",
+    "amenityFeature": [
+       {
+          "type": "ChangingRooms",
+          "name": "Changing Facilities",
+          "value": true
+       }
+    ]
+  }
 </code></pre>
 
 Publishers MUST include the `type`, `name` and `value` properties for each amenity. A `value` of `false` indicates that a specific amenity is not available.
@@ -2629,17 +2627,17 @@ The list of pre-defined amenties MAY be revised in future specifications based o
 In the meantime additional types of amenities can be specified using the more generic [`schema:LocationFeatureSpecification`](https://schema.org/LocationFeatureSpecification) type as shown below:
 
 <pre class="example" title="Generic amenity type example"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Place",
-  "amenityFeature": [
-     {
-        "type": "LocationFeatureSpecification",
-        "name": "Outdoor seating",
-        "value": true
-     }
-  ]
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Place",
+    "amenityFeature": [
+       {
+          "type": "LocationFeatureSpecification",
+          "name": "Outdoor seating",
+          "value": true
+       }
+    ]
+  }
 </code></pre>
 
 
@@ -2651,25 +2649,25 @@ be expressed using the containment properties
 and [`schema:containsPlace`](https://schema.org/containsPlace)). The following example illustrates how to describe that a Leisure Centre includes a gym:
 
 <pre class="example" title="Describing a leisure centre"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Place",
-  "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
-  "name": "Bath Sports and Leisure Centre",
-  "address": {
-      "type": "PostalAddress",
-      "streetAddress": "North Parade Road",
-      "addressLocality": "Bath",
-      "addressRegion": "Somerset",
-      "postalCode": "BA2 4ET",
-      "addressCountry": "GB"
-  },
-  "containsPlace": [{
-    "type": "SportsActivityLocation",
-    "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym",
-    "name": "Gym"
-  }]    
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "Place",
+    "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
+    "name": "Bath Sports and Leisure Centre",
+    "address": {
+        "type": "PostalAddress",
+        "streetAddress": "North Parade Road",
+        "addressLocality": "Bath",
+        "addressRegion": "Somerset",
+        "postalCode": "BA2 4ET",
+        "addressCountry": "GB"
+    },
+    "containsPlace": [{
+      "type": "SportsActivityLocation",
+      "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym",
+      "name": "Gym"
+    }]    
+  }
 </code></pre>
 
 ## Describing Organisers (<code>schema:Person</code> and <code>schema:Organization</code>)
@@ -2772,26 +2770,25 @@ Both the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`
 The following example illustrates how to associate an [`schema:Organization`](https://schema.org/Organization) with an event:
 
 <pre class="example" title="Specifying an organiser"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "startDate": "2017-03-22T20:00:00-05:00",
-  "duration": "PT60M",
-  "organizer": [{
-    "type": "Organization",
-    "url": "http://example.org/clubs/1",
-    "name": "Bath Tai Chi Club",
-    "logo": [{
-        "type": "ImageObject",
-        "url": "http://www.example.org/clubs/1/logo.png"
-    }]    
-  }]
-}
-</code>
-</pre>
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "startDate": "2017-03-22T20:00:00-05:00",
+    "duration": "PT60M",
+    "organizer": [{
+      "type": "Organization",
+      "url": "http://example.org/clubs/1",
+      "name": "Bath Tai Chi Club",
+      "logo": [{
+          "type": "ImageObject",
+          "url": "http://www.example.org/clubs/1/logo.png"
+      }]    
+    }]
+  }
+</code></pre>
 
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)
 
@@ -2859,24 +2856,23 @@ The [[OpenActive-Activity-List]] provides an openly licensed standard activity l
 The following example illustrates the basic structure of an activity list:
 
 <pre class="example" title="Publishing an activity list"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "ConceptScheme",
-  "id": "http://www.example.org/activity-list",
-  "url": "http://www.example.org/activity-list",
-  "title": "Activity List",
-  "description": "An example activity list",
-  "concept": [{
-    "type": "Concept",
-    "prefLabel": "Martial Arts",
-    "narrower": {
+  {
+    "@context": "https://openactive.io/",
+    "type": "ConceptScheme",
+    "id": "http://www.example.org/activity-list",
+    "url": "http://www.example.org/activity-list",
+    "title": "Activity List",
+    "description": "An example activity list",
+    "concept": [{
       "type": "Concept",
-      "prefLabel": "Tai Chi"
-    }    
-  }]
-}
-</code>
-</pre>
+      "prefLabel": "Martial Arts",
+      "narrower": {
+        "type": "Concept",
+        "prefLabel": "Tai Chi"
+      }    
+    }]
+  }
+</code></pre>
 
 ### Describing Physical Activities
 
@@ -2948,16 +2944,15 @@ The following properties from the [[SKOS]] specification can be used to describe
 The following markup illustrates how to describe a single activity.
 
 <pre class="example" title="Publishing an activity list"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Concept",
-  "id": "http://www.example.org/activity-list#tai-chi",
-  "prefLabel": "Tai Chi",
-  "altLabel": ["Tai-Chi"],
-  "inScheme": "http://www.example.org/activity-list"
-}
-</code>
-</pre>
+  {
+    "@context": "https://openactive.io/",
+    "type": "Concept",
+    "id": "http://www.example.org/activity-list#tai-chi",
+    "prefLabel": "Tai Chi",
+    "altLabel": ["Tai-Chi"],
+    "inScheme": "http://www.example.org/activity-list"
+  }
+</code></pre>
 
 ## Describing Offers (<code>schema:Offer</code>)
 
@@ -3047,22 +3042,21 @@ To indicate that a `schema:Event` is only available to paid attendees, opportuni
 The following example shows an event which offers a price for attending a single session.
 
 <pre class="example" title="Describing an Offer"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "Event",
-  "url": "http://www.example.org/events/1",
-  "name": "Tai chi Class",
-  "description": "A tai chi class intended for beginners",
-  "duration": "PT60M",
-  "offers": [{
-    "type": "Offer",
-    "name": "Single session",
-    "price": 5,
-    "priceCurrency": "GBP"
-  }]  
-}
-</code>
-</pre>
+  {
+    "@context": "https://openactive.io/",
+    "type": "Event",
+    "url": "http://www.example.org/events/1",
+    "name": "Tai chi Class",
+    "description": "A tai chi class intended for beginners",
+    "duration": "PT60M",
+    "offers": [{
+      "type": "Offer",
+      "name": "Single session",
+      "price": 5,
+      "priceCurrency": "GBP"
+    }]  
+  }
+</code></pre>
 
 <div class="note">
 Schema.org provides [additional properties for describing Offers](https://schema.org/Offer). The above model highlights the properties 
@@ -3096,7 +3090,7 @@ interpretation are:
       <td>Participants may pay in advance or pay on arrival</td>
     </tr>
     <tr>
-      <td>https://openactive.io/None</td>
+      <td>https://openactive.io/Unavailable</td>
       <td>Advance booking is not available. Users must turn up</td>
       <td>Prepayment is not available. Users may be able to book in advance but 
       must pay on the door</td>
@@ -3370,66 +3364,66 @@ In both cases a maximum of four tables are available. In the example, only one
 table remains for use in the first slot, while the second has three. 
 
 <pre class="example" title="Describing use of a facility"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "FacilityUse",
-  "url": "http://www.example.org/facility-use/1",
-  "name": "Example Leisure Centre Table Tennis",
-  "description": "Table tennis tables are available to hire for thirty minute slots",
-  "activity": "Table Tennis",
-  "provider": {
-    "type": "Organization",
-    "name": "Leisure Centre Ltd"
-  },
-  "location": {
-    "type": "Place",
-    "name": "Example Leisure Centre",
-    "address": {
-      "type": "PostalAddress",
-      "streetAddress": "1 High Street",
-      "addressLocality": "Bristol",
-      "addressRegion": "Somerset",
-      "postalCode": "BS1 4SD",
-      "addressCountry": "GB"
-    }  
-  },
-  "offers": [
-      {
-        "type": "Offer",
-        "name": "30 minute hire",
-        "price": 10,
-        "priceCurrency": "GBP"
-      }
-  ],
-  "event": [
-      {
-        "type": "Slot",   
-        "id": "http://www.example.org/facility-use/slots/1",
-        "facilityUse": "http://www.example.org/facility-use/1",
-        "startDate": "2018-03-01T10:00:00Z",   
-        "duration": "PT30M",   
-        "remainingUses": 1,
-        "maximumUses": 4
-      },
-      {
-        "type": "Slot",   
-        "id": "http://www.example.org/facility-use/slots/2",
-        "facilityUse": "http://www.example.org/facility-use/1",
-        "startDate": "2018-03-01T11:00:00Z",   
-        "duration": "PT30M",   
-        "remainingUses": 3,
-        "maximumUses": 4,
-        "offers": [
-           {
-              "type": "Offer",
-              "name": "30 minute hire",
-              "price": 15,
-              "priceCurrency": "GBP"
-           }
-        ]
-      }
-  ] 
-}
+  {
+    "@context": "https://openactive.io/",
+    "type": "FacilityUse",
+    "url": "http://www.example.org/facility-use/1",
+    "name": "Example Leisure Centre Table Tennis",
+    "description": "Table tennis tables are available to hire for thirty minute slots",
+    "activity": "Table Tennis",
+    "provider": {
+      "type": "Organization",
+      "name": "Leisure Centre Ltd"
+    },
+    "location": {
+      "type": "Place",
+      "name": "Example Leisure Centre",
+      "address": {
+        "type": "PostalAddress",
+        "streetAddress": "1 High Street",
+        "addressLocality": "Bristol",
+        "addressRegion": "Somerset",
+        "postalCode": "BS1 4SD",
+        "addressCountry": "GB"
+      }  
+    },
+    "offers": [
+        {
+          "type": "Offer",
+          "name": "30 minute hire",
+          "price": 10,
+          "priceCurrency": "GBP"
+        }
+    ],
+    "event": [
+        {
+          "type": "Slot",   
+          "id": "http://www.example.org/facility-use/slots/1",
+          "facilityUse": "http://www.example.org/facility-use/1",
+          "startDate": "2018-03-01T10:00:00Z",   
+          "duration": "PT30M",   
+          "remainingUses": 1,
+          "maximumUses": 4
+        },
+        {
+          "type": "Slot",   
+          "id": "http://www.example.org/facility-use/slots/2",
+          "facilityUse": "http://www.example.org/facility-use/1",
+          "startDate": "2018-03-01T11:00:00Z",   
+          "duration": "PT30M",   
+          "remainingUses": 3,
+          "maximumUses": 4,
+          "offers": [
+             {
+                "type": "Offer",
+                "name": "30 minute hire",
+                "price": 15,
+                "priceCurrency": "GBP"
+             }
+          ]
+        }
+    ] 
+  }
 </code></pre>
 
 <p>The following example shows how to use the data model to publish opportunities 
@@ -3438,60 +3432,60 @@ the location property provides more detail on the location. The example describe
 two Slots, but the second is no longer available.</p>
 
 <pre class="example" title="Describing use of an individual facility"><code>
-{
-  "@context": "https://openactive.io/",
-  "type": "IndividualFacilityUse",
-  "url": "http://www.example.org/facility-use/2",
-  "name": "Play Tenns on the Main Tennis Court",
-  "description": "Tennis courts are available for 30 min sessions",
-  "image": [
-     {
-       "type": "ImageObject",
-       "url": "http://example.org/images/1.jpg"
-     }  
-  ],
-  "activity": "Tennis",
-  "provider": {
-    "type": "Organization",
-    "name": "Leisure Centre Ltd"
-  },
-  "location": {
-    "type": "SportsActivityLocation",
-    "name": "Main Tennis Court",
-    "containedInPlace": {
-       "type": "Place",
-       "name": "Example Leisure Centre",
-       "address": {
-         "type": "PostalAddress",
-         "streetAddress": "1 High Street",
-         "addressLocality": "Bristol",
-         "addressRegion": "Somerset",
-         "postalCode": "BS1 4SD",
-         "addressCountry": "GB"
+  {
+    "@context": "https://openactive.io/",
+    "type": "IndividualFacilityUse",
+    "url": "http://www.example.org/facility-use/2",
+    "name": "Play Tenns on the Main Tennis Court",
+    "description": "Tennis courts are available for 30 min sessions",
+    "image": [
+       {
+         "type": "ImageObject",
+         "url": "http://example.org/images/1.jpg"
        }  
-    }
-  },
-  "event": [
-      {
-        "type": "Slot",   
-        "id": "http://www.example.org/facility-use/slots/1",
-        "facilityUse": "http://www.example.org/facility-use/1",
-        "startDate": "2018-03-01T10:00:00Z",   
-        "duration": "PT30M",   
-        "remainingUses": 1,
-        "maximumUses": 1
-      },
-      {
-        "type": "Slot",   
-        "id": "http://www.example.org/facility-use/slots/1",
-        "facilityUse": "http://www.example.org/facility-use/1",
-        "startDate": "2018-03-01T11:00:00Z",   
-        "duration": "PT30M",   
-        "remainingUses": 0,
-        "maximumUses": 1
+    ],
+    "activity": "Tennis",
+    "provider": {
+      "type": "Organization",
+      "name": "Leisure Centre Ltd"
+    },
+    "location": {
+      "type": "SportsActivityLocation",
+      "name": "Main Tennis Court",
+      "containedInPlace": {
+         "type": "Place",
+         "name": "Example Leisure Centre",
+         "address": {
+           "type": "PostalAddress",
+           "streetAddress": "1 High Street",
+           "addressLocality": "Bristol",
+           "addressRegion": "Somerset",
+           "postalCode": "BS1 4SD",
+           "addressCountry": "GB"
+         }  
       }
-  ] 
-}
+    },
+    "event": [
+        {
+          "type": "Slot",   
+          "id": "http://www.example.org/facility-use/slots/1",
+          "facilityUse": "http://www.example.org/facility-use/1",
+          "startDate": "2018-03-01T10:00:00Z",   
+          "duration": "PT30M",   
+          "remainingUses": 1,
+          "maximumUses": 1
+        },
+        {
+          "type": "Slot",   
+          "id": "http://www.example.org/facility-use/slots/1",
+          "facilityUse": "http://www.example.org/facility-use/1",
+          "startDate": "2018-03-01T11:00:00Z",   
+          "duration": "PT30M",   
+          "remainingUses": 0,
+          "maximumUses": 1
+        }
+    ] 
+  }
 </code></pre>
 
 <div class="note">
@@ -3618,28 +3612,28 @@ The following example shows a simple custom JSON-LD context that defines a new n
 `ext` and three custom properties.
 
 <pre class="example" title="Example of a custom context"><code>
-{
-   "@context":{
-      "label":"http://www.w3.org/2000/01/rdf-schema#label",
-      "xsd":"http://www.w3.org/2001/XMLSchema#",
-      "ext":"http://example.org/jsonld#",
-      "id":"@id"
-   },
-   "ext:myCustomProperty":{
-      "id":"ext:myCustomProperty",
-      "label":"This is the label"
-   },
-   "ext:myNumericProperty":{
-      "id":"ext:myNumericProperty",
-      "label":"This is a property with a number value",
-      "@type":"xsd:integer"
-   },
-   "ext:myURLProperty":{
-      "id":"ext:myURLProperty",
-      "label":"This is a property with a URI value",
-      "@type":"@id"
-   }
-}
+  {
+     "@context":{
+        "label":"http://www.w3.org/2000/01/rdf-schema#label",
+        "xsd":"http://www.w3.org/2001/XMLSchema#",
+        "ext":"http://example.org/jsonld#",
+        "id":"@id"
+     },
+     "ext:myCustomProperty":{
+        "id":"ext:myCustomProperty",
+        "label":"This is the label"
+     },
+     "ext:myNumericProperty":{
+        "id":"ext:myNumericProperty",
+        "label":"This is a property with a number value",
+        "@type":"xsd:integer"
+     },
+     "ext:myURLProperty":{
+        "id":"ext:myURLProperty",
+        "label":"This is a property with a URI value",
+        "@type":"@id"
+     }
+  }
 </code></pre>
 
 [[JSON-LD]] allows data to be [published with reference to multiple contexts](https://www.w3.org/TR/json-ld/#advanced-context-usage). 
@@ -3648,14 +3642,14 @@ Assuming that the previous JSON-LD context was published to `https://example.org
 the following example shows how to use this extension:
 
 <pre class="example" title="Example of a custom context"><code>
-{
-  "@context": [
-    "https://openactive.io/",
-    "https://example.org/custom.jsonld"
-  ],
-  "type": "Event",
-  "ext:myCustomProperty": "foo"
-}
+  {
+    "@context": [
+      "https://openactive.io/",
+      "https://example.org/custom.jsonld"
+    ],
+    "type": "Event",
+    "ext:myCustomProperty": "foo"
+  }
 </code></pre>
 
 Publishers <em class="rfc2119">MUST NOT</em> use unprefixed property and type 

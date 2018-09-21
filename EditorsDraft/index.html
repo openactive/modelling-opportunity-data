@@ -1164,18 +1164,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
       define a zero priced [`schema:Offer`](https://schema.org/Offer). If the only 
       [`schema:Offer`](https://schema.org/Offer) for an Event is zero priced, then 
       publishers SHOULD include this property with a value of `true`.</td>
-    </tr>    
-    <tr>
-      <td>[`oa:isAccessibleWithoutBooking`](https://openactive.io/isAccessibleWithoutBooking)</td>
-      <td><em class="rfc2119">OPTIONAL</em></td>
-      <td>Boolean</td>
-      <td>If this is `true` then a participant can turn up and participate on the 
-      day. There may also be opportunities for them to book in advance. If the 
-      property is `false` then a user MUST book in advance. In this case there 
-      MUST be at least one bookable Offer for the Event. If this property is provided 
-      with a value of `false` then the MUST be at least one applicable Offer with 
-      an `@id` and/or `url` property.</td>
-    </tr>    
+    </tr>
 
     <tr>
       <td>[`schema:offers`](https://schema.org/offers)</td>

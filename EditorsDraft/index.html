@@ -1551,9 +1551,9 @@ property can be used to specify these restrictions.
 Data publishers using this property MUST use one of the following values:
 </p>
 
-* `https://openactive.io/None` indicating that the event has no restrictions
-* `https://openactive.io/Male` indicating that the event is restricted to the male gender
-* `https://openactive.io/Female` indicating that the event is restricted to the female gender
+* `https://openactive.io/NoRestriction` indicating that the event has no restrictions
+* `https://openactive.io/MaleOnly` indicating that the event is restricted to the male gender
+* `https://openactive.io/FemaleOnly` indicating that the event is restricted to the female gender
 
 <p>
 If the `genderRestriction` property is not supplied for an Event, then data 
@@ -3096,7 +3096,7 @@ interpretation are:
       <td>Participants may pay in advance or pay on arrival</td>
     </tr>
     <tr>
-      <td>https://openactive.io/None</td>
+      <td>https://openactive.io/Unavailable</td>
       <td>Advance booking is not available. Users must turn up</td>
       <td>Prepayment is not available. Users may be able to book in advance but 
       must pay on the door</td>

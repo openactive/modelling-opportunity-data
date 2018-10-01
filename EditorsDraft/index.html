@@ -1771,6 +1771,7 @@ are OPTIONAL. This information can be provided and inherited from the parent `oa
 
 For an [`oa:SessionSeries`](https://openactive.io/SessionSeries):
 
+* it MUST NOT have either a [`schema:maximumAttendeeCapacity`](https://schema.org/maximumAttendeeCapacity) or a [`schema:remainingAttendeeCapacity`](https://schema.org/remainingAttendeeCapacity). They are a series of sessions so do not have capacity themselves.
 * The `schema:startDate` and `schema:endDate` properties are OPTIONAL
 * The `schema:eventStatus` property is OPTIONAL
 

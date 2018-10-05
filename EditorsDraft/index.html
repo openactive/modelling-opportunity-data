@@ -3592,43 +3592,14 @@ Publish <em class="rfc2119">MUST</em> also
 
 * avoid using names for custom types or properties that clash with the core 
 data model
-* publish a custom [JSON-LD context](https://www.w3.org/TR/json-ld/#the-context) to provide a machine-readable version of their 
-extension 
+* publish a custom [JSON-LD context](https://www.w3.org/TR/json-ld/#the-context) to provide a machine-readable version of their extension 
 * include a reference to their context in their published data
 
-A full tutorial on creating JSON-LD contexts is outside the scope of this specification. 
-
-The following example shows a simple custom JSON-LD context that defines a new namespace
-`ext` and three custom properties.
-
-<pre class="example" title="Example of a custom context"><code>
-  {
-     "@context":{
-        "label":"http://www.w3.org/2000/01/rdf-schema#label",
-        "xsd":"http://www.w3.org/2001/XMLSchema#",
-        "ext":"http://example.org/jsonld#",
-        "id":"@id"
-     },
-     "ext:myCustomProperty":{
-        "id":"ext:myCustomProperty",
-        "label":"This is the label"
-     },
-     "ext:myNumericProperty":{
-        "id":"ext:myNumericProperty",
-        "label":"This is a property with a number value",
-        "@type":"xsd:integer"
-     },
-     "ext:myURLProperty":{
-        "id":"ext:myURLProperty",
-        "label":"This is a property with a URI value",
-        "@type":"@id"
-     }
-  }
-</code></pre>
+A full tutorial on creating JSON-LD contexts is outside the scope of this specification.
 
 [[JSON-LD]] allows data to be [published with reference to multiple contexts](https://www.w3.org/TR/json-ld/#advanced-context-usage). 
 
-Assuming that the previous JSON-LD context was published to `https://example.org/custom.jsonld`, then 
+Assuming that a JSON-LD context using the prefix `ext:` was published to `https://example.org/custom.jsonld`, then 
 the following example shows how to use this extension:
 
 <pre class="example" title="Example of a custom context"><code>

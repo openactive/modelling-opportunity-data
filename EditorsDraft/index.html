@@ -3228,7 +3228,7 @@ allow a participant to use that facility for a specified time and duration.
       <td>`@type`</td>
       <td><em class="rfc2119">REQUIRED</em></td>
       <td>String</td>
-      <td>FacilityUse or IndividualFacilityUse</td>
+      <td>`FacilityUse` or `IndividualFacilityUse`</td>
     </tr>
     <tr>
       <td>`@id`</td>
@@ -3313,7 +3313,7 @@ allow a participant to use that facility for a specified time and duration.
     </tr>       
     <tr>
       <td>[`schema:event`](https://schema.org/events)</td>
-      <td><em class="rfc2119">REQUIRED</em></td>
+      <td><em class="rfc2119">RECOMMENDED</em></td>
       <td>Array of <code>oa:Slot</code></td>
       <td>An array of one or more upcoming slots (<code>oa:Slot</code>) during which the product can be used. E.g. a list of hourly slots during which a 
       football pitch might be hired. Only minimal information need be provided about each event, e.g. identifiers, start time, duration, 
@@ -3347,6 +3347,14 @@ allow a participant to use that facility for a specified time and duration.
       <td>Inverse of the [`oa:individualFacilityUse`](https://openactive.io/individualFacilityUse) property. Related an 
       <code>oa:IndividualFacilityUse</code> (e.g. an opportunity to play tennis on a specific court) to a <code>oa:FacilityUse</code> (e.g. an opportunity to play tennis at a specific location).</td>
     </tr>
+    <tr>
+      <td>[`schema:potentialAction`](https://schema.org/potentialAction)</td>
+      <td><em class="rfc2119">OPTIONAL</em></td>
+      <td>Array of [`schema:Action`](https://schema.org/Action)</td>
+      <td>Provides one or more actions that can be carried out on this FacilityUse, 
+      e.g. through interacting with an API or other service.  The   
+      [[Open-Booking-API]] defines a `ReserveAction`.</td>
+    </tr>  
 
   </tbody>
 </table>   

@@ -48,6 +48,7 @@ function respec2html {
 
 echo Copying static files
 cp -r ../1.0 .
+cp -r ../1.1 .
 cp -r ../Latest .
 cp -r ../EditorsDraft .
 cp -r ../Latest/* .
@@ -56,6 +57,7 @@ cd ..
 
 respec2html "file://$PWD/EditorsDraft/index.html" "$PWD/out/EditorsDraft/index.html" "EditorsDraft"
 respec2html "file://$PWD/1.0/index.html" "$PWD/out/1.0/index.html" "1.0"
+respec2html "file://$PWD/1.1/index.html" "$PWD/out/1.1/index.html" "1.1"
 respec2html "file://$PWD/Latest/index.html" "$PWD/out/Latest/index.html" "Latest"
 cp "$PWD/out/Latest/index.html" out/index.html
 

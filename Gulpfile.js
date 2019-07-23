@@ -2,7 +2,7 @@
 
 var gulp = require('gulp')
 
-const fetchAndWrite = require("./respec/tools/respecDocWriter.js").fetchAndWrite;
+const fetchAndWrite = require("./node_modules/respec/tools/respecDocWriter.js").fetchAndWrite;
 
 gulp.task('express', function() {
   var express = require('express');

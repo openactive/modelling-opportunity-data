@@ -3617,12 +3617,10 @@ Route Metadata is often generated over an extended period of curation: that is t
          <td>Length of route. Must include both number and unit. sameAs beta:distance.</td>
       </tr>
       <tr>
-        <td>[`schema:duration`](https://schema.org/duration)</td>
+        <td>[`oa:indicativeDuration`](https://openactive.io/indicativeDuration)</td>
         <td><em class="rfc2119">RECOMMENDED</em></td>
-        <td>String</td>
-        <td>The duration of the event given in [[ISO8601]] format. Durations
-        MUST NOT be zero length. If duration is unknown it should be omitted. A
-        duration MUST be provided if both a start and end date are available.</td>
+        <td>Array of [`oa:IndicativeDuration`](https://openactive.io/IndicativeDuration)</td>
+        <td>See [Describing Indicative Duration](#describing-indicative-durations-oa-indicativeduration-)</td>
       </tr>
       <tr>
          <td>[`oa:startPoint`](https://openactive.io/startPoint)</td>
@@ -3986,6 +3984,34 @@ Users of Routes, particularly in rural areas, need to be apprised of their legal
    <td>OPTIONAL</td>
    <td>[`schema:URL`](https://schema.org/URL)</td>
 </tr>
+</tbody>
+</table>
+
+### Describing Indicative Durations (`oa:IndicativeDuration`)
+
+Being able to complete a Route within a given time is important to many users, particularly those who engage infrequently in outdoor activities because they feel pressed for time. While there is considerable variance in individual activity speed, providing a rough indication of how much time to allow can nevertheless be valuable.
+
+<table>
+<thead>
+     <th>Property</th>
+     <th>Status</th>
+     <th>Type</th>
+     <th>Notes</th>
+</thead>
+<tbody>
+  <tr>
+    <td>[`oa:activity`](https://openactive.io/activity)</td>
+    <td><em class="rfc2119">REQUIRED</em></td>
+    <td>[`skos:Concept`](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)</td>
+    <td>Specifies the physical activity for which the [`schema:duration`](https://schema.org/duration) is relevant. This activity SHOULD ideally be taken from an activity list.</td>
+  </tr>
+  <tr>
+    <td>[`schema:duration`](https://schema.org/duration)</td>
+    <td><em class="rfc2119">REQUIRED</em></td>
+    <td>String</td>
+    <td>The duration of the event given in [[ISO8601]] format.  Durations
+    MUST NOT be zero length.</td>
+  </tr>
 </tbody>
 </table>
 

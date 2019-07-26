@@ -3617,6 +3617,14 @@ Route Metadata is often generated over an extended period of curation: that is t
          <td>Length of route. Must include both number and unit. sameAs beta:distance.</td>
       </tr>
       <tr>
+        <td>[`schema:duration`](https://schema.org/duration)</td>
+        <td><em class="rfc2119">RECOMMENDED</em></td>
+        <td>String</td>
+        <td>The duration of the event given in [[ISO8601]] format. Durations
+        MUST NOT be zero length. If duration is unknown it should be omitted. A
+        duration MUST be provided if both a start and end date are available.</td>
+      </tr>
+      <tr>
          <td>[`oa:startPoint`](https://openactive.io/startPoint)</td>
          <td>REQUIRED</td>
          <td>Array of [`oa:RoutePoint`](https://openactive.io/RoutePoint)</td>

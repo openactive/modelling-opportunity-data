@@ -3550,6 +3550,17 @@ Route Metadata is often generated over an extended period of curation: that is t
       <th>Notes</th>
    </thead>
    <tbody>
+     <tr>
+        <td>`@type`</td>
+        <td>REQUIRED</td>
+        <td>[`schema:Text`](https://schema.org/Text)</td>
+        <td>`Route`</td>
+     </tr>
+     <td>`@id`</td>
+        <td>REQUIRED</td>
+        <td>[`schema:url`](https://schema.org/url)</td>
+        <td>A URI providing a unique identifier for the resource</td>
+      </tr>
       <tr>
          <td>[`schema:name`](https://schema.org/name)</td>
          <td>REQUIRED</td>
@@ -3561,6 +3572,12 @@ Route Metadata is often generated over an extended period of curation: that is t
          <td>REQUIRED</td>
          <td>[`schema:Organization`](https://schema.org/Organization)</td>
          <td>The Organization originally providing the information about the Route</td>
+      </tr>
+      <tr>
+        <td>[`schema:url`](https://schema.org/url)</td>
+        <td>OPTIONAL</td>
+        <td>`schema:URL`</td>
+        <td>A URL to a web page (or section of a page) describing the `Route`. If present, the value of the `schema:url` attribute SHOULD NOT be the same as `oa:originatingPublisher`.</td>
       </tr>
       <tr>
          <td>[`oa:createdBy`](https://openactive.io/createdBy)</td>
@@ -3744,6 +3761,10 @@ Route Metadata is often generated over an extended period of curation: that is t
       </tr>
    </tbody>
 </table>
+
+<div class="note" title="schema:url vs. oa:originatingWebsite">
+Identical values should not be given for the `schema:url` and `oa:originatingWebsite` properties, and where applicable preference SHOULD be given to populating the more-specific property (that is to say, `oa:originatingWebsite`).
+</div>
 
 ### Describing Route Points (`oa:RoutePoint`)
 
@@ -4213,7 +4234,7 @@ Route Segment Metadata, then, is identical to Route Metadata, with the following
 
 1. The presence of a mandatory `sequence` attribute. The value of this attribute MUST be an integer, and the values of the `sequence` attribute MUST run consecutively for the Route Segments comprising a Route.
 
-1. The availability of an OPTIONAL `alternativeSegmentTo` attribute, in cases where the user may select from a variety of alternative `Route Segment`s (e.g., a short and steep `Segment` alongside a longer, more leisurely, alternative) to complete their journey.
+1. The availability of an OPTIONAL `alternativeSegmentTo` attribute, in cases where the end user may select from a variety of alternative `Route Segment`s (e.g., a short and steep `Segment` alongside a longer, more leisurely, alternative) to complete their journey.
 
 1. Segments MUST NOT themselves contains Segments. That is to say, the `segments` attribute is FORBIDDEN for Route Segment Metadata.
 
@@ -4303,7 +4324,7 @@ The table below indicates which Route Metadata properties should be viewed as in
          <td>Yes</td>
       </tr>
       <tr>
-        <td>schema:url</td>
+        <td>`schema:url`</td>
         <td>Yes</td>
       <tr>
          <td>[`schema:description`](https://schema.org/description)</td>
@@ -4395,6 +4416,10 @@ The table below indicates which Route Metadata properties should be viewed as in
       </tr>
       <tr>
          <td>[`oa:segments`](https://openactive.io/segments)</td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td>[`oa:alternativeSegmentTo`](https://openactive.io/alternativeSegmentTo)</td>
          <td>N/A</td>
       </tr>
    </tbody>

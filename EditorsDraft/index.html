@@ -3751,7 +3751,13 @@ Route Metadata is often generated over an extended period of curation: that is t
          <td>[`schema:review`](https://schema.org/review)</td>
          <td>OPTIONAL</td>
          <td>Array of [`schema:Review`](https://schema.org/Review)</td>
-         <td>User-submitted ratings of the Route. URL MUST resolve to a file in a format that does not support any form of geo-encoding, e.g. .pdf, .jjpg</td>
+         <td>User-submitted ratings of the Route. URL MUST resolve to a file in a format that does not support any form of geo-encoding, e.g. .pdf, .jpg</td>
+      </tr>
+      <tr>
+         <td>[`schema:contactPoint`](https://schema.org/contactPoint)</td>
+         <td>OPTIONAL</td>
+         <td>[`schema:ContactPoint`](https://schema.org/ContactPoint)</td>
+         <td>Contact details specifically related to the `Route`. The values of the `RouteMetadata` `contactPoint` SHOULD NOT be the same as those of the `oa:originatingPublisher` if present.</td>
       </tr>
       <tr>
          <td>[`oa:segments`](https://openactive.io/segments)</td>
@@ -3778,6 +3784,12 @@ An `oa:RoutePoint` is simply a point of some special significance along a Route 
       <th>Notes</th>
    </thead>
    <tbody>
+     <tr>
+        <td>[`schema:name`](https://schema.org/name)</td>
+        <td>OPTIONAL</td>
+        <td>[`schema:Text`](https://schema.org.Text)</td>
+        <td>Though indicated as a String to avoid whitespace issues, values here should conform to [`schema:Float`](https://schema.org/Float)</td>
+     </tr>
       <tr>
          <td>geo:long</td>
          <td>OPTIONAL</td>
@@ -3809,28 +3821,28 @@ An `oa:RoutePoint` is simply a point of some special significance along a Route 
          <td></td>
       </tr>
       <tr>
-         <td>[`oa:publicTransportNote`](https://openactive.io/publicTransportNote)</td>
+         <td>[`oa:transportNote`](https://openactive.io/transportNote)</td>
          <td>OPTIONAL</td>
-         <td>[`schema:Text`](https://schema.org/Text)</td>
-         <td>Information about how to reach the RoutePoint by public transport.</td>
-      </tr>
-      <tr>
-         <td>[`oa:landmark`](https://openactive.io/landmark)</td>
-         <td>OPTIONAL</td>
-         <td>[`schema:Text`](https://schema.org/Text)</td>
-         <td>information about any significant landmarks associated with the RoutePoint</td>
+         <td>Array of [`oa:TransportNote`](https://openactive.io/TransportNote)</td>
+         <td>Information about how to reach the RoutePoint.</td>
       </tr>
       <tr>
          <td>[`oa:town`](https://openactive.io/town)</td>
          <td>OPTIONAL</td>
-         <td>[`schema:Text`](https://schema.org/Text)</td>
+         <td>[`schema:Text`](https://schema.org/Text) or [`schema:URL`](https://schema.org/URL)</td>
          <td>The municipality closest to or containing the RoutePoint.</td>
       </tr>
       <tr>
          <td>[`oa:region`](https://openactive.io/region)</td>
          <td>OPTIONAL</td>
-         <td>[`schema:Text`](https://schema.org/Text)</td>
+         <td>[`schema:Text`](https://schema.org/Text) or [`schema:URL`](https://schema.org/URL)</td>
          <td>The region containing the RoutePoint.</td>
+      </tr>
+      <tr>
+         <td>[`oa:shortDescription`](https://openactive.io/shortDescription)</td>
+         <td>OPTIONAL</td>
+         <td>[`schema:Text`](https://schema.org/Text)</td>
+         <td></td>
       </tr>
       <tr>
          <td>[`schema:description`](https://schema.org/description)</td>
@@ -3916,14 +3928,14 @@ In addition, gradient is often used as a component in, or proxy for, description
       <tr>
          <td>[`oa:totalElevationGain`](https://openactive.io/totalElevationGain)</td>
          <td>OPTIONAL</td>
-         <td>[`schema:QuantitativeValue`](https://schema.org/QuantitativeValue)</td>
-         <td>Must include both number and unit.</td>
+         <td>Integer</td>
+         <td>Unit is metres.</td>
       </tr>
       <tr>
          <td>[`oa:totalElevationLoss`](https://openactive.io/totalElevationLoss)</td>
          <td>OPTIONAL</td>
-         <td>[`schema:QuantitativeValue`](https://schema.org/QuantitativeValue)</td>
-         <td>Must include both number and unit.</td>
+         <td>Integer</td>
+         <td>Unit is metres.</td>
       </tr>
       <tr>
          <td>[`oa:gradientTerm`](https://openactive.io/gradientTerm)</td>
@@ -3945,6 +3957,35 @@ In addition, gradient is often used as a component in, or proxy for, description
       </tr>
    </tbody>
 </table>
+
+### Describing Transport to and from the Route (`oa:transportNote`)
+
+<table>
+   <thead>
+      <th>Property</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th>Notes</th>
+   </thead>
+   <tbody>
+      <tr>
+         <td>[`oa:transportMode`](https://openactive.io/transportMode)</td>
+         <td>REQUIRED</td>
+         <td>[`schema:Text`](https://schema.org/Text)</td>
+         <td>e.g. 'Bus', 'Train', 'Road'</td>
+      </tr>
+      <tr>
+         <td>[`schema:description`](https://schema.org/description)</td>
+         <td>REQUIRED</td>
+         <td>[`schema:Text`](https://schema.org/Text)</td>
+         <td>Instructions for navigation to the destination by means of the `oa:transportMode`</td>
+      </tr>
+   </tbody>
+</table>
+
+<div class="note">
+It is RECOMMENDED that the value of `oa:transportMode` be taken from the following list: "Bus", "Rail", "Bicycle", "Road", or "Foot".
+</div>
 
 ### Describing Route Difficulty (`oa:RouteDifficulty`)
 

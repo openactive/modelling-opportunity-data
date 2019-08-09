@@ -3642,20 +3642,20 @@ Route Metadata is often generated over an extended period of curation: that is t
       <tr>
          <td>[`oa:startPoint`](https://openactive.io/startPoint)</td>
          <td>REQUIRED</td>
-         <td>Array of [`oa:RoutePoint`](https://openactive.io/RoutePoint)</td>
-         <td></td>
+         <td>Array of [`schema:Place`](https://schema.org/Place)</td>
+         <td>On modelling values here, see below: Describing Route Points.</td>
       </tr>
       <tr>
          <td>[`oa:endPoint`](https://openactive.io/endPoint)</td>
          <td>OPTIONAL</td>
-         <td>RoutePoint object</td>
-         <td>REQUIRED if isLoop is 'false'</td>
+         <td>Array of [`schema:Place`](https://schema.org/Place)</td>
+         <td>REQUIRED if isLoop is 'false'. On modelling values here, see below: Describing Route Points.</td>
       </tr>
       <tr>
          <td>[`oa:pointOfInterest`](https://openactive.io/pointOfInterest)</td>
          <td>OPTIONAL</td>
-         <td>Array of [`oa:RoutePoint`](https://openactive.io/RoutePoint)</td>
-         <td>Noteworthy points along the Route</td>
+         <td>Array of [`schema:Place`](https://schema.org/Place)</td>
+         <td>Noteworthy points along the Route. On modelling values here, see below: Describing Route Points.</td>
       </tr>
       <tr>
          <td>[`oa:accessibiltyDescription`](https://openactive.io/accessibiltyDescription)</td>
@@ -3772,9 +3772,11 @@ Route Metadata is often generated over an extended period of curation: that is t
 Identical values should not be given for the `schema:url` and `oa:originatingWebsite` properties, and where applicable preference SHOULD be given to populating the more-specific property (that is to say, `oa:originatingWebsite`).
 </div>
 
-### Describing Route Points (`oa:RoutePoint`)
+### Describing Route Points: Start, End, and Of Interest
 
-An `oa:RoutePoint` is simply a point of some special significance along a Route - because, e.g., it forms the `startPoint` or `endPoint` of a Route, or forms a `pointOfInterest` that users may wish to make note of.
+`Route`s are typically characterised by a number of points of special significance along their path: at a minimum, in the case of a looping `Route`, a `startPoint`, but often also an `endPoint` and sometimes various other `pointsOfInterest` along the way.
+
+Such points, for the purpose of describing `Route`s, are `schema:Place`s. However, the restricted but distinctive requirements `Route`s impose mean that particular attention should be paid to the properties listed below, some of which are unique to the OpenActive namespace:
 
 <table>
    <thead>
@@ -3788,11 +3790,11 @@ An `oa:RoutePoint` is simply a point of some special significance along a Route 
         <td>[`schema:name`](https://schema.org/name)</td>
         <td>OPTIONAL</td>
         <td>[`schema:Text`](https://schema.org.Text)</td>
-        <td>Though indicated as a String to avoid whitespace issues, values here should conform to [`schema:Float`](https://schema.org/Float)</td>
+        <td></td>
      </tr>
      <tr>
        <td>[`schema:geo`](https://schema.org/geo)</td>
-       <td><em class="rfc2119">RECOMMENDED</em></td>
+       <td><em class="rfc2119">OPTIONAL</em></td>
        <td>[`schema:GeoCoordinates`](https://schema.org/GeoCoordinates)</td>
        <td>The geographic co-ordinates, specified as a latitude and longitude of a Place</td>
      </tr>
@@ -3806,7 +3808,7 @@ An `oa:RoutePoint` is simply a point of some special significance along a Route 
          <td>[`oa:transportNote`](https://openactive.io/transportNote)</td>
          <td>OPTIONAL</td>
          <td>Array of [`oa:TransportNote`](https://openactive.io/TransportNote)</td>
-         <td>Information about how to reach the RoutePoint.</td>
+         <td>Information about how to reach the `RoutePoint`.</td>
       </tr>
       <tr>
          <td>[`oa:shortDescription`](https://openactive.io/shortDescription)</td>
@@ -3816,9 +3818,21 @@ An `oa:RoutePoint` is simply a point of some special significance along a Route 
       </tr>
       <tr>
          <td>[`schema:description`](https://schema.org/description)</td>
-         <td>OPTIONAL</td>
+         <td>REQUIRED</td>
          <td>[`schema:Text`](https://schema.org/Text)</td>
          <td></td>
+      </tr>
+      <tr>
+         <td>[`schema:description`](https://schema.org/description)</td>
+         <td>REQUIRED</td>
+         <td>[`schema:Text`](https://schema.org/Text)</td>
+         <td></td>
+      </tr>
+      <tr>
+         <td>[`schema:sameAs`](https://schema.org/sameAd)</td>
+         <td>OPTIONAL</td>
+         <td>[`schema:URL`](https://schema.org/URL)</td>
+         <td>URL of a reference Web page that unambiguously indicates the Place's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.</td>
       </tr>
    </tbody>
 </table>
@@ -4272,10 +4286,10 @@ In addition, the following structural constraints apply:
          <td>Indicates the presentation order of `Route Segment`s within the parent `Route`.</td>
       </tr>
       <tr>
-         <td>[`schema:alternativeSegmentTo`](https://schema.org/alternativeSegmentTo)</td>
+         <td>[`schema:alternativeRouteSegmentMetadata`](https://schema.org/alternativeSegmentTo)</td>
          <td>OPTIONAL</td>
          <td>Array of schema:URL</td>
-         <td>An array of `@id` values indicating other possible `Route Segment`s that may be taken in preference to the declaring `Segment`. </td>
+         <td>An array of `@id` values pointing to RouteSegment Metadata describing alternative `RouteSegment`s that may be taken in preference to the declaring `Segment`. </td>
       </tr>
    <tbody>
 </table>

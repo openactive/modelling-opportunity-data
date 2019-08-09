@@ -3790,24 +3790,12 @@ An `oa:RoutePoint` is simply a point of some special significance along a Route 
         <td>[`schema:Text`](https://schema.org.Text)</td>
         <td>Though indicated as a String to avoid whitespace issues, values here should conform to [`schema:Float`](https://schema.org/Float)</td>
      </tr>
-      <tr>
-         <td>geo:long</td>
-         <td>OPTIONAL</td>
-         <td>String</td>
-         <td>Though indicated as a String to avoid whitespace issues, values here should conform to [`schema:Float`](https://schema.org/Float)</td>
-      </tr>
-      <tr>
-         <td>geo:lat</td>
-         <td>OPTIONAL</td>
-         <td>String</td>
-         <td>Though indicated as a String to avoid whitespace issues, values here should conform to [`schema:Float`](https://schema.org/Float)</td>
-      </tr>
-      <tr>
-         <td>geo:alt</td>
-         <td>OPTIONAL</td>
-         <td>String</td>
-         <td>Though indicated as a String to avoid whitespace issues, values here should conform to [`schema:Float`](https://schema.org/Float)</td>
-      </tr>
+     <tr>
+       <td>[`schema:geo`](https://schema.org/geo)</td>
+       <td><em class="rfc2119">RECOMMENDED</em></td>
+       <td>[`schema:GeoCoordinates`](https://schema.org/GeoCoordinates)</td>
+       <td>The geographic co-ordinates, specified as a latitude and longitude of a Place</td>
+     </tr>
       <tr>
          <td>[`oa:mapReference`](https://openactive.io/mapReference)</td>
          <td>OPTIONAL</td>
@@ -3815,28 +3803,10 @@ An `oa:RoutePoint` is simply a point of some special significance along a Route 
          <td></td>
       </tr>
       <tr>
-         <td>[`schema:postalCode`](https://schema.org/postalCode)</td>
-         <td>OPTIONAL</td>
-         <td>[`schema:Text`](https://schema.org/Text)</td>
-         <td></td>
-      </tr>
-      <tr>
          <td>[`oa:transportNote`](https://openactive.io/transportNote)</td>
          <td>OPTIONAL</td>
          <td>Array of [`oa:TransportNote`](https://openactive.io/TransportNote)</td>
          <td>Information about how to reach the RoutePoint.</td>
-      </tr>
-      <tr>
-         <td>[`oa:town`](https://openactive.io/town)</td>
-         <td>OPTIONAL</td>
-         <td>[`schema:Text`](https://schema.org/Text) or [`schema:URL`](https://schema.org/URL)</td>
-         <td>The municipality closest to or containing the RoutePoint.</td>
-      </tr>
-      <tr>
-         <td>[`oa:region`](https://openactive.io/region)</td>
-         <td>OPTIONAL</td>
-         <td>[`schema:Text`](https://schema.org/Text) or [`schema:URL`](https://schema.org/URL)</td>
-         <td>The region containing the RoutePoint.</td>
       </tr>
       <tr>
          <td>[`oa:shortDescription`](https://openactive.io/shortDescription)</td>
@@ -3872,19 +3842,19 @@ An `oa:MapReference` is simply a geographic reference specified in terms of some
          <td></td>
       </tr>
       <tr>
-         <td>mapSeries</td>
+         <td>[`mapSeries`](https://openactive.io/mapSeries)</td>
          <td>OPTIONAL</td>
          <td>[`schema:Text`](https://schema.org/Text)</td>
          <td>e.g. 'Explorer', 'Landranger'</td>
       </tr>
       <tr>
-         <td>mapNumber</td>
+         <td>[`mapNumber`](https://openactive.io/mapNumber)</td>
          <td>OPTIONAL</td>
          <td>[`schema:Text`](https://schema.org/Text)</td>
          <td>REQUIRED if no gridReference supplied</td>
       </tr>
       <tr>
-         <td>gridReference</td>
+         <td>[`gridReference`](https://openactive.io/gridReference)</td>
          <td>OPTIONAL</td>
          <td>[`schema:Text`](https://schema.org/Text)</td>
          <td>REQUIRED if no mapNumber supplied</td>

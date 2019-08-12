@@ -3772,7 +3772,7 @@ Route Metadata is often generated over an extended period of curation: that is t
 Identical values should not be given for the `schema:url` and `oa:originatingWebsite` properties, and where applicable preference SHOULD be given to populating the more-specific property (that is to say, `oa:originatingWebsite`).
 </div>
 
-### Describing Route Points: Start, End, and Of Interest
+### Describing Route Points: Start, End, and Of Interest (`schema:Place`)
 
 `Route`s are typically characterised by a number of points of special significance along their path: at a minimum, in the case of a looping `Route`, a `startPoint`, but often also an `endPoint` and sometimes various other `pointsOfInterest` along the way.
 
@@ -3808,7 +3808,7 @@ Such points, for the purpose of describing `Route`s, are `schema:Place`s. Howeve
          <td>[`oa:transportNote`](https://openactive.io/transportNote)</td>
          <td>OPTIONAL</td>
          <td>Array of [`oa:TransportNote`](https://openactive.io/TransportNote)</td>
-         <td>Information about how to reach the `RoutePoint`.</td>
+         <td>Information about how to reach the `routePoint`.</td>
       </tr>
       <tr>
          <td>[`oa:shortDescription`](https://openactive.io/shortDescription)</td>

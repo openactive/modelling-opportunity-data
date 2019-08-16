@@ -767,11 +767,11 @@ The following table provides a high-level summary of how the concepts introduced
 definitions in SKOS, Schema.org and the OpenActive Vocabulary ([[OpenActive-Vocabulary]]).
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Concept</th>
     <th>Mapping</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>Activity List</td>
@@ -959,12 +959,12 @@ The following table illustrates how the essential aspects of describing an event
 existing Schema.org properties and/or properties defined in the OpenActive Vocabulary.
 </p>
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Type</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -1413,12 +1413,12 @@ Events can be associated with a Programme using the
 is a [`schema:Brand`](https://schema.org/Brand) object.
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -1662,7 +1662,7 @@ different times of the day (the children).
 This type of relationship between events can be described using the
 [`schema:subEvent`](https://schema.org/subEvent) and [`schema:superEvent`](https://schema.org/superEvent)
 properties. Note on each occasion within this specification that a relationship is
-represented using [`schema:subEvent`](https://schema.org/subEvent], the inverse is also
+represented using [`schema:subEvent`](https://schema.org/subEvent), the inverse is also
 possible using [`schema:superEvent`](https://schema.org/superEvent) and conformance rules MUST be adapted accordingly.
 
 <pre class="example" title="Parent-child Events"><code>
@@ -2089,12 +2089,12 @@ calendar entry. A data consumer can apply these rules to generate future instanc
 of an event, e.g. to populate a calendar
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -2369,12 +2369,12 @@ The following table lists a number of properties that can be used to
 describe a [`schema:Place`](https://schema.org/Place).
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -2493,12 +2493,12 @@ The following example illustrates a simple place description including its name,
 Schema.org provides the following properties for publishing address data using the [`schema:PostalAddress`](https://schema.org/PostalAddress) type.
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -2558,12 +2558,12 @@ The following example shows how to markup a simple address:
 A more precise geographical location can be provided for a [`schema:Place`](https://schema.org/Place) by adding a [`schema:geo`](https://schema.org/geo) property. The value of this property is a is a [`schema:GeoCoordinates`](https://schema.org/GeoCoordinates) object.
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -2729,12 +2729,12 @@ To help ensure that publishers apply these properties in consistent ways, it is 
 Both the [`schema:Person`](https://schema.org/Person) and [`schema:Organization`](https://schema.org/Organization) types support a common set of properties that capture the basic information required for publishing opportunity data.
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -2834,12 +2834,12 @@ standard covers all the requirements [outlined in the concept model](#physical-a
 The [[OpenActive-Activity-List]] provides an openly licensed standard activity list that can be used by publishers. But where a publisher needs to publish their own list, then they can use the properties defined in the SKOS specification, as follows:
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -2912,12 +2912,12 @@ The following example illustrates the basic structure of an activity list:
 The following properties from the [[SKOS]] specification can be used to describe physical activities.
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -2992,12 +2992,12 @@ The following markup illustrates how to describe a single activity.
 To indicate that a `schema:Event` is only available to paid attendees, opportunity data provides may include details of the offers available to participants. The [`schema:Offer`](https://schema.org/Offer) type provides some basic properties for indicating the price and availability of Offers.
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -3106,11 +3106,11 @@ The legal values for the [`oa:advanceBooking`](https://openactive.io/advanceBook
 interpretation are:
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Value</th>
     <th>`oa:advanceBooking`</th>
     <th>`oa:prepayment`</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>https://openactive.io/Required</td>
@@ -3151,12 +3151,12 @@ product which may link to more detail about the facility on offer and the costs
 for hire.
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -3252,12 +3252,12 @@ The opportunity to use a facility is divided into a calendar of Slots, which
 allow a participant to use that facility for a specified time and duration.
 
 <table>
-  <thead>
+  <thead><tr>
     <th>Property</th>
     <th>Status</th>
     <th>Format</th>
     <th>Notes</th>
-  </thead>
+  </tr></thead>
   <tbody>
     <tr>
       <td>`@type`</td>
@@ -3544,12 +3544,12 @@ The purpose of the __Route Metadata__ model is to describe a __Route__: that is 
 Route Metadata is often generated over an extended period of curation: that is to say, initially sparse information about a Route is frequently augmented over time, until a full description of the Route emerges. While the Route Metadata model is rich, then, the number of REQUIRED fields is relatively small, in keeping with this curation workflow.
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
      <tr>
         <td>`@type`</td>
@@ -3781,12 +3781,12 @@ Identical values should not be given for the `schema:url` and `oa:originatingWeb
 Such points, for the purpose of describing `Route`s, are `schema:Place`s. However, the restricted but distinctive requirements `Route`s impose mean that particular attention should be paid to the properties listed below, some of which are unique to the OpenActive namespace:
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
      <tr>
         <td>[`schema:name`](https://schema.org/name)</td>
@@ -3844,12 +3844,12 @@ Such points, for the purpose of describing `Route`s, are `schema:Place`s. Howeve
 An `oa:MapReference` is simply a geographic reference specified in terms of some widely-used map or series of maps. In the UK, for instance, the Ordnance Survey Explorer and Landranger maps are frequently used to indicate the boundaries within which a geographic entity falls.
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
       <tr>
          <td>[`schema:publisher`](https://schema.org/publisher)</td>
@@ -3885,12 +3885,12 @@ An `oa:RouteGradient` captures the steepness of climb and descent along a Route.
 In addition, gradient is often used as a component in, or proxy for, description of the difficulty of completing a given Route. Data publishers should therefore give careful thought as to whether their gradient information is better captured using the `RouteGradient` or `RouteDifficulty` models.
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
       <tr>
          <td>[`oa:maxGradient`](https://openactive.io/maxGradient)</td>
@@ -3940,12 +3940,12 @@ In addition, gradient is often used as a component in, or proxy for, description
 ### Describing Transport to and from the Route (`oa:transportNote`)
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
       <tr>
          <td>[`oa:transportMode`](https://openactive.io/transportMode)</td>
@@ -3971,12 +3971,12 @@ It is RECOMMENDED that the value of `oa:transportMode` be taken from the followi
 The `oa:RouteDifficulty` model describes the effort and level of fitness required to successfully complete a Route. Such assessments necessarily contain a strong subjective component, and data publishers are thus encouraged to use the `[`schema:description`](https://schema.org/description)` field to ground their assessment in more concrete terms such as distance and gradient, and/or to provide a `difficultyDefinitionURL` further explaining the rationale behind it.
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
       <tr>
          <td>[`oa:difficultyTerm`](https://openactive.io/difficultyTerm)</td>
@@ -4004,11 +4004,11 @@ The `oa:RouteDifficulty` model describes the effort and level of fitness require
 Users of Routes, particularly in rural areas, need to be apprised of their legal status: that is to say, whether and under what conditions they are legally allowed to avail themselves of all sections of the Route. In most cases this can be done concisely by indicating the `oa:routeDesignation`; further nuances or exceptional cases should be dealt with in more detail using the `description` and `legalInformationURL` fields.
 
 <table>
-<thead>
+<thead><tr>
    <th>Property</th>
    <th>Status</th>
    <th>Type</th>
-   </thead>
+   </tr></thead>
    <tbody>
 <tr>
    <td>[`oa:routeDesignation`](https://openactive.io/routeDesignation)</td>
@@ -4033,12 +4033,12 @@ Users of Routes, particularly in rural areas, need to be apprised of their legal
 Being able to complete a Route within a given time is important to many users, particularly those who engage infrequently in outdoor activities because they feel pressed for time. While there is considerable variance in individual activity speed, providing a rough indication of how much time to allow can nevertheless be valuable.
 
 <table>
-<thead>
+<thead><tr>
      <th>Property</th>
      <th>Status</th>
      <th>Type</th>
      <th>Notes</th>
-</thead>
+</tr></thead>
 <tbody>
   <tr>
     <td>[`oa:activity`](https://openactive.io/activity)</td>
@@ -4061,12 +4061,12 @@ Being able to complete a Route within a given time is important to many users, p
 An `oa:RouteDesignation` is a formal, legal declaration of the status of a given Route or Route Segment. As such, any given jurisdiction will define only a finite (usually quite small) number of possible Designations.
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
       <tr>
          <td>[`oa:routeDesignationTerm`](https://openactive.io/routeDesignationTerm)</td>
@@ -4141,12 +4141,12 @@ To avoid potential confusion between absence of risk information and absence of 
 </div>
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
       <tr>
          <td>[`oa:knownRisks`](https://openactive.io/knownRisks)</td>
@@ -4210,12 +4210,12 @@ To avoid potential confusion between absence of risk information and absence of 
 Route Access Restrictions convey information regardihg restrictions on use or access to the Route that arising from reasons other than legal status, e.g., social convention, wildlife protection, or seasonal factors.
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
       <tr>
          <td>[`oa:routeAccessRestrictionTerm`](https://openactive.io/routeAccessRestrictionTerm)</td>
@@ -4267,12 +4267,12 @@ In addition, the following structural constraints apply:
 1.  If a Route contains Route Segments at all, these Segments MUST describe the entirety of the Route: there should be no 'gaps' left unaccounted for by the Segments.
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Status</th>
       <th>Type</th>
       <th>Notes</th>
-   </thead>
+   </tr></thead>
    <tbody>
       <tr>
          <td>[`oa:sequence`](https://openactive.io/sequence)</td>
@@ -4302,10 +4302,10 @@ Modelling here is to be guided by the principle that some properties (e.g., `ori
 The table below indicates which Route Metadata properties should be viewed as inherited, and which not:
 
 <table>
-   <thead>
+   <thead><tr>
       <th>Property</th>
       <th>Inherited?</th>
-   </thead>
+   </tr></thead>
    <tbody>
      <tr>
         <td>`@type`</td>

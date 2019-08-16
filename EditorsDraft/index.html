@@ -3629,7 +3629,7 @@ Route Metadata is often generated over an extended period of curation: that is t
          <td>Specifies one or more physical activities that will take place during an event. The activities should ideally be taken from an activity list. In the context of Route Metadata, the activity specified will normally be one or more of https://openactive.io/activity-list#_4a19873e-118e-43f4-b86e-05acba8fb1de ("cycling"), https://openactive.io/activity-list#_95092977-5a20-4d6e-b312-8fddabe71544 ("walking") https://openactive.io/activity-list#_72ddb2dc-7d75-424e-880a-d90eabe91381 ("running"), https://openactive.io/activity-list#_45a372d9-baca-4f6c-859f-04de3efae742 ("Horse riding"), or a narrower term within these.</td>
       </tr>
       <tr>
-         <td>beta:distance</td>
+         <td>`distance`</td>
          <td>REQUIRED</td>
          <td>[`schema:QuantitativeValue`](https://schema.org/QuantitativeValue)</td>
          <td>Length of route. Must include both number and unit. sameAs beta:distance.</td>
@@ -4285,7 +4285,7 @@ In addition, the following structural constraints apply:
          <td>Array of schema:URL</td>
          <td>An array of `@id` values pointing to RouteSegment Metadata describing alternative `RouteSegment`s that may be taken in preference to the declaring `Segment`. </td>
       </tr>
-   <tbody>
+   </tbody>
 </table>
 
 <div class="note">

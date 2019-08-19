@@ -13,7 +13,7 @@
     "express": "^4.13.4",
     "gulp": "^3.9.1",
     "livereload": "^0.4.1",
-    "tiny-lr": "^0.2.1",
-    "respec": "w3c/respec"
+    "respec": "github:w3c/respec",
+    "tiny-lr": "^0.2.1"
   }
 }

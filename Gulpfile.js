@@ -36,7 +36,7 @@ function notifyEditorsDraft() {
 
   tinylr.changed({
     body: {
-      files: ["EditorsDraft/live.html"]
+      files: ["EditorsDraft/edit.html"]
     }
   });
 }
@@ -47,10 +47,9 @@ gulp.task('editorsdraft', function() {
 
   var thisDir = path.dirname(fs.realpathSync(__filename));
 
-  //const src = "file://" + thisDir + "/EditorsDraft/index.html";
-  const src = "http://localhost:4000/EditorsDraft/index.html";
+  const src = "http://localhost:4000/EditorsDraft/edit.html";
   console.log(src);
-  const out = "./EditorsDraft/live.html";
+  const out = "./EditorsDraft/index.html";
   const whenToHalt = {
     haltOnError: false,
     haltOnWarn: false,
@@ -61,8 +60,7 @@ gulp.task('editorsdraft', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('EditorsDraft/index.html', ['editorsdraft']);
-  //gulp.watch('EditorsDraft/live.html', notifyLiveReload);
+  gulp.watch('EditorsDraft/edit.html', ['editorsdraft']);
 });
 
 gulp.task('default', ['editorsdraft', 'express', 'livereload', 'watch'], function() {

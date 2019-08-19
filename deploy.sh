@@ -5,21 +5,7 @@ set -e # exit with nonzero exit code if anything fails
 git config --global push.default matching
 
 # prepare respec build
-
-# clear the respec directory
-rm -rf respec || exit 0;
-
-# get existing gh-pages
-#git clone -b develop "https://github.com/w3c/respec.git"
-git clone -b develop "https://github.com/openactive/respec.git"
-
-cd respec
-#reset to version that was working?
-#git reset --hard 250324c3b256e2b9055d2fd239a3c32c260e2bf6
-
 npm install
-
-cd ..
 
 # clear and re-create the out directory
 rm -rf out || exit 0;
@@ -35,9 +21,9 @@ git config user.email "travis@openactive.org"
 
 # compile using respec2html (handling each version separately)
 function respec2html {
-  rm $2
-  echo Running respec2html Nightmare for $1 $2
-  DEBUG=nightmare xvfb-run --server-args="-screen 0 1024x768x24" node respec/tools/respec2html.js --haltonerror --src $1 --out $2
+  #rm $2 || exit 0;
+  echo Running respec2html NightmareJS for $1 $2;
+  node ./node_modules/respec/tools/respec2html.js --haltonerror --src $1 --out $2;
   {
   if [ ! -f $2 ]; then
       echo "respect2html Nightmare failed to generate index.html for $3"
@@ -49,17 +35,19 @@ function respec2html {
 echo Copying static files
 cp -r ../1.0 .
 cp -r ../1.1 .
-cp -r ../Latest .
+cp -r ../2.0 .
 cp -r ../EditorsDraft .
-cp -r ../Latest/* .
+
+# Remove edit versions
+#rm **/edit.html
+
+# Current latest version
+cp -r ../2.0/* .
 
 cd ..
 
-respec2html "file://$PWD/EditorsDraft/index.html" "$PWD/out/EditorsDraft/index.html" "EditorsDraft"
-respec2html "file://$PWD/1.0/index.html" "$PWD/out/1.0/index.html" "1.0"
-respec2html "file://$PWD/1.1/index.html" "$PWD/out/1.1/index.html" "1.1"
-respec2html "file://$PWD/Latest/index.html" "$PWD/out/Latest/index.html" "Latest"
-cp "$PWD/out/Latest/index.html" out/index.html
+# Regenerate file for EditorsDraft only
+respec2html "file://$PWD/EditorsDraft/edit.html" "$PWD/out/EditorsDraft/index.html" "EditorsDraft"
 
 cd out
 

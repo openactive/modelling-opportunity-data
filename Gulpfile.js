@@ -54,9 +54,16 @@ gulp.task('editorsdraft', function() {
     haltOnError: false,
     haltOnWarn: false,
   };
-  const timeout = 10000;
+  const timeout = 20000;
 
-  return fetchAndWrite(src, out, whenToHalt, timeout).then(notifyEditorsDraft);
+  return (async function run() {
+    try {
+      await fetchAndWrite(src, out, whenToHalt, timeout);
+    } catch (err) {
+      console.error(colors.error(err.stack));
+    }
+    notifyEditorsDraft();
+  })();
 });
 
 gulp.task('watch', function() {

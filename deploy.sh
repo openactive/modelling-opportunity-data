@@ -39,7 +39,7 @@ cp -r ../2.0 .
 cp -r ../EditorsDraft .
 
 # Remove edit versions
-rm **/edit.html
+# rm **/edit.html
 
 # Current latest version
 cp -r ../2.0/* .

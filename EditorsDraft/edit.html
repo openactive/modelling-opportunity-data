@@ -2641,7 +2641,7 @@ Such points, for the purpose of describing `Route`s, are `schema:Place`s. Howeve
 |@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RoutePoint`|
 |[schema:name](https://schema.org/name)|OPTIONAL|[schema:Text](https://schema.org.Text)||
 |[schema:geo](https://schema.org/geo)|OPTIONAL|[schema:GeoCoordinates](https://schema.org/GeoCoordinates)|The geographic co-ordinates, specified as a latitude and longitude of a Place|
-|[oa:isAccessPoint](https://openactive.io/isAccessPoint)||[schema:Boolean](https://schema.org/Boolean)|Whether or not it is possible to join the Route as a whole at this point. On `RouteGuidance``startPoint` and `endPoint` attributes this defaults to `true`; otherwise it defaults to `false`.|
+|[oa:isAccessPoint](https://openactive.io/isAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is possible to join the Route as a whole at this point. On `RouteGuidance``startPoint` and `endPoint` attributes this defaults to `true`; otherwise it defaults to `false`.|
 |[oa:mapReference](https://openactive.io/mapReference)|OPTIONAL|Array of [oa:MapReference](https://openactive.io/MapReference)||
 |[oa:transportNote](https://openactive.io/transportNote)|OPTIONAL|Array of [oa:TransportNote](https://openactive.io/TransportNote)|Information about how to reach the `routePoint`.|
 |[oa:shortDescription](https://openactive.io/shortDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)||

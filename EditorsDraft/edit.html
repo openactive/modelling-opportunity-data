@@ -2574,7 +2574,7 @@ Route Guidance is often generated over an extended period of curation: that is t
 |[oa:dateModified](https://openactive.io/dateModified)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|Last point at which route information was added or edited.|
 |[oa:verifiedBy](https://openactive.io/verifiedBy)|RECOMMENDED|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Person or organisation who has confirmed accuracy of route information|
 |[oa:dateVerified](https://openactive.io/dateVerified)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|REQUIRED if 'verifiedBy' is supplied. Can be specified as [schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|
-|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)||
+|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the route.|
 |[oa:shortDescription](https://openactive.io/shortDescription)|OPTIONAL|[schema:description](https://schema.org/description)|A short summary of the route, for use as a tagline or preview.|
 |[oa:activity](https://openactive.io/activity)|REQUIRED|Array of [schema:URL](https://schema.org/URL)|Specifies one or more physical activities that will take place during an event. The activities should ideally be taken from an activity list. In the context of Route Guidance, the activity specified will normally be one or more of https://openactive.io/activity-list#_4a19873e-118e-43f4-b86e-05acba8fb1de ("cycling"), https://openactive.io/activity-list#_95092977-5a20-4d6e-b312-8fddabe71544 ("walking") https://openactive.io/activity-list#_72ddb2dc-7d75-424e-880a-d90eabe91381 ("running"), https://openactive.io/activity-list#_45a372d9-baca-4f6c-859f-04de3efae742 ("Horse riding"), or a narrower term within these.|
 |distance|REQUIRED|[schema:QuantitativeValue](https://schema.org/QuantitativeValue)|Length of route. Must include both number and unit. sameAs beta:distance.|
@@ -2587,8 +2587,8 @@ Route Guidance is often generated over an extended period of curation: that is t
 |[oa:surface](https://openactive.io/surface)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|Suggested values include "Gravel", "Paved", "Bare Earth or Bedrock", "Short Vegetation", "Rough Vegetation or Crop", "Hard Surface (Stoney)", "Hard Surface (Sealed)", and "Boardwalk or Timber"|
 |[oa:originatingWebsite](https://openactive.io/originatingWebsite)|OPTIONAL|[schema:URL](https://schema.org/URL)|Link to original hosting site, which may contain additional or contextual information.|
 |[oa:routeDifficulty](https://openactive.io/routeDifficulty)|OPTIONAL|[oa:RouteDifficulty](https://openactive.io/RouteDifficulty)|In cases where more than one [oa:RouteDifficulty](https://openactive.io/RouteDifficulty) may be applicable, the most difficult should be supplied|
-|[oa:geoPath](https://openactive.io/geoPath)|RECOMMENDED|Array of [schema:URL](https://schema.org/URL)|REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX|
-|[oa:mapImage](https://openactive.io/mapImage)|OPTIONAL|Array of [schema:URL](https://schema.org/URL)|REQUIRED if no geoPath is provided.|
+|[oa:geoPath](https://openactive.io/geoPath)|RECOMMENDED|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX|
+|[oa:mapImage](https://openactive.io/mapImage)|OPTIONAL|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no geoPath is provided.|
 |[oa:category](https://openactive.io/category)|OPTIONAL|Array of [schema:Text](https://schema.org/Text) or skos:Concept|e.g. "pushchair-friendly", "family", "forest walk"|
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|e.g., “Parking”, “Toilets”. See section 5.7.3|
 |[oa:isLoop](https://openactive.io/isLoop)|OPTIONAL|Boolean|Whether the route returns to its point of origin|
@@ -2599,12 +2599,36 @@ Route Guidance is often generated over an extended period of curation: that is t
 |[schema:image](https://schema.org/image)|OPTIONAL|Array of [schema:ImageObject](https://schema.org/ImageObject)|Route images. May be aligned with segments or waypoints|
 |[schema:review](https://schema.org/review)|OPTIONAL|Array of [schema:Review](https://schema.org/Review)|User-submitted ratings of the Route. URL MUST resolve to a file in a format that does not support any form of geo-encoding, e.g. .pdf, .jpg|
 |[schema:contactPoint](https://schema.org/contactPoint)|OPTIONAL|[schema:ContactPoint](https://schema.org/ContactPoint)|Contact details specifically related to the `Route`. The values of the `RouteGuidance` `contactPoint` SHOULD NOT be the same as those of the `oa:originatingPublisher` if present.|
+|[oa:userRouteRecording](https://openactive.io/userRouteRecording)|OPTIONAL|Array of [schema:URL](https://schema.org/URL)|Links to user-generated recordings of their traversal of the route.|
 |[oa:segments](https://openactive.io/segments)|OPTIONAL|Array of [oa:RouteSegmentGuidance](https://openactive.io/RouteSegmentGuidance)|See [Segmenting Routes](#segmenting-routes-routes-as-a-collection-of-sub-routes)|
+|[oa:segmentGroups](https://openactive.io/segmentGroupings)|OPTIONAL|Array of [oa:RouteSegmentGroup](https://openactive.io/RouteSegmentGroup)|See [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)
 
 
 <div class="note" title="schema:url vs. oa:originatingWebsite">
 Identical values should not be given for the `schema:url` and `oa:originatingWebsite` properties, and where applicable preference SHOULD be given to populating the more-specific property (that is to say, `oa:originatingWebsite`).
 </div>
+
+### Describing Maps: `oa:geoPath` and `oa:mapImage`
+
+Cartographic representations of `Route`s ('maps', in common parlance) are typically provided in one of two format families: properly geographic format types, such as [GeoJSON](https://geojson.org/) or the [.osm format](https://learnosm.org/en/osm-data/file-formats/), which support sophisticated geo-specific functionality such as distance calculation or route-tracking; and simple images, such as .jpg files, which provide a visual overview of the relevant area but do not offer any further functionality.
+
+The first kind of map should populate the `oa:geoPath` property; for the second, the `oa:mapImage` property should be used. In both cases, the relevant maps are modelled using the schema.org [`Map`](https://schema.org/Map) class. However, the data-profile of these `Maps` will differ slightly.
+
+#### `oa:geoPath`
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|"Map"||
+|[`schema:mapType`](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|In addition to the [`mapCategoryType`](https://schema.org/MapCategoryType) values proposed by schema.org, the values `http://openactive.io/RouteMap`, `http://openactive.io/ElevationMap`, and `http://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
+|[`schema:url`](https://schema.org/url)|REQUIRED|[`schema:URL`](https://schema.org/URL)|A link to the file containing the map.|
+
+#### `oa:mapImage`
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|"Map"||
+|[`schema:mapType`](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|In addition to the [`mapCategoryType`](https://schema.org/MapCategoryType) values proposed by schema.org, the values `http://openactive.io/RouteMap`, `http://openactive.io/ElevationMap`, and `http://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
+|[`schema:image`](https://schema.org/image)|REQUIRED|[`schema:URL`](https://schema.org/ImageObject)|A link to the image file depicting the map.|
 
 ### Describing Route Points: Start, End, and Of Interest (`schema:Place`)
 
@@ -2810,7 +2834,7 @@ In addition, the following structural constraints apply:
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
-|[oa:sequence](https://openactive.io/sequence)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent `Route`. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuidance` that is otherwise unsegmented but for access points.|
+|[oa:sequence](https://openactive.io/sequence)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent `Route`. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuidance` that is otherwise unsegmented but for access points. In cases where `RouteSegmentGroup`s are provided, this property is REQUIRED (See below, [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)).|
 |[schema:alternativeRouteSegmentGuidance](https://schema.org/alternativeSegmentTo)|OPTIONAL|Array of schema:URL|An array of `@id` values pointing to RouteSegment Metadata describing alternative `RouteSegment`s that may be taken in preference to the declaring `Segment`.|
 
 <div class="note">
@@ -2865,6 +2889,16 @@ The table below indicates which Route Guidance properties should be viewed as in
 
 When it comes to cases where a property may be declared either at the level of Route or Route Segment Guidance, modelling decisions must simply be made on the basis of scope: properties declared at the Route level apply to the Route as a whole, and hence of each Segment within it; those declared on a Segment apply ONLY to that particular Segment.
 
+### Grouping Route Segments (`oa:RouteSegmentGroup`)
+
+In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valley Way](https://s3-eu-west-1.amazonaws.com/explore-kent-bucket/uploads/2015/02/18163918/explore-kent-long-distance-route-elham-valley-way.pdf) walk), individual Route Segments may be grouped together into larger wholes to indicate, e.g., which Segments should ideally be covered in a single day, link together significant sites along the route, etc. In such cases, these larger groupings should be indicated using `oa:RouteSegmentGroup` objects.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|`"RouteSegmentGroup"`||
+|[schema:name](https://schema.org/name)|REQUIRED|String|The name of the grouping.|
+|[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description of the grouping.|
+|[`oa:includesSegments`](https://openactive.io/includesSegments)|Array of [Integer](http://schema.org/Integer)|The individual `RouteSegmentGuidance` objects the `RouteSegmentGroup` comprises, as identified by the value of their `sequence` attribute.|
 <p></p>
 
 ## Extending the Model

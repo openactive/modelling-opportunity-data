@@ -2647,6 +2647,7 @@ Such points, for the purpose of describing `Route`s, are `schema:Place`s. Howeve
 |[oa:shortDescription](https://openactive.io/shortDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)||
 |[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)||
 |[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects. See "Describing Amenities" for more information.|
+|[oa:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
 |[schema:sameAs](https://schema.org/sameAd)|OPTIONAL|[schema:URL](https://schema.org/URL)|URL of a reference Web page that unambiguously indicates the Place's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.|
 
 ### Describing Map References (`oa:MapReference`)
@@ -2883,9 +2884,13 @@ The table below indicates which Route Guidance properties should be viewed as in
 |[oa:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|Yes|
 |[schema:image](https://schema.org/image)|Yes|
 |[schema:review](https://schema.org/review)|Yes|
+|[oa:indicativeDuration](https://schema.org/indicativeDuration)|No|
+|[oa:suggestedEquipment](https://schema.org/suggestedEquipment)|Yes|
+|[schema:contactPoint](https://schema.org/contactPoint)|Yes|
+|[oa:userContributedContent](https://schema.org/userContributedContent)|No|
+|[oa:segmentGroups](https://schema.org/segmentGroups)|N/A|
 |[oa:segments](https://openactive.io/segments)|N/A|
 |[oa:alternativeSegmentTo](https://openactive.io/alternativeSegmentTo)|N/A|
-
 
 When it comes to cases where a property may be declared either at the level of Route or Route Segment Guidance, modelling decisions must simply be made on the basis of scope: properties declared at the Route level apply to the Route as a whole, and hence of each Segment within it; those declared on a Segment apply ONLY to that particular Segment.
 

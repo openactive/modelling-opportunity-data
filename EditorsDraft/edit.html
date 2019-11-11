@@ -2619,7 +2619,7 @@ The first kind of map should populate the `oa:geoPath` property; for the second,
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|"Map"||
-|[`schema:mapType`](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|In addition to the [`mapCategoryType`](https://schema.org/MapCategoryType) values proposed by schema.org, the values `http://openactive.io/RouteMap`, `http://openactive.io/ElevationMap`, and `http://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
+|[`schema:mapType`](https://schema.org/mapType)|OPTIONAL|A schema.org [`MapCategoryType`](https://schema.org/MapCategoryType) or OpenActive enumeration value (see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, and `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
 |[`schema:url`](https://schema.org/url)|REQUIRED|[`schema:URL`](https://schema.org/URL)|A link to the file containing the map.|
 
 #### `oa:mapImage`
@@ -2627,7 +2627,7 @@ The first kind of map should populate the `oa:geoPath` property; for the second,
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
 |@type|REQUIRED|"Map"||
-|[`schema:mapType`](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|In addition to the [`mapCategoryType`](https://schema.org/MapCategoryType) values proposed by schema.org, the values `http://openactive.io/RouteMap`, `http://openactive.io/ElevationMap`, and `http://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
+|[`schema:mapType`](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, and `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
 |[`schema:image`](https://schema.org/image)|REQUIRED|[`schema:URL`](https://schema.org/ImageObject)|A link to the image file depicting the map.|
 
 ### Describing Route Points: Start, End, and Of Interest (`schema:Place`)
@@ -2711,7 +2711,6 @@ Users of Routes, particularly in rural areas, need to be apprised of their legal
 |[oa:routeDesignation](https://openactive.io/routeDesignation)|RECOMMENDED|[oa:RouteDesignation](https://openactive.io/RouteDesignation)|
 |[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|
 |[oa:legalInformationURL](https://openactive.io/legalInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|
-
 
 ### Describing Indicative Durations (`oa:IndicativeDuration`)
 

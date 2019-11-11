@@ -2903,6 +2903,18 @@ In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valle
 |[`alternativeGroupTo`](https://openactive.io/isAlternativeGroupTo)|Array of [URL](http://schema.org/URL)|Used to indicate that this `RouteSegmentGroup`'s collection of `RouteSegmentGuidance` serves as an alternative to the group identified in the `Array`. Where this value is supplied, it is RECOMMENDED that the `description` supply reasons why one or another alternative (e.g. distance, accessibility) might be preferred.  |
 <p></p>
 
+### Describing User Generated Content (`oa:userGeneratedContent`)
+
+Users are often prolific in creating a wide range of supplemental material – e.g images, descriptions, GPX track recordings – for Routes, and such contributions can often considerably enrich `RouteGuidance` data. The sheer – and open-ended – variety of possible contributions means that they are modelled using `schema:CreativeWork`. This type is extremely flexible, and implementers are encouraged to avail themselves of as much of this flexibility as is considered desirable; however, the properties and usage given below are given for guidance and as potentially useful starting-points.
+
+|Property|Status|Type|Notes|
+|--- |--- |--- |--- |
+|@type|REQUIRED|`"CreativeWork"`||
+|[schema:creator](https://schema.org/creator)|RECOMMENDED|String|The individual, howsoever identified (e.g. full name, user handle), responsible for creating the content.|
+|[schema:accountablePerson](http://schema.org/accountablePerson)|RECOMMENDED|[Person](http://schema.org/Person)]|In the context of user-generated content, the `accountablePerson` is the editor, curator, or reviewer who approves and if necessary edits the user-contented submissions prior to publication.|
+|[schema:spatialCoverage](https://schema.org/spatialCoverage)|REQUIRED|String|	The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content - typically, in this context, the location of the `Route`, or points along it.|
+|[schema:associatedMedia](https://schema.org/spatialCoverage)|REQUIRED|String|	The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content - typically, in this context, the location of the `Route`, or points along it.|
+
 ## Extending the Model
 
 The previous sections describe how to publish opportunity data using a combination of existing and new vocabularies.

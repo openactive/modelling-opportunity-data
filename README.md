@@ -3,7 +3,7 @@
 This repository holds the source for the Modelling Opportunity Data specification developed by the [OpenActive Community Group](https://www.w3.org/community/openactive). Links to the published specifications are provided below.
 
 
-Thw specification introduces a data model to support the publication of data describing opportunities for people to engage in physical activities ("opportunity data"). This model covers description of activities, as well as the events and locations in which they take place.
+The specification introduces a data model to support the publication of data describing opportunities for people to engage in physical activities ("opportunity data"). This model covers description of activities, as well as the events and locations in which they take place.
 
 The specification is intended to support the publication of opportunity data as open data for anyone to access, use and share. It will also guide reusers of opportunity data, introducing them to the key concepts relevant to that sector.
 

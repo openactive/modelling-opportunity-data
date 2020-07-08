@@ -649,13 +649,13 @@ paying attendees.
 An __*Offer*__ is used to describe the terms under which a participant can pay to attend an event.
 
 <div class="note">
-<p>
+
 The concept of an Offer is taken from Schema.org, which itself references the [Good Relations](http://www.heppnetz.de/projects/goodrelations/)
 vocabulary for ecommerce. The data model described in a later section is not intended as a
 complete specification. The concept is introduced in this version of specification to highlight
 the support available in Schema.org for associating offers with events. Later versions of the specification
 will explore the area of booking in more detail.
-</p>
+
 </div>
 
 ## Facility Use and Slots
@@ -754,16 +754,14 @@ The rest of this specification makes use of the following namespaces:
 </dl>
 
 <div class="note">
-<p>
+
 In the following sections all referenced terms have been qualified using their namespace prefix. This highlights the
 source vocabulary in which they have been defined. Terms have also been linked to their definitions.
-</p>
-<p>
+
 The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]], which is accessible at `https://openactive.io/` when using an `Accept` header that includes `application/ld+json`.
-</p>
-<p>
+
 The context removes the need to use explicit namespace prefixes in the JSON documents. The context also maps the JSON-LD [@type](https://www.w3.org/TR/json-ld/#specifying-the-type) and [@id](https://www.w3.org/TR/json-ld/#node-identifiers) properties to simple keys (`type` and `id`). This further limits the amount of JSON-LD syntax exposed to developers.
-</p>
+
 </div>
 
 ## Data Model Overview
@@ -903,15 +901,12 @@ of open data that may inform future standardisation.
 
 ## Describing Events (<code>schema:Event</code>)
 
-<p>
 The Schema.org [schema:Event](https://schema.org/Event) type corresponds to the definition of
 Event given earlier in this specification. The properties and relationships associated with the
 [schema:Event](https://schema.org/Event) type can all be used to describe events.
-</p>
-<p>
+
 The following table illustrates how the essential aspects of describing an event map to
 existing Schema.org properties and/or properties defined in the OpenActive Vocabulary.
-</p>
 
 
 |Property|Status|Type|Notes|
@@ -1005,12 +1000,10 @@ This basic description can be improved by providing information about its locati
 
 ### Relating events to Physical Activities
 
-<p>
 The [oa:activity](https://openactive.io/activity) property allows an
 event to be associated with one or more Physical Activities. The Physical
 Activities used to describe an event SHOULD be drawn from a standard Activity
 List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]).
-</p>
 
 <pre class="example" title="Using activities from an Activity List"><code>
   {
@@ -1037,14 +1030,11 @@ Applications could include additional information, e.g. alternate labels for con
 
 ### Describing event availability
 
-<p>
 Schema.org provides a couple of basic properties for describing the
 maximum ([schema:maximumAttendeeCapacity](https://schema.org/maximumAttendeeCapacity))
 and remaining capacity ([schema:remainingAttendeeCapacity](https://schema.org/remainingAttendeeCapacity)) for an [schema:Event](https://schema.org/Event).
-</p>
-<p>
+
 These properties can be used to provide some basic availability information for scheduled events. These are illustrated in the following example which states that a Tai chi class can be attended by up to 20 people and that there are 4 spaces remaining.
-</p>
 
 <pre class="example" title="Basic event availability"><code>
   {
@@ -1063,26 +1053,18 @@ These properties can be used to provide some basic availability information for 
 
 ### Indicating the status of an event
 
-<p>
 An [schema:Event](https://schema.org/Event) may occasionally be rescheduled or cancelled. Schema.org provides the [schema:eventStatus](https://schema.org/eventStatus) property for indicating the current status of an event.
-</p>
 
-<p>
 The property can have several standardised values which are defined by the [schema:EventStatusType](https://schema.org/EventStatusType) enumeration. The property values should therefore be one of the following URIs:
-</p>
 
 * Cancelled: `https://schema.org/EventCancelled`
 * Postponed: `https://schema.org/EventPostponed`
 * Rescheduled: `https://schema.org/EventRescheduled`
 * Scheduled: `https://schema.org/EventScheduled`
 
-<p>
 If the status property is not provided then applications <em class="rfc2119">SHOULD</em> assume a default value of `https://schema.org/EventScheduled`.
-</p>
 
-<p>
 The following example shows a Tai chi class that has been cancelled:
-</p>
 
 <pre class="example" title="A cancelled event"><code>
   {
@@ -1100,7 +1082,6 @@ The following example shows a Tai chi class that has been cancelled:
 
 ### Categorising events
 
-<p>
 The [oa:category](https://openactive.io/category) property can be
 used to associate an Event with one or more tags that provide some extra
 context about an event. This might include general information on the intensity
@@ -1109,12 +1090,10 @@ an Event, a common use case is the need to tag an event as being suitable for
 a specific type of audience, e.g. Beginners. Where this information is
 available, the [oa:level](https://openactive.io/level) property
 can be used in preference to [oa:category](https://openactive.io/category).
-</p>
-<p>
+
 If an application does not distinguish between different types of tags
 associated with an Event, then it <em class="rfc2119">SHOULD</em> use the
 more general [oa:category](https://openactive.io/category) property.
-</p>
 
 <pre class="example" title="Tagging an Event"><code>
   {
@@ -1197,34 +1176,26 @@ an event is:
 
 #### Age ranges
 
-<p>
 Age ranges are specified using the [oa:ageRange](https://openactive.io/ageRange) property.
 The value is a [schema:QuantitativeValue](https://schema.org/QuantitativeValue)
 which should have [minValue](https://schema.org/minValue) or
 [maxValue](https://schema.org/maxValue) properties. These properties specify an
 inclusive minimum and maximum age range for participants.
-</p>
 
-<p>
 Data publishers using the [oa:ageRange](https://openactive.io/ageRange)
 property MUST ensure that it has:
-</p>
 
 * a `type` of [schema:QuantitativeValue](https://schema.org/QuantitativeValue)
 * at least one of the `minValue` or `maxValue`properties
 
-<p>
 Data consumers SHOULD assume that:
-</p>
 
 * if there is no `ageRange` property for an Event, then the event is suitable for adults only. E.g. as if the `minValue` has been specified as `18`
 * if an `ageRange` is provided without a `minValue` property, then there is no minimum age for the `Event`
 * if an `ageRange` is provided without a `maxValue` property, then there is no maximum age for the `Event`
 * if an `ageRange` is provided with a `minValue` of 0, and there is no `maxValue` property then the Event is suitable for all
 
-<p>
 The following example illustrates how to specify an Event that is suitable for people aged 60 or over.
-</p>
 
 <pre class="example" title="Age range example"><code>
   {
@@ -1262,30 +1233,22 @@ no `maxValue` property.
 
 #### Gender restrictions
 
-<p>
 Attendance at some events is limited to certain audiences. For example a
 female only gym class. The [oa:genderRestriction](https://openactive.io/genderRestriction)
 property can be used to specify these restrictions.
-</p>
 
-<p>
 Data publishers using this property MUST use one of the following values:
-</p>
 
 * `https://openactive.io/NoRestriction` indicating that the event has no restrictions
 * `https://openactive.io/MaleOnly` indicating that the event is restricted to the male gender
 * `https://openactive.io/FemaleOnly` indicating that the event is restricted to the female gender
 
-<p>
 If the `genderRestriction` property is not supplied for an Event, then data
 consumers SHOULD NOT assume a default value, the value should be treated as
 `null`. When searching or filtering for gender restricted Events, data
 consumers SHOULD remove Events with a `null` value.
-</p>
 
-<p>
 Invalid values for the `genderRestriction` property SHOULD be treated as `null`.
-</p>
 
 <pre class="example" title="Gender restriction example"><code>
   {
@@ -1750,10 +1713,11 @@ that its definition may need to change in future versions of this specification.
 ### Publishing event schedules
 
 <div class="note" title="Schema.org support for recurring events">
-<p>
+
 This specification relies on some pending changes to Schema.org that will add recurrence rules to Events. The [proposal](https://github.com/schemaorg/schemaorg/pull/1693) has been accepted, but is not yet formally part of the model.
-</p>
-<p>We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that this is an area that may change in future versions.</p>
+
+We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that this is an area that may change in future versions.
+
 </div>
 
 The previous section has described several methods for publishing lists of upcoming
@@ -2157,10 +2121,10 @@ and [schema:containsPlace](https://schema.org/containsPlace)). The following exa
 
 <div class="note">
 <p><strong>Applications must not publish personal data without permission</strong></p>
-<p>
+
 While the [schema:Person](https://schema.org/Person) type allows a variety of information to be published about a
 person, applications <em class="rfc2119">MUST</em> not publish this information as open data without consent.
-</p>
+
 </div>
 
 To describe the people and organisations involving in organising Events, Schema.org provides the [schema:Person](https://schema.org/Person) and [schema:Organization](https://schema.org/Organization) types.
@@ -2549,11 +2513,13 @@ two Slots, but the second is no longer available.</p>
 </code></pre>
 
 <div class="note">
-<p>
+
 The community group feels that the data model proposed in this section adequately covers the primary use cases relating to publishing data on opportunities to hire and use facilities</p>
-<p>However we recognise that there may be some consequences on the volume of data shared via [RPDE feeds](https://www.openactive.io/realtime-paged-data-exchange/). Specifically, for multi-use facilities the booking of mutually exclusive configurations will end up increasing the volume of updates that need to be communicated to users.
-</p>
-<p>The community group has documented this issue and [requests feedback from publishers and users](https://github.com/openactive/modelling-opportunity-data/issues/73) based on implementation feedback before deciding how to address the issue.</p>
+
+However we recognise that there may be some consequences on the volume of data shared via [RPDE feeds](https://www.openactive.io/realtime-paged-data-exchange/). Specifically, for multi-use facilities the booking of mutually exclusive configurations will end up increasing the volume of updates that need to be communicated to users.
+
+The community group has documented this issue and [requests feedback from publishers and users](https://github.com/openactive/modelling-opportunity-data/issues/73) based on implementation feedback before deciding how to address the issue.</p>
+
 </div>
 
 ## Describing Route Guidance (`oa:RouteGuidance`)
@@ -2694,7 +2660,7 @@ It is RECOMMENDED that the value of `oa:transportMode` be taken from the followi
 
 ### Describing Route Difficulty (`oa:RouteDifficulty`)
 
-The `oa:RouteDifficulty` model describes the effort and level of fitness required to successfully complete a Route. Such assessments necessarily contain a strong subjective component, and data publishers are thus encouraged to use the `[schema:description](https://schema.org/description)` field to ground their assessment in more concrete terms such as distance and gradient, and/or to provide a `difficultyDefinitionURL` further explaining the rationale behind it.
+The `oa:RouteDifficulty` model describes the effort and level of fitness required to successfully complete a Route. Such assessments necessarily contain a strong subjective component, and data publishers are thus encouraged to use the <code><a href="https://schema.org/description">schema:description</a></code> field to ground their assessment in more concrete terms such as distance and gradient, and/or to provide a `difficultyDefinitionURL` further explaining the rationale behind it.
 
 |Property|Status|Type|Notes|
 |--- |--- |--- |--- |
@@ -3069,11 +3035,13 @@ define their own namespace.
 
   <!--  </section> -->
 
-    <section class='appendix informative'>
-    Acknowledgements
-    ================
+<section class='appendix informative'>
 
-    The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
-    </section>
+Acknowledgements
+================
+
+The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
+
+</section>
   </body>
 </html>

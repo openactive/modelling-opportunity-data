@@ -34,14 +34,18 @@
 
     // editors, add as many as you like
     // only "name" is required
-    editors: [
-    { name: "Timothy Hill", url: "https://theodi.org/person/timothy-hill/",
+      editors: [{
+        name: "Howard Askew", url: "https://theodi.org/person/howard-askew",
+        company: "Open Data Institute", companyURL: "http://opendata.institute/",
+        w3cid: 138948
+      }],
+
+    formerEditors: [{ name: "Timothy Hill", url: "https://theodi.org/person/timothy-hill/",
 company: "Open Data Institute", companyURL: "http://opendata.institute/",
 w3cid: 114402 },
     { name: "Leigh Dodds", url: "http://ldodds.com",
     company: "Open Data Institute", companyURL: "http://opendata.institute/",
-    w3cid: 55359 }
-    ],
+    w3cid: 55359 }],
 
     // authors, add as many as you like.
     // This is optional, uncomment if you have authors as well as editors.
@@ -58,16 +62,14 @@ w3cid: 114402 },
 }
     ],
 
-    logos: [
-{
-  src: 'https://www.openactive.io/assets/openactive-logo-large.png',
-  href: "https://www.openactive.io",
-  alt: "openactive.io",
-  width: 255, //170
-  height: 43, //22
-  id: 'logo'
-}
-    ],
+    logos: [{
+          src: 'https://www.openactive.io/assets/openactive-logo-small.png',
+          url: "https://www.openactive.io",
+          alt: "openactive.io",
+          width: 262,
+          height: 44,
+          id: 'oa-logo'
+        }],
 
     // extend the bibliography entries
     //localBiblio: {},
@@ -86,7 +88,7 @@ w3cid: 114402 },
     // This is important for Rec-track documents, do not copy a patent URI from a random
     // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
     // Team Contact.
-    maxTocLevel: 4,
+    maxTocLevel: 2,
     preProcess: [ ],
     isRecTrack:   true,
     isNoTrack:    true,
@@ -143,9 +145,7 @@ w3cid: 114402 },
     }
   };
     </script>
-
-    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
-
+    <script src='https://www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
     <style>
     table {border-collapse: collapse; border: 1px solid #bec9d9}
     td, th {padding: 3px 0.5em; border-left:1px solid black; border-right: 1px solid black; border-bottom:1px solid #E2EDFE;}
@@ -178,7 +178,7 @@ font-size: 220%;
 padding-top: 0px !important;
     }
     .remove {
-background-colour: yellow;
+background-color: yellow;
     }
     code {
   color: #C83500;
@@ -186,12 +186,6 @@ background-colour: yellow;
     em.rfc2119 {
 font-variant: small-caps;
     }
-
-    </style>
-
-  </head>
-  <body>
-    <style>
     body {
 background-size: 25px auto !important;
     }
@@ -206,7 +200,8 @@ background-attachment: fixed !important;
         color:              #900;
     }
     </style>
-    <section id='abstract'>
+  </head>
+  <body><section id='abstract'>
 This specification introduces a data model to support the publication of data describing
 opportunities for people to engage in physical activities ("opportunity data"). This model
 covers description of activities, as well as the events and locations in which they take place.
@@ -228,11 +223,8 @@ The data model introduced in this document has been mapped to existing standards
 SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a
 useful existing framework around which the
 [OpenActive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.
-
-
-    </section>
-
-    <section id="sotd" class="introductory">
+</section>
+<section id="sotd" class="introductory">
        <h2>Status of This Document</h2>
 Contributions to this document are not only welcomed but are actively solicited. Please add any solutions, comments, or improvements you might have via [GitHub Issues](https://github.com/openactive/modelling-opportunity-data/issues)
 and pull requests. The source code is available on [GitHub](https://github.com/openactive/modelling-opportunity-data).
@@ -240,7 +232,6 @@ and pull requests. The source code is available on [GitHub](https://github.com/o
 This document represents a published Candidate Release, including minor non-breaking clarifications that build on the version released at [https://www.openactive.io/open-booking-api](https://www.openactive.io/open-booking-api). This Candidate Release is published for the purposes of creating accompanying tooling and gathering implementation experience, and will be updated with further clarifications and minor technical improvements based on implementation feedback. We encourage developers to implement this API and share their experience.
 </div>
     </section>
-
     <section class="informative">
 # Introduction
 
@@ -255,7 +246,7 @@ There are several different categories of data that are relevant to physical act
 This data covers different parts of [the data spectrum](http://theodi.org/data-spectrum)
 and is represented in the following diagram.
 
-    <figure>
+<figure>
 ![](images/opportunity-data.png)
 <figcaption>Types of physical activity data</figcaption>
     </figure>
@@ -367,7 +358,7 @@ The following typographic conventions are used in this specification:
   <dd>Markup (elements, attributes, properties), machine processable
 values (string, characters, media types), property name, or a
 file name is in a monospace font.</dd>
-  <dt><a href="#" class="internalDFN">Definition</a></strong></dt>
+  <dt><a href="" class="internalDFN">Definition</a></strong></dt>
   <dd>A definition of a term, to be used elsewhere in this or other
 specifications, is underlined and in black.</dd>
   <dt><a href="">hyperlink</a></dt>
@@ -406,7 +397,7 @@ specification.
 
 This diagram illustrates the resources and relationships that are introduced in the following sections.
 
-    <figure>
+<figure>
 ![](images/schema-diagram.png)
 <figcaption>Opportunity data schema diagram</figcaption>
     </figure>
@@ -954,7 +945,6 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
 |[schema:isAccessibleForFree](https://schema.org/isAccessibleForFree)|OPTIONAL|Boolean|Indicates that an Event is free to attend. If an Event is bookable in advance, then publishers SHOULD also define a zero priced [schema:Offer](https://schema.org/Offer). If the only [schema:Offer](https://schema.org/Offer) for an Event is zero priced, then publishers SHOULD include this property with a value of `true`.|
 |[schema:offers](https://schema.org/offers)|RECOMMENDED|Array of [schema:Offer](https://schema.org/Offer)|Provides one or more offers to book and participate in an Event|
 |[schema:potentialAction](https://schema.org/potentialAction)|OPTIONAL|Array of [schema:Action](https://schema.org/Action)|Provides one or more actions that can be carried out on this Event, e.g. through interacting with an API or other service.  The [[Open-Booking-API]] defines a `ReserveAction`.|
-|oa:RouteGuidance|OPTIONAL|Array of [oa:RouteGuidance](https://openactive.io/RouteGuidance)|See below, [Describing Route Guidance](#describing-route-metadata-oa-RouteGuidance-)|
 
 <p>
 The following example shows a simple event description, including its start time and duration:
@@ -2581,7 +2571,7 @@ Route Guidance is often generated over an extended period of curation: that is t
 |[oa:shortDescription](https://openactive.io/shortDescription)|OPTIONAL|[schema:description](https://schema.org/description)|A short summary of the route, for use as a tagline or preview.|
 |[oa:activity](https://openactive.io/activity)|REQUIRED|Array of [schema:URL](https://schema.org/URL)|Specifies one or more physical activities that will take place during an event. The activities should ideally be taken from an activity list. In the context of Route Guidance, the activity specified will normally be one or more of https://openactive.io/activity-list#_4a19873e-118e-43f4-b86e-05acba8fb1de ("cycling"), https://openactive.io/activity-list#_95092977-5a20-4d6e-b312-8fddabe71544 ("walking") https://openactive.io/activity-list#_72ddb2dc-7d75-424e-880a-d90eabe91381 ("running"), https://openactive.io/activity-list#_45a372d9-baca-4f6c-859f-04de3efae742 ("Horse riding"), or a narrower term within these.|
 |distance|REQUIRED|[schema:QuantitativeValue](https://schema.org/QuantitativeValue)|Length of route. Must include both number and unit. sameAs beta:distance.|
-|[oa:indicativeDuration](https://openactive.io/indicativeDuration)|RECOMMENDED|Array of [oa:IndicativeDuration](https://openactive.io/IndicativeDuration)|See [Describing Indicative Duration](#describing-indicative-durations-oa-indicativeduration-)|
+|[oa:indicativeDuration](https://openactive.io/indicativeDuration)|RECOMMENDED|Array of [oa:IndicativeDuration](https://openactive.io/IndicativeDuration)|See [Describing Indicative Duration]()|
 |[oa:startPoint](https://openactive.io/startPoint)|REQUIRED|[schema:Place](https://schema.org/Place)|On modelling values here, see below: Describing Route Points.|
 |[oa:endPoint](https://openactive.io/endPoint)|OPTIONAL|[schema:Place](https://schema.org/Place)|REQUIRED if isLoop is 'false'. On modelling values here, see below: Describing Route Points.|
 |[oa:pointOfInterest](https://openactive.io/pointOfInterest)|OPTIONAL|Array of [schema:Place](https://schema.org/Place)|Noteworthy points along the Route. On modelling values here, see below: Describing Route Points.|
@@ -3069,14 +3059,11 @@ Publishers needing additional custom properties <em class="rfc2119">SHOULD</em>
 define their own namespace.
 
   </section>
+  <section class='appendix informative'>
+Acknowledgements
+================
 
-  <!--  </section> -->
-
-    <section class='appendix informative'>
-    Acknowledgements
-    ================
-
-    The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
-    </section>
+The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
+</section>
   </body>
 </html>

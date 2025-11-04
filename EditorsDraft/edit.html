@@ -2,7 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
   <head>
     <meta charset='utf-8'/>
-    <title>Modelling Opportunity Data 2.1</title>
+    <title>Modelling Opportunity Data - 2.1 - Editors Draft</title>
 
     <script type="text/javascript" class='remove'>
   var respecConfig = {
@@ -34,18 +34,19 @@
 
     // editors, add as many as you like
     // only "name" is required
-      editors: [{
-        name: "Howard Askew", url: "https://theodi.org/person/howard-askew",
-        company: "Open Data Institute", companyURL: "http://opendata.institute/",
-        w3cid: 138948
-      }],
+    editors: [{
+      name: "Howard Askew", url: "https://theodi.org/person/howard-askew",
+      company: "Open Data Institute", companyURL: "http://opendata.institute/",
+      w3cid: 138948
+    }],
 
     formerEditors: [{ name: "Timothy Hill", url: "https://theodi.org/person/timothy-hill/",
-company: "Open Data Institute", companyURL: "http://opendata.institute/",
-w3cid: 114402 },
-    { name: "Leigh Dodds", url: "http://ldodds.com",
-    company: "Open Data Institute", companyURL: "http://opendata.institute/",
-    w3cid: 55359 }],
+      company: "Open Data Institute", companyURL: "http://opendata.institute/",
+      w3cid: 114402 },
+      { name: "Leigh Dodds", url: "http://ldodds.com",
+      company: "Open Data Institute", companyURL: "http://opendata.institute/",
+      w3cid: 55359
+    }],
 
     // authors, add as many as you like.
     // This is optional, uncomment if you have authors as well as editors.
@@ -55,11 +56,11 @@ w3cid: 114402 },
     //],
 
     otherLinks: [
-{
-    key: "Version",
-    value: "2.1 Candidate Specification",
-    href: "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/"
-}
+      {
+          key: "Latest Published Version",
+          value: "2.0 Final Community Group Report",
+          href: "https://openactive.io/modelling-opportunity-data"
+      }
     ],
 
     logos: [{
@@ -117,11 +118,6 @@ w3cid: 114402 },
     "title": "W3C Semantic Web Interest Group: Basic Geo",
     "publisher": "SWIG"
 },
-"Publishing-Opportunity-Data": {
-    "href": "https://www.openactive.io/opportunity-data-primer/",
-    "title": "Publishing Opportunity Data: A Primer",
-    "publisher": "OpenActive Community Group",
-},
 "OpenActive-Beta-Namespace": {
     "href": "https://www.openactive.io/ns-beta/",
     "title": "OpenActive Beta Namespace",
@@ -145,7 +141,7 @@ w3cid: 114402 },
     }
   };
     </script>
-    <script src='https://www.w3.org/Tools/respec/respec-w3c' class='remove'></script>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
     <style>
     table {border-collapse: collapse; border: 1px solid #bec9d9}
     td, th {padding: 3px 0.5em; border-left:1px solid black; border-right: 1px solid black; border-bottom:1px solid #E2EDFE;}
@@ -217,7 +213,7 @@ The specification is an output of the [OpenActive Community Group](http://www.w3
 and serves as a common reference point for other specifications and outputs of that activity.
 
 Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the
-[[Publishing-Opportunity-Data]] primer which provides a number of additional examples.
+[Developer site](https://developer.openactive.io) which provides guidance and examples.
 
 The data model introduced in this document has been mapped to existing standards and vocabularies, including
 SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a
@@ -725,10 +721,6 @@ The __[*OpenActive Vocabulary*](https://www.openactive.io/ns/)__ [[OpenActive-Vo
 opportunity data. It defines a number of new terms that extend SKOS and Schema.org to cover additional
 requirements highlighted in this specification.
 
-<div class="note">
-Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the
-[[Publishing-Opportunity-Data]] primer which provides many more examples.
-</div>
 
 ## Namespaces
 

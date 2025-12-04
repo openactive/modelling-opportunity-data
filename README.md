@@ -26,6 +26,5 @@ The editors draft is the primary working document. Once this has been reviewed a
 
 For live reloading of the document during editing, run `gulp`.
 
-The specification will be automatically deployed following a merge of a pull request into the master branch. This is handled by [Travis](https://travis-ci.org/openactive/modelling-opportunity-data) which will render both versions of the specification to HTML and push them to the `gh-pages` branch of this repo. 
-
+The specification will be automatically deployed following a merge of a pull request into the master branch. This is handled by [Travis](https://travis-ci.org/openactive/modelling-opportunity-data) which will render both versions of the specification to HTML and push them to the `gh-pages` branch of this repo.
 

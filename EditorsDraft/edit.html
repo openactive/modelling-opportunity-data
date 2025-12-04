@@ -72,8 +72,7 @@
           id: 'oa-logo'
         }],
 
-    // extend the bibliography entries
-    //localBiblio: {},
+
 
     // name of the WG
     wg:     "OpenActive Community Group",
@@ -95,24 +94,8 @@
     isNoTrack:    true,
     github: "https://github.com/openactive/modelling-opportunity-data/",
     format: "markdown",
+    // extend the bibliography entries
     localBiblio: {
-"JSON-LD": {
-    "href": "https://www.w3.org/TR/json-ld/",
-    "title": "JSON-LD 1.0",
-    "status": "REC",
-    "publisher": "W3C",
-},
-"SCHEMA-ORG": {
-    "href": "https://schema.org/",
-    "title": "Schema.org"
-
-},
-"SKOS": {
-    "href": "https://www.w3.org/TR/skos-primer",
-    "title": "SKOS Simple Knowledge Organization System Primer",
-    "status": "NOTE",
-    "publisher": "W3C",
-},
 "BasicGeo":{
     "href": "https://www.w3.org/2003/01/geo/",
     "title": "W3C Semantic Web Interest Group: Basic Geo",
@@ -136,6 +119,16 @@
 "OpenActive-Activity-List": {
     "href": "https://openactive.io/activity-list",
     "title": "OpenActive Activity List",
+    "publisher": "OpenActive Community Group",
+},
+"OpenActive-RPDE": {
+    "href": "https://www.openactive.io/realtime-paged-data-exchange",
+    "title": "OpenActive Realtime Paged Data Exchange",
+    "publisher": "OpenActive Community Group",
+},
+"OpenActive-Route-Guide": {
+    "href": "https://openactive.io/route-guide/EditorsDraft/",
+    "title": "OpenActive Route Guide",
     "publisher": "OpenActive Community Group",
 }
     }
@@ -176,9 +169,9 @@ padding-top: 0px !important;
     .remove {
 background-color: yellow;
     }
-    code {
+code {
   color: #C83500;
-    }
+}
     em.rfc2119 {
 font-variant: small-caps;
     }
@@ -195,6 +188,9 @@ background-attachment: fixed !important;
         font-style:         normal;
         color:              #900;
     }
+    .example > .marker a {
+    color: #574b0f !important;
+}
     </style>
   </head>
   <body><section id='abstract'>
@@ -216,17 +212,13 @@ Developers looking for a quick primer on the model and how to use it to structur
 [Developer site](https://developer.openactive.io) which provides guidance and examples.
 
 The data model introduced in this document has been mapped to existing standards and vocabularies, including
-SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a
+SKOS ([[skos-primer]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a
 useful existing framework around which the
 [OpenActive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.
 </section>
 <section id="sotd" class="introductory">
-       <h2>Status of This Document</h2>
 Contributions to this document are not only welcomed but are actively solicited. Please add any solutions, comments, or improvements you might have via [GitHub Issues](https://github.com/openactive/modelling-opportunity-data/issues)
 and pull requests. The source code is available on [GitHub](https://github.com/openactive/modelling-opportunity-data).
-<div class="note">
-This document represents a published Candidate Release, including minor non-breaking clarifications that build on the version released at [https://www.openactive.io/open-booking-api](https://www.openactive.io/open-booking-api). This Candidate Release is published for the purposes of creating accompanying tooling and gathering implementation experience, and will be updated with further clarifications and minor technical improvements based on implementation feedback. We encourage developers to implement this API and share their experience.
-</div>
     </section>
     <section class="informative">
 # Introduction
@@ -238,22 +230,10 @@ participation in physical activities.
 
 ## Categories of Physical Activity Data
 
-There are several different categories of data that are relevant to physical activities.
-This data covers different parts of [the data spectrum](http://theodi.org/data-spectrum)
-and is represented in the following diagram.
+A wide range of data can be relevant to physical activities, from across the [the data spectrum](http://theodi.org/data-spectrum).
 
-<figure>
-![](images/opportunity-data.png)
-<figcaption>Types of physical activity data</figcaption>
-    </figure>
+Some of this data can be *open data*. Open data is data that anyone can access, use and share.
 
-Some of this data is shared data. It can only be accessed by
-specific people or groups, under terms and conditions that define how and when
-it can be accessed and used. This shared data includes personal data about
-people taking part in activities and participation data that describes how people have
-been involved in previous events.
-
-Some of this data can be open data. Open data is data that anyone can access, use and share.
 All of the following types of data can be published as open data:
 
 * descriptions and lists of physical activities
@@ -263,7 +243,19 @@ All of the following types of data can be published as open data:
 on attendance, costs, etc
 * any related information, e.g. about the format of the event, its organisers, etc
 
-Collectively this is known as __*opportunity data*__.
+Collectively we call this __*opportunity data*__.
+
+Other types of data are represented in the following diagram:
+<figure>
+![](images/opportunity-data.png)
+<figcaption>Types of physical activity data</figcaption>
+    </figure>
+
+Some of this data is *shared data*. It can only be accessed by
+specific people or groups, under terms and conditions that define how and when
+it can be accessed and used. This shared data can include personal data about
+people taking part in activities and participation data that describes how people have
+been involved in previous events.
 
 ## Requirements
 
@@ -290,7 +282,7 @@ all types of physical activities, not just sports.
 
 At present the physical activity sector does not have a standard list of physical activities.
 The specification should allow data providers to share the lists they have and support the
-sector in moving towards a standardised list of physical activities
+sector in moving towards a standardised list of physical activities.
 
 ### Support a variety of sources
 
@@ -317,18 +309,24 @@ This specification defines a data model for opportunity data. This reflects the 
 encourage the publishing and reuse of open data that might help people to become
 more active.
 
-The following items are therefore out of scope for this specification:
+The following items are out of scope for this specification:
 
-* booking and related activities, e.g. availability, booking process and membership packages
+* booking and related activities, e.g. booking process and membership packages
 * participation data, e.g. statistics on attendance
 * personal information, demographics and other information about event participants
 * APIs for publishing and discovering opportunity data
-
-Support for third-party bookings is covered in the draft [[Open-Booking-API]]
-specification.
+* detailed route guidance information for scheduled or self directed activity such as walking, running and cycling
+* geographical route data
 
 The [OpenActive Community Group](http://www.w3.org/community/openactive/) may
-produce additional specifications that address the other areas.
+produce additional specifications that address these other areas:
+
+The recommended approach for publishing opportunity data is covered in the [[OpenActive-RPDE]] specification.
+
+Support for third-party bookings is covered in the draft [[Open-Booking-API]] specification.
+
+A standardised approach for route guidance is described in the [[OpenActive-Route-Guide]] specification.
+
 
 ## Structure of this document
 
@@ -382,7 +380,7 @@ The content of the example is in monospace font and may be syntax colored.
 This section introduces the high-level data model for opportunity data. This includes a
 description of the:
 
-* the resources that are relevant to opportunity data, e.g. places, events, activities, etc
+* the resources that are relevant to opportunity data, e.g. activities, organisers, places, events, etc
 * the relationships between those resources
 * the main attributes that help to describe those resources, e.g. names, dates, etc
 
@@ -391,10 +389,10 @@ specification.
 
 ## Data Model Diagram
 
-This diagram illustrates the resources and relationships that are introduced in the following sections.
+This diagram provides a simple illustration of the resources and relationships that are introduced in the following sections.
 
 <figure>
-![](images/schema-diagram.png)
+![](images/schema-diagram-20251203.png)
 <figcaption>Opportunity data schema diagram</figcaption>
     </figure>
 
@@ -404,7 +402,7 @@ A __*Physical Activity*__ is an exercise, sport or other form of bodily movement
 that involves physical effort. Physical activities will usually have a well-understood,
 dictionary definition.
 
-Examples of Physical Activities include walking, running, cycling, rugby, football and tennis
+Examples of Physical Activities include walking, running, cycling, rugby, football and tennis.
 
 Activities should have a name. They might also be associated with one of more synonyms
 that provide alternative names for that activity. E.g. "Soccer" is a synonym
@@ -464,28 +462,22 @@ Physical Activities to help people find opportunities to be active. For example
 a search engine might offer users results for all types of Martial Art, or for Karate specifically.
 
 <div class="note">
-The proposed model for Activity Lists is based on the [[SKOS]] standard for publishing controlled
-vocabularies.
-</div>
+__The OpenActive Activity List__
 
-<div class="note">
+There are benefits to the physical activity sector converging on a standardised list of
+activities in order to improve discovery, reporting, etc.
+
+The OpenActive Community Group have developed and maintain the standardised [[OpenActive-Activity-List]], based on the [[skos-primer]] standard for publishing controlled
+vocabularies.
+
+Where possible, data publishers <em class="rfc2119">SHOULD</em> use the OpenActive Activity List.
+
+However, there is no requirement that applications that
+implement this specification must adopt a single standardised list, or agree on standard groupings.
 It is not a requirement that systems store, publish or use relationships between
 Physical Activities. A system may choose to treat Physical Activities as simple tags
-or categories associated with Events. Other systems may define a fixed list of
-Physical Activities that are used as a controlled vocabulary to guides user input
-and data collection. Others may adopt a more complex hierarchical approach.
-</div>
-
-<div class="note">
-<p>__Developing a standard activity list__</p>
-<p>This specification doesn't place any requirements on how applications manage
-or use Physical Activities or Activity Lists. There is no requirement that applications that
-implement this specification must adopt a single standardised list, or agree on standard groupings. The intention
-here is to just capture a useful model that can represent the variety of data currently in use.
-</p>
-<p>However there are benefits to the physical activity sector in convergence on a standard list of
-activities in order to improve discovery, reporting, etc. The OpenActive Community Group are developing
-a standard list as a separate activity. For more information see [[OpenActive-Activity-List]].
+or categories associated with Organisers or Events. Other systems may define a fixed list used as a controlled vocabulary to guides user input
+and data collection. Others may adopt more complex hierarchical approaches.
 </div>
 
 ## Events
@@ -506,7 +498,7 @@ People looking for opportunities to be active will be interested in both specifi
 
 For some scheduled events, participants may not have to commit to attending every
 session. They can drop-in for individual classes, or build up a regular habit to
-improve their fitness. For other events, like a course, there is might be an
+improve their fitness. For other events, like a course, might be an
 expectation that a participant will attend every class.
 
 Some large scale events, such as a family fun day, might consist of a programme
@@ -535,21 +527,20 @@ This includes:
 <p>There are a variety of ways to categorise and describe events. This includes restrictions on attendance,
 aspect of suitability for different audiences and fitness levels, and a mixture of pre-requisites such as the
 need for certain qualifications, membership or equipment.
-</p>
-<p>
-The initial version of this specification prioritises capturing the essential elements of describing an event. The
+
+The initial version of this specification prioritised capturing the essential elements of describing an event. The
 structured information about time, place and activity is supplemented with some basic descriptive properties.
-This also includes the ability to add "tags" to an event to capture a variety of categorisation elements. Future
-versions of this specification will use experience working with real-world data to decide the best approach of
-formalising these categories.
+
+Future versions of this specification will be refined based on experience working with real-world data.
+See [extending the model](#extending-the-model) and the [beta namespace](#beta-namespace).
 </p>
 </div>
 
 ## Organisers (Persons and Organizations)
 
-Events have __*organisers*__. An event organiser might be a __*Person*__ or an __*Organization*__.
-The organiser of an event is the person or organisation who arranged and/or hosts the event. The organizer
-will be the person or organisation who is ultimately responsible for an Event.
+Physical Activities have __*organisers*__. An organiser might be a __*Person*__ or an __*Organization*__.
+The organiser of an Event is the person or organisation who arranged and/or hosts the event. The organizer
+will be the person or organisation who is ultimately responsible for the event.
 
 Examples of organisers might be coaches, or a local sports club.
 
@@ -560,7 +551,7 @@ In addition to their names, some systems may have additional information about o
 E.g. links to their web sites, photos, logos or contact details.
 
 <div class="note">
-<p>__Applications must not publish personal data without permission__</p>
+__Applications must not publish personal data without permission__
 <p>
 This specification provides a data model for publishing information about individual people, e.g. coaches,
 volunteers, etc. However applications <em class="rfc2119">MUST</em> respect privacy and data protection laws and must not publish
@@ -576,7 +567,7 @@ consent of the individual concerned.
 
 ## Places
 
-Events take place in a __*location*__. But, depending on the activity, the location
+Physical Activities take place in a __*location*__. But, depending on the activity, the location
 may be defined to different levels of precision. For example:
 
 * A gym class may take place in a leisure centre at a specific address or other precisely defined location
@@ -598,7 +589,7 @@ This specification uses __*Place*__ as a general concept to refer to all types o
 The concept of Place therefore covers general outdoor areas such as parks, event venues (e.g. a Leisure centre)
 and facilities within a venue (e.g. a squash court, running track, etc). Facilities are contained in Places.
 
-A __Sports Activity Location__ is a type of Place that is used to describe a facilities within a broader
+A __Sports Activity Location__ is a type of Place that is used to describe facilities within a broader
 Place.
 
 Places may have additional descriptive properties, for example:
@@ -609,16 +600,16 @@ Places may have additional descriptive properties, for example:
 
 ## Programmes and Brands
 
-Events are often organised and run in a variety of different ways. This tailoring
+Physical Activities are often organised and run in a variety of different ways. This tailoring
 might include adjusting the activity to a particular type of participant, demographic.
-Or it could include running the event in a particular style, e.g. with a fixed routine
+Or it could include running an event in a particular style, e.g. with a fixed routine
 or sequence of activities.
 
 A __*Programme*__ describes a means of organising and running a Physical Activity. Some programmes are very loosely defined.
 While others are more structured and may be run to a specific agenda or in a particular style.
 
 Programmes are often associated with branding or marketing that helps participants understand more about what they
-can expect from an event of that format. Formats might be offered or overseen by specific organisations
+can expect from an event of that format. Formats might be offered or overseen by specific organisations.
 
 Examples of programmes include:
 
@@ -626,7 +617,7 @@ Examples of programmes include:
 * Learn to Row, from British Rowing
 * Back to Netball, from England Netball
 
-Programmes provide another means of tagging or describing Events to help describe them to
+Programmes provide another means of tagging or describing Physical Activities to help describe them to
 participants. When participants are looking for opportunities they may be interested in
 discovering Events based on either the general activity (e.g. Running) or a specific
 programme (Back to Netball).
@@ -639,13 +630,14 @@ paying attendees.
 An __*Offer*__ is used to describe the terms under which a participant can pay to attend an event.
 
 <div class="note">
-<p>
+
 The concept of an Offer is taken from Schema.org, which itself references the [Good Relations](http://www.heppnetz.de/projects/goodrelations/)
 vocabulary for ecommerce. The data model described in a later section is not intended as a
-complete specification. The concept is introduced in this version of specification to highlight
-the support available in Schema.org for associating offers with events. Later versions of the specification
-will explore the area of booking in more detail.
-</p>
+complete specification, but highlights
+the support available in Schema.org for associating offers with events.
+
+Booking is explored in more detail in the [[Open-Booking-API]] specification.
+
 </div>
 
 ## Facility Use and Slots
@@ -690,13 +682,20 @@ As the use of facility is a self-directed activity it will differ from an Event 
 
 ## Route Guidance
 
-In addition to Events and Facilities hosted by leisure or recreational operators, opportunities for exercise may alse be presented by outdoor trails and pathways suitable for e.g. walking, cycling, horse-riding, etc. For the purposes of this specification, such trails and pathways are referred to as __Routes__, and information about them as __Route Guidance__.
+Opportunities for exercise may also be presented by outdoor trails and pathways suitable for e.g. walking, cycling, horse-riding, etc.
+For the purposes of this specification, such trails and pathways are referred to as __Routes__, and information about them as __Route Guidance__.
 
-In the OpenActive context, __Routes__ are considered to be a geographical entity: that is to say, the path or trail itself, as characterised by distance, terrain, elevation, and other strictly geographical data points. __Route Guidance__, by contrast, consists of information users might find helpful in accessing or engaging with the __Route__, for instance its starting point, degree of challenge, points of interest, etc.
+In the OpenActive context, __Routes__ are considered to be a geographical entity: that is to say, the path or trail itself,
+as characterised by distance, terrain, elevation, and other strictly geographical data points.
+Note that __Routes__ themselves are not modelled, beyond basic provision of a .gpx file or similar for pathfinding.
 
-Note that modelling of __Routes__ themselves is beyond the current scope of this specification, beyond basic provision of a .gpx file or similar for pathfinding. __Route Guidance__, however, **is** within scope, with the intention that such __Metadata__ objects should give users all the information necessary for them to engage with the activity opportunity the __Route__ presents.
+__Route Guidance__, by contrast, consists of information users might find helpful in accessing or engaging with the __Route__, for instance its starting point, degree of challenge, points of interest, etc.
 
-Note that __Route Guidance__ objects may exist either as attributes of a scheduled Event or Session (acting as an amenity or resource supporting a planned activity), or as self-standing entitites (simply indicating the existence or availability of a __Route__ for use).
+__Route Guidance__ objects may exist either as attributes of a scheduled Event or Session (acting as an amenity or resource supporting a planned activity),
+or as standalone entitites (indicating the existence or availability of a __Routes__ for self-directed use).
+
+Refer to the [[OpenActive-Route-Guide]] specification for full details.
+
   </section>
 
   <section>
@@ -706,7 +705,7 @@ The data model described in the following sections reuses existing standards and
 have then been extended to cover the additional requirements needs to support the publication of
 opportunity data.
 
-The Simple Knowledge Organisation System ([[SKOS]]) is a W3C standard for publishing taxonomies and
+The Simple Knowledge Organisation System ([[skos-primer]]) is a W3C standard for publishing taxonomies and
 category schemes. It can be used to help publish and organise Activity Lists and to describe
 Physical Activities.
 
@@ -864,7 +863,7 @@ When the value of a property might be one of a fixed set of values, it can be us
 to publish that list of values as a "controlled vocabulary".
 
 This allows a publisher to publish the list of values, with supporting documentation
-and definitions in a machine-readable format. We use the existing [[SKOS]]
+and definitions in a machine-readable format. We use the existing [[skos-primer]]
 standard as a means of publishing these vocabularies.
 
 A number of properties in this data model allow data publishers to use values
@@ -2244,7 +2243,7 @@ The following example illustrates the basic structure of an activity list:
 
 ### Describing Physical Activities
 
-The following properties from the [[SKOS]] specification can be used to describe physical activities.
+The following properties from the [[skos-primer]] specification can be used to describe physical activities.
 
 |Property|Status|Format|Notes|
 |--- |--- |--- |--- |
@@ -2946,11 +2945,11 @@ provide opportunities for both publishers and users of the data to update their 
 
 ### Relationship with Schema.org and SKOS
 
-This specification draws heavily on [[SCHEMA-ORG]] and [[SKOS]] to define its
+This specification draws heavily on [[SCHEMA-ORG]] and [[skos-primer]] to define its
 core data model. This is supplemented with additional custom types and properties
 that capture additional requirements for the physical activity sector.
 
-The [[SCHEMA-ORG]] and [[SKOS]] specifications define additional properties
+The [[SCHEMA-ORG]] and [[skos-primer]] specifications define additional properties
 that are not directly referenced in this document.
 
 Rather than reflect the whole of these specifications in this document, we have

@@ -22,9 +22,15 @@ For an introduction to using the specification vist the [developer site](https:/
 
 The specification has been authored using [the W3C respec tool](https://github.com/w3c/respec) using the markdown syntax option.
 
-The editors draft is the primary working document. Once this has been reviewed and agreed for release, then it can be promoted to be the latest published draft (copied into the `Latest` directory). At which point the publication date should be added to the document.
+The editors draft is the primary working document. Once this has been reviewed and agreed for release, then it can be promoted to be the latest published version. At which point the publication date should be added to the document.
 
-For live reloading of the document during editing, run `gulp`.
+The mermaid markdown, in the editors draft image folder, can be adapted using tools like https://www.mermaidchart.com/ to produce the schema image. (The cutoff text in the image is a known issue.)
+
+For live reloading of the document during editing, use browser-sync via the following:
+```
+npm install
+npm run dev
+```
 
 The specification will be automatically deployed following a merge of a pull request into the master branch. This is handled by [Travis](https://travis-ci.org/openactive/modelling-opportunity-data) which will render both versions of the specification to HTML and push them to the `gh-pages` branch of this repo.
 

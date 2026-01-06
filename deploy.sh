@@ -16,8 +16,8 @@ cd out
 git init
 
 # inside this git repo we'll pretend to be a new user
-git config user.name "Travis CI"
-git config user.email "travis@openactive.org"
+git config user.name "github-actions[bot]"
+git config user.email "services@openactive.org"
 
 # compile using respec2html (handling each version separately)
 function respec2html {

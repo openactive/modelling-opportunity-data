@@ -2,7 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
   <head>
     <meta charset='utf-8'/>
-    <title>Modelling Opportunity Data 2.1</title>
+    <title>Modelling Opportunity Data - 2.1 - Editors Draft</title>
 
     <script type="text/javascript" class='remove'>
   var respecConfig = {
@@ -34,14 +34,19 @@
 
     // editors, add as many as you like
     // only "name" is required
-    editors: [
-    { name: "Timothy Hill", url: "https://theodi.org/person/timothy-hill/",
-company: "Open Data Institute", companyURL: "http://opendata.institute/",
-w3cid: 114402 },
-    { name: "Leigh Dodds", url: "http://ldodds.com",
-    company: "Open Data Institute", companyURL: "http://opendata.institute/",
-    w3cid: 55359 }
-    ],
+    editors: [{
+      name: "Howard Askew", url: "https://theodi.org/person/howard-askew",
+      company: "Open Data Institute", companyURL: "http://opendata.institute/",
+      w3cid: 138948
+    }],
+
+    formerEditors: [{ name: "Timothy Hill", url: "https://theodi.org/person/timothy-hill/",
+      company: "Open Data Institute", companyURL: "http://opendata.institute/",
+      w3cid: 114402 },
+      { name: "Leigh Dodds", url: "http://ldodds.com",
+      company: "Open Data Institute", companyURL: "http://opendata.institute/",
+      w3cid: 55359
+    }],
 
     // authors, add as many as you like.
     // This is optional, uncomment if you have authors as well as editors.
@@ -51,26 +56,23 @@ w3cid: 114402 },
     //],
 
     otherLinks: [
-{
-    key: "Version",
-    value: "2.1 Candidate Specification",
-    href: "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/"
-}
+      {
+          key: "Latest Published Version",
+          value: "2.0 Final Community Group Report",
+          href: "https://openactive.io/modelling-opportunity-data"
+      }
     ],
 
-    logos: [
-{
-  src: 'https://www.openactive.io/assets/openactive-logo-large.png',
-  href: "https://www.openactive.io",
-  alt: "openactive.io",
-  width: 255, //170
-  height: 43, //22
-  id: 'logo'
-}
-    ],
+    logos: [{
+          src: 'https://www.openactive.io/assets/openactive-logo-small.png',
+          url: "https://www.openactive.io",
+          alt: "openactive.io",
+          width: 262,
+          height: 44,
+          id: 'oa-logo'
+        }],
 
-    // extend the bibliography entries
-    //localBiblio: {},
+
 
     // name of the WG
     wg:     "OpenActive Community Group",
@@ -86,39 +88,18 @@ w3cid: 114402 },
     // This is important for Rec-track documents, do not copy a patent URI from a random
     // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
     // Team Contact.
-    maxTocLevel: 4,
+    maxTocLevel: 2,
     preProcess: [ ],
     isRecTrack:   true,
     isNoTrack:    true,
     github: "https://github.com/openactive/modelling-opportunity-data/",
     format: "markdown",
+    // extend the bibliography entries
     localBiblio: {
-"JSON-LD": {
-    "href": "https://www.w3.org/TR/json-ld/",
-    "title": "JSON-LD 1.0",
-    "status": "REC",
-    "publisher": "W3C",
-},
-"SCHEMA-ORG": {
-    "href": "https://schema.org/",
-    "title": "Schema.org"
-
-},
-"SKOS": {
-    "href": "https://www.w3.org/TR/skos-primer",
-    "title": "SKOS Simple Knowledge Organization System Primer",
-    "status": "NOTE",
-    "publisher": "W3C",
-},
 "BasicGeo":{
     "href": "https://www.w3.org/2003/01/geo/",
     "title": "W3C Semantic Web Interest Group: Basic Geo",
     "publisher": "SWIG"
-},
-"Publishing-Opportunity-Data": {
-    "href": "https://www.openactive.io/opportunity-data-primer/",
-    "title": "Publishing Opportunity Data: A Primer",
-    "publisher": "OpenActive Community Group",
 },
 "OpenActive-Beta-Namespace": {
     "href": "https://www.openactive.io/ns-beta/",
@@ -139,13 +120,21 @@ w3cid: 114402 },
     "href": "https://openactive.io/activity-list",
     "title": "OpenActive Activity List",
     "publisher": "OpenActive Community Group",
+},
+"OpenActive-RPDE": {
+    "href": "https://www.openactive.io/realtime-paged-data-exchange",
+    "title": "OpenActive Realtime Paged Data Exchange",
+    "publisher": "OpenActive Community Group",
+},
+"OpenActive-Route-Guide": {
+    "href": "https://openactive.io/route-guide/EditorsDraft/",
+    "title": "OpenActive Route Guide",
+    "publisher": "OpenActive Community Group",
 }
     }
   };
     </script>
-
     <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
-
     <style>
     table {border-collapse: collapse; border: 1px solid #bec9d9}
     td, th {padding: 3px 0.5em; border-left:1px solid black; border-right: 1px solid black; border-bottom:1px solid #E2EDFE;}
@@ -178,20 +167,14 @@ font-size: 220%;
 padding-top: 0px !important;
     }
     .remove {
-background-colour: yellow;
+background-color: yellow;
     }
-    code {
+code {
   color: #C83500;
-    }
+}
     em.rfc2119 {
 font-variant: small-caps;
     }
-
-    </style>
-
-  </head>
-  <body>
-    <style>
     body {
 background-size: 25px auto !important;
     }
@@ -205,8 +188,12 @@ background-attachment: fixed !important;
         font-style:         normal;
         color:              #900;
     }
+    .example > .marker a {
+    color: #574b0f !important;
+}
     </style>
-    <section id='abstract'>
+  </head>
+  <body><section id='abstract'>
 This specification introduces a data model to support the publication of data describing
 opportunities for people to engage in physical activities ("opportunity data"). This model
 covers description of activities, as well as the events and locations in which they take place.
@@ -215,32 +202,42 @@ The specification is intended to support the publication of opportunity data as 
 for anyone to access, use and share. It will also guide reusers of opportunity data,
 introducing them to the key concepts relevant to that sector.
 
-The model may also be useful in guiding the development of both new and existing booking
-systems and applications that consume opportunity data.
+To empower organizations at different stages of their digital journey, this specification supports three levels of open data publication:
+
+**Organizer (or 'Club') Level**
+
+This level is ideal for organizations or activity providers who don’t manage sessions online, but want to boost their discoverability
+and attract new participants. Start simply by publishing essential information like your name, location, contact details and the activities you provide.
+
+**Listings – Sessions, Series, Facilities and Slots**
+
+At this intermediate level, publishers include individual session listings or facility slots with scheduled dates and times.
+The specification describes how to list recurring or one-off sessions, courses, open days, or timed slots for facilities.
+
+**Bookable Sessions and Facilities**
+
+The level offers frictionless online booking directly from search or partner platforms, via opportunity data feeds and the Open Booking API.
+Organizations with OpenActive-enabled booking systems can publish real-time session and slot data complete with direct booking links, so participants can instantly reserve their place.
+
 
 The specification is an output of the [OpenActive Community Group](http://www.w3.org/community/openactive/)
 and serves as a common reference point for other specifications and outputs of that activity.
 
+The model may also be useful in guiding the development of both new and existing booking
+systems and applications that consume opportunity data.
+
 Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the
-[[Publishing-Opportunity-Data]] primer which provides a number of additional examples.
+[Developer site](https://developer.openactive.io) which provides guidance and examples.
 
 The data model introduced in this document has been mapped to existing standards and vocabularies, including
-SKOS ([[SKOS]]) and the Schema.org ([[SCHEMA-ORG]]) types and properties. This existing work provides a
-useful existing framework around which the
+SKOS ([[?skos-primer]]) and the Schema.org ([[?SCHEMA-ORG]]) types and properties. This existing work provides a
+useful framework around which the
 [OpenActive Community Group](http://www.w3.org/community/openactive/) can build additional data standards.
-
-
-    </section>
-
-    <section id="sotd" class="introductory">
-       <h2>Status of This Document</h2>
+</section>
+<section id="sotd" class="introductory">
 Contributions to this document are not only welcomed but are actively solicited. Please add any solutions, comments, or improvements you might have via [GitHub Issues](https://github.com/openactive/modelling-opportunity-data/issues)
 and pull requests. The source code is available on [GitHub](https://github.com/openactive/modelling-opportunity-data).
-<div class="note">
-This document represents a published Candidate Release, including minor non-breaking clarifications that build on the version released at [https://www.openactive.io/open-booking-api](https://www.openactive.io/open-booking-api). This Candidate Release is published for the purposes of creating accompanying tooling and gathering implementation experience, and will be updated with further clarifications and minor technical improvements based on implementation feedback. We encourage developers to implement this API and share their experience.
-</div>
     </section>
-
     <section class="informative">
 # Introduction
 
@@ -251,22 +248,10 @@ participation in physical activities.
 
 ## Categories of Physical Activity Data
 
-There are several different categories of data that are relevant to physical activities.
-This data covers different parts of [the data spectrum](http://theodi.org/data-spectrum)
-and is represented in the following diagram.
+A wide range of data can be relevant to physical activities, from across the [the data spectrum](http://theodi.org/data-spectrum).
 
-    <figure>
-![](images/opportunity-data.png)
-<figcaption>Types of physical activity data</figcaption>
-    </figure>
+Some of this data can be *open data*. Open data is data that anyone can access, use and share.
 
-Some of this data is shared data. It can only be accessed by
-specific people or groups, under terms and conditions that define how and when
-it can be accessed and used. This shared data includes personal data about
-people taking part in activities and participation data that describes how people have
-been involved in previous events.
-
-Some of this data can be open data. Open data is data that anyone can access, use and share.
 All of the following types of data can be published as open data:
 
 * descriptions and lists of physical activities
@@ -274,10 +259,23 @@ All of the following types of data can be published as open data:
 * the facilities available at those locations
 * the details of event involving physical activities e.g. when and where they will take place, restrictions
 on attendance, costs, etc
-* any related information, e.g. about the format of the event, its organisers, etc
+* any related information, e.g. about the format of the event, its organizers, etc
 
-Collectively this is known as __*opportunity data*__.
+Collectively we call this __*opportunity data*__.
 
+Other types of data are represented in the following diagram:
+<figure>
+![](images/opportunity-data.png)
+<figcaption>Types of physical activity data</figcaption>
+    </figure>
+
+Some of this data is *shared data*. It can only be accessed by
+specific people or groups, under terms and conditions that define how and when
+it can be accessed and used. This shared data can include personal data about
+people taking part in activities and participation data that describes how people have
+been involved in previous events.
+
+**This specification focuses on *opportunity data* that can be published as *open data*.**
 ## Requirements
 
 This specification has been developed to meet a broad set of requirements.
@@ -303,7 +301,7 @@ all types of physical activities, not just sports.
 
 At present the physical activity sector does not have a standard list of physical activities.
 The specification should allow data providers to share the lists they have and support the
-sector in moving towards a standardised list of physical activities
+sector in moving towards a standardised list of physical activities.
 
 ### Support a variety of sources
 
@@ -330,18 +328,24 @@ This specification defines a data model for opportunity data. This reflects the 
 encourage the publishing and reuse of open data that might help people to become
 more active.
 
-The following items are therefore out of scope for this specification:
+The following items are out of scope for this specification:
 
-* booking and related activities, e.g. availability, booking process and membership packages
+* booking and related activities, e.g. booking process and membership packages
 * participation data, e.g. statistics on attendance
 * personal information, demographics and other information about event participants
 * APIs for publishing and discovering opportunity data
-
-Support for third-party bookings is covered in the draft [[Open-Booking-API]]
-specification.
+* detailed route guide information for scheduled or self directed activity such as walking, running and cycling
+* geographical route data
 
 The [OpenActive Community Group](http://www.w3.org/community/openactive/) may
-produce additional specifications that address the other areas.
+produce additional specifications that address these other areas:
+
+The recommended approach for publishing opportunity data is covered in the [[?OpenActive-RPDE]] specification.
+
+Support for third-party bookings is covered in the draft [[?Open-Booking-API]] specification.
+
+A standardised approach for route guides is described in the [[?OpenActive-Route-Guide]] specification.
+
 
 ## Structure of this document
 
@@ -354,7 +358,7 @@ This specification is divided into two main sections:
   </section>
 
 <section id="conformance">
-This specification makes use of the compact IRI Syntax; please refer to the [Compact IRIs](http://www.w3.org/TR/json-ld/#compact-iris) from [[JSON-LD]].
+This specification makes use of the compact IRI Syntax; please refer to the [Compact IRIs](http://www.w3.org/TR/json-ld/#compact-iris) from [[?JSON-LD]].
 </section>
 
   <section>
@@ -367,7 +371,7 @@ The following typographic conventions are used in this specification:
   <dd>Markup (elements, attributes, properties), machine processable
 values (string, characters, media types), property name, or a
 file name is in a monospace font.</dd>
-  <dt><a href="#" class="internalDFN">Definition</a></strong></dt>
+  <dt><a href="" class="internalDFN">Definition</a></strong></dt>
   <dd>A definition of a term, to be used elsewhere in this or other
 specifications, is underlined and in black.</dd>
   <dt><a href="">hyperlink</a></dt>
@@ -395,7 +399,7 @@ The content of the example is in monospace font and may be syntax colored.
 This section introduces the high-level data model for opportunity data. This includes a
 description of the:
 
-* the resources that are relevant to opportunity data, e.g. places, events, activities, etc
+* the resources that are relevant to opportunity data, e.g. activities, organizers, places, events, etc
 * the relationships between those resources
 * the main attributes that help to describe those resources, e.g. names, dates, etc
 
@@ -404,10 +408,10 @@ specification.
 
 ## Data Model Diagram
 
-This diagram illustrates the resources and relationships that are introduced in the following sections.
+This diagram provides a simple illustration of the resources and relationships that are introduced in the following sections. Note not every property or data element is included.
 
-    <figure>
-![](images/schema-diagram.png)
+<figure>
+![](images/schema-diagram-20251218.png)
 <figcaption>Opportunity data schema diagram</figcaption>
     </figure>
 
@@ -417,7 +421,7 @@ A __*Physical Activity*__ is an exercise, sport or other form of bodily movement
 that involves physical effort. Physical activities will usually have a well-understood,
 dictionary definition.
 
-Examples of Physical Activities include walking, running, cycling, rugby, football and tennis
+Examples of Physical Activities include walking, running, cycling, rugby, football and tennis.
 
 Activities should have a name. They might also be associated with one of more synonyms
 that provide alternative names for that activity. E.g. "Soccer" is a synonym
@@ -477,28 +481,22 @@ Physical Activities to help people find opportunities to be active. For example
 a search engine might offer users results for all types of Martial Art, or for Karate specifically.
 
 <div class="note">
-The proposed model for Activity Lists is based on the [[SKOS]] standard for publishing controlled
-vocabularies.
-</div>
+__The OpenActive Activity List__
 
-<div class="note">
+There are benefits to the physical activity sector converging on a standardised list of
+activities in order to improve discovery, reporting, etc.
+
+The OpenActive Community Group have developed and maintain the standardised [[?OpenActive-Activity-List]], based on the [[?skos-primer]] standard for publishing controlled
+vocabularies.
+
+Where possible, data publishers <em class="rfc2119">SHOULD</em> use the OpenActive Activity List.
+
+However, there is no requirement that applications that
+implement this specification must adopt a single standardised list, or agree on standard groupings.
 It is not a requirement that systems store, publish or use relationships between
 Physical Activities. A system may choose to treat Physical Activities as simple tags
-or categories associated with Events. Other systems may define a fixed list of
-Physical Activities that are used as a controlled vocabulary to guides user input
-and data collection. Others may adopt a more complex hierarchical approach.
-</div>
-
-<div class="note">
-<p>__Developing a standard activity list__</p>
-<p>This specification doesn't place any requirements on how applications manage
-or use Physical Activities or Activity Lists. There is no requirement that applications that
-implement this specification must adopt a single standardised list, or agree on standard groupings. The intention
-here is to just capture a useful model that can represent the variety of data currently in use.
-</p>
-<p>However there are benefits to the physical activity sector in convergence on a standard list of
-activities in order to improve discovery, reporting, etc. The OpenActive Community Group are developing
-a standard list as a separate activity. For more information see [[OpenActive-Activity-List]].
+or categories associated with Organizers or Events. Other systems may define a fixed list used as a controlled vocabulary to guides user input
+and data collection. Others may adopt more complex hierarchical approaches.
 </div>
 
 ## Events
@@ -519,7 +517,7 @@ People looking for opportunities to be active will be interested in both specifi
 
 For some scheduled events, participants may not have to commit to attending every
 session. They can drop-in for individual classes, or build up a regular habit to
-improve their fitness. For other events, like a course, there is might be an
+improve their fitness. For other events, like a course, might be an
 expectation that a participant will attend every class.
 
 Some large scale events, such as a family fun day, might consist of a programme
@@ -538,7 +536,7 @@ This includes:
 
 * the Physical Activity or Activities that will take place at the event
 * the location (Place or Venue) in which it is taking place
-* the Organiser of the event, which might be a person or an organisation
+* the Organizer of the event, which might be a person or an organization
 * the Programme used to structure the event
 * descriptive attributes, such as its suitability for specific age or weight ranges
 * general category information to tag the event as suitable for certain fitness levels, intensity, etc
@@ -548,39 +546,38 @@ This includes:
 <p>There are a variety of ways to categorise and describe events. This includes restrictions on attendance,
 aspect of suitability for different audiences and fitness levels, and a mixture of pre-requisites such as the
 need for certain qualifications, membership or equipment.
-</p>
-<p>
-The initial version of this specification prioritises capturing the essential elements of describing an event. The
+
+The initial version of this specification prioritised capturing the essential elements of describing an event. The
 structured information about time, place and activity is supplemented with some basic descriptive properties.
-This also includes the ability to add "tags" to an event to capture a variety of categorisation elements. Future
-versions of this specification will use experience working with real-world data to decide the best approach of
-formalising these categories.
+
+Future versions of this specification will be refined based on experience working with real-world data.
+See [extending the model](#extending-the-model) and the [beta namespace](#beta-namespace).
 </p>
 </div>
 
-## Organisers (Persons and Organizations)
+## Organizers (Persons and Organizations)
 
-Events have __*organisers*__. An event organiser might be a __*Person*__ or an __*Organization*__.
-The organiser of an event is the person or organisation who arranged and/or hosts the event. The organizer
-will be the person or organisation who is ultimately responsible for an Event.
+Physical Activities have __*organizers*__. An organizer might be a __*Person*__ or an __*Organization*__.
+The organizer of an Event is the person or organization who arranged and/or hosts the event. The organizer
+will be the person or organization who is ultimately responsible for the event.
 
-Examples of organisers might be coaches, or a local sports club.
+Examples of organizers might be coaches, or a local sports club.
 
-Events may involve other named individuals or organisations. Examples might include named staff who will be participating
-in the event in addition to the main organiser. These are referred to as __*contributors*__.
+Events may involve other named individuals or organizations. Examples might include named staff who will be participating
+in the event in addition to the main organizer. These are referred to as __*contributors*__.
 
-In addition to their names, some systems may have additional information about organisers and contributors.
+In addition to their names, some systems may have additional information about organizers and contributors.
 E.g. links to their web sites, photos, logos or contact details.
 
 <div class="note">
-<p>__Applications must not publish personal data without permission__</p>
+__Applications must not publish personal data without permission__
 <p>
 This specification provides a data model for publishing information about individual people, e.g. coaches,
 volunteers, etc. However applications <em class="rfc2119">MUST</em> respect privacy and data protection laws and must not publish
 data about individuals without their consent.
 </p>
 <p>
-The ability to publish this type of data has been included because event organisers often choose to publicly
+The ability to publish this type of data has been included because event organizers often choose to publicly
 share some information about themselves to help advertise an event. E.g. their name and some background on
 their qualifications or experience. But this information <em class="rfc2119">MUST</em> not be published as open data without getting the
 consent of the individual concerned.
@@ -589,7 +586,7 @@ consent of the individual concerned.
 
 ## Places
 
-Events take place in a __*location*__. But, depending on the activity, the location
+Physical Activities take place in a __*location*__. But, depending on the activity, the location
 may be defined to different levels of precision. For example:
 
 * A gym class may take place in a leisure centre at a specific address or other precisely defined location
@@ -611,7 +608,7 @@ This specification uses __*Place*__ as a general concept to refer to all types o
 The concept of Place therefore covers general outdoor areas such as parks, event venues (e.g. a Leisure centre)
 and facilities within a venue (e.g. a squash court, running track, etc). Facilities are contained in Places.
 
-A __Sports Activity Location__ is a type of Place that is used to describe a facilities within a broader
+A __Sports Activity Location__ is a type of Place that is used to describe facilities within a broader
 Place.
 
 Places may have additional descriptive properties, for example:
@@ -622,16 +619,16 @@ Places may have additional descriptive properties, for example:
 
 ## Programmes and Brands
 
-Events are often organised and run in a variety of different ways. This tailoring
+Physical Activities are often organised and run in a variety of different ways. This tailoring
 might include adjusting the activity to a particular type of participant, demographic.
-Or it could include running the event in a particular style, e.g. with a fixed routine
+Or it could include running an event in a particular style, e.g. with a fixed routine
 or sequence of activities.
 
 A __*Programme*__ describes a means of organising and running a Physical Activity. Some programmes are very loosely defined.
 While others are more structured and may be run to a specific agenda or in a particular style.
 
 Programmes are often associated with branding or marketing that helps participants understand more about what they
-can expect from an event of that format. Formats might be offered or overseen by specific organisations
+can expect from an event of that format. Formats might be offered or overseen by specific organizations.
 
 Examples of programmes include:
 
@@ -639,7 +636,7 @@ Examples of programmes include:
 * Learn to Row, from British Rowing
 * Back to Netball, from England Netball
 
-Programmes provide another means of tagging or describing Events to help describe them to
+Programmes provide another means of tagging or describing Physical Activities to help describe them to
 participants. When participants are looking for opportunities they may be interested in
 discovering Events based on either the general activity (e.g. Running) or a specific
 programme (Back to Netball).
@@ -652,13 +649,14 @@ paying attendees.
 An __*Offer*__ is used to describe the terms under which a participant can pay to attend an event.
 
 <div class="note">
-<p>
+
 The concept of an Offer is taken from Schema.org, which itself references the [Good Relations](http://www.heppnetz.de/projects/goodrelations/)
 vocabulary for ecommerce. The data model described in a later section is not intended as a
-complete specification. The concept is introduced in this version of specification to highlight
-the support available in Schema.org for associating offers with events. Later versions of the specification
-will explore the area of booking in more detail.
-</p>
+complete specification, but highlights
+the support available in Schema.org for associating offers with events.
+
+Booking is explored in more detail in the [[?Open-Booking-API]] specification.
+
 </div>
 
 ## Facility Use and Slots
@@ -701,15 +699,22 @@ is used.
 
 As the use of facility is a self-directed activity it will differ from an Event in that is will not be lead, coached, etc.
 
-## Route Guidance
+## Route Guides
 
-In addition to Events and Facilities hosted by leisure or recreational operators, opportunities for exercise may alse be presented by outdoor trails and pathways suitable for e.g. walking, cycling, horse-riding, etc. For the purposes of this specification, such trails and pathways are referred to as __Routes__, and information about them as __Route Guidance__.
+Opportunities for exercise may also be presented by outdoor trails and pathways suitable for e.g. walking, cycling, horse-riding, etc.
+For the purposes of this specification, such trails and pathways are referred to as __Routes__, and information about them as __Route Guides__.
 
-In the OpenActive context, __Routes__ are considered to be a geographical entity: that is to say, the path or trail itself, as characterised by distance, terrain, elevation, and other strictly geographical data points. __Route Guidance__, by contrast, consists of information users might find helpful in accessing or engaging with the __Route__, for instance its starting point, degree of challenge, points of interest, etc.
+In the OpenActive context, __Routes__ are considered to be a geographical entity: that is to say, the path or trail itself,
+as characterised by distance, terrain, elevation, and other strictly geographical data points.
+Note that __Routes__ themselves are not modelled, beyond basic provision of a .gpx file or similar for pathfinding.
 
-Note that modelling of __Routes__ themselves is beyond the current scope of this specification, beyond basic provision of a .gpx file or similar for pathfinding. __Route Guidance__, however, **is** within scope, with the intention that such __Metadata__ objects should give users all the information necessary for them to engage with the activity opportunity the __Route__ presents.
+__Route Guides__, by contrast, consist of information users might find helpful in accessing or engaging with the __Route__, for instance its starting point, degree of challenge, points of interest, etc.
 
-Note that __Route Guidance__ objects may exist either as attributes of a scheduled Event or Session (acting as an amenity or resource supporting a planned activity), or as self-standing entitites (simply indicating the existence or availability of a __Route__ for use).
+__Route Guide__ objects may exist either as attributes of a scheduled Event or Session (acting as an amenity or resource supporting a planned activity),
+or as standalone entitites (indicating the existence or availability of a __Routes__ for self-directed use).
+
+Refer to the [[?OpenActive-Route-Guide]] specification for full details.
+
   </section>
 
   <section>
@@ -719,25 +724,24 @@ The data model described in the following sections reuses existing standards and
 have then been extended to cover the additional requirements needs to support the publication of
 opportunity data.
 
-The Simple Knowledge Organisation System ([[SKOS]]) is a W3C standard for publishing taxonomies and
+The Simple Knowledge Organization System ([[?skos-primer]]) is a W3C standard for publishing taxonomies and
 category schemes. It can be used to help publish and organise Activity Lists and to describe
 Physical Activities.
 
-Schema.org [[SCHEMA-ORG]] provides an existing well-used and documented data model for publishing
-data to the web. It provides an existing model for describing Events, Organisations, People, and
+Schema.org [[?SCHEMA-ORG]] provides an existing well-used and documented data model for publishing
+data to the web. It provides an existing model for describing Events, Organizations, People, and
 Places.
 
 Both standards are widely used, and can be used to publish data in a variety of structured formats, including
-[[JSON-LD]].
+[[?JSON-LD]].
 
-The __[*OpenActive Vocabulary*](https://www.openactive.io/ns/)__ [[OpenActive-Vocabulary]] is a custom vocabulary designed to support the publication of
+The [[?OpenActive-Vocabulary]] is a custom vocabulary designed to support the publication of
 opportunity data. It defines a number of new terms that extend SKOS and Schema.org to cover additional
 requirements highlighted in this specification.
 
-<div class="note">
-Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the
-[[Publishing-Opportunity-Data]] primer which provides many more examples.
-</div>
+A separate custom vocabulary is being developed to support the publication of Route Guide
+opportunity data. A RouteGuide is a subclass of schema:CreativeWork. While any of the properties defined for CreativeWork
+are therefore available for use, a set of additional OpenActive (oa:)- or Routes (rt:)-defined properties are proposed as those most applicable to RouteGuide modelling.
 
 ## Namespaces
 
@@ -754,17 +758,20 @@ The rest of this specification makes use of the following namespaces:
 <dd>`http://www.w3.org/2003/01/geo/wgs84_pos#`<dd>
 <dt>`oa:`</dt>
 <dd>`https://openactive.io/`</dd>
+<dt>`rt:`</dt>
+<dd>`https://openactive.io/routes/`</dd>
 </dl>
+
 
 <div class="note">
 <p>
 In the following sections all referenced terms have been qualified using their namespace prefix. This highlights the
 source vocabulary in which they have been defined. Terms have also been linked to their definitions.
-</p>
-<p>
-The examples in each section use [[JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]], which is accessible at `https://openactive.io/` when using an `Accept` header that includes `application/ld+json`.
-</p>
-<p>
+
+The examples in each section use [[?JSON-LD]] syntax and reference the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld)
+defined by [[?OpenActive-Vocabulary]], which is accessible at `https://openactive.io/` when using an `Accept` header that includes `application/ld+json`.
+
+
 The context removes the need to use explicit namespace prefixes in the JSON documents. The context also maps the JSON-LD [@type](https://www.w3.org/TR/json-ld/#specifying-the-type) and [@id](https://www.w3.org/TR/json-ld/#node-identifiers) properties to simple keys (`type` and `id`). This further limits the amount of JSON-LD syntax exposed to developers.
 </p>
 </div>
@@ -772,24 +779,20 @@ The context removes the need to use explicit namespace prefixes in the JSON docu
 ## Data Model Overview
 
 The following table provides a high-level summary of how the concepts introduced in the previous sections map to
-definitions in SKOS, Schema.org and the OpenActive Vocabulary ([[OpenActive-Vocabulary]]).
+definitions in SKOS, Schema.org and the OpenActive Vocabulary ([[?OpenActive-Vocabulary]]).
 
 |Concept|Mapping|Notes|
 |--- |--- |--- |
 |Activity List|[skos:ConceptScheme](https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme)|Activity lists are controlled vocabularies and map well to the definition of a SKOS Concept Scheme.|
 |Physical Activity|[skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Individual Physical Activities can be represented as individual SKOS concepts|
-|Event|[schema:Event](https://schema.org/Event)|Schema.org provides a well defined model for Events with properties that cover many
-of the core requirements for opportunity data. This specification defines some
-additional types of Event and properties for describing them in the context of
-publishing opportunity data.|
-|Place|[schema:Place](https://schema.org/Place)|As well as the general definition of a Place, Schema.org defines sub-types including
-[schema:EventVenue](https://schema.org/EventVenue) and [schema:SportsActivityLocation](https://schema.org/SportsActivityLocation) which can be used where appropriate|
+|Event|[schema:Event](https://schema.org/Event)|Schema.org provides a well defined model for Events with properties that cover many of the core requirements for opportunity data. This specification defines some additional types of Event and properties for describing them in the context of publishing opportunity data.|
+|Place|[schema:Place](https://schema.org/Place)|As well as the general definition of a Place, Schema.org defines sub-types including [schema:EventVenue](https://schema.org/EventVenue) and [schema:SportsActivityLocation](https://schema.org/SportsActivityLocation) which can be used where appropriate|
 |Facility Use|[schema:FacilityUse](https://schema.org/FacilityUse)|Products that describe opportunities to use facilities in a location|
-|Organization|[schema:Organization](https://schema.org/Organization)|Covers all types of organisations, including companies, clubs, etc|
+|Organization|[schema:Organization](https://schema.org/Organization)|Covers all types of organizations, including companies, clubs, etc|
 |Person|[schema:Person](https://schema.org/Person)|An individual person|
 |Brand|[schema:Brand](https://schema.org/Brand)|The brand used to describe a programme of activities.|
 |Offer|[schema:Offer](https://schema.org/Offer)|Schema.org provides an existing model for describing offers to pay to participate in an Event.|
-|Route Guidance|---|While properties within the Route Guidance model are often drawn from schema.org, the model itself originates with OpenActive.|
+|Route Guide|rt:RouteGuide|While properties within the Route Guides model are often drawn from schema.org, the model itself originates with OpenActive.|
 
 
 ## Identifying and Linking Resources
@@ -809,9 +812,6 @@ If there are several different URLs that may be used to identify a resource, it 
 * a stable link that will resolve to a public web page, accessible to both web browsers and applications
 * a consistent link that will allow reusers to rely on the URL as an identifier, e.g. to merge in updated data
 
-<div class="warning" title="Route Guidance property URLs in the oa: namespace
-currently do not resolve. Providing resolvable definitions is a work-in-progress
-to be completed 2019-08-01."></div>
 
 This specification provides three properties for identifying resources:
 
@@ -881,7 +881,7 @@ When the value of a property might be one of a fixed set of values, it can be us
 to publish that list of values as a "controlled vocabulary".
 
 This allows a publisher to publish the list of values, with supporting documentation
-and definitions in a machine-readable format. We use the existing [[SKOS]]
+and definitions in a machine-readable format. We use the existing [[?skos-primer]]
 standard as a means of publishing these vocabularies.
 
 A number of properties in this data model allow data publishers to use values
@@ -895,8 +895,8 @@ controlled vocabularies to help improve the consistency of how data is published
 
 Publishers SHOULD use values from standard vocabularies where available.
 
-For example, the community group is developing a controlled vocabulary that defines
-a standard activity list. Values from this vocabulary can be used in the `oa:activity`
+For example, the community group has developed a controlled vocabulary that defines
+a standard activity list. Values from this vocabulary <em class="rfc2119">SHOULD</em> be used in the `oa:activity`
 property.
 
 The OpenActive Community Group may decide to define and recommend
@@ -906,11 +906,11 @@ of open data that may inform future standardisation.
 
 ## Describing Events (<code>schema:Event</code>)
 
-<p>
+
 The Schema.org [schema:Event](https://schema.org/Event) type corresponds to the definition of
 Event given earlier in this specification. The properties and relationships associated with the
 [schema:Event](https://schema.org/Event) type can all be used to describe events.
-</p>
+
 <p>
 The following table illustrates how the essential aspects of describing an event map to
 existing Schema.org properties and/or properties defined in the OpenActive Vocabulary.
@@ -926,9 +926,9 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
 |[schema:name](https://schema.org/name)|REQUIRED|String|The name of the event|
 |[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description of the event|
 |[schema:image](https://schema.org/image)|OPTIONAL|Array of [schema:ImageObject](https://schema.org/ImageObject)|One or more images or photos that depicts the event, e.g. a photo taken at a previous event|
-|[schema:startDate](https://schema.org/startDate)|RECOMMENDED|String|The start date and time of the event. Can be specified as a [schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime). While this property is marked as OPTIONAL, a data publisher MUST provide either a [schema:startDate](https://schema.org/startDate) or at least one [schema:eventSchedule](https://pending.schema.org/eventSchedule) for an event.|
+|[schema:startDate](https://schema.org/startDate)|RECOMMENDED|String|The start date and time of the event. Can be specified as a [schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime). While this property is marked as RECOMMENDED, a data publisher MUST provide either a [schema:startDate](https://schema.org/startDate) or at least one [schema:eventSchedule](https://schema.org/eventSchedule) for an event.|
 |[schema:endDate](https://schema.org/endDate)|RECOMMENDED|String|The end date and time of the event. Can be specified as a [schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime). It is RECOMMENDED that publishers provide either an [schema:endDate](https://schema.org/endDate) or a [schema:duration](https://schema.org/duration) for an event.|
-|[schema:duration](https://schema.org/duration)|RECOMMENDED|String|The duration of the event given in [[ISO8601]] format. Durations MUST NOT be zero length. If duration is unknown it should be omitted. A duration MUST be provided if both a start and end date are available.|
+|[schema:duration](https://schema.org/duration)|RECOMMENDED|String|The duration of the event given in [[?ISO8601]] format. Durations MUST NOT be zero length. If duration is unknown it should be omitted. A duration MUST be provided if both a start and end date are available.|
 |[schema:location](https://schema.org/location)|REQUIRED|[schema:Place](https://schema.org/Place)|The location at which the event will take place. Or, in the case of events that may span multiple locations, the initial meeting or starting point.|
 |[schema:organizer](https://schema.org/organizer)|REQUIRED|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The person or organization responsible for running an event. An organizer might be an [schema:Organization](https://schema.org/Organization) or a [schema:Person]((https://schema.org/Person).|
 |[schema:contributor](https://schema.org/contributor)|RECOMMENDED|Array of [schema:Person](https://schema.org/Person)|One or more people, e.g. a coach, staff member or volunteer who will be helping to run the event.|
@@ -937,7 +937,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
 |[schema:eventStatus](https://schema.org/eventStatus)|RECOMMENDED|[schema:EventStatusType](https://schema.org/EventStatusType)|The status of an event. Can be used to indicate rescheduled or cancelled events|
 |[schema:subEvent](https://schema.org/subEvent)|OPTIONAL|Array of [schema:Event](https://schema.org/Event)|Relates a parent event to one or more child events. Properties describing the parent event can be assumed to apply to the child, unless otherwise specified. A child event might be a specific instance of an Event within a schedule|
 |[schema:superEvent](https://schema.org/superEvent)|OPTIONAL|[schema:Event](https://schema.org/Event)|Relates a child event to a parent event. Properties describing the parent event can be assumed to apply to the child, unless otherwise specified. A parent event might specify a recurring schedule, of which the child event is one specific instance|
-|schema:eventSchedule|Array of OPTIONAL|[schema:Schedule](https://pending.schema.org/Schedule)|A schedule defines a repeating time period used to describe a regularly occurring Event.|
+|schema:eventSchedule|Array of OPTIONAL|[schema:Schedule](https://schema.org/Schedule)|A schedule defines a repeating time period used to describe a regularly occurring Event.|
 |[oa:schedulingNote](https://openactive.io/schedulingNote)|OPTIONAL|String|Provides a note from an organizer relating to how this Event is scheduled. For example "This event doesn't run during school holidays", or "This is a regular weekly session". Where possible publishers SHOULD provide machine-readable descriptions of schedules via the `schema:eventSchedule` property.|
 |[oa:activity](https://openactive.io/activity)|REQUIRED|Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies one or more physical activities that will take place during an event. The activities SHOULD ideally be taken from an activity list.|
 |[oa:category](https://openactive.io/category)|OPTIONAL|Array of String or [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.|
@@ -945,7 +945,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
 |[oa:genderRestriction](https://openactive.io/genderRestriction)|OPTIONAL|[oa:GenderRestrictionType](https://openactive.io/GenderRestrictionType)|Indicates that an event is restricted to Male, Female or a Mixed audience. Values should be one of the three URIs defined by this specification (see below).|
 |[oa:programme](https://openactive.io/programme)|OPTIONAL|[schema:Brand](https://schema.org/Brand)|Indicates that an event will be organised according to a specific Programme|
 |[oa:attendeeInstructions](https://openactive.io/attendeeInstructions)|OPTIONAL|String|Provides additional notes and instructions for event attendees. E.g. more information on how to find the event, what to bring, etc.|
-|[oa:leader](https://openactive.io/leader)|OPTIONAL|Array of [schema:Person](https://schema.org/Person)|Refers to a person (`schema:Person`) who will be leading an event. E.g. a coach. This is a more specific role than an organiser or a contributor|
+|[oa:leader](https://openactive.io/leader)|OPTIONAL|Array of [schema:Person](https://schema.org/Person)|Refers to a person (`schema:Person`) who will be leading an event. E.g. a coach. This is a more specific role than an organizer or a contributor|
 |[oa:accessibilitySupport](https://openactive.io/accessibilitySupport)|OPTIONAL|Array of String or [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Used to specify the types of disabilities or impairments that are supported at an event|
 |[oa:accessibilityInformation](https://openactive.io/accessibilitySupport)|OPTIONAL|String|Provide additional, specific documentation for participants about how disabilities are, or can be supported at the Event.|
 |[oa:isCoached](https://openactive.io/isCoached)|OPTIONAL|Boolean|A boolean property that indicates whether an Event will be coached. This flag allows an Event to be marked as being coached without having to specify a named individual as a coach. This addresses both privacy concerns and also scenarios where the actual coach may only be decided on the day. If this property is not specified then consumers SHOULD assume a value of undefined|
@@ -953,8 +953,9 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
 |[oa:meetingPoint](https://openactive.io/meetingPoint)|OPTIONAL|String|Instructions for the attendees of an Event about where they should meet the organizer or leader at the start of the event. Some larger locations may have several possible meeting points, so this property provides additional more specific directions.|
 |[schema:isAccessibleForFree](https://schema.org/isAccessibleForFree)|OPTIONAL|Boolean|Indicates that an Event is free to attend. If an Event is bookable in advance, then publishers SHOULD also define a zero priced [schema:Offer](https://schema.org/Offer). If the only [schema:Offer](https://schema.org/Offer) for an Event is zero priced, then publishers SHOULD include this property with a value of `true`.|
 |[schema:offers](https://schema.org/offers)|RECOMMENDED|Array of [schema:Offer](https://schema.org/Offer)|Provides one or more offers to book and participate in an Event|
-|[schema:potentialAction](https://schema.org/potentialAction)|OPTIONAL|Array of [schema:Action](https://schema.org/Action)|Provides one or more actions that can be carried out on this Event, e.g. through interacting with an API or other service.  The [[Open-Booking-API]] defines a `ReserveAction`.|
-|oa:RouteGuidance|OPTIONAL|Array of [oa:RouteGuidance](https://openactive.io/RouteGuidance)|See below, [Describing Route Guidance](#describing-route-metadata-oa-RouteGuidance-)|
+|[schema:potentialAction](https://schema.org/potentialAction)|OPTIONAL|Array of [schema:Action](https://schema.org/Action)|Provides one or more actions that can be carried out on this Event, e.g. through interacting with an API or other service.  The [[?Open-Booking-API]] defines a `ReserveAction`.|
+|[rt:RouteGuide]()|OPTIONAL|URL or Array of rt:RouteGuide|Refer to [[?OpenActive-Route-Guide]]. Provides information about a route or trail for walking, running, cycling, etc. The RouteGuide data object itself may be fully represented as the value of this property. Or, it may be populated by a URL that resolves to such a data object.|
+
 
 <p>
 The following example shows a simple event description, including its start time and duration:
@@ -987,21 +988,21 @@ This basic description can be improved by providing information about its locati
     "startDate": "2017-03-22T20:00:00-05:00",
     "duration": "PT60M",
     "organizer": [{
-"type": "Organization",
-"url": "http://example.org/orgs/bristol-tai-chi",
-"name": "Bristol Tai Chi"
+      "type": "Organization",
+      "url": "http://example.org/orgs/bristol-tai-chi",
+      "name": "Bristol Tai Chi"
     }],
     "location": {
-"type": "Place",
-"name": "ExampleCo Gym",
-"address": {
-  "type": "PostalAddress",
-  "streetAddress": "1 High Street",
-  "addressLocality": "Bristol",
-  "addressCountry": "GB",
-  "addressRegion": "Somerset",
-  "postalCode": "BS1 4SD"
-}
+      "type": "Place",
+      "name": "ExampleCo Gym",
+      "address": {
+        "type": "PostalAddress",
+        "streetAddress": "1 High Street",
+        "addressLocality": "Bristol",
+        "addressCountry": "GB",
+        "addressRegion": "Somerset",
+        "postalCode": "BS1 4SD"
+      }
     }
   }
 </code></pre>
@@ -1012,7 +1013,7 @@ This basic description can be improved by providing information about its locati
 The [oa:activity](https://openactive.io/activity) property allows an
 event to be associated with one or more Physical Activities. The Physical
 Activities used to describe an event SHOULD be drawn from a standard Activity
-List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]).
+List, e.g. the OpenActive Activity List ([[?OpenActive-Activity-List]]).
 </p>
 
 <pre class="example" title="Using activities from an Activity List"><code>
@@ -1025,10 +1026,10 @@ List, e.g. the OpenActive Activity List ([[OpenActive-Activity-List]]).
     "startDate": "2017-03-22T20:00:00-05:00",
     "duration": "PT60M",
     "activity": [{
-"id": "https://openactive.io/activity-list#c16df6ed-a4a0-4275-a8c3-1c8cff56856f",
-"type": "Concept",
-"prefLabel": "Tai Chi",
-"inScheme": "https://openactive.io/activity-list"
+      "id": "https://openactive.io/activity-list#c16df6ed-a4a0-4275-a8c3-1c8cff56856f",
+      "type": "Concept",
+      "prefLabel": "Tai Chi",
+      "inScheme": "https://openactive.io/activity-list"
     }]
   }
 </code>
@@ -1129,11 +1130,11 @@ more general [oa:category](https://openactive.io/category) property.
     "startDate": "2017-03-22T20:00:00-05:00",
     "duration": "PT60M",
     "category": [
-"Suitable For All", "Low Intensity"
+      "Suitable For All", "Low Intensity"
     ],
     "level": [{
-"type": "Concept",
-"prefLabel": "Beginner"
+      "type": "Concept",
+      "prefLabel": "Beginner"
     }]
   }
 </code>
@@ -1173,14 +1174,14 @@ is a [schema:Brand](https://schema.org/Brand) object.
     "startDate": "2017-04-01T08:00:00Z",
     "duration": "PT60M",
     "programme": {
-"type": "Brand",
-"name": "Back to Netball",
-"url": "https://www.englandnetball.co.uk/backtonetball/",
-"description": "Running across England since 2010, over 60,000 women have taken part in Back to Netball and realised the benefits of getting involved.",
-"logo": {
-  "type": "ImageObject",
-  "url": "http://hertsnetball.co.uk/js/plugins/imagemanager/files/B2N_logo.jpg"
-}
+      "type": "Brand",
+      "name": "Back to Netball",
+      "url": "https://www.englandnetball.co.uk/backtonetball/",
+      "description": "Running across England since 2010, over 60,000 women have taken part in Back to Netball and realised the benefits of getting involved.",
+      "logo": {
+        "type": "ImageObject",
+        "url": "http://hertsnetball.co.uk/js/plugins/imagemanager/files/B2N_logo.jpg"
+      }
     }
   }
 </code>
@@ -1236,8 +1237,8 @@ The following example illustrates how to specify an Event that is suitable for p
     "url": "http://www.example.org/events/1",
     "name": "Tai chi Class",
     "ageRange": {
- "type": "QuantitativeValue",
- "minValue": 60
+      "type": "QuantitativeValue",
+      "minValue": 60
     }
   }
 </code>
@@ -1256,8 +1257,8 @@ no `maxValue` property.
     "url": "http://www.example.org/events/1",
     "name": "Exercise in the park",
     "ageRange": {
- "type": "QuantitativeValue",
- "minValue": 0
+      "type": "QuantitativeValue",
+      "minValue": 0
     }
   }
 </code>
@@ -1319,7 +1320,7 @@ with alternative options. We have <a href="https://github.com/openactive/modelli
 #### Describing support for disabilities
 
 <p>
-This specification defines several ways to capture information from organisers
+This specification defines several ways to capture information from organizers
 about the types of support they provide for people with disabilities or
 other impairments. This includes:
 </p>
@@ -1341,7 +1342,7 @@ Examples of using these are shown below:
     "startDate": "2017-03-22T20:00:00-05:00",
     "duration": "PT60M",
     "accessibilitySupport": ["Hearing Impairment", "Visual Impairment"],
-    "accessibilityInformation": "The location is fully accessible, please contact the organiser if you have questions"
+    "accessibilityInformation": "The location is fully accessible, please contact the organizer if you have questions"
   }
 </code>
 </pre>
@@ -1370,18 +1371,18 @@ possible using [schema:superEvent](https://schema.org/superEvent) and conformanc
     "endDate": "2018-09-01T17:00:00-05:00",
     "duration": "P1D",
     "subEvent": [
-{
-  "type": "Event",
-  "url": "http://www.example.org/events/2",
-  "name": "Aquathlon Sprint",
-  "startDate": "2018-09-01T10:00:00-05:00"
-},
-{
-  "type": "Event",
-  "url": "http://www.example.org/events/2",
-  "name": "Aquathlon Long Course",
-  "startDate": "2018-09-01T14:00:00-05:00"
-}
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/2",
+        "name": "Aquathlon Sprint",
+        "startDate": "2018-09-01T10:00:00-05:00"
+      },
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/2",
+        "name": "Aquathlon Long Course",
+        "startDate": "2018-09-01T14:00:00-05:00"
+      }
     ]
   }
 </code>
@@ -1440,7 +1441,7 @@ individual publishers.
 
 #### Regular sessions (`SessionSeries` and `ScheduledSession`)
 
-Many organisers run regularly scheduled Events, e.g. a weekly exercise class or
+Many organizers run regularly scheduled Events, e.g. a weekly exercise class or
 a monthly ride of a cycle club.
 
 These can be thought of as two distinct types of Event:
@@ -1461,14 +1462,14 @@ The following example illustrates how these types are used.
     "startDate": "2018-01-01",
     "endDate": "2018-12-31"
     "subEvent": [
-{
-  "type": "ScheduledSession",
-  "url": "http://www.example.org/events/2",
-  "startDate": "2018-09-05T18:00:00-05:00",
-  "endDate": "2018-09-05T19:00:00-05:00",
-  "duration": "PT1H"
-},
-...
+      {
+        "type": "ScheduledSession",
+        "url": "http://www.example.org/events/2",
+        "startDate": "2018-09-05T18:00:00-05:00",
+        "endDate": "2018-09-05T19:00:00-05:00",
+        "duration": "PT1H"
+      },
+      ...
     ]
   }
 </code>
@@ -1480,12 +1481,12 @@ a [oa:SessionSeries](https://openactive.io/SessionSeries) provided in a [schema:
 of the [oa:ScheduledSession](https://openactive.io/ScheduledSession) type.
 
 As an [oa:SessionSeries](https://openactive.io/SessionSeries) is intended to be
-a parent for other events, then it MUST have either a [schema:eventSchedule](https://pending.schema.org/eventSchedule) which
+a parent for other events, then it MUST have either a [schema:eventSchedule](https://schema.org/eventSchedule) which
 describes the schedule for the subevents, OR must be explicitly associated with
 those events via a [schema:subEvent](https://schema.org/subEvent) (or [schema:superEvent](https://schema.org/superEvent))
 property.
 
-Where an [schema:eventSchedule](https://pending.schema.org/eventSchedule) is provided for
+Where an [schema:eventSchedule](https://schema.org/eventSchedule) is provided for
 a [oa:SessionSeries](https://openactive.io/SessionSeries) then it MUST include a
 [oa:scheduledEventType](https://openactive.io/scheduledEventType) property with a value
 of [oa:ScheduledSession](https://openactive.io/ScheduledSession)
@@ -1495,7 +1496,7 @@ that override conformance rules defined for [schema:Event](https://schema.org/Ev
 
 For an [oa:ScheduledSession](https://openactive.io/ScheduledSession):
 
-* it MUST NOT have either a [schema:eventSchedule](https://pending.schema.org/eventSchedule) or a [schema:subEvent](https://schema.org/subEvent). They are individual instances
+* it MUST NOT have either a [schema:eventSchedule](https://schema.org/eventSchedule) or a [schema:subEvent](https://schema.org/subEvent). They are individual instances
 of events.
 * the `schema:startDate` property is REQUIRED. This will either be explicitly provided or derived as part of generating it
 from a `Schedule`
@@ -1541,18 +1542,18 @@ type.
     "endDate": "2018-09-01T17:00:00-05:00",
     "duration": "P1D",
     "subEvent": [
-{
-  "type": "Event",
-  "url": "http://www.example.org/events/2",
-  "name": "Aquathlon Sprint",
-  "startDate": "2018-09-01T10:00:00-05:00"
-},
-{
-  "type": "Event",
-  "url": "http://www.example.org/events/3",
-  "name": "Aquathlon Long Course",
-  "startDate": "2018-09-01T14:00:00-05:00"
-}
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/2",
+        "name": "Aquathlon Sprint",
+        "startDate": "2018-09-01T10:00:00-05:00"
+      },
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/3",
+        "name": "Aquathlon Long Course",
+        "startDate": "2018-09-01T14:00:00-05:00"
+      }
     ]
   }
 </code>
@@ -1578,14 +1579,14 @@ ticketed.
 
 #### Courses (`CourseInstance`)
 
-Schema.org defines a [Course](https://pending.schema.org/Course) as an education
+Schema.org defines a [Course](https://schema.org/Course) as an education
 course that is run at different times and places. The course might consist of one or
 more individual classes.
 
 These instances of a course are described using the
-[schema:CourseInstance](https://pending.schema.org/CourseInstance) type.
+[schema:CourseInstance](https://schema.org/CourseInstance) type.
 
-Publishers SHOULD use the [schema:CourseInstance](https://pending.schema.org/CourseInstance)
+Publishers SHOULD use the [schema:CourseInstance](https://schema.org/CourseInstance)
 type when describing courses of any duration.
 
 <pre class="example" title="Course Instance"><code>
@@ -1598,37 +1599,31 @@ type when describing courses of any duration.
     "startDate": "2018-08-30",
     "endDate": "2018-11-08"
     "subEvent": [
-{
-  "type": "Event",
-  "url": "http://www.example.org/events/2",
-  "startDate": "2018-08-30T09:00:00-05:00",
-  "endDate": "2018-08-30T10:00:00-05:00",
-  "duration": "PT1H"
-},
-...
+      {
+        "type": "Event",
+        "url": "http://www.example.org/events/2",
+        "startDate": "2018-08-30T09:00:00-05:00",
+        "endDate": "2018-08-30T10:00:00-05:00",
+        "duration": "PT1H"
+      },
+      ...
     ]
   }
 </code>
 </pre>
 
-A [schema:CourseInstance](https://pending.schema.org/CourseInstance) MUST have
+A [schema:CourseInstance](https://schema.org/CourseInstance) MUST have
 either a `subEvent` property AND/or an `eventSchedule` property that provides
 information about the individual classes.
 
-Child events of a [schema:CourseInstance](https://pending.schema.org/CourseInstance)
+Child events of a [schema:CourseInstance](https://schema.org/CourseInstance)
 SHOULD be of the generic `schema:Event` type.
 
 A participant will typically pay to attend a whole course. So, as with the
-generic type, any Offers provided for a [[schema:CourseInstance](https://pending.schema.org/CourseInstance)
+generic type, any Offers provided for a [[?schema:CourseInstance](https://schema.org/CourseInstance)
 apply to the whole course any not the individual classes. However a publisher
 MAY provide Offers for individual events in the programme if they are individually
 ticketed.
-
-<div class="note" title="Status of CourseInstance">
-[schema:CourseInstance](https://pending.schema.org/CourseInstance) is currently
-a draft Schema.org type. As a result, both publishers and consumers should be aware
-that its definition may need to change in future versions of this specification.
-</div>
 
 #### Grouping together events (`EventSeries`)
 
@@ -1643,8 +1638,8 @@ Event
 More broadly, other properties of a set of Events can be used to group them together
 in useful ways. For example Events might be grouped based on:
 
-* their `schema:organizer` to identify all Events organisations by a specific
-person or organisation
+* their `schema:organizer` to identify all Events organizations by a specific
+person or organization
 * their `schema:place` to list all Events taking place at a specific location
 * their `oa:programmee` to identify Events that are part of the same Brand
 * their `oa:activity` to define a list of Events that involve the same physical
@@ -1658,7 +1653,7 @@ organised and presented in a number of different ways.
 However it can also be useful for publishers to identify that a set of Events are
 related to one another in some way and provide information about that set.
 
-The Schema.org [EventSeries](https://pending.schema.org/EventSeries) type can
+The Schema.org [EventSeries](https://schema.org/EventSeries) type can
 be used to group together related events. This allows the publisher to provide
 this grouping for data consumers, along with additional information such as
 images, a common description, etc.
@@ -1679,58 +1674,58 @@ Event schedules are described further in the following section.
     "prefLabel": "Swimming"
     }],
     "subEvent": [
-{
-  "type": "SessionSeries",
-  "url": "http://www.example.org/events/2",
-  "name": "Swim For Adults",
-  "location": {
-    "type": "Place",
-    "name": "ExampleCo Gym"
-    ...
-  },
-  "eventSchedule": [
-    {
-"type": "Schedule",
-"startDate": "2017-01-01",
-"endDate": "2017-12-31",
-"repeatFrequency": "P1W",
-"byDay": [ "https://schema.org/Wednesday" ],
-"startTime": "19:00",
-"endTime": "20:00",
-"duration": "PT1H",
-"scheduledEventType": "ScheduledSession"
-    }
-  ]
-},
-{
-  "type": "SessionSeries",
-  "url": "http://www.example.org/events/2",
-  "name": "Swim For Adults",
-  "location": {
-    "type": "Place",
-    "name": "A. N. Other Gym"
-    ...
-  },
-  "eventSchedule": [
-    {
-"type": "Schedule",
-"startDate": "2017-01-01",
-"endDate": "2017-12-31",
-"repeatFrequency": "P1W",
-"byDay": [ "https://schema.org/Thursday" ],
-"startTime": "18:00",
-"endTime": "20:00",
-"duration": "PT2H",
-"scheduledEventType": "ScheduledSession"
-    }
-  ]
-}
+      {
+        "type": "SessionSeries",
+        "url": "http://www.example.org/events/2",
+        "name": "Swim For Adults",
+        "location": {
+          "type": "Place",
+          "name": "ExampleCo Gym"
+          ...
+        },
+        "eventSchedule": [
+          {
+      "type": "Schedule",
+      "startDate": "2017-01-01",
+      "endDate": "2017-12-31",
+      "repeatFrequency": "P1W",
+      "byDay": [ "https://schema.org/Wednesday" ],
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "duration": "PT1H",
+      "scheduledEventType": "ScheduledSession"
+          }
+        ]
+      },
+      {
+        "type": "SessionSeries",
+        "url": "http://www.example.org/events/2",
+        "name": "Swim For Adults",
+        "location": {
+          "type": "Place",
+          "name": "A. N. Other Gym"
+          ...
+        },
+        "eventSchedule": [
+          {
+      "type": "Schedule",
+      "startDate": "2017-01-01",
+      "endDate": "2017-12-31",
+      "repeatFrequency": "P1W",
+      "byDay": [ "https://schema.org/Thursday" ],
+      "startTime": "18:00",
+      "endTime": "20:00",
+      "duration": "PT2H",
+      "scheduledEventType": "ScheduledSession"
+          }
+        ]
+      }
     ]
   }
 </code>
 </pre>
 
-The [schema:EventSeries](https://pending.schema.org/EventSeries) type can be used
+The [schema:EventSeries](https://schema.org/EventSeries) type can be used
 as a parent for any type of event, including the generic [schema:Event](https://www.schema.org/Event)
 type.
 
@@ -1738,30 +1733,17 @@ The `schema:location`, `schema:startDate` and `schema:endDate` propertes are
 only RECOMMENDED.
 
 <div class="note" title="Grouping CourseInstance">
-We note however that when grouping together [schema:CourseInstance](https://pending.schema.org/CourseInstance)
+We note however that when grouping together [schema:CourseInstance](https://schema.org/CourseInstance)
 events, it may be more appropriate to describe associate them with a
-[schema:Course](https://schema.org/Course). Although unlike [schema:EventSeries](https://pending.schema.org/EventSeries)
+[schema:Course](https://schema.org/Course). Although unlike [schema:EventSeries](https://schema.org/EventSeries)
 this is not a type of event.
-</div>
-
-<div class="note" title="Status of EventSeries">
-[schema:EventSeries](https://pending.schema.org/EventSeries) is currently
-a draft Schema.org type. As a result, both publishers and consumers should be aware
-that its definition may need to change in future versions of this specification.
 </div>
 
 ### Publishing event schedules
 
-<div class="note" title="Schema.org support for recurring events">
-<p>
-This specification relies on some pending changes to Schema.org that will add recurrence rules to Events. The [proposal](https://github.com/schemaorg/schemaorg/pull/1693) has been accepted, but is not yet formally part of the model.
-</p>
-<p>We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that this is an area that may change in future versions.</p>
-</div>
-
 The previous section has described several methods for publishing lists of upcoming
 events, e.g. an `oa:SessionSeries` with a list of its upcoming `oa:ScheduledSession`,
-or a [schema:EventSeries](https://pending.schema.org/EventSeries) and a list of
+or a [schema:EventSeries](https://schema.org/EventSeries) and a list of
 Events.
 
 Using the `schema:subEvent` property in this way allows a publisher to publish
@@ -1773,34 +1755,34 @@ information about the schedule itself rather than listing each individual event.
 Describing the schedule means publishing less data as data consumers will be
 able to calculate when a future event will take place.
 
-The [schema:eventSchedule](https://pending.schema.org/eventSchedule) property can
+The [schema:eventSchedule](https://schema.org/eventSchedule) property can
 be used to associate a [`schema:Event`] (or one of its sub-types) with a
-[schema:Schedule](https://pending.schema.org/Schedule).
+[schema:Schedule](https://schema.org/Schedule).
 
 Based on the [iCalendar](https://icalendar.org/) specification, a
-[schema:Schedule](https://pending.schema.org/Schedule) define a repeating
+[schema:Schedule](https://schema.org/Schedule) define a repeating
 calendar entry. A data consumer can apply these rules to generate future instances
 of an event, e.g. to populate a calendar
 
 |Property|Status|Format|Notes|
 |--- |--- |--- |--- |
 |`@type`|REQUIRED|String|`Schedule`|
-|[schema:repeatFrequency](https://pending.schema.org/repeatFrequency)|REQUIRED|String|The frequency of the events, specified as an [[ISO8601]] duration, e.g. day, week, month|
+|[schema:repeatFrequency](https://schema.org/repeatFrequency)|REQUIRED|String|The frequency of the events, specified as an [[?ISO8601]] duration, e.g. day, week, month|
 |[schema:startDate](https://schema.org/startDate)|RECOMMENDED|String|Specifies the [schema:Date](https://schema.org/Date) from which the schedule is active|
 |[schema:endDate](https://schema.org/startDate)|RECOMMENDED|String|Specifies the [schema:Date](https://schema.org/Date) at which the schedule ends.|
 |[schema:startTime](https://schema.org/startTime)|REQUIRED|String|Specifies the [schema:Time](https://schema.org/Time) at which the Events will take place.|
 |[schema:endTime](https://schema.org/endTime)|REQUIRED|String|Specifies the [schema:Time](https://schema.org/Time) at which the Events will end|
-|[schema:duration](https://schema.org/duration)|RECOMMENDED|String|Specifies the duration of the Event as an [[ISO8601]] duration.  Durations MUST NOT be zero length. If duration is unknown it should be omitted.  A duration MUST be provided if both a start and end date are available.|
-|[schema:byDay](https://pending.schema.org/byDay)|OPTIONAL|Array of [schema:DayOfWeek](https://schema.org/DayOfWeek) or Array of String|Lists the day(s) of the week during which the Events will take place. When using string values, this MUST conform to iCal BYDAY rule.|
-|[schema:byMonth](https://pending.schema.org/byMonth)|OPTIONAL|Array of Integers|Lists the month(s) of the year during which the Events will take place. January is the first month|
-|[schema:byMonthDay](https://pending.schema.org/byMonthDay)|OPTIONAL|Array of Integers|Lists the day(s) of the month on which an Event will take place|
-|[schema:repeatCount](https://pending.schema.org/repeatCount)|OPTIONAL|Number|Specifies that an Event will repeat the specified number of times|
-|[schema:exceptDate](https://pending.schema.org/exceptDate)|OPTIONAL|Array of [Date](https://schema.org/Date) or [DateTime](https://schema.org/DateTime)|Defines a list of [Date](https://schema.org/Date) or [DateTime](https://schema.org/DateTime) during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a [DateTime](https://schema.org/DateTime) then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a [Date](https://schema.org/Date) then any event that is scheduled for that 24 hour period should be excluded from the schedule. This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.|
+|[schema:duration](https://schema.org/duration)|RECOMMENDED|String|Specifies the duration of the Event as an [[?ISO8601]] duration.  Durations MUST NOT be zero length. If duration is unknown it should be omitted.  A duration MUST be provided if both a start and end date are available.|
+|[schema:byDay](https://schema.org/byDay)|OPTIONAL|Array of [schema:DayOfWeek](https://schema.org/DayOfWeek) or Array of String|Lists the day(s) of the week during which the Events will take place. When using string values, this MUST conform to iCal BYDAY rule.|
+|[schema:byMonth](https://schema.org/byMonth)|OPTIONAL|Array of Integers|Lists the month(s) of the year during which the Events will take place. January is the first month|
+|[schema:byMonthDay](https://schema.org/byMonthDay)|OPTIONAL|Array of Integers|Lists the day(s) of the month on which an Event will take place|
+|[schema:repeatCount](https://schema.org/repeatCount)|OPTIONAL|Number|Specifies that an Event will repeat the specified number of times|
+|[schema:exceptDate](https://schema.org/exceptDate)|OPTIONAL|Array of [Date](https://schema.org/Date) or [DateTime](https://schema.org/DateTime)|Defines a list of [Date](https://schema.org/Date) or [DateTime](https://schema.org/DateTime) during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a [DateTime](https://schema.org/DateTime) then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a [Date](https://schema.org/Date) then any event that is scheduled for that 24 hour period should be excluded from the schedule. This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.|
 |[oa:scheduledEventType](https://openactive.io/scheduledEventType)|REQUIRED|String|Specifies the type that a data consumer should assign to Events that are generated from this schedule.|
-|[oa:urlTemplate](https://openactive.io/urlTemplate)|RECOMMENDED|String|An [[RFC6570]] compliant URI template that can be used to generate a unique URL (`schema:url`) for every event described by the schedule (see below for more information). This property is REQUIRED if the data provider wants to provide participants with a unique URL to book to attend an event.|
-|[oa:idTemplate](https://openactive.io/idTemplate)|RECOMMENDED|String|An [[RFC6570]] compliant URI template that can be used to generate a unique identifier (`@id`) for every event described by the schedule (see below for more information). This property is REQUIRED if the data provider is supporting third-party booking via the [[Open-Booking-API]].|
+|[oa:urlTemplate](https://openactive.io/urlTemplate)|RECOMMENDED|String|An [[?RFC6570]] compliant URI template that can be used to generate a unique URL (`schema:url`) for every event described by the schedule (see below for more information). This property is REQUIRED if the data provider wants to provide participants with a unique URL to book to attend an event.|
+|[oa:idTemplate](https://openactive.io/idTemplate)|RECOMMENDED|String|An [[?RFC6570]] compliant URI template that can be used to generate a unique identifier (`@id`) for every event described by the schedule (see below for more information). This property is REQUIRED if the data provider is supporting third-party booking via the [[?Open-Booking-API]].|
 
-A [schema:Schedule](https://pending.schema.org/Schedule) is defined as having a number of required fields that will support the creation of events from the schedule it describes. As a minimum a data user will need to be provided with:
+A [schema:Schedule](https://schema.org/Schedule) is defined as having a number of required fields that will support the creation of events from the schedule it describes. As a minimum a data user will need to be provided with:
 
 * the [schema:repeatFrequency](https://schema.org/repeatFrequency) at
 which the events will occur
@@ -1810,14 +1792,14 @@ properties to indicate when the events will take place
 that data consumers can properly apply rules for parent-child relationships between
 events
 
-While marked as optional, publishers also need to provide additional information about the frequency, e.g. whether the event occurs on a specific day, day of the month, or month, by including one of the [schema:byDay](https://pending.schema.org/byDay), [schema:byMonth](https://pending.schema.org/byMonth) or [schema:byMonthDay](https://pending.schema.org/byMonthDay) properties
+While marked as optional, publishers also need to provide additional information about the frequency, e.g. whether the event occurs on a specific day, day of the month, or month, by including one of the [schema:byDay](https://schema.org/byDay), [schema:byMonth](https://schema.org/byMonth) or [schema:byMonthDay](https://schema.org/byMonthDay) properties
 
 For Events that are intended to be bookable then publishers SHOULD also provide
 the [oa:idTemplate](https://openactive.io/idTemplate) and [oa:urlTemplate](https://openactive.io/urlTemplate) properties.
 
 In practice we recommend that publishers provide as much detail in possible to allow data consumers to reliably expand a schedule into a calendar of events.
 
-The following example illustrates basic usage of the [schema:eventSchedule](https://pending.schema.org/eventSchedule) property to associate an `Event` with a [schema:Schedule](https://pending.schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
+The following example illustrates basic usage of the [schema:eventSchedule](https://schema.org/eventSchedule) property to associate an `Event` with a [schema:Schedule](https://schema.org/Schedule). The data describes a Tai Chi class that occurs every Wednesday at 7pm
 
 <pre class="example" title="Adding an event schedule"><code>
   {
@@ -1828,17 +1810,17 @@ The following example illustrates basic usage of the [schema:eventSchedule](http
     "description": "A tai chi class intended for beginners",
     "duration": "PT60M",
     "eventSchedule": [
-{
-  "type": "Schedule",
-  "startDate": "2017-01-01",
-  "endDate": "2017-12-31",
-  "repeatFrequency": "P1W",
-  "byDay": [ "https://schema.org/Wednesday" ],
-  "startTime": "19:00",
-  "endTime": "20:00",
-  "duration": "PT1H",
-  "scheduledEventType": "ScheduledSession"
-}
+      {
+        "type": "Schedule",
+        "startDate": "2017-01-01",
+        "endDate": "2017-12-31",
+        "repeatFrequency": "P1W",
+        "byDay": [ "https://schema.org/Wednesday" ],
+        "startTime": "19:00",
+        "endTime": "20:00",
+        "duration": "PT1H",
+        "scheduledEventType": "ScheduledSession"
+      }
     ]
   }
 </code>
@@ -1879,25 +1861,25 @@ deep links into websites and booking systems. It is a REQUIRED property for
 every Event.
 
 The `@id` property of an Event provides a unique stable identifier for an Event.
-It is a RECOMMENDED property that, as described in the [[Open-Booking-API]], MAY provide an entry point
+It is a RECOMMENDED property that, as described in the [[?Open-Booking-API]], MAY provide an entry point
 into an API that allows retrieval of current information about an Event and a
 means to carry out third-party bookings.
 
 A data consumer therefore needs a reliable way to generate `schema:url` and `@id`
 properties for individual Events in a schedule. To achieve these we rely on URL
-templates defined in [[RFC6570]].
+templates defined in [[?RFC6570]].
 
 The [oa:idTemplate](https://openactive.io/idTemplate) and
 [oa:urlTemplate](https://openactive.io/urlTemplate) properties of
-a [schema:Schedule](https://pending.schema.org/Schedule) provide URL templates
+a [schema:Schedule](https://schema.org/Schedule) provide URL templates
 that can be expanded out into the appropriate `@id` and `schema:url` property values.
 
 To apply these templates correctly, data consumers MUST support Level 1 (simple
-variable substitution) of [[RFC6570]]. Only two variables need to be substitutable
+variable substitution) of [[?RFC6570]]. Only two variables need to be substitutable
 into the templates: `startDate` and `endDate`.
 
 Publishers MUST ensure that values for these properties are valid according to
-the Level 1 processing rules for [[RFC6570]]. Publishers MUST NOT use additional
+the Level 1 processing rules for [[?RFC6570]]. Publishers MUST NOT use additional
 syntax or substitution rules from [RFC6570]].
 
 To convert a `Schedule` into an instance of an `Event` a data consumer MUST therefore
@@ -1914,7 +1896,7 @@ string as the value of the `@id` property for the event
 calculated value of `schema:startDate`. Do the same for `endDate` and `schema:endDate`. Use the resulting
 string as the value of the `schema:url` property for the event
 
-Other than complying with [[RFC6570]] publishers are free to provide additional
+Other than complying with [[?RFC6570]] publishers are free to provide additional
 information in their URL templates to ensure that identifiers and URLs are unique.
 For example by including the `identifier` for the parent event.
 
@@ -1928,14 +1910,14 @@ we note that events are sometimes cancelled, rescheduled or postponed. It is imp
 that data publishers provide status updates on events as a data consumer may need
 to notify a user of changes.
 
-When a publisher is providing a [schema:Schedule](https://pending.schema.org/Schedule) for upcoming events rather than
+When a publisher is providing a [schema:Schedule](https://schema.org/Schedule) for upcoming events rather than
 an explicit list of upcoming events, a data consumer needs to be able to identify
 when an upcoming event has had a status change.
 
 To handle this we recommend that publishers SHOULD provide details of the updated event:
 
 * via their RPDE feed(s), allowing all consumers to receive updates on the status of an individual events
-* via an API, e.g. as described in the [[Open-Booking-API]], allowing
+* via an API, e.g. as described in the [[?Open-Booking-API]], allowing
 authorised data consumers to confirm the event status during booking, or to receive
 notifications of changes
 
@@ -1943,7 +1925,7 @@ For cancelled Events, publishers SHOULD NOT just amend a `Schedule` to add a new
 `schema:exceptDate` that removes the event from the schedule.
 
 For data consumers to be able to associate an updated event description with a
-event they have generated from a [schema:Schedule](https://pending.schema.org/Schedule)
+event they have generated from a [schema:Schedule](https://schema.org/Schedule)
 a publisher MUST use the same identifier (`@id`) for the event as a consumer may
 have generated from an [oa:idTemplate](https://openactive.io/idTemplate)
 provided in the schedule.
@@ -1959,8 +1941,7 @@ and [schema:SportsActivityLocation](https://schema.org/SportsActivityLocation)
 types for describing locations.
 
 The [schema:location](https://schema.org/location) property can be used to
-relate an [schema:Event](https://schema.org/Event)
-or [oa:FacilityUse](https://openactive.io/FacilityUse) to a Place.
+relate an [schema:Event](https://schema.org/Event),[oa:FacilityUse](https://openactive.io/FacilityUse) or [schema:Organizer](https://schema.org/organizer) to a Place.
 
 The following table lists a number of properties that can be used to
 describe a [schema:Place](https://schema.org/Place).
@@ -1992,14 +1973,14 @@ The following example illustrates a simple place description including its name,
     "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
     "name": "Bath Sports and Leisure Centre",
     "address": {
-  "type": "PostalAddress",
-  "streetAddress": "North Parade Road",
-  "addressLocality": "Bath",
-  "addressRegion": "Somerset",
-  "postalCode": "BA2 4ET",
-  "addressCountry": "GB"
-    },
-    "telephone": "+44 (0)1225 486905"
+      "type": "PostalAddress",
+      "streetAddress": "North Parade Road",
+      "addressLocality": "Bath",
+      "addressRegion": "Somerset",
+      "postalCode": "BA2 4ET",
+      "addressCountry": "GB"
+        },
+        "telephone": "+44 (0)1225 486905"
   }
 </code></pre>
 
@@ -2053,19 +2034,19 @@ The following example illustrates how to use the
     "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
     "name": "Bath Sports and Leisure Centre",
     "address": {
-  "type": "PostalAddress",
-  "streetAddress": "North Parade Road",
-  "addressLocality": "Bath",
-  "addressRegion": "Somerset",
-  "postalCode": "BA2 4ET",
-  "addressCountry": "GB"
-    },
-    "telephone": "+44 (0)1225 486905",
-    "geo": {
-"type": "GeoCoordinates",
-"latitude": 51.3816123,
-"longitude": -2.3544367
-    }
+      "type": "PostalAddress",
+      "streetAddress": "North Parade Road",
+      "addressLocality": "Bath",
+      "addressRegion": "Somerset",
+      "postalCode": "BA2 4ET",
+      "addressCountry": "GB"
+        },
+        "telephone": "+44 (0)1225 486905",
+        "geo": {
+          "type": "GeoCoordinates",
+          "latitude": 51.3816123,
+          "longitude": -2.3544367
+        }
   }
 </code></pre>
 
@@ -2141,34 +2122,34 @@ and [schema:containsPlace](https://schema.org/containsPlace)). The following exa
     "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre",
     "name": "Bath Sports and Leisure Centre",
     "address": {
-  "type": "PostalAddress",
-  "streetAddress": "North Parade Road",
-  "addressLocality": "Bath",
-  "addressRegion": "Somerset",
-  "postalCode": "BA2 4ET",
-  "addressCountry": "GB"
+      "type": "PostalAddress",
+      "streetAddress": "North Parade Road",
+      "addressLocality": "Bath",
+      "addressRegion": "Somerset",
+      "postalCode": "BA2 4ET",
+      "addressCountry": "GB"
     },
     "containsPlace": [{
-"type": "SportsActivityLocation",
-"url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym",
-"name": "Gym"
+      "type": "SportsActivityLocation",
+      "url": "http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym",
+      "name": "Gym"
     }]
   }
 </code></pre>
 
-## Describing Organisers (<code>schema:Person</code> and <code>schema:Organization</code>)
+## Describing Organizers (<code>schema:Person</code> and <code>schema:Organization</code>)
 
 <div class="note">
 <p><strong>Applications must not publish personal data without permission</strong></p>
-<p>
+
 While the [schema:Person](https://schema.org/Person) type allows a variety of information to be published about a
 person, applications <em class="rfc2119">MUST</em> not publish this information as open data without consent.
-</p>
+
 </div>
 
-To describe the people and organisations involving in organising Events, Schema.org provides the [schema:Person](https://schema.org/Person) and [schema:Organization](https://schema.org/Organization) types.
+To describe the people and organizations involved in organising Physical Activities, Schema.org provides the [schema:Person](https://schema.org/Person) and [schema:Organization](https://schema.org/Organization) types.
 
-People and organisations can be associated with an Event using the [schema:organizer](https://schema.org/organizer), [schema:contributor](https://schema.org/contributor) or [oa:leader](https://openactive.io/leader) properties. These allow some flexibility in defining how a person or organisation is associated with an event. For example an event may be:
+People and organizations can be associated with an Event using the [schema:organizer](https://schema.org/organizer), [schema:contributor](https://schema.org/contributor) or [oa:leader](https://openactive.io/leader) properties. These allow some flexibility in defining how a person or organization is associated with an event. For example an event may be:
 
 * organized by an club (`schema:organizer`)
 * be led by a specific coach (`oa:leader`)
@@ -2178,7 +2159,7 @@ To help ensure that publishers apply these properties in consistent ways, it is 
 
 * For events taking place in a gym, the organizer should be listed as the gym (an [schema:Organization](https://schema.org/Organization))
 * For "user generated" events in a booking system, the organizer should be the account under which the events were created, rather than the booking system. The instructor for the event can be specified as the `oa:leader` or `oa:contributor`
-* For franchised events (e.g. Clubbercise), the organiser should be the franchisee, as they are ultimately responsible for organising that specific event
+* For franchised events (e.g. Clubbercise), the organizer should be the franchisee, as they are ultimately responsible for organising that specific event
 
 Both the [schema:Person](https://schema.org/Person) and [schema:Organization](https://schema.org/Organization) types support a common set of properties that capture the basic information required for publishing opportunity data.
 
@@ -2186,18 +2167,37 @@ Both the [schema:Person](https://schema.org/Person) and [schema:Organization](ht
 |--- |--- |--- |--- |
 |`@type`|REQUIRED|String|Person or Organization|
 |`@id`|RECOMMENDED|URI|A URI providing a unique identifier for the resource|
+|[schema:name](https://schema.org/name)|REQUIRED for Organization.OPTIONAL for Person.|String|The name of the organization|
+|[schema:description](https://schema.org/description)|RECOMMENDED for Organization. OPTIONAL for Person.|String|A free text description containing a brief summary of the organization.|
+|[schema:url](https://schema.org/url)|RECOMMENDED for Organization. OPTIONAL for Person|URL|A URL to the organization’s website homepage or other page about the organization.|
+|[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED for Organization. OPTIONAL for Person.|String or Array of String|Lists the URL(s) of the official social media profile pages associated with the organization or person.|
+|[oa:activity](https://openactive.io/activity) | REQUIRED if publishing opportunities at the organization level. | Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept) | Specifies one or more physical activities that are provided by the organization.  |
+|[schema:location](https://schema.org/location) | REQUIRED if publishing opportunities at the organization level. | [schema:Place](https://schema.org/Place) or array of [schema:Place](https://schema.org/Place), [schema: address](https://schema.org/address), String | The main address of the organization or key locations of the activities provided by the organization. |
+|[schema:email](https://schema.org/email)  | RECOMMENDED for Organization. OPTIONAL for Person. | String | A contact email address for the organization. |
+|[schema:telephone](https://schema.org/telephone)|RECOMMENDED for Organization. OPTIONAL for Person.|String|A contact telephone number of the organization or person.|
+|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)| A URL to an image associated with the organization which can be presented alongside its name. |
+|[schema:alternativeName](https://schema.org/alternateName) | OPTIONAL | String or array of String | Aliases, common acronyms or alternative names for the organization.  |
+|[oa:genderRestriction](https://openactive.io/genderRestriction) | OPTIONAL if publishing opportunities at the organization level. | [oa:GenderRestrictionType](https://openactive.io/GenderRestrictionType) | Indicates that an organization provides activities that are restricted to Male or Female participants, or that there are no restrictions. 3  values are defined as URIs however see [related discussion](https://github.com/openactive/modelling-opportunity-data/issues/69%20).  |
+|[oa:ageRange](https://openactive.io/ageRange) | OPTIONAL if publishing opportunities at the organization level. | [schema:QuantitativeValue](https://schema.org/QuantitativeValue) | Indicates that an organization provides activities suitable for a specific age range. Specified as a [QuantitativeValue](https://schema.org/QuantitativeValue) with [minValue](https://schema.org/minValue) and [maxValue](https://schema.org/maxValue) properties |
+|[schema:memberOf](https://schema.org/memberOf) | OPTIONAL if publishing opportunities at the organization level. | String | The Organization Id for an organization that this club is affiliated to. For example, a club can link to its National Governing Body. |
+|[schema:member](https://schema.org/member) | OPTIONAL if publishing opportunities at the organization level. | String or array of String | The organization IDs for organizations affiliated to this organization. For example, a National Governing Body can list its current affiliated clubs. |
 |[schema:identifier](https://schema.org/identifier)|OPTIONAL|Number, String, [schema:PropertyValue](https://schema.org/PropertyValue) or an array of [schema:PropertyValue](https://schema.org/PropertyValue)|A local identifier for the resource.|
-|[schema:url](https://schema.org/url)|RECOMMENDED for Organization. OPTIONAL for Person|URL|A URL to the homepage or other page about the organisation|
-|[schema:name](https://schema.org/name)|REQUIRED for Organization.OPTIONAL for Person.|String|The name of the organisation|
-|[schema:description](https://schema.org/description)|OPTIONAL|String|A description of the organisation|
-|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)|Logo for the organization|
-|[schema:telephone](https://schema.org/telephone)|RECOMMENDED for Organization. OPTIONAL for Person.|String|Telephone number of the organization or person.|
-|[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED for Organization. OPTIONAL for Person.|Array of String|Lists the URL(s) of the official social media profile pages associated with the organization or person.|
+
+<div class="note">
+<p><strong>Publishing opportunity data at the organizer level</strong></p>
+
+An <code>activity</code> and <code>location</code> MUST be provided when publishing organization data that is not associated with an Event or FacilityUse.
+
+The following additional details: <code>genderRestriction</code>, <code>ageRange</code>, <code>memberOf</code>, <code>member</code> MAY be provided when publishing organization data that is not associated with an Event or FacilityUse.
+
+At least one form of contact information (<code>url</code>, <code>sameAs</code>, <code>email</code>, or <code>telephone</code>) <strong>MUST</strong> be provided when publishing organization data that is not associated with an Event or FacilityUse.
+
+</div>
 
 
 The following example illustrates how to associate an [schema:Organization](https://schema.org/Organization) with an event:
 
-<pre class="example" title="Specifying an organiser"><code>
+<pre class="example" title="Specifying an organizer for an Event"><code>
   {
     "@context": "https://openactive.io/",
     "type": "Event",
@@ -2207,14 +2207,60 @@ The following example illustrates how to associate an [schema:Organization](http
     "startDate": "2017-03-22T20:00:00-05:00",
     "duration": "PT60M",
     "organizer": [{
-"type": "Organization",
-"url": "http://example.org/clubs/1",
-"name": "Bath Tai Chi Club",
-"logo": [{
-    "type": "ImageObject",
-    "url": "http://www.example.org/clubs/1/logo.png"
-}]
+      "type": "Organization",
+      "url": "http://example.org/clubs/1",
+      "name": "Bath Tai Chi Club",
+      "logo": [{
+          "type": "ImageObject",
+          "url": "http://www.example.org/clubs/1/logo.png"
+      }]
     }]
+  }
+</code></pre>
+
+The following example illustrates how to describe an [schema:Organization](https://schema.org/Organization) as a provider of opportunities for Physical Activity:
+
+<pre class="example" title="Specifying an organizer of an activity"><code>
+  {
+    "@context": "https://openactive.io/",
+    "@type": "Organizer",
+    "@id": "https://opensessions.io/api/id/organizers/2572",
+    "organizer": [{
+      "type": "Organization",
+      "name": "Greenwich Yacht Club",
+      "description": "Community amateur sports club focused on getting people sailing.",
+      "url": "http://www.greenwichyachtclub.co.uk",
+      "sameAs": [
+          "http://www.greenwichyachtclub.co.uk",
+          "https://www.facebook.com/GreenwichYachtClub/",
+          "https://www.twitter.com/greenwichYC"
+      ],
+      "activity": [
+        {
+            "@id": "https://openactive.io/activity-list\#d2733a1c-662c-427a-a270-400171c07320",
+            "@type": "Concept",
+            "inScheme": "https://openactive.io/activity-list",
+            "prefLabel": "Rowing"
+        }
+      ],
+      "location": {
+          "@type": "Place",
+          "name": "Greenwich Yacht Club, London SE10 0BW, UK",
+          "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 51.4955,
+              "longitude": 0.018473
+          },
+          "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Greenwich Yacht Club, Peartree Wharf, 1 Peartree Way",
+              "addressLocality": "Greenwich",
+              "addressRegion": "London",
+              "postalCode": "SE10 0BW",
+              "addressCountry": "UK"
+          },
+      }],
+    }
   }
 </code></pre>
 
@@ -2227,7 +2273,7 @@ standard covers all the requirements [outlined in the concept model](#physical-a
 * sharing of alternative labels to support search and indexing
 * the sharing of standard codes to support data integration
 
-The [[OpenActive-Activity-List]] provides an openly licensed standard activity list that can be used by publishers. But where a publisher needs to publish their own list, then they can use the properties defined in the SKOS specification, as follows:
+The [[?OpenActive-Activity-List]] provides an openly licensed standard activity list that can be used by publishers. But where a publisher needs to publish their own list, then they can use the properties defined in the SKOS specification, as follows:
 
 |Property|Status|Format|Notes|
 |--- |--- |--- |--- |
@@ -2250,19 +2296,19 @@ The following example illustrates the basic structure of an activity list:
     "title": "Activity List",
     "description": "An example activity list",
     "concept": [{
-"type": "Concept",
-"prefLabel": "Martial Arts",
-"narrower": {
-  "type": "Concept",
-  "prefLabel": "Tai Chi"
-}
+      "type": "Concept",
+      "prefLabel": "Martial Arts",
+      "narrower": {
+        "type": "Concept",
+        "prefLabel": "Tai Chi"
+      }
     }]
   }
 </code></pre>
 
 ### Describing Physical Activities
 
-The following properties from the [[SKOS]] specification can be used to describe physical activities.
+The following properties from the [[?skos-primer]] specification can be used to describe physical activities.
 
 |Property|Status|Format|Notes|
 |--- |--- |--- |--- |
@@ -2318,10 +2364,10 @@ The following example shows an event which offers a price for attending a single
     "description": "A tai chi class intended for beginners",
     "duration": "PT60M",
     "offers": [{
-"type": "Offer",
-"name": "Single session",
-"price": 5,
-"priceCurrency": "GBP"
+      "type": "Offer",
+      "name": "Single session",
+      "price": 5,
+      "priceCurrency": "GBP"
     }]
   }
 </code></pre>
@@ -2374,7 +2420,7 @@ for hire.
 |[oa:facilityUse](https://openactive.io/facilityUse)|REQUIRED|String|Links a specific Slot with the oa:FacilityUse of which it is a part.|
 |[schema:startDate](https://schema.org/startDate)|REQUIRED|String|The start date and time of the slot. Can be specified as a [schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime).|
 |[schema:endDate](https://schema.org/endDate)|OPTIONAL|String|The end date and time of the event. Can be specified as a [schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|
-|[schema:duration](https://schema.org/duration)|REQUIRED|String|The duration of the event given in [[ISO8601]] format.  Durations MUST NOT be zero length.|
+|[schema:duration](https://schema.org/duration)|REQUIRED|String|The duration of the event given in [[?ISO8601]] format.  Durations MUST NOT be zero length.|
 |[schema:offers](https://schema.org/offers)|RECOMMENDED|Array of [schema:Offer](https://schema.org/Offer)|Describes offers to book and use this specific slot. If unspecified, then a client SHOULD use offers associated with the related Facility Use.|
 |[oa:remainingUses](https://openactive.io/remainingUses)|REQUIRED|Number|Used to indicate the availability of this Slot. Where a Slot describes the opportunity to use a single facility this property should have a value of 0 or 1. Where a Slot describes the opportunity to use one of several facilities, which will be allocated during booking, then the property specific how many such facilities are remaining, and may then have a value greater than 1.|
 |[oa:maximumUses](https://openactive.io/maximumUses)|RECOMMENDED|Number|Where a Slot describes the opportunity to use one of several facilities, which will be allocated during booking, then this value can be used to indicate how many facilities might be available.|
@@ -2399,7 +2445,7 @@ allow a participant to use that facility for a specified time and duration.
 |[schema:identifier](https://schema.org/identifier)|OPTIONAL|Number, String, [schema:PropertyValue](https://schema.org/PropertyValue) or an array of [schema:PropertyValue](https://schema.org/PropertyValue)|A local identifier for the resource.|
 |[schema:name](https://schema.org/name)|REQUIRED|String|The name of the product or service|
 |[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description of the product or service|
-|[schema:provider](https://schema.org/provider)|REQUIRED|[schema:Organization](https://schema.org/Organization)|The organisation responsible for providing the facility|
+|[schema:provider](https://schema.org/provider)|REQUIRED|[schema:Organization](https://schema.org/Organization)|The organization responsible for providing the facility|
 |[schema:image](https://schema.org/image)|RECOMMENDED|Array of [schema:ImageObject](https://schema.org/ImageObject)|One or more images or photos that depicts the facility or equipment|
 |[oa:activity](https://openactive.io/activity)|REQUIRED|Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies the physical activity or activities that can be performed when the facility is used. The activities SHOULD ideally be taken from an activity list.|
 |[schema:location](https://schema.org/location)|REQUIRED|[schema:Place](https://schema.org/Place)|The location of the facility being used. This will either be a generic location, e.g. a leisure centre or sports hall for equipment or more temporary spaces, or a specific schema:SportsActivityLocation when describing opportunities to use a specific identifiable facility (oa:IndividualFacilityUse)|
@@ -2413,7 +2459,7 @@ allow a participant to use that facility for a specified time and duration.
 |[oa:individualFacilityUse](https://openactive.io/individualFacilityUse)|OPTIONAL|Array of [oa:IndividualFacilityUse](https://openactive.io/IndividualFacilityUse)|Links a oa:FacilityUse product, describing a general opportunity to, e.g. book and play tennis at a leisure centre with an array of oa:IndividualFacilityUse products that provide a more detailed description about an opportunity to book, e.g. individual tennis courts. This allows a platform to publish both a general product and timetable as well as more detailed products for individual facilities.|
 |[oa:aggregateFacilityUse](https://openactive.io/aggregateFacilityUse)|OPTIONAL|[oa:FacilityUse](https://openactive.io/FacilityUse)|Inverse of the [oa:individualFacilityUse](https://openactive.io/individualFacilityUse) property. Related an oa:IndividualFacilityUse (e.g. an opportunity to play tennis on a specific court) to a oa:FacilityUse (e.g. an opportunity to play tennis at a specific location).|
 |[schema:potentialAction](https://schema.org/potentialAction)|OPTIONAL|Array of [schema:Action](https://schema.org/Action)|Provides one or more actions that can be carried out on this FacilityUse, e.g. through interacting with an API or other service.  The
-[[Open-Booking-API]] defines a `ReserveAction`.|
+[[?Open-Booking-API]] defines a `ReserveAction`.|
 
 
 The following example describes opportunities to use table tennis facilities at
@@ -2435,56 +2481,56 @@ table remains for use in the first slot, while the second has three.
     "description": "Table tennis tables are available to hire for thirty minute slots",
     "activity": "Table Tennis",
     "provider": {
-"type": "Organization",
-"name": "Leisure Centre Ltd"
+      "type": "Organization",
+      "name": "Leisure Centre Ltd"
     },
     "location": {
-"type": "Place",
-"name": "Example Leisure Centre",
-"address": {
-  "type": "PostalAddress",
-  "streetAddress": "1 High Street",
-  "addressLocality": "Bristol",
-  "addressRegion": "Somerset",
-  "postalCode": "BS1 4SD",
-  "addressCountry": "GB"
-}
+      "type": "Place",
+      "name": "Example Leisure Centre",
+      "address": {
+        "type": "PostalAddress",
+        "streetAddress": "1 High Street",
+        "addressLocality": "Bristol",
+        "addressRegion": "Somerset",
+        "postalCode": "BS1 4SD",
+        "addressCountry": "GB"
+      }
     },
     "offers": [
-  {
-    "type": "Offer",
-    "name": "30 minute hire",
-    "price": 10,
-    "priceCurrency": "GBP"
-  }
+      {
+        "type": "Offer",
+        "name": "30 minute hire",
+        "price": 10,
+        "priceCurrency": "GBP"
+      }
     ],
     "event": [
-  {
-    "type": "Slot",
-    "id": "http://www.example.org/facility-use/slots/1",
-    "facilityUse": "http://www.example.org/facility-use/1",
-    "startDate": "2018-03-01T10:00:00Z",
-    "duration": "PT30M",
-    "remainingUses": 1,
-    "maximumUses": 4
-  },
-  {
-    "type": "Slot",
-    "id": "http://www.example.org/facility-use/slots/2",
-    "facilityUse": "http://www.example.org/facility-use/1",
-    "startDate": "2018-03-01T11:00:00Z",
-    "duration": "PT30M",
-    "remainingUses": 3,
-    "maximumUses": 4,
-    "offers": [
- {
-    "type": "Offer",
-    "name": "30 minute hire",
-    "price": 15,
-    "priceCurrency": "GBP"
- }
-    ]
-  }
+    {
+      "type": "Slot",
+      "id": "http://www.example.org/facility-use/slots/1",
+      "facilityUse": "http://www.example.org/facility-use/1",
+      "startDate": "2018-03-01T10:00:00Z",
+      "duration": "PT30M",
+      "remainingUses": 1,
+      "maximumUses": 4
+    },
+    {
+      "type": "Slot",
+      "id": "http://www.example.org/facility-use/slots/2",
+      "facilityUse": "http://www.example.org/facility-use/1",
+      "startDate": "2018-03-01T11:00:00Z",
+      "duration": "PT30M",
+      "remainingUses": 3,
+      "maximumUses": 4,
+      "offers": [
+        {
+            "type": "Offer",
+            "name": "30 minute hire",
+            "price": 15,
+            "priceCurrency": "GBP"
+        }
+      ]
+    }
     ]
   }
 </code></pre>
@@ -2552,376 +2598,14 @@ two Slots, but the second is no longer available.</p>
 </code></pre>
 
 <div class="note">
-<p>
-The community group feels that the data model proposed in this section adequately covers the primary use cases relating to publishing data on opportunities to hire and use facilities</p>
-<p>However we recognise that there may be some consequences on the volume of data shared via [RPDE feeds](https://www.openactive.io/realtime-paged-data-exchange/). Specifically, for multi-use facilities the booking of mutually exclusive configurations will end up increasing the volume of updates that need to be communicated to users.
-</p>
-<p>The community group has documented this issue and [requests feedback from publishers and users](https://github.com/openactive/modelling-opportunity-data/issues/73) based on implementation feedback before deciding how to address the issue.</p>
+
+The community group feels that the data model proposed in this section adequately covers the primary use cases relating to publishing data on opportunities to hire and use facilities.
+
+However we recognise that there may be some consequences on the volume of data shared via [RPDE feeds](https://www.openactive.io/realtime-paged-data-exchange/). Specifically, for multi-use facilities the booking of mutually exclusive configurations will end up increasing the volume of updates that need to be communicated to users.
+
+The community group has documented this issue and [requests feedback from publishers and users](https://github.com/openactive/modelling-opportunity-data/issues/73) based on implementation feedback before deciding how to address the issue.
 </div>
 
-## Describing Route Guidance (`oa:RouteGuidance`)
-
-The purpose of the __Route Guidance__ model is to describe a __Route__: that is to say, while it concerns and points to geographic information, it is not itself a geo-information type.
-
-Route Guidance is often generated over an extended period of curation: that is to say, initially sparse information about a Route is frequently augmented over time, until a full description of the Route emerges. While the Route Guidance model is rich, then, the number of REQUIRED fields is relatively small, in keeping with this curation workflow.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RouteGuidance`|
-|@id|REQUIRED|[schema:url](https://schema.org/url)|A URI providing a unique identifier for the resource|
-|[schema:name](https://schema.org/name)|REQUIRED|[schema:Text](https://schema.org/Text)|The name of the Route|
-|[oa:originatingPublisher](https://openactive.io/originatingPublisher)|REQUIRED|[schema:Organization](https://schema.org/Organization)|The Organization originally providing the information about the Route|
-|[schema:url](https://schema.org/url)|OPTIONAL|`schema:URL`|A URL to a web page (or section of a page) describing the `Route`. If present, the value of the `schema:url` attribute SHOULD NOT be the same as `oa:originatingPublisher`.|
-|[oa:createdBy](https://openactive.io/createdBy)|OPTIONAL|Array of [schema:Person](https://schema.org/Person)|Individual(s) responsible for creating the original Route or Route Guidance information|
-|[schema:datePublished](https://schema.org/datePublished)|RECOMMENDED|[schema:Date](https://schema.org/Date)|Date Route was originally published|
-|[oa:dateModified](https://openactive.io/dateModified)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|Last point at which route information was added or edited.|
-|[oa:verifiedBy](https://openactive.io/verifiedBy)|RECOMMENDED|Array of [schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|Person or organisation who has confirmed accuracy of route information|
-|[oa:dateVerified](https://openactive.io/dateVerified)|RECOMMENDED|[schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|REQUIRED if 'verifiedBy' is supplied. Can be specified as [schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime)|
-|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|A free text description of the route.|
-|[oa:shortDescription](https://openactive.io/shortDescription)|OPTIONAL|[schema:description](https://schema.org/description)|A short summary of the route, for use as a tagline or preview.|
-|[oa:activity](https://openactive.io/activity)|REQUIRED|Array of [schema:URL](https://schema.org/URL)|Specifies one or more physical activities that will take place during an event. The activities should ideally be taken from an activity list. In the context of Route Guidance, the activity specified will normally be one or more of https://openactive.io/activity-list#_4a19873e-118e-43f4-b86e-05acba8fb1de ("cycling"), https://openactive.io/activity-list#_95092977-5a20-4d6e-b312-8fddabe71544 ("walking") https://openactive.io/activity-list#_72ddb2dc-7d75-424e-880a-d90eabe91381 ("running"), https://openactive.io/activity-list#_45a372d9-baca-4f6c-859f-04de3efae742 ("Horse riding"), or a narrower term within these.|
-|distance|REQUIRED|[schema:QuantitativeValue](https://schema.org/QuantitativeValue)|Length of route. Must include both number and unit. sameAs beta:distance.|
-|[oa:indicativeDuration](https://openactive.io/indicativeDuration)|RECOMMENDED|Array of [oa:IndicativeDuration](https://openactive.io/IndicativeDuration)|See [Describing Indicative Duration](#describing-indicative-durations-oa-indicativeduration-)|
-|[oa:startPoint](https://openactive.io/startPoint)|REQUIRED|[schema:Place](https://schema.org/Place)|On modelling values here, see below: Describing Route Points.|
-|[oa:endPoint](https://openactive.io/endPoint)|OPTIONAL|[schema:Place](https://schema.org/Place)|REQUIRED if isLoop is 'false'. On modelling values here, see below: Describing Route Points.|
-|[oa:pointOfInterest](https://openactive.io/pointOfInterest)|OPTIONAL|Array of [schema:Place](https://schema.org/Place)|Noteworthy points along the Route. On modelling values here, see below: Describing Route Points.|
-|[oa:accessibiltyDescription](https://openactive.io/accessibiltyDescription)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|e.g. 'wheelchair friendly', 'hearing loop'|
-|[oa:gradient](https://openactive.io/gradient)|RECOMMENDED|[oa:RouteGradient](https://openactive.io/RouteGradient)||
-|[oa:surface](https://openactive.io/surface)|RECOMMENDED|Array of [schema:Text](https://schema.org/Text)|Suggested values include "Gravel", "Paved", "Bare Earth or Bedrock", "Short Vegetation", "Rough Vegetation or Crop", "Hard Surface (Stoney)", "Hard Surface (Sealed)", and "Boardwalk or Timber"|
-|[oa:originatingWebsite](https://openactive.io/originatingWebsite)|OPTIONAL|[schema:URL](https://schema.org/URL)|Link to original hosting site, which may contain additional or contextual information.|
-|[oa:routeDifficulty](https://openactive.io/routeDifficulty)|OPTIONAL|[oa:RouteDifficulty](https://openactive.io/RouteDifficulty)|In cases where more than one [oa:RouteDifficulty](https://openactive.io/RouteDifficulty) may be applicable, the most difficult should be supplied|
-|[oa:geoPath](https://openactive.io/geoPath)|RECOMMENDED|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no mapImage is provided. URL MUST resolve to a file in a format that natively supports geo encoding, e.g. geoJSON or GPX|
-|[oa:mapImage](https://openactive.io/mapImage)|OPTIONAL|Array of [schema:Map](https://schema.org/Map)|REQUIRED if no geoPath is provided.|
-|[oa:category](https://openactive.io/category)|OPTIONAL|Array of [schema:Text](https://schema.org/Text) or skos:Concept|e.g. "pushchair-friendly", "family", "forest walk"|
-|[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|e.g., “Parking”, “Toilets”. See section 5.7.3. Note that in cases where an `amenityFeature` may be modelled as a feature either of `RouteGuidance` or a `RoutePoint`, preference should be given to the `RoutePoint` (that is to say, to the more-specific level of modelling).|
-|[oa:isLoop](https://openactive.io/isLoop)|OPTIONAL|Boolean|Whether the route returns to its point of origin|
-|[oa:riskInformation](https://openactive.io/riskInformation)|RECOMMENDED|[oa:RouteRiskAdvisory](https://openactive.io/RouteRiskAdvisory)||
-|[oa:legalAdvisory](https://openactive.io/legalAdvisory)|RECOMMENDED|[oa:RouteLegalAdvisory](https://openactive.io/RouteLegalAdvisory)||
-|[oa:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|OPTIONAL|Array of [oa:RouteAccessRestriction](https://openactive.io/RouteAccessRestriction)|Restrictions on or obstacles to use of the route|
-|[oa:suggestedEquipment](https://openactive.io/suggestedEquipment)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Items users of the Route are advised to bring. For Routes intended for novice use, advice on footwear, bicycle frame, etc. may not be out of place here.|
-|[schema:image](https://schema.org/image)|OPTIONAL|Array of [schema:ImageObject](https://schema.org/ImageObject)|Route images. May be aligned with segments or waypoints|
-|[schema:review](https://schema.org/review)|OPTIONAL|Array of [schema:Review](https://schema.org/Review)|User-submitted ratings of the Route. URL MUST resolve to a file in a format that does not support any form of geo-encoding, e.g. .pdf, .jpg|
-|[schema:contactPoint](https://schema.org/contactPoint)|OPTIONAL|[schema:ContactPoint](https://schema.org/ContactPoint)|Contact details specifically related to the `Route`. The values of the `RouteGuidance` `contactPoint` SHOULD NOT be the same as those of the `oa:originatingPublisher` if present.|
-|[oa:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
-|[oa:segments](https://openactive.io/segments)|OPTIONAL|Array of [oa:RouteSegmentGuidance](https://openactive.io/RouteSegmentGuidance)|See [Segmenting Routes](#segmenting-routes-routes-as-a-collection-of-sub-routes)|
-|[oa:segmentGroups](https://openactive.io/segmentGroupings)|OPTIONAL|Array of [oa:RouteSegmentGroup](https://openactive.io/RouteSegmentGroup)|See [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)
-
-
-<div class="note" title="schema:url vs. oa:originatingWebsite">
-Identical values should not be given for the `schema:url` and `oa:originatingWebsite` properties, and where applicable preference SHOULD be given to populating the more-specific property (that is to say, `oa:originatingWebsite`).
-</div>
-
-### Describing Maps: `oa:geoPath` and `oa:mapImage`
-
-Cartographic representations of `Route`s ('maps', in common parlance) are typically provided in one of two format families: properly geographic format types, such as [GeoJSON](https://geojson.org/) or the [.osm format](https://learnosm.org/en/osm-data/file-formats/), which support sophisticated geo-specific functionality such as distance calculation or route-tracking; and simple images, such as .jpg files, which provide a visual overview of the relevant area but do not offer any further functionality.
-
-The first kind of map should populate the `oa:geoPath` property; for the second, the `oa:mapImage` property should be used. In both cases, the relevant maps are modelled using the schema.org [`Map`](https://schema.org/Map) class. However, the data-profile of these `Maps` will differ slightly.
-
-#### `oa:geoPath`
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|"Map"||
-|[`schema:mapType`](https://schema.org/mapType)|OPTIONAL|A schema.org [`MapCategoryType`](https://schema.org/MapCategoryType) or OpenActive enumeration value (see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, and `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
-|[`schema:url`](https://schema.org/url)|REQUIRED|[`schema:URL`](https://schema.org/URL)|A link to the file containing the map.|
-
-#### `oa:mapImage`
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|"Map"||
-|[`schema:mapType`](https://schema.org/mapType)|OPTIONAL|A schema.org [`mapCategoryType`](https://schema.org/MapCategoryType) enumeration (though see 'Notes')|May be taken from the [`MapCategoryType`](https://schema.org/MapCategoryType) values defined by schema.org; alternatively, `https://openactive.io/RouteMap`, `https://openactive.io/ElevationMap`, and `https://openactive.io/CustomMap` may be used. If more than one `Map` value is provided for `oa:geoPath`, this property is REQUIRED for each `Map`|
-|[`schema:image`](https://schema.org/image)|REQUIRED|[`schema:URL`](https://schema.org/ImageObject)|A link to the image file depicting the map.|
-
-### Describing Route Points: Start, End, and Of Interest (`schema:Place`)
-
-`Route`s are typically characterised by a number of points of special significance along their path: at a minimum, in the case of a looping `Route`, a `startPoint`, but often also an `endPoint` and sometimes various other `pointsOfInterest` along the way.
-
-Such points, for the purpose of describing `Route`s, are `schema:Place`s. However, the restricted but distinctive requirements `Route`s impose mean that particular attention should be paid to the properties listed below, some of which are unique to the OpenActive namespace:
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RoutePoint`|
-|[schema:name](https://schema.org/name)|OPTIONAL|[schema:Text](https://schema.org.Text)||
-|[schema:geo](https://schema.org/geo)|OPTIONAL|[schema:GeoCoordinates](https://schema.org/GeoCoordinates)|The geographic co-ordinates, specified as a latitude and longitude of a Place|
-|[oa:isAccessPoint](https://openactive.io/isAccessPoint)|OPTIONAL|[schema:Boolean](https://schema.org/Boolean)|Whether or not it is possible to join the Route as a whole at this point. On `RouteGuidance``startPoint` and `endPoint` attributes this defaults to `true`; otherwise it defaults to `false`.|
-|[oa:mapReference](https://openactive.io/mapReference)|OPTIONAL|Array of [oa:MapReference](https://openactive.io/MapReference)||
-|[oa:transportNote](https://openactive.io/transportNote)|OPTIONAL|Array of [oa:TransportNote](https://openactive.io/TransportNote)|Information about how to reach the `routePoint`.|
-|[oa:shortDescription](https://openactive.io/shortDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)||
-|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)||
-|[schema:amenityFeature](https://schema.org/amenityFeature)|RECOMMENDED|Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification)|Used to indicate whether specific amenities are available at a location. The value of this property will be an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects. See "Describing Amenities" for more information.|
-|[oa:userContributedContent](https://openactive.io/userContributedContent)|OPTIONAL|Array of [schema:CreativeWork](https://schema.org/CreativeWork)|Links to user-generated content, such as e.g. images or descriptions of the Route, video or path-recordings of their traversal of the Route, etc. If this field is populated, it is recommended that the data-publisher have some means of filtering and otherwise curating user-generated content prior to publication.|
-|[schema:sameAs](https://schema.org/sameAd)|OPTIONAL|[schema:URL](https://schema.org/URL)|URL of a reference Web page that unambiguously indicates the Place's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.|
-
-### Describing Map References (`oa:MapReference`)
-
-An `oa:MapReference` is simply a geographic reference specified in terms of some widely-used map or series of maps. In the UK, for instance, the Ordnance Survey Explorer and Landranger maps are frequently used to indicate the boundaries within which a geographic entity falls.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`MapReference`|
-|[schema:publisher](https://schema.org/publisher)|REQUIRED|[schema:Organization](https://schema.org/Organization) or [schema:Person](https://schema.org/Person)||
-|[mapSeries](https://openactive.io/mapSeries)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g. 'Explorer', 'Landranger'|
-|[mapNumber](https://openactive.io/mapNumber)|OPTIONAL|[schema:Text](https://schema.org/Text)|REQUIRED if no gridReference supplied|
-|[gridReference](https://openactive.io/gridReference)|OPTIONAL|[schema:Text](https://schema.org/Text)|REQUIRED if no mapNumber supplied|
-
-
-### Describing Route Gradients (`oa:RouteGradient`)
-
-An `oa:RouteGradient` captures the steepness of climb and descent along a Route. Data providers should bear in mind that many descriptors of gradient are mathematical and/or unstandardised in nature (e.g., when specified in terms of percentages), and may convey little to novice users. The provision of a gradient `description` is therefore RECOMMENDED.
-
-In addition, gradient is often used as a component in, or proxy for, description of the difficulty of completing a given Route. Data publishers should therefore give careful thought as to whether their gradient information is better captured using the `RouteGradient` or `RouteDifficulty` models.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RouteGradient`|
-|[oa:maxGradient](https://openactive.io/maxGradient)|RECOMMENDED|[schema:Text](https://schema.org/Text)|e.g. "7.5%", "4.2°"|
-|[oa:avgGradient](https://openactive.io/avgGradient)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
-|[oa:totalElevationGain](https://openactive.io/totalElevationGain)|OPTIONAL|Integer|Unit is metres.|
-|[oa:totalElevationLoss](https://openactive.io/totalElevationLoss)|OPTIONAL|Integer|Unit is metres.|
-|[oa:gradientTerm](https://openactive.io/gradientTerm)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g. "Easy", "Moderate", "3"|
-|[oa:gradientDefinitionURL](https://openactive.io/gradientDefinitionURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|This will typically be a link to a page describing the meaning of the gradientTerm in more detail.|
-|[schema:description](https://schema.org/description)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
-
-### Describing Transport to and from the Route (`oa:transportNote`)
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`transportNote`|
-|[oa:transportMode](https://openactive.io/transportMode)|REQUIRED|[schema:Text](https://schema.org/Text)|e.g. 'Bus', 'Train', 'Road'|
-|[schema:description](https://schema.org/description)|REQUIRED|[schema:Text](https://schema.org/Text)|Instructions for navigation to the destination by means of the `oa:transportMode`|
-
-<div class="note">
-It is RECOMMENDED that the value of `oa:transportMode` be taken from the following list: "Bus", "Rail", "Bicycle", "Road", or "Foot".
-</div>
-
-### Describing Route Difficulty (`oa:RouteDifficulty`)
-
-The `oa:RouteDifficulty` model describes the effort and level of fitness required to successfully complete a Route. Such assessments necessarily contain a strong subjective component, and data publishers are thus encouraged to use the `[schema:description](https://schema.org/description)` field to ground their assessment in more concrete terms such as distance and gradient, and/or to provide a `difficultyDefinitionURL` further explaining the rationale behind it.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RouteDifficulty`|
-|[oa:difficultyTerm](https://openactive.io/difficultyTerm)|OPTIONAL|[schema:Text](https://schema.org/Text)||
-|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|e.g., 'Easy', 'Strenuous'|
-|[oa:difficultyDefinitionURL](https://openactive.io/difficultyDefinitionURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|This will typically be a link to a page describing the meaning of the difficultyTerm in more detail, e.g. https://www.ramblers.org.uk/go-walking/about-group-walks/walks-difficulty.aspx|
-
-### Describing Route Legal Advisories (`oa:RouteLegalAdvisory`)
-
-Users of Routes, particularly in rural areas, need to be apprised of their legal status: that is to say, whether and under what conditions they are legally allowed to avail themselves of all sections of the Route. In most cases this can be done concisely by indicating the `oa:routeDesignation`; further nuances or exceptional cases should be dealt with in more detail using the `description` and `legalInformationURL` fields.
-
-|Property|Status|Type|
-|--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RouteLegalAdvisory`|
-|[oa:routeDesignation](https://openactive.io/routeDesignation)|RECOMMENDED|[oa:RouteDesignation](https://openactive.io/RouteDesignation)|
-|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)|
-|[oa:legalInformationURL](https://openactive.io/legalInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|
-
-### Describing Indicative Durations (`oa:IndicativeDuration`)
-
-Being able to complete a Route within a given time is important to many users, particularly those who engage infrequently in outdoor activities because they feel pressed for time. While there is considerable variance in individual activity speed, providing a rough indication of how much time to allow can nevertheless be valuable.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`IndicativeDuration`|
-|[oa:activity](https://openactive.io/activity)|REQUIRED|[skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept)|Specifies the physical activity for which the [schema:duration](https://schema.org/duration) is relevant. This activity SHOULD ideally be taken from an activity list.|
-|[schema:duration](https://schema.org/duration)|REQUIRED|String|The duration of the event given in [[ISO8601]] format.  Durations MUST NOT be zero length.|
-
-### Describing Route Designations (`oa:RouteDesignation`)
-
-An `oa:RouteDesignation` is a formal, legal declaration of the status of a given Route or Route Segment. As such, any given jurisdiction will define only a finite (usually quite small) number of possible Designations.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RouteDesignation`|
-|[oa:routeDesignationTerm](https://openactive.io/routeDesignationTerm)|REQUIRED|Array of [schema:Text](https://schema.org/Text)|See Example below|
-|[schema:description](https://schema.org/description)|OPTIONAL|[schema:Text](https://schema.org/Text)||
-|[schema:url](https://schema.org/url)|OPTIONAL|[schema:URL](https://schema.org/URL)||
-
-<div class="example">
-  <strong>Example: Route Designations in the UK</strong>
-  <p>
-In the UK, the number of legal statuses a Route might have is quite small,
-and all Routes will therefore be some assortment of:
-</p>
-<ul>
-<li>Footpath</li>
-<li>Bridleway</li>
-<li>Byway Open to All Traffic</li>
-<li>Restricted Byway</li>
-<li>Recreational Route</li>
-<li>National Trail</li>
-<li>Highway Cycle Route</li>
-<li>Other Public Access Route</li>
-<li>Permissive Footpath</li>
-<li>Permissive Bridleway</li>
-<li>Traffic-free Cycle Route</li>
-<li>National Cycle Network</li>
-<li>Danger Area</li>
-<li>Managed Access</li>
-<li>Open Access Land</li>
-<li>Right To Roam</li>
-</ul>
-<p>
-The `routeDesignationTerm` field is reserved for strictly-defined terms such as these. The `RouteDesignation` `description` property is then intended to hold a formal, legal definition of this `routeDesignationTerm`: for example,
-</p>
-
-<blockquote>
-**Restricted byway** – on these routes there are restrictions on how you can travel the route. You are permitted to use the route on foot, horseback, bicycle or horse drawn carriage. You cannot use any motorised vehicles along this route.
-</blockquote>
-<p>
-The `url` property is intended to hold a link resolving to a definition or further explanation of this term: for example, the webpage from which the above definition has been taken: https://www.ordnancesurvey.co.uk/blog/2011/08/rights-of-way/.
-</p>
-</div>
-
-### Describing Route Risk Advisories (`oa:RouteRiskAdvisory`)
-
-The purpose of the `oa:RouteRiskAdvisory` model is to describe risks in sufficient detail that users are able to weigh these and feel they are making an adequately-informed choice when deciding to avail themselves of a Route.
-
-Because the range of risks users may be concerned with is wide, including such disparate areas as personal threat, environmental factors, and shared use of Routes with other traffic; because individuals vary widely in the degree of risk they are prepared to tolerate; and because perceptions of risk involve a subjective component the `oa:RouteRiskAdvisory` model is intentionally eclectic and captures information in a variety of styles.
-
-<div class="note">
-<p>
-  While modelling risk is challenging, user research also indicates it is a paramount concern, particularly amongst those who are inexperienced with or hesitant to engage in outdoor activities. Data publishers are RECOMMENDED to provide any and all risk information they can.
-</p>
-<p>
-To avoid potential confusion between absence of risk information and absence of risk, in cases where no risk information is available it is RECOMMENDED that publishers indicate this explicitly.
-</p>
-</div>
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RouteRiskAdvisory`|
-|[oa:knownRisks](https://openactive.io/knownRisks)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g., "crime incidence","harrassment reported", "shared with heavy traffic"|
-|[oa:riskModifiers](https://openactive.io/riskModifiers)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors influencing knownRisks, e.g. "time of day", "season"|
-|[oa:riskMitigators](https://openactive.io/riskMitigators)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|Contextual factors reducing knownRisks, e.g. "guardrails provided", "well-lit"|
-|[oa:riskDescription](https://openactive.io/riskDescription)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
-|[oa:userSafetyFeedback](https://openactive.io/userSafetyFeedback)|OPTIONAL|[schema:Review](https://schema.org/Review)||
-|[oa:isMaintained](https://openactive.io/isMaintained)|OPTIONAL|Boolean||
-|[oa:isMaintainedBy](https://openactive.io/isMaintainedBy)|OPTIONAL|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|REQUIRED if isMaintained is 'true'|
-|[oa:riskInformationURL](https://openactive.io/riskInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to a formal definition outlining risk and mitigating factors, e.g. https://vscg.org/guiding-principles/risk-control|
-|[oa:trafficDescription](https://openactive.io/trafficDescription)|OPTIONAL|[schema:Text](https://schema.org/Text)||
-
-### Describing Route Restrictions (`oa:RouteAccessRestriction`)
-
-Route Access Restrictions convey information regardihg restrictions on use or access to the Route that arising from reasons other than legal status, e.g., social convention, wildlife protection, or seasonal factors.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|[schema:Text](https://schema.org/Text)|`RouteAccessRestriction`|
-|[oa:routeAccessRestrictionTerm](https://openactive.io/routeAccessRestrictionTerm)|OPTIONAL|Array of [schema:Text](https://schema.org/Text)|e.g. "Routine maintenance", "Closed in deer mating season", "Dogs not allowed"|
-|[schema:description](https://schema.org/description)|RECOMMENDED|[schema:Text](https://schema.org/Text)||
-|[oa:routeAccessRestrictionInformationURL](https://openactive.io/routeAccessRestrictionInformationURL)|OPTIONAL|[schema:URL](https://schema.org/URL)|Should point to further advice about the restriction, e.g. https://canalrivertrust.org.uk/notices/winter|
-|[oa:routeAccessRestrictionTimeSpan](https://openactive.io/routeAccessRestrictionTimeSpan)|OPTIONAL|[schema:Text](https://schema.org/Text)|Brief text indicating when the pragmaticRestriction applies, e.g, "Winter", "2020-01-01 to 2020-03-31"|
-
-### Segmenting Routes: Routes as a collection of sub-Routes
-
-In practice, Routes are often broken down into a series of smaller units - so that, for instance, a scenic walk may be described in terms of traversals to various landmarks, or a multi-day cycle tour broken down into individual day or half-day progressions. These smaller units are here referred to as __Route Segments__, and they are described by __Route Segment Guidance__.
-
-__Route Segments__ are treated, for the purposes of this specification, as essentially identical to __Routes__: that is to say, they are themselves simply __Routes__ that happen to fall in a particular sequence and thereby comprise a larger __Route__.
-
-Route Segment Guidance, then, is identical to Route Guidance, with the following exceptions:
-
-1. The presence of a mandatory `sequence` attribute. The value of this attribute MUST be an integer, and the values of the `sequence` attribute MUST run consecutively for the Route Segments comprising a Route.
-
-1. The availability of an OPTIONAL `alternativeSegmentTo` attribute, in cases where the end user may select from a variety of alternative `Route Segment`s (e.g., a short and steep `Segment` alongside a longer, more leisurely, alternative) to complete their journey.
-
-1. Segments MUST NOT themselves contains Segments. That is to say, the `segments` attribute is FORBIDDEN for Route Segment Guidance.
-
-1. Because the parent Route Guidance can be assumed to convey the necessary information to users, all attributes are OPTIONAL for Route Segments, even those that marked as REQUIRED for Route Guidance.
-
-In addition, the following structural constraints apply:
-
-1. If a Route contains Route Segments at all, it must contain AT LEAST two Segments. That is to say, a Route cannot consist of only a single Segment.
-
-1.  If a Route contains Route Segments at all, these Segments MUST describe the entirety of the Route: there should be no 'gaps' left unaccounted for by the Segments.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|[oa:sequence](https://openactive.io/sequence)|RECOMMENDED|Integer|Indicates the presentation order of `Route Segment`s within the parent `Route`. This ordering should normally be present, except for unusual situations such as e.g., modelling `RouteGuidance` that is otherwise unsegmented but for access points. In cases where `RouteSegmentGroup`s are provided, this property is REQUIRED (See below, [Grouping Route Segments](#grouping-route-segments-oa-routesegmentgroup)).|
-|[schema:alternativeRouteSegmentGuidance](https://schema.org/alternativeSegmentTo)|OPTIONAL|Array of schema:URL|An array of `@id` values pointing to RouteSegment Metadata describing alternative `RouteSegment`s that may be taken in preference to the declaring `Segment`.|
-
-<div class="note">
-The intention of the `sequence` attribute is to provide a guide regarding presentational order of the `Route Segments` to client applications, which will not necessarily correspond with the physical ordering of `Segments` along the `Route`. Ordering must thus be sequential even in cases where multiple alternative `Segments` exist.
-</div>
-
-#### Inheritance semantics between Route Guidance and Route Segment Guidance
-
-Given that, for the most part, Route Guidance and Route Segment Guidance contain the same properties, how are they to be distributed between these two similar, but not identical, objects?
-
-Modelling here is to be guided by the principle that some properties (e.g., `originatingPublisher`, `createdBy`) are relatively generic, and hence heritable downwards from Route Guidance to Route Segment Guidance, while others are specific to one level or another (for example, `distance`: the total length of a Route will necessarily be different from that of its individual Segments).
-
-The table below indicates which Route Guidance properties should be viewed as inherited, and which not:
-
-|Property|Inherited?|
-|--- |--- |
-|`@type`|No|
-|`@id`|Yes|
-|[schema:name](https://schema.org/name)|Yes|
-|[oa:originatingPublisher](https://openactive.io/originatingPublisher)|Yes|
-|[oa:createdBy](https://openactive.io/createdBy)|Yes|
-|[schema:datePublished](https://schema.org/datePublished)|Yes|
-|[oa:dateModified](https://openactive.io/dateModified)|Yes|
-|[oa:verifiedBy](https://openactive.io/verifiedBy)|Yes|
-|[oa:dateVerified](https://openactive.io/dateVerified)|Yes|
-|`schema:url`|Yes|
-|[schema:description](https://schema.org/description)|Yes|
-|[oa:shortDescription](https://openactive.io/shortDescription)|Yes|
-|[oa:activity](https://openactive.io/activity)|Yes|
-|`beta:distance`|No|
-|[oa:startPoint](https://openactive.io/startPoint)|No|
-|[oa:endPoint](https://openactive.io/endPoint)|No|
-|[oa:pointOfInterest](https://openactive.io/pointOfInterest)|No|
-|[oa:accessibiltyDescription](https://openactive.io/accessibiltyDescription)|Yes|
-|[oa:gradient](https://openactive.io/gradient)|No|
-|[oa:surface](https://openactive.io/surface)|Yes|
-|[oa:originatingWebsite](https://openactive.io/originatingWebsite)|Yes|
-|[oa:routeDifficulty](https://openactive.io/routeDifficulty)|Yes|
-|[oa:geoPath](https://openactive.io/geoPath)|Yes|
-|[oa:mapImage](https://openactive.io/mapImage)|Yes|
-|[oa:category](https://openactive.io/category)|Yes|
-|[schema:amenityFeature](https://schema.org/amenityFeature)|No|
-|[oa:isLoop](https://openactive.io/isLoop)|No|
-|[oa:riskInformation](https://openactive.io/riskInformation)|Yes|
-|[oa:legalAdvisory](https://openactive.io/legalAdvisory)|Yes|
-|[oa:routeAccessRestriction](https://openactive.io/routeAccessRestriction)|Yes|
-|[schema:image](https://schema.org/image)|Yes|
-|[schema:review](https://schema.org/review)|Yes|
-|[oa:indicativeDuration](https://schema.org/indicativeDuration)|No|
-|[oa:suggestedEquipment](https://schema.org/suggestedEquipment)|Yes|
-|[schema:contactPoint](https://schema.org/contactPoint)|Yes|
-|[oa:userContributedContent](https://schema.org/userContributedContent)|No|
-|[oa:segmentGroups](https://schema.org/segmentGroups)|N/A|
-|[oa:segments](https://openactive.io/segments)|N/A|
-|[oa:alternativeSegmentTo](https://openactive.io/alternativeSegmentTo)|N/A|
-
-When it comes to cases where a property may be declared either at the level of Route or Route Segment Guidance, modelling decisions must simply be made on the basis of scope: properties declared at the Route level apply to the Route as a whole, and hence of each Segment within it; those declared on a Segment apply ONLY to that particular Segment.
-
-### Grouping Route Segments (`oa:RouteSegmentGroup`)
-
-In the case of exceptionally lengthy routes (see e.g. ExploreKent's [Elham Valley Way](https://s3-eu-west-1.amazonaws.com/explore-kent-bucket/uploads/2015/02/18163918/explore-kent-long-distance-route-elham-valley-way.pdf) walk), individual Route Segments may be grouped together into larger wholes to indicate, e.g., which Segments should ideally be covered in a single day, link together significant sites along the route, etc. In such cases, these larger groupings should be indicated using `oa:RouteSegmentGroup` objects.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|`"RouteSegmentGroup"`||
-|@id|RECOMMENDED|URI|A URI providing a unique, stable identifier for the resource. Note that an `@id` value is REQUIRED if `alternativeGroupTo` is supplied.|
-|[schema:name](https://schema.org/name)|REQUIRED|String|The name of the grouping.|
-|[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description of the grouping.|
-|[`oa:includesSegments`](https://openactive.io/includesSegments)|Array of [URL](http://schema.org/URL)|The individual `RouteSegmentGuidance` objects the `RouteSegmentGroup` comprises, as identified by the value of their `@id`.|
-|[`alternativeGroupTo`](https://openactive.io/isAlternativeGroupTo)|Array of [URL](http://schema.org/URL)|Used to indicate that this `RouteSegmentGroup`'s collection of `RouteSegmentGuidance` serves as an alternative to the group identified in the `Array`. Where this value is supplied, it is RECOMMENDED that the `description` supply reasons why one or another alternative (e.g. distance, accessibility) might be preferred.  |
-<p></p>
-
-### Describing User Generated Content (`oa:userGeneratedContent`)
-
-Users are often prolific in creating a wide range of supplemental material – e.g images, descriptions, GPX track recordings – for Routes, and such contributions can often considerably enrich `RouteGuidance` data. The sheer – and open-ended – variety of possible contributions means that they are modelled using `schema:CreativeWork`. This type is extremely flexible, and implementers are encouraged to avail themselves of as much of this flexibility as is considered desirable; however, the properties and usage given below are given for guidance and as potentially useful starting-points.
-
-|Property|Status|Type|Notes|
-|--- |--- |--- |--- |
-|@type|REQUIRED|`"CreativeWork"`||
-|[schema:creator](https://schema.org/creator)|RECOMMENDED|String|The individual, howsoever identified (e.g. full name, user handle), responsible for creating the content.|
-|[schema:accountablePerson](http://schema.org/accountablePerson)|RECOMMENDED|[Person](http://schema.org/Person)]|In the context of user-generated content, the `accountablePerson` is the editor, curator, or reviewer who approves and if necessary edits the user-contented submissions prior to publication.|
-|[schema:spatialCoverage](https://schema.org/spatialCoverage)|REQUIRED|String|	The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content - typically, in this context, the location of the `Route`, or points along it.|
-|[schema:associatedMedia](https://schema.org/spatialCoverage)|REQUIRED|String|	The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of the content - typically, in this context, the location of the `Route`, or points along it.|
 
 ## Extending the Model
 
@@ -2930,7 +2614,7 @@ But this approach may not address every requirement. Specific applications may n
 revise or improve the core model presented here.
 
 Future versions of the specification may have a wider scope, e.g. to support description of facilities, equipment,
-event booking or accreditation schemes for sporting organisations.
+event booking or accreditation schemes for sporting organizations.
 
 With this in mind, the following sections briefly outline some expected ways in which this specification and the practice of
 publishing of opportunity data may evolve.
@@ -2964,11 +2648,11 @@ provide opportunities for both publishers and users of the data to update their 
 
 ### Relationship with Schema.org and SKOS
 
-This specification draws heavily on [[SCHEMA-ORG]] and [[SKOS]] to define its
+This specification draws heavily on [[?SCHEMA-ORG]] and [[?skos-primer]] to define its
 core data model. This is supplemented with additional custom types and properties
 that capture additional requirements for the physical activity sector.
 
-The [[SCHEMA-ORG]] and [[SKOS]] specifications define additional properties
+The [[?SCHEMA-ORG]] and [[?skos-primer]] specifications define additional properties
 that are not directly referenced in this document.
 
 Rather than reflect the whole of these specifications in this document, we have
@@ -2976,13 +2660,13 @@ chosen to include those types and properties that:
 
 * are necessary to document a basic framework for publishing opportunity data
 * are useful to highlight to encourage consistent usage across the community
-* have stricter conformance rules that used by [[SCHEMA-ORG]]. For example where
+* have stricter conformance rules that used by [[?SCHEMA-ORG]]. For example where
 we have agreed to specific uses of properties to increase quality and consistency
 in how data is being published
 
 However data publishers are free to use any additional types and properties
-where useful. [[SCHEMA-ORG]] in particular provides a source of a wide range
-of additional properties for describing Events, Places, Organisations, etc.
+where useful. [[?SCHEMA-ORG]] in particular provides a source of a wide range
+of additional properties for describing Events, Places, Organizations, etc.
 
 For example an application may wish to share reviews of events, places or
 clubs. The [schema:review](https://schema.org/review) property and its
@@ -2993,7 +2677,7 @@ to this specification.
 
 Individual publishers, or members of the community may identify new requirements
 for publishing opportunity data that are not covered by this specification or
-[[SCHEMA-ORG]].
+[[?SCHEMA-ORG]].
 
 These new requirements might result in:
 
@@ -3012,7 +2696,7 @@ publication of opportunity data.
 #### Defining and Using Custom Namespaces
 
 The data model described in this specification is defined in
-the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[OpenActive-Vocabulary]].
+the [OpenActive JSON-LD context](https://openactive.io/ns/oa.jsonld) defined by [[?OpenActive-Vocabulary]].
 
 They <em class="rfc2119">SHOULD</em> also:
 
@@ -3032,7 +2716,7 @@ data model
 
 A full tutorial on creating JSON-LD contexts is outside the scope of this specification.
 
-[[JSON-LD]] allows data to be [published with reference to multiple contexts](https://www.w3.org/TR/json-ld/#advanced-context-usage).
+[[?JSON-LD]] allows data to be [published with reference to multiple contexts](https://www.w3.org/TR/json-ld/#advanced-context-usage).
 
 Assuming that a JSON-LD context using the prefix `ext:` was published to `https://example.org/custom.jsonld`, then
 the following example shows how to use this extension:
@@ -3040,8 +2724,8 @@ the following example shows how to use this extension:
 <pre class="example" title="Example of a custom context"><code>
   {
     "@context": [
-"https://openactive.io/",
-"https://example.org/custom.jsonld"
+      "https://openactive.io/",
+      "https://example.org/custom.jsonld"
     ],
     "type": "Event",
     "ext:myCustomProperty": "foo"
@@ -3056,7 +2740,7 @@ a dataset is referencing one or more extensions.
 
 #### Beta Namespace
 
-The [[OpenActive-Beta-Namespace]] provides a custom namespace that can be used
+The [[?OpenActive-Beta-Namespace]] provides a custom namespace that can be used
 by publishers experimenting with new properties that are likely to be added to
 the core specification.
 
@@ -3069,14 +2753,11 @@ Publishers needing additional custom properties <em class="rfc2119">SHOULD</em>
 define their own namespace.
 
   </section>
+  <section class='appendix informative'>
+Acknowledgements
+================
 
-  <!--  </section> -->
-
-    <section class='appendix informative'>
-    Acknowledgements
-    ================
-
-    The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
-    </section>
+The editors thank [all members](http://www.w3.org/community/openactive/participants) of the OpenActive CG for contributions of various kinds.
+</section>
   </body>
 </html>

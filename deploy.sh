@@ -23,7 +23,7 @@ git config user.email "services@openactive.org"
 function respec2html {
   #rm $2 || exit 0;
   echo Running respec2html NightmareJS for $1 $2;
-  node ./node_modules/respec/tools/respec2html.js --timeout 30000 --haltonerror --src $1 --out $2;
+  node ./node_modules/respec/tools/respec2html.js --timeout 30000 --haltonerror --src $1 --out $2 -- --no-sandbox --disable-setuid-sandbox;
   {
   if [ ! -f $2 ]; then
       echo "respect2html Nightmare failed to generate index.html for $3"

@@ -61,6 +61,6 @@ git commit -m "Deploy to GitHub Pages - Static"
 # will be lost, since we are overwriting it.) We redirect any output to
 # /dev/null to hide any sensitive credential data that might otherwise be exposed.
 # FIXME should be authorised via key
-git push --force "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+git push --force "https://x-access-token:${GH_TOKEN}@${GH_REF}" master:gh-pages
 
 cd ..

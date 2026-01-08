@@ -31,4 +31,6 @@ jobs:
         env:
           GH_REF: github.com/${{ github.repository }}.git
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD:  false
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable   
         run: bash ./deploy.sh

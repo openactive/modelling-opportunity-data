@@ -202,23 +202,25 @@ The specification is intended to support the publication of opportunity data as 
 for anyone to access, use and share. It will also guide reusers of opportunity data,
 introducing them to the key concepts relevant to that sector.
 
-To empower organizations at different stages of their digital journey, this specification supports three levels of open data publication:
+To empower organizations at different stages of their digital journey, this specification supports three **levels** of open data publication:
 
-**Organizer (or 'Club') Level**
+**Organization**
 
-This level is ideal for organizations or activity providers who don’t manage sessions online, but want to boost their discoverability
+This level is ideal for activity providers who may not manage their sessions online, but want to boost their discoverability
 and attract new participants. Start simply by publishing essential information like your name, location, contact details and the activities you provide.
 
 **Listings – Sessions, Series, Facilities and Slots**
 
-At this intermediate level, publishers include individual session listings or facility slots with scheduled dates and times.
+At this level, publishers include individual session listings or facility slots with scheduled dates and times.
 The specification describes how to list recurring or one-off sessions, courses, open days, or timed slots for facilities.
 
-**Bookable Sessions and Facilities**
+**Bookable Opportunities**
 
-The level offers frictionless online booking directly from search or partner platforms, via opportunity data feeds and the Open Booking API.
+This level offers frictionless online booking directly from search or partner platforms, via opportunity data feeds and the Open Booking API.
 Organizations with OpenActive-enabled booking systems can publish real-time session and slot data complete with direct booking links, so participants can instantly reserve their place.
 
+
+The levels are cumulative in capability but not in obligation: publishing at Listings or Bookable Opportunities does not require an organisation to also publish at Organization level.
 
 The specification is an output of the [OpenActive Community Group](http://www.w3.org/community/openactive/)
 and serves as a common reference point for other specifications and outputs of that activity.
@@ -349,16 +351,40 @@ A standardised approach for route guides is described in the [[?OpenActive-Route
 
 ## Structure of this document
 
-This specification is divided into two main sections:
+This specification is divided into sections:
 
-1. **Introduction** - provides a broad definition of opportunity data and goals for this specification
-2. **Key Concepts** - describes the key types of resources relevant to opportunity data, along with their relationships and common attributes
-3. **Data Model** - a data model that maps the key concepts to some standard vocabularies
+**Introduction** - provides a broad definition of opportunity data and goals for this specification
+
+**Conformance** - provides details of the required properties for each type of data being published
+
+**Typographical Conventions** - outlines the conventions used in this specification
+
+**Key Concepts** - describes the key types of resources relevant to opportunity data, along with their relationships and common attributes
+
+**Data Model** - a data model that maps the key concepts to some standard vocabularies
 
   </section>
 
-<section id="conformance">
-This specification makes use of the compact IRI Syntax; please refer to the [Compact IRIs](http://www.w3.org/TR/json-ld/#compact-iris) from [[?JSON-LD]].
+# Conformance
+
+As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.
+
+<p id="respecRFC2119">The key words <em class="rfc2119" title="MAY">MAY</em>, <em class="rfc2119" title="MUST">MUST</em>, <em class="rfc2119" title="MUST NOT">MUST NOT</em>, <em class="rfc2119" title="OPTIONAL">OPTIONAL</em>, <em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>, <em class="rfc2119" title="REQUIRED">REQUIRED</em>, <em class="rfc2119" title="SHOULD">SHOULD</em>, and <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em> are
+  to be interpreted as described in [[?RFC2119]].
+</p>
+
+This specification makes use of the compact IRI Syntax; please refer to the <a href="http://www.w3.org/TR/json-ld/#compact-iris">Compact IRIs</a> from [[?JSON-LD]].
+
+#### Conformance classes
+This specification defines three conformance classes, referred to as levels. A level names the types that a publisher publishes as records. Data conforms at a level when every record of the named types satisfies that type's REQUIRED properties, as defined in section 5.4.
+
+| Level | Types published |
+| :---- | :---- |
+| Organization | `Organization` |
+| Listings | `SessionSeries` with `ScheduledSession`, `FacilityUse` or `IndividualFacilityUse` with `Slot`, `Course` with `CourseInstance`, `Event` or `HeadlineEvent` |
+| Bookable Opportunities| The types required at Listings, together with conformance to the Open Booking API |
+
+
 </section>
 
   <section>
@@ -406,7 +432,7 @@ description of the:
 The model also helps to provide definitions of key terms that are used throughout this
 specification.
 
-## Data Model Diagram
+## Data Model Overview
 
 This diagram provides a simple illustration of the resources and relationships that are introduced in the following sections. Note not every property or data element is included.
 
@@ -555,7 +581,7 @@ See [extending the model](#extending-the-model) and the [beta namespace](#beta-n
 </p>
 </div>
 
-## Organizers (Persons and Organizations)
+## Organizations and Organizers
 
 Physical Activities have __*organizers*__. An organizer might be a __*Person*__ or an __*Organization*__.
 The organizer of an Event is the person or organization who arranged and/or hosts the event. The organizer
@@ -564,9 +590,9 @@ will be the person or organization who is ultimately responsible for the event.
 Examples of organizers might be coaches, or a local sports club.
 
 Events may involve other named individuals or organizations. Examples might include named staff who will be participating
-in the event in addition to the main organizer. These are referred to as __*contributors*__.
+in the event in addition to the main organizer (__*contributors*__) or those leading a course (__*leaders*__).
 
-In addition to their names, some systems may have additional information about organizers and contributors.
+In addition to their names, some systems may have additional information about organizers, leaders and contributors.
 E.g. links to their web sites, photos, logos or contact details.
 
 <div class="note">
@@ -583,6 +609,12 @@ their qualifications or experience. But this information <em class="rfc2119">MUS
 consent of the individual concerned.
 </p>
 </div>
+
+This specification now also provides a simple data model for information about Organisations.
+
+This **Organization** level data describes those who provide opportunities for physical activity, independently of what is happening or when. It exists so that an organisation can be found by someone looking for activity even where no timetable is published as open data.
+
+Person is not a type published at Organization level. An individual who provides physical activity as a sole trader e.g. a coach or instructor should publish as an Organization under the name they trade under.
 
 ## Places
 
@@ -865,7 +897,7 @@ Where data is not available to populate <em class="rfc2119">RECOMMENDED</em> and
 <em class="rfc2119">OPTIONAL</em> properties, publishers
 <em class="rfc2119">MUST</em> exclude these from their data. Published data
 <em class="rfc2119">MUST</em> not include properties with null values, empty
-strings or empty arrays.
+strings or empty arrays. Data published via a csv template is an exception.
 
 Data publishers <em class="rfc2119">MAY</em> include additional properties,
 e.g. from Schema.org or other vocabularies when helpful to describe their data.
@@ -930,7 +962,7 @@ existing Schema.org properties and/or properties defined in the OpenActive Vocab
 |[schema:endDate](https://schema.org/endDate)|RECOMMENDED|String|The end date and time of the event. Can be specified as a [schema:Date](https://schema.org/Date) or [schema:DateTime](https://schema.org/DateTime). It is RECOMMENDED that publishers provide either an [schema:endDate](https://schema.org/endDate) or a [schema:duration](https://schema.org/duration) for an event.|
 |[schema:duration](https://schema.org/duration)|RECOMMENDED|String|The duration of the event given in [[?ISO8601]] format. Durations MUST NOT be zero length. If duration is unknown it should be omitted. A duration MUST be provided if both a start and end date are available.|
 |[schema:location](https://schema.org/location)|REQUIRED|[schema:Place](https://schema.org/Place)|The location at which the event will take place. Or, in the case of events that may span multiple locations, the initial meeting or starting point.|
-|[schema:organizer](https://schema.org/organizer)|REQUIRED|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The person or organization responsible for running an event. An organizer might be an [schema:Organization](https://schema.org/Organization) or a [schema:Person]((https://schema.org/Person).|
+|[schema:organizer](https://schema.org/organizer)|REQUIRED|[schema:Person](https://schema.org/Person) or [schema:Organization](https://schema.org/Organization)|The person or organization responsible for running an event. An organizer might be an [schema:Organization](https://schema.org/Organization) or a [schema:Person](https://schema.org/Person).|
 |[schema:contributor](https://schema.org/contributor)|RECOMMENDED|Array of [schema:Person](https://schema.org/Person)|One or more people, e.g. a coach, staff member or volunteer who will be helping to run the event.|
 |[schema:maximumAttendeeCapacity](https://schema.org/maximumAttendeeCapacity)|RECOMMENDED|Integer|The maximum capacity of the event|
 |[schema:remainingAttendeeCapacity](https://schema.org/remainingAttendeeCapacity)|RECOMMENDED|Integer|The number of places that are still available for the event|
@@ -2136,7 +2168,15 @@ and [schema:containsPlace](https://schema.org/containsPlace)). The following exa
   }
 </code></pre>
 
-## Describing Organizers (<code>schema:Person</code> and <code>schema:Organization</code>)
+## Describing Organizations and Organizers
+
+Organisations and individual people can appear in opportunity data in two different ways, and the requirements are different in each case:
+
+**As part of an opportunity.** An event, session or slot is arranged by someone. schema:organizer records who that is, and it is REQUIRED on schema:Event. Here the organisation is an attribute of the opportunity: it answers "who runs this?" and it exists in the data only as part of that opportunity.
+
+**In their own right.** An organisation is also a thing in itself, with activities it provides and places it operates in, whether or not it has any opportunities published today. Published as a record, it answers "what does this organisation offer, and where?" and it exists in the data independently of any opportunity.
+
+### Describing the Organizers of an Event (<code>schema:Person</code> and <code>schema:Organization</code>)
 
 <div class="note">
 <p><strong>Applications must not publish personal data without permission</strong></p>
@@ -2150,7 +2190,7 @@ To describe the people and organizations involved in organising Physical Activit
 
 People and organizations can be associated with an Event using the [schema:organizer](https://schema.org/organizer), [schema:contributor](https://schema.org/contributor) or [oa:leader](https://openactive.io/leader) properties. These allow some flexibility in defining how a person or organization is associated with an event. For example an event may be:
 
-* organized by an club (`schema:organizer`)
+* organized by a club (`schema:organizer`)
 * be led by a specific coach (`oa:leader`)
 * and involve other named participants (`oa:contributor`)
 
@@ -2166,32 +2206,13 @@ Both the [schema:Person](https://schema.org/Person) and [schema:Organization](ht
 |--- |--- |--- |--- |
 |`@type`|REQUIRED|String|Person or Organization|
 |`@id`|RECOMMENDED|URI|A URI providing a unique identifier for the resource|
-|[schema:name](https://schema.org/name)|REQUIRED for Organization.OPTIONAL for Person.|String|The name of the organization|
-|[schema:description](https://schema.org/description)|RECOMMENDED for Organization. OPTIONAL for Person.|String|A free text description containing a brief summary of the organization.|
-|[schema:url](https://schema.org/url)|RECOMMENDED for Organization. OPTIONAL for Person|URL|A URL to the organization’s website homepage or other page about the organization.|
-|[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED for Organization. OPTIONAL for Person.|String or Array of String|Lists the URL(s) of the official social media profile pages associated with the organization or person.|
-|[oa:activity](https://openactive.io/activity) | REQUIRED if publishing opportunities at the organization level. | Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept) | Specifies one or more physical activities that are provided by the organization.  |
-|[schema:location](https://schema.org/location) | REQUIRED if publishing opportunities at the organization level. | [schema:Place](https://schema.org/Place) or array of [schema:Place](https://schema.org/Place), [schema: address](https://schema.org/address), String | The main address of the organization or key locations of the activities provided by the organization. |
-|[schema:email](https://schema.org/email)  | RECOMMENDED for Organization. OPTIONAL for Person. | String | A contact email address for the organization. |
-|[schema:telephone](https://schema.org/telephone)|RECOMMENDED for Organization. OPTIONAL for Person.|String|A contact telephone number of the organization or person.|
-|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)| A URL to an image associated with the organization which can be presented alongside its name. |
-|[schema:alternativeName](https://schema.org/alternateName) | OPTIONAL | String or array of String | Aliases, common acronyms or alternative names for the organization.  |
-|[oa:genderRestriction](https://openactive.io/genderRestriction) | OPTIONAL if publishing opportunities at the organization level. | [oa:GenderRestrictionType](https://openactive.io/GenderRestrictionType) | Indicates that an organization provides activities that are restricted to Male or Female participants, or that there are no restrictions. 3  values are defined as URIs however see [related discussion](https://github.com/openactive/modelling-opportunity-data/issues/69%20).  |
-|[oa:ageRange](https://openactive.io/ageRange) | OPTIONAL if publishing opportunities at the organization level. | [schema:QuantitativeValue](https://schema.org/QuantitativeValue) | Indicates that an organization provides activities suitable for a specific age range. Specified as a [QuantitativeValue](https://schema.org/QuantitativeValue) with [minValue](https://schema.org/minValue) and [maxValue](https://schema.org/maxValue) properties |
-|[schema:memberOf](https://schema.org/memberOf) | OPTIONAL if publishing opportunities at the organization level. | String | The Organization Id for an organization that this club is affiliated to. For example, a club can link to its National Governing Body. |
-|[schema:member](https://schema.org/member) | OPTIONAL if publishing opportunities at the organization level. | String or array of String | The organization IDs for organizations affiliated to this organization. For example, a National Governing Body can list its current affiliated clubs. |
 |[schema:identifier](https://schema.org/identifier)|OPTIONAL|Number, String, [schema:PropertyValue](https://schema.org/PropertyValue) or an array of [schema:PropertyValue](https://schema.org/PropertyValue)|A local identifier for the resource.|
-
-<div class="note">
-<p><strong>Publishing opportunity data at the organizer level</strong></p>
-
-An <code>activity</code> and <code>location</code> MUST be provided when publishing organization data that is not associated with an Event or FacilityUse.
-
-The following additional details: <code>genderRestriction</code>, <code>ageRange</code>, <code>memberOf</code>, <code>member</code> MAY be provided when publishing organization data that is not associated with an Event or FacilityUse.
-
-At least one form of contact information (<code>url</code>, <code>sameAs</code>, <code>email</code>, or <code>telephone</code>) <strong>MUST</strong> be provided when publishing organization data that is not associated with an Event or FacilityUse.
-
-</div>
+|[schema:url](https://schema.org/url)|RECOMMENDED for Organization. OPTIONAL for Person|URL|A URL to the organization’s website homepage or other page about the organization.|
+|[schema:name](https://schema.org/name)|REQUIRED for Organization.OPTIONAL for Person.|String|The name of the organization|
+|[schema:description](https://schema.org/description)|OPTIONAL|String|A free text description containing a brief summary of the organization.|
+|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)| A URL to an image associated with the organization which can be presented alongside its name. |
+|[schema:telephone](https://schema.org/telephone)|RECOMMENDED for Organization. OPTIONAL for Person.|String|A contact telephone number of the organization or person.|
+|[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED for Organization. OPTIONAL for Person.|String or Array of String|Lists the URL(s) of the official social media profile pages associated with the organization or person.|
 
 
 The following example illustrates how to associate an [schema:Organization](https://schema.org/Organization) with an event:
@@ -2217,34 +2238,64 @@ The following example illustrates how to associate an [schema:Organization](http
   }
 </code></pre>
 
+### Describing an Organization (<code>schema:Organization</code>)
+
+A publisher at Organization level publishes records describing organisations that provide physical activity, independently of any opportunity. This is useful for organisations that do not manage sessions online, and for governing bodies, partnerships and portals publishing about the organisations they work with.
+
+A record published at this level is a <code>schema:Organization</code>. It is not wrapped in any containing <code>organizer</code> object.
+
+|Property|Status|Format|Notes|
+|--- |--- |--- |--- |
+|`@type`|REQUIRED|String|Organization|
+|`@id`|RECOMMENDED|URI|A URI providing a unique identifier for the resource|
+|[schema:name](https://schema.org/name)|REQUIRED|String|The name of the organization|
+|[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description containing a brief summary of the organization.|
+|[schema:url](https://schema.org/url)|RECOMMENDED|URL|A URL to the organization’s website homepage or other page about the organization.|
+|[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED|String or Array of String|Lists the URL(s) of the official social media profile pages associated with the organization.|
+|[oa:activity](https://openactive.io/activity) | REQUIRED| Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept) | Specifies one or more physical activities that are provided by the organization.  |
+|[schema:location](https://schema.org/location) | REQUIRED| [schema:Place](https://schema.org/Place) or array of [schema:Place](https://schema.org/Place), [schema: address](https://schema.org/address), String | The main address of the organization or key locations of the activities provided by the organization. |
+|[schema:email](https://schema.org/email)  | RECOMMENDED| String | A contact email address for the organization. |
+|[schema:telephone](https://schema.org/telephone)|RECOMMENDED|String|A contact telephone number of the organization.|
+|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)| A URL to an image associated with the organization which can be presented alongside its name. |
+|[schema:alternativeName](https://schema.org/alternateName) | OPTIONAL | String or array of String | Aliases, common acronyms or alternative names for the organization. |
+|[oa:genderRestriction](https://openactive.io/genderRestriction) | OPTIONAL| [oa:GenderRestrictionType](https://openactive.io/GenderRestrictionType) | Indicates that an organization provides activities that are restricted to Male or Female participants, or that there are no restrictions. 3  values are defined as URIs however see [related discussion](https://github.com/openactive/modelling-opportunity-data/issues/69%20).  |
+|[oa:ageRange](https://openactive.io/ageRange) | OPTIONAL| [schema:QuantitativeValue](https://schema.org/QuantitativeValue) | Indicates that an organization provides activities suitable for a specific age range. Specified as a [QuantitativeValue](https://schema.org/QuantitativeValue) with [minValue](https://schema.org/minValue) and [maxValue](https://schema.org/maxValue) properties |
+|[schema:memberOf](https://schema.org/memberOf) | OPTIONAL| String | The Organization Id for an organization that this club is affiliated to. For example, a club can link to its National Governing Body. |
+|[schema:member](https://schema.org/member) | OPTIONAL| String or array of String | The organization IDs for organizations affiliated to this organization. For example, a National Governing Body can list its current affiliated clubs. |
+|[schema:identifier](https://schema.org/identifier)|OPTIONAL|Number, String, [schema:PropertyValue](https://schema.org/PropertyValue) or an array of [schema:PropertyValue](https://schema.org/PropertyValue)|A local identifier for the resource.|
+
 The following example illustrates how to describe an [schema:Organization](https://schema.org/Organization) as a provider of opportunities for Physical Activity:
 
 <pre class="example" title="Specifying an organizer of an activity"><code>
-  {
-    "@context": "https://openactive.io/",
-    "@type": "Organizer",
-    "@id": "https://opensessions.io/api/id/organizers/2572",
-    "organizer": [{
-      "type": "Organization",
-      "name": "Greenwich Yacht Club",
-      "description": "Community amateur sports club focused on getting people sailing.",
-      "url": "http://www.greenwichyachtclub.co.uk",
-      "sameAs": [
-          "http://www.greenwichyachtclub.co.uk",
-          "https://www.facebook.com/GreenwichYachtClub/",
-          "https://www.twitter.com/greenwichYC"
-      ],
-      "activity": [
-        {
-            "@id": "https://openactive.io/activity-list\#d2733a1c-662c-427a-a270-400171c07320",
-            "@type": "Concept",
-            "inScheme": "https://openactive.io/activity-list",
-            "prefLabel": "Rowing"
-        }
-      ],
-      "location": {
+{
+  "@context": "https://openactive.io/",
+  "type": "Organization",
+  "id": "https://example.org/id/organisation/1",
+  "name": "Example Yacht Club",
+  "description": "A community amateur sports club focused on getting people sailing.",
+  "url": "https://exampleyachtclub.org/",
+  "sameAs": [
+    "http://www.exampleyachtclub.co.uk",
+    "https://www.facebook.com/ExampleYachtClub/",
+    "https://www.twitter.com/ExampleYC"
+  ],
+  "activity": [
+    {
+      "@type": "Concept",
+      "@id": "https://openactive.io/activity-list#6bb8b844-df3e-4cae-bf5f-3e129c6b1a9d",
+      "prefLabel": "Sailing",
+      "inScheme": "https://openactive.io/activity-list"
+    },
+    {
+      "@type": "Concept",
+      "@id": "https://openactive.io/activity-list#d2733a1c-662c-427a-a270-400171c07320",
+      "prefLabel": "Rowing",
+      "inScheme": "https://openactive.io/activity-list"
+    }
+  ],
+  "location": {
           "@type": "Place",
-          "name": "Greenwich Yacht Club, London SE10 0BW, UK",
+          "name": "Example Yacht Club, London SE10 0BW, UK",
           "geo": {
               "@type": "GeoCoordinates",
               "latitude": 51.4955,
@@ -2252,15 +2303,14 @@ The following example illustrates how to describe an [schema:Organization](https
           },
           "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Greenwich Yacht Club, Peartree Wharf, 1 Peartree Way",
+              "streetAddress": "Example Yacht Club, Example Wharf",
               "addressLocality": "Greenwich",
               "addressRegion": "London",
               "postalCode": "SE10 0BW",
-              "addressCountry": "UK"
+              "addressCountry": "GB"
           },
-      }],
-    }
   }
+}
 </code></pre>
 
 ## Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)

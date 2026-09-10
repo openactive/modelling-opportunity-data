@@ -191,6 +191,16 @@ background-attachment: fixed !important;
     .example > .marker a {
     color: #574b0f !important;
 }
+    @media screen and (min-width: 1200px) {
+      #datamodeldiagram {
+        width: calc(80vw);
+        max-width: 1500px;
+      }
+      #datamodeldiagram img {
+        width: 100%;
+        max-width: 1500px;
+      }
+    }
     </style>
   </head>
   <body><section id='abstract'>
@@ -383,7 +393,7 @@ This specification defines three conformance classes, referred to as levels. A l
 | Level | Types published |
 | :---- | :---- |
 | Organization | `Organization` |
-| Listings | `SessionSeries` with `ScheduledSession`, `FacilityUse` or `IndividualFacilityUse` with `Slot`, `Course` with `CourseInstance`, `Event` or `HeadlineEvent` |
+| Listings | `SessionSeries` with `ScheduledSession`, `FacilityUse` or `IndividualFacilityUse` with `Slot`, `Course` with `CourseInstance`, `EventSeries`,`HeadlineEvent`,`Event` or `OnDemandEvent` |
 | Bookable Opportunities| The types required at Listings, together with conformance to the Open Booking API |
 
 
@@ -434,11 +444,11 @@ description of the:
 The model also helps to provide definitions of key terms that are used throughout this
 specification.
 
-## Data Model Overview
+## Data Model Diagram
 
 This diagram provides a simple illustration of the resources and relationships that are introduced in the following sections. Note not every property or data element is included.
 
-<figure>
+<figure id="datamodeldiagram">
 ![](images/schema-diagram-20251218.png)
 <figcaption>Opportunity data schema diagram</figcaption>
     </figure>
@@ -583,7 +593,7 @@ See [extending the model](#extending-the-model) and the [beta namespace](#beta-n
 </p>
 </div>
 
-## Organizations and Organizers
+## Organizers (Persons and Organizations)
 
 Physical Activities have __*organizers*__. An organizer might be a __*Person*__ or an __*Organization*__.
 The organizer of an Event is the person or organization who arranged and/or hosts the event. The organizer
@@ -2170,15 +2180,7 @@ and [schema:containsPlace](https://schema.org/containsPlace)). The following exa
   }
 </code></pre>
 
-## Describing Organizations and Organizers
-
-Organisations and individual people can appear in opportunity data in two different ways, and the requirements are different in each case:
-
-**As part of an opportunity.** An event, session or slot is arranged by someone. schema:organizer records who that is, and it is REQUIRED on schema:Event. Here the organisation is an attribute of the opportunity: it answers "who runs this?" and it exists in the data only as part of that opportunity.
-
-**In their own right.** An organisation is also a thing in itself, with activities it provides and places it operates in, whether or not it has any opportunities published today. Published as a record, it answers "what does this organisation offer, and where?" and it exists in the data independently of any opportunity.
-
-### Describing the Organizers of an Event (<code>schema:Person</code> and <code>schema:Organization</code>)
+## Describing Organizers (<code>schema:Person</code> and <code>schema:Organization</code>)
 
 <div class="note">
 <p><strong>Applications must not publish personal data without permission</strong></p>
@@ -2240,11 +2242,12 @@ The following example illustrates how to associate an [schema:Organization](http
   }
 </code></pre>
 
-### Describing an Organization (<code>schema:Organization</code>)
+### Describing an Organization (<code>schema:Organization</code>), independent of any specific event.
 
-A publisher at Organization level publishes records describing organisations that provide physical activity, independently of any opportunity. This is useful for organisations that do not manage sessions online, and for governing bodies, partnerships and portals publishing about the organisations they work with.
+In addition to being used as the organizer of an event, an Organization can also be used in its own right. This is useful for organisations that do not manage sessions online, and for governing bodies, partnerships and portals publishing about the organisations they work with.
 
-A record published at this level is a <code>schema:Organization</code>. It is not wrapped in any containing <code>organizer</code> object.
+When publishing at Organization level, each record is a <code>schema:Organization</code>. It is not wrapped in any containing <code>organizer</code> object.
+The table below indicates the required and recommended properties at this level.
 
 |Property|Status|Format|Notes|
 |--- |--- |--- |--- |

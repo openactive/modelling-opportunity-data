@@ -26,6 +26,8 @@ The editors draft is the primary working document. Once this has been reviewed a
 
 The mermaid markdown, in the editors draft image folder, can be adapted using tools like https://www.mermaidchart.com/ to produce the schema image. (The cutoff text in the image is a known issue.)
 
+In the editors draft, the schema diagram expands into available horizontal space on wide screens so that it is easier to read.
+
 For live reloading of the document during editing, use browser-sync via the following:
 ```
 npm install

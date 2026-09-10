@@ -1,0 +1,171 @@
+---
+config:
+  theme: base
+  themeVariables:
+    primaryColor: '#fff'
+    primaryTextColor: '#000'
+    primaryBorderColor: '#000'
+    lineColor: '#000'
+    fontSize: 11px
+  look: classic
+  layout: elk
+
+---
+classDiagram
+direction LR
+    class Organization["Organization<br>(schema:Organization)"] {
+	    id
+	    name
+	    description
+	    image
+	    address
+	    logo
+    }
+
+    class Person["Person<br>(schema:Person)"] {
+	    url
+	    name
+	    description
+	    image
+    }
+
+    class Event["Event<br>(schema:Event)"] {
+	    url
+	    name
+	    description
+	    image
+	    startDate
+	    endDate
+	    duration
+	    location
+	    organizer
+	    contributor
+	    leader
+	    maximumAttendeeCapacity
+	    remainingAttendeeCapacity
+	    eventStatus
+	    superEvent
+	    subEvent
+	    activity
+	    category
+	    programme
+	    schedule
+	    ageRestriction
+	    genderRestriction
+	    attendeeInstructions
+	    isCoached
+	    level
+	    meetingPoint
+	    offers
+	    routeGuide
+    }
+
+    class Place["Place<br>(schema:Place)"] {
+	    url
+	    name
+	    description
+	    image
+	    address
+	    geo
+	    amenityFeature
+	    containsPlace
+	    telephone
+	    faxNumber
+	    openingHoursSpecification
+    }
+
+    class FacilityUse["FacilityUse<br>(oa:FacilityUse)"] {
+	    url
+	    name
+	    description
+	    image
+	    location
+	    activity
+	    events
+	    offers
+	    individualFacilityUses
+    }
+
+    class IndividualFacilityUse["IndividualFacilityUse<br>(oa:IndividualFacilityUse)"] {
+	    url
+	    name
+	    description
+	    image
+	    location
+	    activity
+	    events
+	    offers
+    }
+
+    class SportsActivityLocation["SportsActivityLocation<br>(schema:SportsActivityLocation)"] {
+	    url
+	    name
+	    description
+	    image
+	    geo
+	    containedInPlace
+    }
+
+    class Offer["Offer<br>(schema:Offer)"] {
+	    identifier
+	    price
+	    priceCurrency
+    }
+
+    class Slot["Slot<br>(oa:Slot)"] {
+	    startDate
+	    endDate
+	    duration
+	    offers
+	    remainingUses
+	    maximumUses
+    }
+
+    class Programme["Programme<br>(skos:Concept)"] {
+	    url
+	    name
+	    description
+	    image
+    }
+
+    class RouteGuide["RouteGuide<br>(rt:RouteGuide)"] {
+    }
+
+    class ActivityList["Activity List<br>(skos:ConceptScheme)"] {
+	    title
+	    description
+	    license
+    }
+
+    class PhysicalActivity["Physical Activity<br>(skos:Concept)"] {
+	    prefLabel
+	    altLabel
+	    inScheme
+	    description
+	    image
+	    broader
+	    narrower
+	    notation
+    }
+
+    Event --|> Organization : organizer or<br>contributor or<br>leader
+    Event --|> Person : organizer or<br>contributor or<br>leader
+    Event --|> Place : location
+    Event --|> Offer : offers
+    Event --|> Event : superEvent or<br>subEvent
+    Event --|> PhysicalActivity : activity
+    Event --|> Programme : programme
+    Event --|> RouteGuide : routeGuide
+    FacilityUse --|> Place : location
+    FacilityUse --|> Slot : events
+    FacilityUse --|> Offer : offers
+    FacilityUse --|> IndividualFacilityUse : individualFacilityUses
+    IndividualFacilityUse --|> Slot : events
+    Slot --|> Offer : offers
+    PhysicalActivity --|> ActivityList : inScheme
+    PhysicalActivity --|> PhysicalActivity : broader or<br>narrower
+    PhysicalActivity --|> Organization : activity
+    Place --|> Place : containsPlace
+    Place --|> Place : containedInPlace
+    SportsActivityLocation --|> Place : location
+    Organization --|> Place : location

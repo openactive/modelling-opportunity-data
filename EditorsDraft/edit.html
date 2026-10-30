@@ -2284,6 +2284,7 @@ The table below indicates the required and recommended properties at this level.
 |`@type`|REQUIRED|String|Organization|
 |`@id`|RECOMMENDED|URI|A URI providing a unique identifier for the resource|
 |[schema:name](https://schema.org/name)|REQUIRED|String|The name of the organization|
+|[beta:dateVerified](https://openactive.io/ns-beta/#dateVerified)|REQUIRED|[schema:Date](https://schema.org/Date)|The date on which the details of the organization were last verified as correct by the publisher. Unlike [schema:dateModified](https://schema.org/dateModified), this changes when the details are confirmed, even if nothing in them has changed, so data users can identify and remove stale records.|
 |[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description containing a brief summary of the organization.|
 |[schema:url](https://schema.org/url)|RECOMMENDED|URL|A URL to the organization’s website homepage or other page about the organization.|
 |[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED|String or Array of String|Lists the URL(s) of the official social media profile pages associated with the organization.|
@@ -2299,14 +2300,20 @@ The table below indicates the required and recommended properties at this level.
 |[schema:member](https://schema.org/member) | OPTIONAL| URI or array of URI | The `@id`s of organizations affiliated to this organization. For example, a National Governing Body can list its current affiliated clubs. |
 |[schema:identifier](https://schema.org/identifier)|OPTIONAL|Number, String, [schema:PropertyValue](https://schema.org/PropertyValue) or an array of [schema:PropertyValue](https://schema.org/PropertyValue)|A local identifier for the resource.|
 
+`beta:dateVerified` is defined in the [beta namespace](#beta-namespace), so Organization level data <em class="rfc2119">MUST</em> include the beta namespace context after the OpenActive context: `"@context": ["https://openactive.io/", "https://openactive.io/ns-beta"]`.
+
 The following example illustrates how to describe an [schema:Organization](https://schema.org/Organization) as a provider of opportunities for Physical Activity:
 
 <pre class="example" title="Specifying an organizer of an activity"><code>
 {
-  "@context": "https://openactive.io/",
+  "@context": [
+    "https://openactive.io/",
+    "https://openactive.io/ns-beta"
+  ],
   "@type": "Organization",
   "@id": "https://example.org/id/organisation/1",
   "name": "Example Yacht Club",
+  "beta:dateVerified": "2026-10-01",
   "description": "A community amateur sports club focused on getting people sailing.",
   "url": "https://exampleyachtclub.org/",
   "email": "info@exampleyachtclub.org",

@@ -160,7 +160,7 @@
     "href": "https://tools.ietf.org/html/rfc6570",
     "title": "URI Template",
     "publisher": "IETF"
-}   
+}
     }
   };
     </script>
@@ -2285,6 +2285,7 @@ The table below indicates the required and recommended properties at this level.
 |`@id`|RECOMMENDED|URI|A URI providing a unique identifier for the resource|
 |[schema:name](https://schema.org/name)|REQUIRED|String|The name of the organization|
 |[beta:dateVerified](https://openactive.io/ns-beta/#dateVerified)|REQUIRED|[schema:Date](https://schema.org/Date)|The date on which the details of the organization were last verified as correct by the publisher. Unlike [schema:dateModified](https://schema.org/dateModified), this changes when the details are confirmed, even if nothing in them has changed, so data users can identify and remove stale records.|
+|[dc:license](http://purl.org/dc/terms/license)|REQUIRED|URL|Reference to the license under which the record is published, for example `https://creativecommons.org/licenses/by/4.0/`. In RPDE feeds, license is provided per page and is not used per record. See below.|
 |[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description containing a brief summary of the organization.|
 |[schema:url](https://schema.org/url)|RECOMMENDED|URL|A URL to the organization’s website homepage or other page about the organization.|
 |[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED|String or Array of String|Lists the URL(s) of the official social media profile pages associated with the organization.|
@@ -2302,6 +2303,8 @@ The table below indicates the required and recommended properties at this level.
 
 `beta:dateVerified` is defined in the [beta namespace](#beta-namespace), so Organization level data <em class="rfc2119">MUST</em> include the beta namespace context after the OpenActive context: `"@context": ["https://openactive.io/", "https://openactive.io/ns-beta"]`.
 
+When Organization level data is published in an [[?OpenActive-RPDE]] feed, the licence is given once by the `license` property of each feed page, so records in the feed <em class="rfc2119">SHOULD NOT</em> include `license`. Records published by any other route, for example as a single JSON document or a CSV file, <em class="rfc2119">MUST</em> include `license` in every record.
+
 The following example illustrates how to describe an [schema:Organization](https://schema.org/Organization) as a provider of opportunities for Physical Activity:
 
 <pre class="example" title="Specifying an organizer of an activity"><code>
@@ -2314,6 +2317,7 @@ The following example illustrates how to describe an [schema:Organization](https
   "@id": "https://example.org/id/organisation/1",
   "name": "Example Yacht Club",
   "beta:dateVerified": "2026-10-01",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
   "description": "A community amateur sports club focused on getting people sailing.",
   "url": "https://exampleyachtclub.org/",
   "email": "info@exampleyachtclub.org",

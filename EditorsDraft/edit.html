@@ -160,7 +160,7 @@
     "href": "https://tools.ietf.org/html/rfc6570",
     "title": "URI Template",
     "publisher": "IETF"
-}   
+}
     }
   };
     </script>
@@ -2244,7 +2244,7 @@ Both the [schema:Person](https://schema.org/Person) and [schema:Organization](ht
 |[schema:url](https://schema.org/url)|RECOMMENDED for Organization. OPTIONAL for Person|URL|A URL to the organization’s website homepage or other page about the organization.|
 |[schema:name](https://schema.org/name)|REQUIRED for Organization.OPTIONAL for Person.|String|The name of the organization|
 |[schema:description](https://schema.org/description)|OPTIONAL|String|A free text description containing a brief summary of the organization.|
-|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)| A URL to an image associated with the organization which can be presented alongside its name. |
+|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)| An image associated with the organization which can be presented alongside its name. The image URL is given in the `url` property of the [schema:ImageObject](https://schema.org/ImageObject). |
 |[schema:telephone](https://schema.org/telephone)|RECOMMENDED for Organization. OPTIONAL for Person.|String|A contact telephone number of the organization or person.|
 |[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED for Organization. OPTIONAL for Person.|String or Array of String|Lists the URL(s) of the official social media profile pages associated with the organization or person.|
 
@@ -2264,10 +2264,10 @@ The following example illustrates how to associate an [schema:Organization](http
       "type": "Organization",
       "url": "http://example.org/clubs/1",
       "name": "Bath Tai Chi Club",
-      "logo": [{
+      "logo": {
           "type": "ImageObject",
           "url": "http://www.example.org/clubs/1/logo.png"
-      }]
+      }
     }]
   }
 </code></pre>
@@ -2284,31 +2284,44 @@ The table below indicates the required and recommended properties at this level.
 |`@type`|REQUIRED|String|Organization|
 |`@id`|RECOMMENDED|URI|A URI providing a unique identifier for the resource|
 |[schema:name](https://schema.org/name)|REQUIRED|String|The name of the organization|
+|[beta:dateVerified](https://openactive.io/ns-beta/#dateVerified)|REQUIRED|[schema:Date](https://schema.org/Date)|The date on which the details of the organization were last verified as correct by the publisher. Unlike [schema:dateModified](https://schema.org/dateModified), this changes when the details are confirmed, even if nothing in them has changed, so data users can identify and remove stale records.|
+|[dc:license](http://purl.org/dc/terms/license)|REQUIRED|URL|Reference to the license under which the record is published, for example `https://creativecommons.org/licenses/by/4.0/`. In RPDE feeds, license is provided per page and is not used per record. See below.|
 |[schema:description](https://schema.org/description)|RECOMMENDED|String|A free text description containing a brief summary of the organization.|
 |[schema:url](https://schema.org/url)|RECOMMENDED|URL|A URL to the organization’s website homepage or other page about the organization.|
 |[schema:sameAs](https://schema.org/sameAs)|RECOMMENDED|String or Array of String|Lists the URL(s) of the official social media profile pages associated with the organization.|
 |[oa:activity](https://openactive.io/activity) | REQUIRED| Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept) | Specifies one or more physical activities that are provided by the organization.  |
-|[schema:location](https://schema.org/location) | REQUIRED| [schema:Place](https://schema.org/Place) or array of [schema:Place](https://schema.org/Place), [schema: address](https://schema.org/address), String | The main address of the organization or key locations of the activities provided by the organization. |
+|[schema:location](https://schema.org/location) | REQUIRED| [schema:Place](https://schema.org/Place), array of [schema:Place](https://schema.org/Place), [schema:PostalAddress](https://schema.org/PostalAddress) or String | The main address of the organization or key locations of the activities provided by the organization. |
 |[schema:email](https://schema.org/email)  | RECOMMENDED| String | A contact email address for the organization. |
 |[schema:telephone](https://schema.org/telephone)|RECOMMENDED|String|A contact telephone number of the organization.|
-|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)| A URL to an image associated with the organization which can be presented alongside its name. |
-|[schema:alternativeName](https://schema.org/alternateName) | OPTIONAL | String or array of String | Aliases, common acronyms or alternative names for the organization. |
-|[oa:genderRestriction](https://openactive.io/genderRestriction) | OPTIONAL| [oa:GenderRestrictionType](https://openactive.io/GenderRestrictionType) | Indicates that an organization provides activities that are restricted to Male or Female participants, or that there are no restrictions. 3  values are defined as URIs however see [related discussion](https://github.com/openactive/modelling-opportunity-data/issues/69%20).  |
+|[schema:logo](https://schema.org/logo)|OPTIONAL|[schema:ImageObject](https://schema.org/ImageObject)| An image associated with the organization which can be presented alongside its name. The image URL is given in the `url` property of the [schema:ImageObject](https://schema.org/ImageObject). |
+|[schema:alternateName](https://schema.org/alternateName) | OPTIONAL | String or array of String | Aliases, common acronyms or alternative names for the organization. |
+|[oa:genderRestriction](https://openactive.io/genderRestriction) | OPTIONAL| [oa:GenderRestrictionType](https://openactive.io/GenderRestrictionType) | Indicates that an organization provides activities that are restricted to Male or Female participants, or that there are no restrictions. 3  values are defined as URIs however see [related discussion](https://github.com/openactive/modelling-opportunity-data/issues/69).  |
 |[oa:ageRange](https://openactive.io/ageRange) | OPTIONAL| [schema:QuantitativeValue](https://schema.org/QuantitativeValue) | Indicates that an organization provides activities suitable for a specific age range. Specified as a [QuantitativeValue](https://schema.org/QuantitativeValue) with [minValue](https://schema.org/minValue) and [maxValue](https://schema.org/maxValue) properties |
-|[schema:memberOf](https://schema.org/memberOf) | OPTIONAL| String | The Organization Id for an organization that this club is affiliated to. For example, a club can link to its National Governing Body. |
-|[schema:member](https://schema.org/member) | OPTIONAL| String or array of String | The organization IDs for organizations affiliated to this organization. For example, a National Governing Body can list its current affiliated clubs. |
+|[schema:memberOf](https://schema.org/memberOf) | OPTIONAL| URI | The `@id` of an organization that this club is affiliated to. For example, a club can link to its National Governing Body. |
+|[schema:member](https://schema.org/member) | OPTIONAL| URI or array of URI | The `@id`s of organizations affiliated to this organization. For example, a National Governing Body can list its current affiliated clubs. |
 |[schema:identifier](https://schema.org/identifier)|OPTIONAL|Number, String, [schema:PropertyValue](https://schema.org/PropertyValue) or an array of [schema:PropertyValue](https://schema.org/PropertyValue)|A local identifier for the resource.|
+
+`beta:dateVerified` is defined in the [beta namespace](#beta-namespace), so Organization level data <em class="rfc2119">MUST</em> include the beta namespace context after the OpenActive context: `"@context": ["https://openactive.io/", "https://openactive.io/ns-beta"]`.
+
+When Organization level data is published in an [[?OpenActive-RPDE]] feed, the licence is given once by the `license` property of each feed page, so records in the feed <em class="rfc2119">SHOULD NOT</em> include `license`. Records published by any other route, for example as a single JSON document or a CSV file, <em class="rfc2119">MUST</em> include `license` in every record.
 
 The following example illustrates how to describe an [schema:Organization](https://schema.org/Organization) as a provider of opportunities for Physical Activity:
 
 <pre class="example" title="Specifying an organizer of an activity"><code>
 {
-  "@context": "https://openactive.io/",
-  "type": "Organization",
-  "id": "https://example.org/id/organisation/1",
+  "@context": [
+    "https://openactive.io/",
+    "https://openactive.io/ns-beta"
+  ],
+  "@type": "Organization",
+  "@id": "https://example.org/id/organisation/1",
   "name": "Example Yacht Club",
+  "beta:dateVerified": "2026-10-01",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
   "description": "A community amateur sports club focused on getting people sailing.",
   "url": "https://exampleyachtclub.org/",
+  "email": "info@exampleyachtclub.org",
+  "telephone": "020 7946 0000",
   "sameAs": [
     "http://www.exampleyachtclub.co.uk",
     "https://www.facebook.com/ExampleYachtClub/",
@@ -2329,21 +2342,21 @@ The following example illustrates how to describe an [schema:Organization](https
     }
   ],
   "location": {
-          "@type": "Place",
-          "name": "Example Yacht Club, London SE10 0BW, UK",
-          "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 51.4955,
-              "longitude": 0.018473
-          },
-          "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Example Yacht Club, Example Wharf",
-              "addressLocality": "Greenwich",
-              "addressRegion": "London",
-              "postalCode": "SE10 0BW",
-              "addressCountry": "GB"
-          },
+    "@type": "Place",
+    "name": "Example Yacht Club, London SE10 0BW, UK",
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 51.4955,
+      "longitude": 0.018473
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Example Yacht Club, Example Wharf",
+      "addressLocality": "Greenwich",
+      "addressRegion": "London",
+      "postalCode": "SE10 0BW",
+      "addressCountry": "GB"
+    }
   }
 }
 </code></pre>

@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="en" typeof="bibo:Document " prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head><meta lang="" property="dc:language" content="en">
+    <meta charset="utf-8">
+    <title>Modelling Opportunity Data 1.1</title>
+
+    
+
+	
+    <!--
+    <script 
+     src='https://www.w3.org/Tools/respec/respec-w3c-common' 
+     class='remove'></script>
+   -->
+
+    <style>
+    table {border-collapse: collapse; border: 1px solid #bec9d9}
+    td, th {padding: 3px 0.5em; border-left:1px solid black; border-right: 1px solid black; border-bottom:1px solid #E2EDFE;}
+    tr th[colspan] {color: #005A9C; background-color: #FEEDE2; text-align: center}
+    th {color: #005A9C; background-color: #E2EDFE; font-weight: normal;border-bottom:1px solid #BEC9D9;}
+    tbody tr th {text-align: left;}
+    td.nb { font-size: smaller;}
+    .rec, .pr {color: #005A9C; background-color: #99EE99}
+    .ext {background-color: #FFFFFF}
+    .cr, .lcwd {color: #005A9C; background-color: #EEEE99}
+    .wd {color: #005A9C; background-color: #EE9999}
+    .ed, .fpwd  {color: #005A9C; background-color: #FF7777}
+    code {white-space: pre;}
+
+    html {
+      background-image: none !important;
+    }
+    body {
+      background: white top left fixed no-repeat !important;
+      background-size: 25px auto !important;
+      background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
+    }
+    h1 {
+      font-family: 'Open Sans',sans-serif !important;
+      font-weight: 300 !important;
+      color: #69b9ff !important;
+      font-size: 220%;
+    }
+    #toc {
+      padding-top: 0px !important;
+    }
+    .remove {
+      background-colour: yellow;
+    }
+    code {
+        color: #C83500;
+    }
+    em.rfc2119 { 
+      font-variant: small-caps;
+    }
+
+    </style>
+
+  <style>/*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  1px solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  1px dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+cite .bibref {
+    font-style: normal;
+}
+
+code {
+    color:  #C83500;
+}
+
+/* --- TOC --- */
+.toc a, .tof a {
+    text-decoration:    none;
+}
+
+a .secno, a .figno {
+    color:  #000;
+}
+
+ul.tof, ol.tof {
+    list-style: none outside none;
+}
+
+.caption {
+    margin-top: 0.5em;
+    font-style:   italic;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+.respec-hidden {
+    display: none;
+}
+
+@media print {
+    .removeOnSave {
+        display: none;
+    }
+}
+</style><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><style>/* --- EXAMPLES --- */
+div.example-title {
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.example-title span {
+    text-transform: uppercase;
+}
+aside.example, div.example, div.illegal-example {
+    padding: 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+div.illegal-example { color: red }
+div.illegal-example p { color: black }
+aside.example, div.example {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+    border-color: #e0cb52;
+    background: #fcfaee;
+}
+
+aside.example div.example {
+    border-left-width: .1em;
+    border-color: #999;
+    background: #fff;
+}
+aside.example div.example div.example-title {
+    color: #999;
+}
+</style><style>/* --- ISSUES/NOTES --- */
+div.issue-title, div.note-title , div.ednote-title, div.warning-title {
+    padding-right:  1em;
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.issue-title { color: #e05252; }
+div.note-title, div.ednote-title { color: #2b2; }
+div.warning-title { color: #f22; }
+div.issue-title span, div.note-title span, div.ednote-title span, div.warning-title span {
+    text-transform: uppercase;
+}
+div.note, div.issue, div.ednote, div.warning {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.note > p:first-child, .ednote > p:first-child, .issue > p:first-child, .warning > p:first-child { margin-top: 0 }
+.issue, .note, .ednote, .warning {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+}
+div.issue, div.note , div.ednote,  div.warning {
+    padding: 1em 1.2em 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+span.note, span.ednote, span.issue, span.warning { padding: .1em .5em .15em; }
+
+.issue {
+    border-color: #e05252;
+    background: #fbe9e9;
+}
+.note, .ednote {
+    border-color: #52e052;
+    background: #e9fbe9;
+}
+
+.warning {
+    border-color: #f11;
+    border-width: .2em;
+    border-style: solid;
+    background: #fbe9e9;
+}
+
+.warning-title:before{
+    content: "⚠"; /*U+26A0 WARNING SIGN*/
+    font-size: 3em;
+    float: left;
+    height: 100%;
+    padding-right: .3em;
+    vertical-align: top;
+    margin-top: -0.5em;
+}
+
+li.task-list-item {
+    list-style: none;
+}
+
+input.task-list-item-checkbox {
+    margin: 0 0.35em 0.25em -1.6em;
+    vertical-align: middle;
+}
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/cg-final"><style>/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+code {
+  display: inline-block;
+  color: #333;
+  background: #f8f8f8;
+}
+
+
+pre code {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+</style><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><script id="initialUserConfig" type="application/json">{
+  "specStatus": "CG-FINAL",
+  "shortName": "modelling-opportunity-data",
+  "publishDate": "2018-06-29",
+  "previousMaturity": "ED",
+  "previousPublishDate": "2017-08-10",
+  "edDraftURI": "https://www.openactive.io/modelling-opportunity-data/EditorsDraft/",
+  "previousURI": "https://www.openactive.io/modelling-opportunity-data/1.0/",
+  "copyrightStart": 2017,
+  "editors": [
+    {
+      "name": "Leigh Dodds",
+      "url": "http://ldodds.com",
+      "company": "Open Data Institute",
+      "companyURL": "http://opendata.institute/",
+      "w3cid": 55359
+    }
+  ],
+  "authors": [],
+  "otherLinks": [
+    {
+      "key": "Repo",
+      "value": "We are on Github",
+      "href": "https://github.com/openactive/modelling-opportunity-data/",
+      "class": "repo"
+    },
+    {
+      "key": "Issues",
+      "href": "https://github.com/openactive/modelling-opportunity-data/issues/"
+    },
+    {
+      "key": "Version",
+      "value": "1.1"
+    }
+  ],
+  "logos": [
+    {
+      "src": "https://www.openactive.io/assets/openactive-logo-large.png",
+      "href": "https://www.openactive.io",
+      "alt": "openactive.io",
+      "width": 255,
+      "height": 43,
+      "id": "logo"
+    }
+  ],
+  "wg": "OpenActive Community Group",
+  "wgURI": "https://www.w3.org/community/openactive/",
+  "wgPublicList": "public-openactive",
+  "maxTocLevel": 4,
+  "preProcess": [],
+  "alternateFormats": [
+    {
+      "uri": "diff-previous.html",
+      "label": "diff to previous version"
+    }
+  ],
+  "isRecTrack": true,
+  "isNoTrack": true,
+  "issueBase": "https://github.com/openactive/modelling-opportunity-data/issues/",
+  "format": "markdown",
+  "localBiblio": {
+    "JSON-LD": {
+      "href": "https://www.w3.org/TR/json-ld/",
+      "title": "JSON-LD 1.0",
+      "status": "REC",
+      "publisher": "W3C"
+    },
+    "SCHEMA-ORG": {
+      "href": "http://schema.org/",
+      "title": "Schema.org"
+    },
+    "SKOS": {
+      "href": "https://www.w3.org/TR/skos-primer",
+      "title": "SKOS Simple Knowledge Organization System Primer",
+      "status": "NOTE",
+      "publisher": "W3C"
+    },
+    "Publishing-Opportunity-Data": {
+      "href": "https://www.openactive.io/opportunity-data-primer/",
+      "title": "Publishing Opportunity Data: A Primer",
+      "publisher": "OpenActive Community Group"
+    },
+    "OpenActive-Beta-Namespace": {
+      "href": "https://www.openactive.io/ns-beta/",
+      "title": "OpenActive Beta Namespace",
+      "publisher": "OpenActive Community Group"
+    },
+    "OpenActive-Vocabulary": {
+      "href": "https://www.openactive.io/ns/",
+      "title": "OpenActive Vocabulary",
+      "publisher": "OpenActive Community Group"
+    },
+    "OpenActive-Activity-List": {
+      "href": "https://www.openactive.io/activity-list/",
+      "title": "OpenActive Activity List",
+      "publisher": "OpenActive Community Group"
+    }
+  }
+}</script></head>
+  <body class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
+  <p>
+    <a class="logo" href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C"></a>
+  </p>
+  <p>
+      </p><p><span id="logo"><img src="https://www.openactive.io/assets/openactive-logo-large.png" width="255" height="43" alt="openactive.io"></span></p>
+  <p></p>
+  <h1 class="title p-name" id="title" property="dc:title">Modelling Opportunity Data 1.1</h1>
+  <h2 id="final-community-group-report-29-june-2018">Final Community Group Report <time property="dc:issued" class="dt-published" datetime="2018-06-29">29 June 2018</time></h2>
+  <dl>
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="https://www.openactive.io/modelling-opportunity-data/EditorsDraft/">https://www.openactive.io/modelling-opportunity-data/EditorsDraft/</a></dd>
+    <dt>Editor:</dt>
+    <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0" data-editor-id="55359"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Leigh Dodds"><a class="u-url url p-name fn" property="foaf:homepage" href="http://ldodds.com">Leigh Dodds</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://opendata.institute/">Open Data Institute</a></span>
+<span property="rdf:rest" resource="rdf:nil"></span>
+</dd>
+
+          <dt class="repo">Repo:</dt>
+              <dd class="repo">
+                <a href="https://github.com/openactive/modelling-opportunity-data/">
+                  We are on Github
+                </a>
+              </dd>
+          <dt>Issues:</dt>
+                <dd>
+                  <a href="https://github.com/openactive/modelling-opportunity-data/issues/">https://github.com/openactive/modelling-opportunity-data/issues/</a>
+                </dd>
+          <dt>Version:</dt>
+              <dd>
+                
+                  1.1
+                
+              </dd>
+  </dl>
+    <p>
+        This document is also available in this non-normative format: 
+      <a rel="alternate" href="diff-previous.html">diff to previous version</a>
+    </p>
+  <p class="copyright">
+    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 
+    2017-2018
+    the Contributors to the Modelling Opportunity Data 1.1 Specification, published by the
+    <a href="https://www.w3.org/community/openactive/">OpenActive Community Group</a> under the
+      <a href="https://www.w3.org/community/about/agreements/fsa/">W3C Community Final Specification Agreement (FSA)</a>. 
+      A human-readable <a href="http://www.w3.org/community/about/agreements/fsa-deed/">summary</a> is available.
+  </p>
+  <hr title="Separator for header">
+</div><p>   <style>
+   body {
+     background-size: 25px auto !important;
+   }
+   body.toc-sidebar #toc {
+     background-size: 25px auto !important;
+     background-attachment: fixed !important;
+   }
+   </style>
+   </p><section id="abstract" class="introductory" property="dc:abstract"><h2 id="h-abstract" resource="#h-abstract"><span property="xhv:role" resource="xhv:heading">Abstract</span></h2><p>This specification introduces a data model to support the publication of data describing 
+opportunities for people to engage in physical activities ("opportunity data"). This model 
+covers description of activities, as well as the events and locations in which they take place. </p><p></p><p>The specification is intended to support the publication of opportunity data as open data 
+for anyone to access, use and share. It will also guide reusers of opportunity data, 
+introducing them to the key concepts relevant to that sector.</p><p>The model may also be useful in guiding the development of both new and existing booking 
+systems and applications that consume opportunity data.</p><p>The specification is an output of the <a href="http://www.w3.org/community/openactive/">OpenActive Community Group</a> 
+and serves as a common reference point for other specifications and outputs of that activity.</p><p>Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the 
+[<cite><a class="bibref" href="#bib-Publishing-Opportunity-Data">Publishing-Opportunity-Data</a></cite>] primer which provides a number of additional examples. </p><p>The data model introduced in this document has been mapped to existing standards and vocabularies, including 
+SKOS ([<cite><a class="bibref" href="#bib-SKOS">SKOS</a></cite>]) and the Schema.org ([<cite><a class="bibref" href="#bib-SCHEMA-ORG">SCHEMA-ORG</a></cite>]) types and properties. This existing work provides a 
+useful existing framework around which the 
+<a href="http://www.w3.org/community/openactive/">OpenActive Community Group</a> can build additional data standards.</p></section><section id="sotd" class="introductory"><h2 id="h-sotd" resource="#h-sotd"><span property="xhv:role" resource="xhv:heading">Status of This Document</span></h2>
+  <p>
+    This specification was published by the <a href="https://www.w3.org/community/openactive/">OpenActive Community Group</a>.
+    It is not a W3C Standard nor is it on the W3C Standards Track.
+      Please note that under the 
+      <a href="https://www.w3.org/community/about/agreements/final/">W3C Community Final Specification Agreement (FSA)</a> 
+      other conditions apply.
+    Learn more about 
+    <a href="http://www.w3.org/community/">W3C Community and Business Groups</a>.
+  </p>
+  <p>Contributions to this document are not only welcomed but are actively solicited and 
+should be made via <a href="https://github.com/openactive/modelling-opportunity-data/issues">GitHub Issues</a> 
+and pull requests. The source code is available on <a href="https://github.com/openactive/modelling-opportunity-data">GitHub</a>.</p>
+      <p>If you wish to make comments regarding this document, please send them to 
+      <a href="mailto:public-openactive@w3.org">public-openactive@w3.org</a> 
+      (<a href="mailto:public-openactive-request@w3.org?subject=subscribe">subscribe</a>,
+      <a href="http://lists.w3.org/Archives/Public/public-openactive/">archives</a>).</p>
+</section><nav id="toc"><h2 class="introductory" id="table-of-contents" resource="#table-of-contents"><span property="xhv:role" resource="xhv:heading">Table of Contents</span></h2><ul class="toc" role="directory"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a><ul class="toc"><li class="tocline"><a href="#categories-of-physical-activity-data" class="tocxref"><span class="secno">1.1 </span>Categories of Physical Activity Data</a></li><li class="tocline"><a href="#requirements" class="tocxref"><span class="secno">1.2 </span>Requirements</a><ul class="toc"><li class="tocline"><a href="#support-all-types-of-opportunity-data" class="tocxref"><span class="secno">1.2.1 </span>Support all types of opportunity data</a></li><li class="tocline"><a href="#support-discovery-of-opportunities" class="tocxref"><span class="secno">1.2.2 </span>Support discovery of opportunities</a></li><li class="tocline"><a href="#support-all-physical-activities" class="tocxref"><span class="secno">1.2.3 </span>Support all physical activities</a></li><li class="tocline"><a href="#allow-sharing-of-activity-lists" class="tocxref"><span class="secno">1.2.4 </span>Allow sharing of activity lists</a></li><li class="tocline"><a href="#support-a-variety-of-sources" class="tocxref"><span class="secno">1.2.5 </span>Support a variety of sources</a></li><li class="tocline"><a href="#be-agnostic-to-formats-and-apis" class="tocxref"><span class="secno">1.2.6 </span>Be agnostic to formats and APIs</a></li><li class="tocline"><a href="#create-an-extensible-framework" class="tocxref"><span class="secno">1.2.7 </span>Create an extensible framework</a></li></ul></li><li class="tocline"><a href="#scope" class="tocxref"><span class="secno">1.3 </span>Scope</a></li><li class="tocline"><a href="#structure-of-this-document" class="tocxref"><span class="secno">1.4 </span>Structure of this document</a></li></ul></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#typographical-conventions" class="tocxref"><span class="secno">3. </span>Typographical Conventions</a></li><li class="tocline"><a href="#key-concepts" class="tocxref"><span class="secno">4. </span>Key Concepts</a><ul class="toc"><li class="tocline"><a href="#data-model-diagram" class="tocxref"><span class="secno">4.1 </span>Data Model Diagram</a></li><li class="tocline"><a href="#physical-activities" class="tocxref"><span class="secno">4.2 </span>Physical Activities</a></li><li class="tocline"><a href="#events" class="tocxref"><span class="secno">4.3 </span>Events</a></li><li class="tocline"><a href="#organisers-persons-and-organizations-" class="tocxref"><span class="secno">4.4 </span>Organisers (Persons and Organizations)</a></li><li class="tocline"><a href="#places" class="tocxref"><span class="secno">4.5 </span>Places</a></li><li class="tocline"><a href="#programmes" class="tocxref"><span class="secno">4.6 </span>Programmes</a></li><li class="tocline"><a href="#activity-opportunities" class="tocxref"><span class="secno">4.7 </span>Activity Opportunities</a></li><li class="tocline"><a href="#offers" class="tocxref"><span class="secno">4.8 </span>Offers</a></li><li class="tocline"><a href="#facility-use-and-slots" class="tocxref"><span class="secno">4.9 </span>Facility Use and Slots</a></li></ul></li><li class="tocline"><a href="#data-model" class="tocxref"><span class="secno">5. </span>Data Model</a><ul class="toc"><li class="tocline"><a href="#namespaces" class="tocxref"><span class="secno">5.1 </span>Namespaces</a></li><li class="tocline"><a href="#data-model-overview" class="tocxref"><span class="secno">5.2 </span>Data Model Overview</a></li><li class="tocline"><a href="#identifying-and-linking-resources" class="tocxref"><span class="secno">5.3 </span>Identifying and Linking Resources</a></li><li class="tocline"><a href="#required-and-optional-properties" class="tocxref"><span class="secno">5.4 </span>Required and Optional Properties</a></li><li class="tocline"><a href="#describing-events-code-schema-event-code-" class="tocxref"><span class="secno">5.5 </span>Describing Events (<code>schema:Event</code>)</a><ul class="toc"><li class="tocline"><a href="#relating-events-to-physical-activities" class="tocxref"><span class="secno">5.5.1 </span>Relating Events to Physical Activities</a></li><li class="tocline"><a href="#categorising-events" class="tocxref"><span class="secno">5.5.2 </span>Categorising events</a></li><li class="tocline"><a href="#describing-event-suitability" class="tocxref"><span class="secno">5.5.3 </span>Describing Event Suitability</a><ul class="toc"><li class="tocline"><a href="#age-ranges" class="tocxref"><span class="secno">5.5.3.1 </span>Age Ranges</a></li><li class="tocline"><a href="#gender-restriction" class="tocxref"><span class="secno">5.5.3.2 </span>Gender Restriction</a></li></ul></li><li class="tocline"><a href="#adding-programmes" class="tocxref"><span class="secno">5.5.4 </span>Adding programmes</a></li><li class="tocline"><a href="#describing-scheduled-events" class="tocxref"><span class="secno">5.5.5 </span>Describing scheduled events</a></li><li class="tocline"><a href="#describing-event-availability" class="tocxref"><span class="secno">5.5.6 </span>Describing event availability</a></li><li class="tocline"><a href="#indicating-the-status-of-an-event" class="tocxref"><span class="secno">5.5.7 </span>Indicating the status of an event</a></li><li class="tocline"><a href="#describing-support-for-disabilities-at-events" class="tocxref"><span class="secno">5.5.8 </span>Describing support for disabilities at events</a></li></ul></li><li class="tocline"><a href="#describing-locations-code-schema-place-code-and-code-schema-postaladdress-code-" class="tocxref"><span class="secno">5.6 </span>Describing Locations (<code>schema:Place</code> and <code>schema:PostalAddress</code>)</a><ul class="toc"><li class="tocline"><a href="#describing-addresses" class="tocxref"><span class="secno">5.6.1 </span>Describing Addresses</a></li><li class="tocline"><a href="#describing-places" class="tocxref"><span class="secno">5.6.2 </span>Describing Places</a></li><li class="tocline"><a href="#describing-amenities" class="tocxref"><span class="secno">5.6.3 </span>Describing Amenities</a></li><li class="tocline"><a href="#describing-facilities" class="tocxref"><span class="secno">5.6.4 </span>Describing Facilities</a></li></ul></li><li class="tocline"><a href="#describing-organisers-code-schema-person-code-and-code-schema-organization-code-" class="tocxref"><span class="secno">5.7 </span>Describing Organisers (<code>schema:Person</code> and <code>schema:Organization</code>)</a></li><li class="tocline"><a href="#describing-activity-lists-code-skos-conceptscheme-code-and-physical-activity-code-skos-concept-code-" class="tocxref"><span class="secno">5.8 </span>Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)</a><ul class="toc"><li class="tocline"><a href="#describing-physical-activities" class="tocxref"><span class="secno">5.8.1 </span>Describing Physical Activities</a></li></ul></li><li class="tocline"><a href="#describing-offers-code-schema-offer-code-" class="tocxref"><span class="secno">5.9 </span>Describing Offers (<code>schema:Offer</code>)</a></li><li class="tocline"><a href="#describing-slots-code-oa-slot-code-" class="tocxref"><span class="secno">5.10 </span>Describing Slots (<code>oa:Slot</code>)</a></li><li class="tocline"><a href="#describing-facility-use-code-oa-facilityuse-code-code-oa-individualfacilityuse-code-" class="tocxref"><span class="secno">5.11 </span>Describing Facility Use (<code>oa:FacilityUse</code>, <code>oa:IndividualFacilityUse</code>)</a></li><li class="tocline"><a href="#describing-activity-opportunities-code-oa-activityopportunity-code-" class="tocxref"><span class="secno">5.12 </span>Describing Activity Opportunities (<code>oa:ActivityOpportunity</code>)</a></li><li class="tocline"><a href="#extending-the-model" class="tocxref"><span class="secno">5.13 </span>Extending the Model</a><ul class="toc"><li class="tocline"><a href="#versioning-policy" class="tocxref"><span class="secno">5.13.1 </span>Versioning Policy</a></li><li class="tocline"><a href="#relationship-with-schema-org-and-skos" class="tocxref"><span class="secno">5.13.2 </span>Relationship with Schema.org and SKOS</a></li><li class="tocline"><a href="#defining-custom-vocabularies" class="tocxref"><span class="secno">5.13.3 </span>Defining Custom Vocabularies</a></li></ul></li></ul></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li></ul></li></ul></nav><section class="informative" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart"><!--OddPage--><h2 id="introduction" resource="#introduction"><span property="xhv:role" resource="xhv:heading"><span class="secno">1. </span>Introduction</span></h2><p><em>This section is non-normative.</em></p><p>The <a href="http://www.w3.org/community/openactive/">W3C OpenActive Community Group</a> was 
+established with the objective of facilitating the sharing and use of 
+physical activity data. Open publishing of this data has enormous potential to increase 
+participation in physical activities.</p><section typeof="bibo:Chapter" resource="#categories-of-physical-activity-data" property="bibo:hasPart"><h3 id="categories-of-physical-activity-data" resource="#categories-of-physical-activity-data"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.1 </span>Categories of Physical Activity Data</span></h3><p>There are several different categories of data that are relevant to physical activities. 
+This data covers different parts of <a href="http://theodi.org/data-spectrum">the data spectrum</a> 
+and is represented in the following diagram.</p><figure id="fig-types-of-physical-activity-data">
+ <img src="images/opportunity-data.png" alt="">
+ <figcaption>Fig. <span class="figno">1</span> <span class="fig-title">Types of physical activity data</span></figcaption>
+</figure><p>Some of this data is shared data. It can only be accessed by 
+specific people or groups, under terms and conditions that define how and when 
+it can be accessed and used. This shared data includes personal data about 
+people taking part in activities and participation data that describes how people have 
+been involved in previous events. </p><p>Some of this data can be open data. Open data is data that anyone can access, use and share. 
+All of the following types of data can be published as open data:</p><ul>
+<li>descriptions and lists of physical activities </li>
+<li>details of the locations and venues at which activities or events takes place</li>
+<li>the facilities available at those locations</li>
+<li>the details of event involving physical activities e.g. when and where they will take place, restrictions 
+on attendance, costs, etc</li>
+<li>any related information, e.g. about the format of the event, its organisers, etc</li>
+</ul><p>Collectively this is known as <strong><em>opportunity data</em></strong>.</p></section><section typeof="bibo:Chapter" resource="#requirements" property="bibo:hasPart"><h3 id="requirements" resource="#requirements"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2 </span>Requirements</span></h3><p>This specification has been developed to meet a broad set of requirements.</p><section typeof="bibo:Chapter" resource="#support-all-types-of-opportunity-data" property="bibo:hasPart"><h4 id="support-all-types-of-opportunity-data" resource="#support-all-types-of-opportunity-data"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2.1 </span>Support all types of opportunity data</span></h4><p>As described in the previous section, opportunity data covers a variety of different types of 
+information including data on venues, activities and events. The specification should support 
+publication of all of these different types of data</p></section><section typeof="bibo:Chapter" resource="#support-discovery-of-opportunities" property="bibo:hasPart"><h4 id="support-discovery-of-opportunities" resource="#support-discovery-of-opportunities"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2.2 </span>Support discovery of opportunities</span></h4><p>The aim of the OpenActive initiative is to encourage people to be more physically active. This means 
+that this specification should focus on the data that will help people discover these 
+opportunities. </p></section><section typeof="bibo:Chapter" resource="#support-all-physical-activities" property="bibo:hasPart"><h4 id="support-all-physical-activities" resource="#support-all-physical-activities"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2.3 </span>Support all physical activities</span></h4><p>The specification should be inclusive and support sharing of opportunity data about 
+all types of physical activities, not just sports.</p></section><section typeof="bibo:Chapter" resource="#allow-sharing-of-activity-lists" property="bibo:hasPart"><h4 id="allow-sharing-of-activity-lists" resource="#allow-sharing-of-activity-lists"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2.4 </span>Allow sharing of activity lists</span></h4><p>At present the physical activity sector does not have a standard list of physical activities. 
+The specification should allow data providers to share the lists they have and support the 
+sector in moving towards a standardised list of physical activities</p></section><section typeof="bibo:Chapter" resource="#support-a-variety-of-sources" property="bibo:hasPart"><h4 id="support-a-variety-of-sources" resource="#support-a-variety-of-sources"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2.5 </span>Support a variety of sources</span></h4><p>Opportunity data is collected and held in a variety of different tools, platforms and websites. 
+There is variation in the amount of detail held about individual events so the specification must 
+provide flexibility to share what data is currently available, whilst guiding activity providers 
+towards additional useful data to collect about events.</p></section><section typeof="bibo:Chapter" resource="#be-agnostic-to-formats-and-apis" property="bibo:hasPart"><h4 id="be-agnostic-to-formats-and-apis" resource="#be-agnostic-to-formats-and-apis"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2.6 </span>Be agnostic to formats and APIs</span></h4><p>Reflecting the wide variety of tools and platforms in use, and also that the sector is at an 
+early stage in sharing its data more widely, this specification should not prescribe specific 
+data formats or APIs. Ideally opportunity data could be published as JSON, XML, CSV or other formats.</p></section><section typeof="bibo:Chapter" resource="#create-an-extensible-framework" property="bibo:hasPart"><h4 id="create-an-extensible-framework" resource="#create-an-extensible-framework"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2.7 </span>Create an extensible framework</span></h4><p>This specification should support extensions to allow it to be customised and revised to meet future 
+requirements, as well as the needs of specific communities of data publishers and consumers.</p></section></section><section typeof="bibo:Chapter" resource="#scope" property="bibo:hasPart"><h3 id="scope" resource="#scope"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.3 </span>Scope</span></h3><p>This specification defines a data model for opportunity data. This reflects the goal of 
+<a href="https://www.openactive.io/">the OpenActive initiative</a> whose aim is to 
+encourage the publishing and reuse of open data that might help people to become 
+more active.</p><p>The following items are therefore out of scope for this specification:</p><ul>
+<li>booking and related activities, e.g. availability, booking process and membership packages </li>
+<li>participation data, e.g. statistics on attendance</li>
+<li>personal information, demographics and other information about event participants </li>
+<li>APIs for publishing and discovering opportunity data</li>
+</ul><p>The <a href="http://www.w3.org/community/openactive/">OpenActive Community Group</a> may produce 
+additional specifications that address these areas.</p></section><section typeof="bibo:Chapter" resource="#structure-of-this-document" property="bibo:hasPart"><h3 id="structure-of-this-document" resource="#structure-of-this-document"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.4 </span>Structure of this document</span></h3><p>This specification is divided into two main sections:</p><ol>
+<li><strong>Introduction</strong> - provides a broad definition of opportunity data and goals for this specification</li>
+<li><strong>Key Concepts</strong> - describes the key types of resources relevant to opportunity data, along with their relationships and common attributes</li>
+<li><strong>Data Model</strong> - a data model that maps the key concepts to some standard vocabularies</li>
+</ol></section></section><section id="conformance" typeof="bibo:Chapter" resource="#conformance" property="bibo:hasPart"><!--OddPage--><h2 id="h-conformance" resource="#h-conformance"><span property="xhv:role" resource="xhv:heading"><span class="secno">2. </span>Conformance</span></h2>
+<p>
+  As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
+  and notes in this specification are non-normative. Everything else in this specification is
+  normative.
+</p>
+<p id="respecRFC2119">The key words <em class="rfc2119" title="MAY">MAY</em>, <em class="rfc2119" title="MUST">MUST</em>, <em class="rfc2119" title="OPTIONAL">OPTIONAL</em>, <em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>, <em class="rfc2119" title="REQUIRED">REQUIRED</em>, <em class="rfc2119" title="SHOULD">SHOULD</em>, and <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em> are 
+  to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
+</p>
+<p>This specification makes use of the compact IRI Syntax; please refer to the <a href="http://www.w3.org/TR/json-ld/#compact-iris">Compact IRIs</a> from [<cite><a class="bibref" href="#bib-JSON-LD">JSON-LD</a></cite>].</p></section><section typeof="bibo:Chapter" resource="#typographical-conventions" property="bibo:hasPart"><!--OddPage--><h2 id="typographical-conventions" resource="#typographical-conventions"><span property="xhv:role" resource="xhv:heading"><span class="secno">3. </span>Typographical Conventions</span></h2><p>The following typographic conventions are used in this specification:</p><dl class="typography">
+<dt><code>markup</code></dt>
+<dd>Markup (elements, attributes, properties), machine processable values (string, characters, media types), property name, or a file name is in a monospace font.</dd>
+<dt><strong><em>definition</em></strong></dt>
+<dd>A definition of a term, to be used elsewhere in this or other specifications, is in bold and italics.</dd>
+<dt><a href="">hyperlink</a></dt>
+<dd>A hyperlink is underlined and in blue.</dd>
+<dt><a href="">[reference]</a></dt>
+<dd>A document reference (normative or informative) is enclosed in square brackets and links to the references section.</dd>
+</dl><p></p><div class="note"><div class="note-title marker" aria-level="3" role="heading" id="h-note1"><span>Note</span></div><div class="">
+Notes are in light green boxes with a green left border and with a "Note" header in green. Notes are normative or informative depending on the whether they are in a normative or informative section, respectively.
+</div></div><p></p><div class="example"><div class="example-title marker"><span>Example 1</span></div><pre class="">Examples are in light khaki boxes, with khaki left border, and with a 
+numbered "Example" header in khaki. Examples are always informative. 
+The content of the example is in monospace font and may be syntax colored.</pre></div></section><section typeof="bibo:Chapter" resource="#key-concepts" property="bibo:hasPart"><!--OddPage--><h2 id="key-concepts" resource="#key-concepts"><span property="xhv:role" resource="xhv:heading"><span class="secno">4. </span>Key Concepts</span></h2><p>This section introduces the high-level data model for opportunity data. This includes a 
+description of the:</p><ul>
+<li>the resources that are relevant to opportunity data, e.g. places, events, activities, etc</li>
+<li>the relationships between those resources</li>
+<li>the main attributes that help to describe those resources, e.g. names, dates, etc</li>
+</ul><p>The model also helps to provide definitions of key terms that are used throughout this 
+specification.</p><section typeof="bibo:Chapter" resource="#data-model-diagram" property="bibo:hasPart"><h3 id="data-model-diagram" resource="#data-model-diagram"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.1 </span>Data Model Diagram</span></h3><p>This diagram illustrates the resources and relationships that are introduced in the following sections.</p><figure id="fig-opportunity-data-schema-diagram">
+ <img src="images/schema-diagram.png" alt="">
+ <figcaption>Fig. <span class="figno">2</span> <span class="fig-title">Opportunity data schema diagram</span></figcaption>
+</figure></section><section typeof="bibo:Chapter" resource="#physical-activities" property="bibo:hasPart"><h3 id="physical-activities" resource="#physical-activities"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.2 </span>Physical Activities</span></h3><p>A <strong><em>Physical Activity</em></strong> is an exercise, sport or other form of bodily movement 
+that involves physical effort. Physical activities will usually have a well-understood, 
+dictionary definition.</p><p>Examples of Physical Activities include walking, running, cycling, rugby, football and tennis</p><p>Activities should have a name. They might also be associated with one of more synonyms 
+that provide alternative names for that activity. E.g. "Soccer" is a synonym 
+for "Football". This additional information may be useful to help improve search engines and 
+improve data collection.</p><p>Physical Activities may also have additional information associated with them. 
+For example a sporting activity might be overseen by a governing body or federation.</p><p>Physical Activities might also be recognised by different bodies. In the UK certain 
+activities are recognised as suitable for educational assessments, while others 
+may be recognised by funding bodies like Sport England.</p><p>An <strong><em>Activity List</em></strong> describes a set of Physical Activities. An Activity List may be a 
+simple list of activity names. But an Activity List might also capture additional information. 
+A common requirement is to describe relationships between Physical Activities.</p><p>One method of grouping activities is to define "broader" and "narrower" relationships.
+For example Judo, Karate and Kendo are all more specific examples of the broader activity of 
+"Martial Arts".</p><ul>
+<li>Martial Arts
+<ul><li>Karate</li>
+<li>Kendo</li>
+<li>Judo</li>
+</ul>
+</li>
+</ul><p>This type of grouping could also be used to describe the disciplines associated with 
+Physical Activities. For example olympic and open water swimming.</p><p>An Activity List might also group Physical Activities into collections. For example 
+swimming, water aerobics, and water polo might all be classified as "Water Sports".
+Water polo and football might also be grouped into a collection of "Team Sports".</p><ul>
+<li>Team Sports
+<ul><li>Football</li>
+<li>Water Polo</li>
+</ul>
+</li>
+<li>Water Sports
+<ul><li>Swimming</li>
+<li>Water Aerobics</li>
+<li>Water Polo</li>
+</ul>
+</li>
+</ul><p>An Activity List may include any number of collections of Physical Activities. As shown in the 
+example above, an individual Physical Activity might be present in more than one grouping. </p><p>Some systems may choose to use grouping and hierarchical relationships between 
+Physical Activities to help people find opportunities to be active. For example 
+a search engine might offer users results for all types of Martial Art, or for Karate specifically.</p><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note2"><span>Note</span></div><div class="">
+The proposed model for Activity Lists is based on the [<cite><a class="bibref" href="#bib-SKOS">SKOS</a></cite>] standard for publishing controlled 
+vocabularies.
+</div></div><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note3"><span>Note</span></div><div class="">
+It is not a requirement that systems store, publish or use relationships between 
+Physical Activities. A system may choose to treat Physical Activities as simple tags 
+or categories associated with Events. Other systems may define a fixed list of 
+Physical Activities that are used as a controlled vocabulary to guides user input 
+and data collection. Others may adopt a more complex hierarchical approach.
+</div></div><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note4"><span>Note</span></div><div class="">
+<p><strong>Developing a standard activity list</strong></p>
+<p>This specification doesn't place any requirements on how applications manage 
+or use Physical Activities or Activity Lists. There is no requirement that applications that 
+implement this specification must adopt a single standardised list, or agree on standard groupings. The intention 
+here is to just capture a useful model that can represent the variety of data currently in use.
+</p>
+<p>However there are benefits to the physical activity sector in convergence on a standard list of 
+activities in order to improve discovery, reporting, etc. The OpenActive Community Group are developing 
+a standard list as a separate activity. For more information see [<cite><a class="bibref" href="#bib-OpenActive-Activity-List">OpenActive-Activity-List</a></cite>].
+</p></div></div></section><section typeof="bibo:Chapter" resource="#events" property="bibo:hasPart"><h3 id="events" resource="#events"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.3 </span>Events</span></h3><p>An <strong><em>Event</em></strong> is an opportunity to take part in a Physical Activity. Events take place at a 
+specific location (see below) at an agreed date and time.</p><p>Some Events are one-off occurrences. For example a fun run organised by a local group 
+may run as a standalone event on a particular date. </p><p>Other events take place on a regular <strong>schedule</strong>. For example a weekly gym class may 
+run every Wednesday evening at 7pm. While a local walking club might meet on a Saturday 
+morning once a month.</p><p>In order to simplify terminology we recommend the use of the term "Event" to 
+refer to both individual occurrences and regularly occurring events. </p><p>It is useful to publish data about both individual Events and those with recurring schedules. 
+People looking for opportunities to be active will be interested in both specific questions 
+("what can I do tomorrow") and more general information about scheduled activities.</p><p>Regardless of whether an event takes place only once or happens on a regular schedule, there 
+is a range of additional information that may help describe the event to potential participants. 
+This includes:</p><ul>
+<li>the Physical Activity or Activities that will take place at the event</li>
+<li>the location (Place or Venue) in which it is taking place</li>
+<li>the Organiser of the event, which might be a person or an organisation</li>
+<li>the Programme used to structure the event</li>
+<li>descriptive attributes, such as its suitability for specific age or weight ranges</li>
+<li>general category information to tag the event as suitable for certain fitness levels, intensity, etc</li>
+<li>booking information, including price, attendance numbers and method of booking</li>
+</ul><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note5"><span>Note</span></div><div class="">
+<p>There are a variety of ways to categorise and describe events. This includes restrictions on attendance, 
+aspect of suitability for different audiences and fitness levels, and a mixture of pre-requisites such as the 
+need for certain qualifications, membership or equipment.
+</p>
+<p>
+The initial version of this specification prioritises capturing the essential elements of describing an event. The 
+structured information about time, place and activity is supplemented with some basic descriptive properties. 
+This also includes the ability to add "tags" to an event to capture a variety of categorisation elements. Future 
+versions of this specification will use experience working with real-world data to decide the best approach of 
+formalising these categories.
+</p>
+</div></div></section><section typeof="bibo:Chapter" resource="#organisers-persons-and-organizations-" property="bibo:hasPart"><h3 id="organisers-persons-and-organizations-" resource="#organisers-persons-and-organizations-"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.4 </span>Organisers (Persons and Organizations)</span></h3><p>Events have <strong><em>organisers</em></strong>. An event organiser might be a <strong><em>Person</em></strong> or an <strong><em>Organization</em></strong>. 
+The organiser of an event is the person or organisation who arranged and/or hosts the event. The organizer 
+will be the person or organisation who is ultimately responsible for an Event.</p><p>Examples of organisers might be coaches, or a local sports club.</p><p>Events may involve other named individuals or organisations. Examples might include named staff who will be participating 
+in the event in addition to the main organiser. These are referred to as <strong><em>contributors</em></strong>.</p><p>In addition to their names, some systems may have additional information about organisers and contributors. 
+E.g. links to their web sites, photos, logos or contact details.</p><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note6"><span>Note</span></div><div class="">
+<p><strong>Applications must not publish personal data without permission</strong></p>
+<p>
+This specification provides a data model for publishing information about individual people, e.g. coaches, 
+volunteers, etc. However applications <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> respect privacy and data protection laws and must not publish 
+data about individuals without their consent.
+</p>
+<p>
+The ability to publish this type of data has been included because event organisers often choose to publicly 
+share some information about themselves to help advertise an event. E.g. their name and some background on 
+their qualifications or experience. But this information <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> not be published as open data without getting the 
+consent of the individual concerned.
+</p>
+</div></div></section><section typeof="bibo:Chapter" resource="#places" property="bibo:hasPart"><h3 id="places" resource="#places"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.5 </span>Places</span></h3><p>Events take place in a <strong><em>location</em></strong>. But, depending on the activity, the location 
+may be defined to different levels of precision. For example:</p><ul>
+<li>A gym class may take place in a leisure centre at a specific address or other precisely defined location</li>
+<li>A cycling or walking event might start at a specific location, but will subsequently follow a route</li>
+<li>An exercise or running group might meet in an area of a local park, rather than at a specific address</li>
+</ul><p>In addition to this, data publishers will have different approaches for capturing location data.</p><p>Recognising this need for flexibility, this model proposes that a location can be specified as any of the 
+following:</p><ul>
+<li>a description, e.g. "Meet by the lake, in Victoria Park"</li>
+<li>an address</li>
+<li>a venue, such as a leisure centre, which might have an address and/or a latitude or longitude</li>
+<li>a facility within a larger venue, e.g. a football pitch which is part of a leisure centre</li>
+</ul><p>This specification uses <strong><em>Place</em></strong> as a general concept to refer to all types of locations, venues and facilities. </p><p>The concept of Place therefore covers general outdoor areas such as parks, event venues (e.g. a Leisure centre) 
+and facilities within a venue (e.g. a squash court, running track, etc). Facilities are contained in Places.</p><p>A <strong>Sports Activity Location</strong> is a type of Place that is used to describe a facilities within a broader 
+Place. </p><p>Places may have additional descriptive properties, for example:</p><ul>
+<li>a name</li>
+<li>an address and/or geographic coordinates</li>
+<li>opening hours</li>
+</ul></section><section typeof="bibo:Chapter" resource="#programmes" property="bibo:hasPart"><h3 id="programmes" resource="#programmes"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.6 </span>Programmes</span></h3><p>Events are often organised and run in a variety of different ways. This tailoring 
+might include adjusting the activity to a particular type of participant, demographic. 
+Or it could include running the event in a particular style, e.g. with a fixed routine 
+or sequence of activities.</p><p>A <strong><em>Programme</em></strong> describes a method of carrying out a Physical Activity. Some programmes are very loosely defined. 
+While others are more structured and may be run to a specific agenda or in a particular style.</p><p>Programmes are often associated with branding or marketing that helps participants understand more about what they 
+can expect from an event of that format. Formats might be offered or overseen by specific organisations</p><p>Examples of programmes include:</p><ul>
+<li>Les Mills BodyPump</li>
+<li>Learn to Row, from British Rowing</li>
+<li>Back to Netball, from England Netball</li>
+</ul><p>Programmes provide another means of tagging or describing Events to help describe them to 
+participants. When participants are looking for opportunities they may be interested in 
+discovering Events based on either the general activity (e.g. Running) or a specific 
+programme (Back to Netball).</p></section><section typeof="bibo:Chapter" resource="#activity-opportunities" property="bibo:hasPart"><h3 id="activity-opportunities" resource="#activity-opportunities"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.7 </span>Activity Opportunities</span></h3><p>Not all opportunities to be physically active are organised Events. Some opportunities are self-directed 
+for example: </p><ul>
+<li>following a designated walking route</li>
+<li>using a permanent (or temporary) orienteering course</li>
+<li>going for a ride on a mountain bike trail</li>
+</ul><p>The common elements here are that facilities are provided for use at a time of the participants choosing 
+(within limits of opening hours or availability), rather than at a time or schedule specified by the 
+organiser.</p><p>However many of the other aspects of describing an <a href="#event">Event</a> are applicable to describing this 
+type of opportunity. For example:</p><ul>
+<li>they will involve one or more Physical Activities, e.g. mountain biking</li>
+<li>take place in a location, e.g. "Victoria Park Mountain Bike Trail"</li>
+<li>have other descriptive attributes, such as suitability for particular types of participants, fitness levels, etc.</li>
+</ul><p>In this specification this type of self-guided activities will be referred to as <strong><em>Activity Opportunities</em></strong>.</p></section><section typeof="bibo:Chapter" resource="#offers" property="bibo:hasPart"><h3 id="offers" resource="#offers"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.8 </span>Offers</span></h3><p>Some opportunities are freely available for anyone to attend. Others are only available to members or 
+paying attendees.</p><p>An <strong><em>Offer</em></strong> is used to describe the terms under which a participant can pay to attend an event.</p><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note7"><span>Note</span></div><div class="">
+<p>
+The concept of an Offer is taken from Schema.org, which itself references the <a href="http://www.heppnetz.de/projects/goodrelations/">Good Relations</a> 
+vocabulary for ecommerce. The data model described in a later section is not intended as a 
+complete specification. The concept is introduced in this version of specification to highlight 
+the support available in Schema.org for associating offers with events. Later versions of the specification 
+will explore the area of booking in more detail.
+</p>
+</div></div></section><section typeof="bibo:Chapter" resource="#facility-use-and-slots" property="bibo:hasPart"><h3 id="facility-use-and-slots" resource="#facility-use-and-slots"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.9 </span>Facility Use and Slots</span></h3><p>Not all opportunities to be physically active are scheduled Events. Leisure centres and other locations also provide 
+facilities (e.g. squash courts, pitches, table tennis tables) that are available for use by participants.</p><p>To manage demand these facilities are usually available for hire at specific times of day. These are referred to as <strong>Slots</strong>.
+A Slot is an opportunity to use a facility at a specific time and a specific duration, e.g. from 10am for 30 minutes</p><p>Some facilities are permanent parts of a leisure centre (or other Place). For example tennis courts, football pitches, etc.</p><p>But many leisure centres have flexibility to reconfigure their spaces to support different, often mutually exclusive ways. 
+For example an individual sports hall might be used as either a single indoor 5-a-side pitch, or as two separate badminton courts. </p><p>Modelling the potential configurations of these spaces is outside the scope of this specification. The community group has 
+chosen to take a more user centred view of describing opportunities to use facilities. This supports our 
+primary use case of enabling the discovery of opportunities.</p><p>A <strong>Facility Use</strong> is a product that is offered to potential participants. It reflects the ability to use or hire a 
+facility at a specific location. A platform can publish data about the range of products on offer at a location, updating 
+their availability as facilities are booked by participants.</p><p>The following properties will help to describe the specific Facility Use product on offer:</p><ul>
+<li>basic descriptive attributes of the product, such as its name, description, etc</li>
+<li>the activity or activities for which the facility is to be used</li>
+<li>the location of the facility</li>
+<li>an offer to use the facility, for a specific price</li>
+<li>the Slots during which the product is available, including any associated offers</li>
+</ul><p>Some facility use products are opportunities to use a individual, identifiable facility, e.g. Tennis Court 1. 
+These are referred to a as <strong>Individual Facility Uses</strong>. The location of these products will be a <strong>Sports Activity Location</strong>.</p><p>Otherwise, a Facility Use will describe an oppirtunity to use less permanent facilities, e.g. a table tennis table that will be moved into a sports hall on demand, or for an unnamed facility that will be allocated by a platform during booking. In this case the 
+location will be for the Place in which the facility is available.</p><p>Facilities may be offered for use at a single price at any time of day, or the price may vary depending on on which Slot 
+is used. </p><p>As the use of facility is a self-directed activity it will differ from an Event in that is will not be lead, coached, etc. </p></section></section><section typeof="bibo:Chapter" resource="#data-model" property="bibo:hasPart"><!--OddPage--><h2 id="data-model" resource="#data-model"><span property="xhv:role" resource="xhv:heading"><span class="secno">5. </span>Data Model</span></h2><p>The data model described in the following sections reuses existing standards and vocabularies which 
+have then been extended to cover the additional requirements needs to support the publication of 
+opportunity data.</p><p>The Simple Knowledge Organisation System ([<cite><a class="bibref" href="#bib-SKOS">SKOS</a></cite>]) is a W3C standard for publishing taxonomies and 
+category schemes. It can be used to help publish and organise Activity Lists and to describe 
+Physical Activities.</p><p>Schema.org [<cite><a class="bibref" href="#bib-SCHEMA-ORG">SCHEMA-ORG</a></cite>] provides an existing well-used and documented data model for publishing 
+data to the web. It provides an existing model for describing Events, Organisations, People, and 
+Places. </p><p>Both standards are widely used, and can be used to publish data in a variety of structured formats, including 
+[<cite><a class="bibref" href="#bib-JSON-LD">JSON-LD</a></cite>]. </p><p>The <strong><a href="https://www.openactive.io/ns/"><em>OpenActive Vocabulary</em></a></strong> [<cite><a class="bibref" href="#bib-OpenActive-Vocabulary">OpenActive-Vocabulary</a></cite>] is a custom vocabulary designed to support the publication of 
+opportunity data. It defines a number of new terms that extend SKOS and Schema.org to cover additional 
+requirements highlighted in this specification.</p><div class="note"><div class="note-title marker" aria-level="3" role="heading" id="h-note8"><span>Note</span></div><div class="">
+Developers looking for a quick primer on the model and how to use it to structure opportunity data may want to refer to the 
+[<cite><a class="bibref" href="#bib-Publishing-Opportunity-Data">Publishing-Opportunity-Data</a></cite>] primer which provides many more examples. 
+</div></div><section typeof="bibo:Chapter" resource="#namespaces" property="bibo:hasPart"><h3 id="namespaces" resource="#namespaces"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.1 </span>Namespaces</span></h3><p>The rest of this specification make use of the following namespaces:</p><dl>
+<dt><code>dc:</code></dt>
+<dd><code><a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a></code></dd>
+<dt><code>schema:</code></dt>
+<dd><code><a href="http://schema.org/">http://schema.org/</a></code></dd>
+<dt><code>skos:</code></dt>
+<dd><code><a href="http://www.w3.org/2004/02/skos/core#">http://www.w3.org/2004/02/skos/core#</a></code></dd>
+<dt><code>oa:</code></dt>
+<dd><code><a href="https://www.openactive.io/ns/">https://www.openactive.io/ns/</a></code></dd>
+</dl><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note9"><span>Note</span></div><div class="">
+<p>
+In the following sections all referenced terms have been qualified using their namespace prefix. This highlights the 
+source vocabulary in which they have been defined. Terms have also been linked to their definitions.
+</p>
+<p>
+The examples in each section use [<cite><a class="bibref" href="#bib-JSON-LD">JSON-LD</a></cite>] syntax and reference the <a href="https://www.openactive.io/ns/oa.jsonld">OpenActive JSON-LD context</a> defined by [<cite><a class="bibref" href="#bib-OpenActive-Vocabulary">OpenActive-Vocabulary</a></cite>]. 
+</p>
+<p>
+The context removes the need to use explicit namespace prefixes in the JSON documents. The context also maps the JSON-LD <a href="https://www.w3.org/TR/json-ld/#specifying-the-type"><code>@type</code></a> and <a href="https://www.w3.org/TR/json-ld/#node-identifiers"><code>@id</code></a> properties to simple keys (<code>type</code> and <code>id</code>). This further limits the amount of JSON-LD syntax exposed to developers.
+</p>
+</div></div></section><section typeof="bibo:Chapter" resource="#data-model-overview" property="bibo:hasPart"><h3 id="data-model-overview" resource="#data-model-overview"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.2 </span>Data Model Overview</span></h3><p>The following table provides a high-level summary of how the concepts introduced in the previous sections map to 
+definitions in SKOS, Schema.org and the OpenActive Vocabulary ([<cite><a class="bibref" href="#bib-OpenActive-Vocabulary">OpenActive-Vocabulary</a></cite>]). </p><br><br><table>
+<thead>
+  <tr><th>Concept</th>
+  <th>Mapping</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>
+  <tr>
+    <td>Activity List</td>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#ConceptScheme"><code>skos:ConceptScheme</code></a></td>
+    <td>
+    Activity lists are controlled vocabularies and map well to the definition of a SKOS Concept Scheme.
+    </td>
+  </tr><tr>
+  </tr><tr>
+    <td>Physical Activity</td>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#Concept"><code>skos:Concept</code></a></td>
+    <td>
+    Individual Physical Activities can be represented as individual SKOS concepts
+    </td>
+  </tr><tr>
+  </tr><tr>
+    <td>Event</td>
+    <td><a href="https://schema.org/Event"><code>schema:Event</code></a></td>
+    <td>Schema.org provides a well defined model for Events already with properties that cover many 
+    of the core requirements for opportunity data</td>
+  </tr><tr>
+  </tr><tr>
+    <td>Place</td>
+    <td><a href="https://schema.org/Place"><code>schema:Place</code></a></td>
+    <td>As well as the general definition of a Place, Schema.org defines sub-types including 
+    <a href="http://schema.org/EventVenue"><code>schema:EventVenue</code></a> and <a href="http://schema.org/SportsActivityLocation"><code>schema:SportsActivityLocation</code></a> which can be used where appropriate</td>
+  </tr><tr>
+  </tr><tr>
+    <td>Organization</td>
+    <td><a href="https://schema.org/Organization"><code>schema:Organization</code></a></td>
+    <td>Covers all types of organisations, including companies, clubs, etc</td>
+  </tr><tr>
+  </tr><tr>
+    <td>Person</td>
+    <td><a href="https://schema.org/Person"><code>schema:Person</code></a></td>
+    <td>An individual person</td>
+  </tr><tr>
+  </tr><tr>
+    <td>Programme</td>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#Concept"><code>skos:Concept</code></a></td>
+    <td></td>
+  </tr><tr>   </tr><tr>
+    <td>Activity Opportunity</td>
+    <td><a href="https://www.openactive.io/ns/#ActivityOpportunity"><code>oa:ActivityOpportunity</code></a></td>
+    <td>An opportunity to carry out an activity at a location, at a time of the participants 
+    choosing.</td>
+  </tr><tr>
+  </tr><tr>
+    <td>Offer</td>
+    <td><a href="http://schema.org/Offer"><code>schema:Offer</code></a></td>
+    <td>Schema.org provides an existing model for describing offers to pay to participate in 
+    an Event.</td>
+  </tr><tr> </tr></tbody>
+</table><br></section><section typeof="bibo:Chapter" resource="#identifying-and-linking-resources" property="bibo:hasPart"><h3 id="identifying-and-linking-resources" resource="#identifying-and-linking-resources"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.3 </span>Identifying and Linking Resources</span></h3><p>This specification adopts the same approach as Schema.org and encourages the use of URLs as unique identifiers for resources.</p><p>Information about Events, Places, Organizations and other types of resources should already have been published online to 
+make that information accessible to users. Using existing URLs as identifiers avoids the need to define a new identifier 
+scheme for resources described in opportunity data. </p><p>There will generally be a single canonical URL for a resource, e.g. the homepage for an Organization or Place, or 
+a public web page advertising an Event.</p><p>If there are several different URLs that may be used to identify a resource, it is recommended that systems use:</p><ul>
+<li>a direct link to the resource that avoids redirects</li>
+<li>a stable link that will resolve to a public web page, accessible to both web browsers and applications</li>
+<li>a consistent link that will allow reusers to rely on the URL as an identifier, e.g. to merge in updated data</li>
+</ul><p>This specification provides three properties for identifying resources:</p><ul>
+<li><code>@id</code> - is used to <a href="https://www.w3.org/TR/json-ld/#node-identifiers">assign a globally unique URI to a resource</a>. This may resolve to further machine-readable 
+information about the resource. When supplied, this URI <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> be stable and unchanging over time. Applications harvesting and 
+indexing opportunity data <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> use this as the unique identifier for the resource</li>
+<li><a href="http://schema.org/url"><code>schema:url</code></a> - provides a link to a public web page about the resource. Further machine-readable metadata 
+<em class="rfc2119"><em class="rfc2119" title="MAY">MAY</em></em> be discoverable from that web page. Applications <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> be able to use this URL as a means for providing users with a link to more information about a resource</li>
+<li><a href="http://schema.org/identifier"><code>schema:identifier</code></a> - provides a means of sharing non-URI identifiers for a resource, e.g. a company or 
+registration number for an Organization, or an internal identifier for an Event. Applications <em class="rfc2119"><em class="rfc2119" title="MAY">MAY</em></em> use this 
+as a unique identifier for the resource, if there is no <code>@id</code> available.</li>
+</ul><p>In short, the <code>@id</code> property provides a unique global identifier, while the <code>schema:url</code> provides a means to provide a link to 
+a public web page about a resource. </p><p>If applicable then publishers may choose to use the same URI for these two properties. If an <code>@id</code> property is not provided then 
+applications <em class="rfc2119"><em class="rfc2119" title="MAY">MAY</em></em> choose to rely on the value of this property as a unique identifier.</p><p>The option to use two different URLs is useful when there is a need to distinguish between a unique identifier and a 
+public resource. For example a platform hosting opportunity data may need to assign a unique identifier to a resource 
+that is separate to its public web page.</p><div class="example"><div class="example-title marker"><span>Example 2</span><span style="text-transform: none">: Simple event description</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"id": "<a href="http://host.opportunity-data.com/id/12345">http://host.opportunity-data.com/id/12345</a>",
+"url": "<a href="http://my-leisure-centre.example.org/events/1">http://my-leisure-centre.example.org/events/1</a>",
+"name": "Tai chi Class"
+}
+</code></pre></div><p>In the above example the <code>@id</code> property provides a unique identifier across the hosting application. But the public URL for the 
+Event uses a separate, customer-specific domain.</p></section><section typeof="bibo:Chapter" resource="#required-and-optional-properties" property="bibo:hasPart"><h3 id="required-and-optional-properties" resource="#required-and-optional-properties"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.4 </span>Required and Optional Properties</span></h3><p>The following sections include more detail about the properties available to describe each type of resource. Some 
+properties are considered to be essential to ensure the provision of a minimally useful set of information about each 
+resource. These <em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em> properties must be provided.</p><p>All other properties are considered to be optional but it is <em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em> that they 
+be provided where possible.</p><p>Data publishers <em class="rfc2119"><em class="rfc2119" title="MAY">MAY</em></em> include additional properties, e.g. from Schema.org or other vocabularies 
+when helpful to describe their data. See the section on <strong>Extending the Model</strong> for more information.</p><p>Applications that consume opportunity data <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> ignore any properties that they don't 
+understand. This allows data publishing practices within the sector to evolve as required.</p></section><section typeof="bibo:Chapter" resource="#describing-events-code-schema-event-code-" property="bibo:hasPart"><h3 id="describing-events-code-schema-event-code-" resource="#describing-events-code-schema-event-code-"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5 </span>Describing Events (<code>schema:Event</code>)</span></h3><p>The Schema.org <a href="https://schema.org/Event"><code>schema:Event</code></a> type corresponds to the definition of 
+Event given earlier in this specification. The properties and relationships associated with the 
+<a href="https://schema.org/Event"><code>schema:Event</code></a> type can all be used to describe events.</p><p>The following table illustrates how the essential aspects of describing an event map to 
+existing Schema.org properties and/or properties defined in the OpenActive Vocabulary.</p><br><br><br><br><br><br><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>
+  <tr>
+    <td><code>@id</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URI providing a unique identifier for the resource</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/url"><code>schema:url</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URL to a web page (or section of a page) that describes the event</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/identifier"><code>schema:identifier</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A local identifier for the resource</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/name"><code>schema:name</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The name of the event</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/description"><code>schema:description</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>A free text description of the event</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/image"><code>schema:image</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>An image or photo that depicts the event, e.g. a photo taken at a previous event</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/startDate"><code>schema:startDate</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>
+    <p>The start date and time of the event. Can be specified as a <a href="https://schema.org/Date"><code>schema:Date</code></a> or
+    <a href="https://schema.org/DateTime"><code>schema:DateTime</code></a>.
+    </p>
+    <p>While this property is marked as <em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em>, a data publisher <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> 
+    provide either a <a href="https://schema.org/startDate"><code>schema:startDate</code></a> or specify a <a href=""><code>oa:schedule</code></a> for an event. 
+    </p></td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/endDate"><code>schema:endDate</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>
+    <p>
+    The end date and time of the event. Can be specified as a <a href="https://schema.org/Date"><code>schema:Date</code></a> or
+    <a href="https://schema.org/DateTime"><code>schema:DateTime</code></a>
+    </p>
+    <p>
+    It is <em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em> that publishers provide either an <a href="https://schema.org/endDate"><code>schema:endDate</code></a> or a 
+    <a href="https://schema.org/duration"><code>schema:duration</code></a> for an event.
+    </p>
+  </td></tr>
+  <tr>
+    <td><a href="https://schema.org/duration"><code>schema:duration</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>The duration of the event given in [<cite><a class="bibref" href="#bib-ISO8601">ISO8601</a></cite>] format.</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/location"><code>schema:location</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The location at which the event will take place. Or, in the case of events that may span multiple locations, the initial meeting or starting point.
+    <p>
+    It is recommended that locations <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> be specified as a <a href="https://schema.org/Place"><code>schema:Place</code></a> complete with a 
+    fully described geographic location and/or address.
+    </p> 
+    <p>If only an address is available then this <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> be described as a 
+    <a href="https://schema.org/PostalAddress"><code>schema:PostalAddress</code></a>.
+    </p>
+    <p>Applications <em class="rfc2119"><em class="rfc2119" title="MAY">MAY</em></em> use <a href="https://schema.org/Text"><code>schema:Text</code></a> to provide 
+    a more general description of a location ("In Victoria Park, near the lake"), but this is not recommended: consuming applications 
+    will be unable to help users discover opportunities based on their location.
+    </p>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/organizer"><code>schema:organizer</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>The person or organization ultimately responsible for an event. An organizer might be an <a href="https://schema.org/Organization"><code>schema:Organization</code></a> or 
+    a <a href="(https://schema.org/Person"><code>schema:Person</code></a>.</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/contributor"><code>schema:contributor</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>A <a href="(https://schema.org/Person"><code>schema:Person</code></a>, e.g. a coach, staff member or volunteer who will be helping to run the event.</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/maximumAttendeeCapacity"><code>schema:maximumAttendeeCapacity</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>The maximum capacity of the event</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/remainingAttendeeCapacity"><code>schema:remainingAttendeeCapacity</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>The number of places that are still available for the event</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/eventStatus"><code>schema:eventStatus</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>The status of an event. Can be used to indicate rescheduled or cancelled events</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/subEvent"><code>schema:subEvent</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Relates a parent event to a child event. Properties describing the parent event can be assumed to apply to the child, unless otherwise specified. 
+    A child event might be a specific instance of an Event within a schedule</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/superEvent"><code>schema:superEvent</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Relates a child event to a parent event. Properties describing the parent event can be assumed to apply to the child, unless otherwise specified. 
+    A parent event might specify a recurring schedule, of which the child event is one specific instance</td>
+  </tr>
+  <tr>
+    <td><code>schema:schedule</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A schedule defines a repeating time period used to describe a regularly occurring Event.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#activity"><code>oa:activity</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>Specifies the physical activity or activities that will take place during an event</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#category"><code>oa:category</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>Provides a set of tags that help categorise and describe an event, e.g. its intensity, purpose, etc.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#ageRange"><code>oa:ageRange</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Indicates that an event is suitable for a specific age range. Specified as a <a href="http://schema.org/QuantitativeValue">QuantifiedValue</a> with 
+    <a href="http://schema.org/minValue">minValue</a> and <a href="http://schema.org/maxValue">maxValue</a> properties</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#genderRestriction"><code>oa:genderRestriction</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Indicates that an event is restricted to Male, Female or a Mixed audience. Values should be one of the three URIs defined by this specification (see below). If a gender restriction isn't specified then applications 
+    <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> assume that an event is suitable for a mixed audience</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#programme"><code>oa:programme</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Indicates that an event will be organised according to a specific Programme</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#attendeeInstructions"><code>oa:attendeeInstructions</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Provides additional notes and instructions for event attendees. E.g. more information on how to find the event, what to bring, etc.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#leader"><code>oa:leader</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Refers to a person (<code>schema:Person</code>) who will be leading an event. E.g. a coach. This is a more specific role than an organiser or a contributor</td>
+  </tr>   <tr>
+    <td><a href="https://www.openactive.io/ns/#accessibilitySupport"><code>oa:accessibilitySupport</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Used to specify the types of disabilities or impairments that are supported at an event</td>
+  </tr>   <tr>
+    <td><a href="https://www.openactive.io/ns/#accessibilitySupport"><code>oa:accessibilityInformation</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Provide additional, specific documentation for participants about how disabilities are, or can be supported at the Event.</td>
+  </tr>   <tr>
+    <td><a href="https://www.openactive.io/ns/#isCoached"><code>oa:isCoached</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A boolean property that indicates whether an Event will be coached. This flag allows an Event to be marked as being coached without having to specify a named individual as a coach. This addresses both privacy concerns and also scenarios where the actual coach may only be decided on the day.</td>
+  </tr>   <tr>
+    <td><a href="https://www.openactive.io/ns/#level"><code>oa:level</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A general purpose property for specifying the suitability of an event for different participant “levels”. E.g. beginner/intermediate/advanced. Or in the case of martial arts, specific belt requirements. Values <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> ideally be drawn from a controlled vocabulary.</td>
+  </tr>   <tr>
+    <td><a href="https://www.openactive.io/ns/#meetingPoint"><code>oa:meetingPoint</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Instructions for the attendees of an Event about where they should meet the organizer or leader at the start of the event. Some larger locations may have several possible meeting points, so this property provides additional more specific directions.</td>
+  </tr>
+
+</tbody>
+</table><p>The following example shows a simple event description, including its start time and duration:</p><div class="example"><div class="example-title marker"><span>Example 3</span><span style="text-transform: none">: Simple event description</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"attendeeInstructions": "Please wear trainers and comfortable clothing",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M"
+}
+</code></pre></div><p>This basic description can be improved by providing information about its location and organizer.</p><div class="example"><div class="example-title marker"><span>Example 4</span><span style="text-transform: none">: Adding a venue and an organizer</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"attendeeInstructions": "Please wear trainers and comfortable clothing",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"organizer": {
+  "type": "Organization",
+  "url": "<a href="http://example.org/orgs/bristol-tai-chi">http://example.org/orgs/bristol-tai-chi</a>",
+  "name": "Bristol Tai Chi"<br>},
+"location": {
+  "type": "Place",
+  "name": "ExampleCo Gym",
+  "address": {
+    "type": "PostalAddress",
+    "streetAddress": "1 High Street",
+    "addressLocality": "Bristol",
+    "postalCode": "BS1 4SD"
+  }
+}<br>}
+</code></pre></div><section typeof="bibo:Chapter" resource="#relating-events-to-physical-activities" property="bibo:hasPart"><h4 id="relating-events-to-physical-activities" resource="#relating-events-to-physical-activities"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.1 </span>Relating Events to Physical Activities</span></h4><p>The <a href="https://www.openactive.io/ns/#activity"><code>oa:activity</code></a> property allows an event to be associated with one or more Physical Activities. Its simplest usage is as follows:</p><div class="example"><div class="example-title marker"><span>Example 5</span><span style="text-transform: none">: Specifying activities</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"activity": "Tai chi"
+}
+</code></pre></div><p>This specifies that the event will involve Tai Chi. Multiple activities can be specified by using repeated values:</p><div class="example"><div class="example-title marker"><span>Example 6</span><span style="text-transform: none">: Specifying multiple activities</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"activity": ["Tai chi", "Martial Arts", "Combat"]
+}
+</code></pre></div><p>The Physical Activities used to describe an event may be drawn from a standard Activity List, e.g. the OpenActive Activity List ([<cite><a class="bibref" href="#bib-OpenActive-Activity-List">OpenActive-Activity-List</a></cite>]). </p><p>In this case it is useful to make this clear in the opportunity data. In the following example the Physical Activity associated with the Event 
+is shown as a structured value. This allows more information to be provided, including its identifier, its label and a reference to the identifier of the Activity List from which it has been drawn:</p><div class="example"><div class="example-title marker"><span>Example 7</span><span style="text-transform: none">: Using activities from an Activity List</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"activity": {
+  "id": "<a href="https://www.openactive.io/activity-list/#c16df6ed-a4a0-4275-a8c3-1c8cff56856f">https://www.openactive.io/activity-list/#c16df6ed-a4a0-4275-a8c3-1c8cff56856f</a>",
+  "type": "Concept",
+  "prefLabel": "Tai Chi",
+  "inScheme": "<a href="https://www.openactive.io/activity-list/">https://www.openactive.io/activity-list/</a>"
+}
+}
+</code></pre></div><p>Applications could include additional information, e.g. alternate labels for convenience of consumers.</p><p>And, as shown in the earlier example, multiple activities can be specified by specifying an array of objects.</p></section><section typeof="bibo:Chapter" resource="#categorising-events" property="bibo:hasPart"><h4 id="categorising-events" resource="#categorising-events"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.2 </span>Categorising events</span></h4><p>The <a href="https://www.openactive.io/ns/#category"><code>oa:category</code></a> property can be used to associate an Event with one or more tags that provide some extra context about an event. This might include general information on the intensity and suitability. While this property can be used to add any arbitrary tags to an Event, a common use case is the need to tag an event as being suitable for a specific type of audience, e.g. Beginners. Where this information is available, the <a href="https://www.openactive.io/ns/#level"><code>oa:level</code></a> property can be used in preference to <a href="https://www.openactive.io/ns/#category"><code>oa:category</code></a>. </p><p>If an application does not distinguish between different types of tags associated with an Event, then it <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> use the more general <a href="https://www.openactive.io/ns/#category"><code>oa:category</code></a> property.</p><div class="example"><div class="example-title marker"><span>Example 8</span><span style="text-transform: none">: Tagging an Event</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"category": ["Suitable for all", "Low intensity"],
+"level": ["Beginner"]
+}
+</code></pre></div><p>Applications publish data using the <a href="https://www.openactive.io/ns/#category"><code>oa:category</code></a> and <a href="https://www.openactive.io/ns/#level"><code>oa:level</code></a> properties <em class="rfc2119"><em class="rfc2119" title="MAY">MAY</em></em> use values either from a controlled vocabulary or more free-form user entered labels. </p><p>Where an application is using a controlled vocabulary it <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> publish that vocabulary as structured data.</p><div class="note"><div class="note-title marker" aria-level="5" role="heading" id="h-note10"><span>Note</span></div><div class="">
+In future, the OpenActive Community Group may decide to define and recommend some controlled vocabularies for use in these properties. At present the values of these properties are left deliberately open to encourage publication of open data that may inform future standardisation.
+</div></div></section><section typeof="bibo:Chapter" resource="#describing-event-suitability" property="bibo:hasPart"><h4 id="describing-event-suitability" resource="#describing-event-suitability"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.3 </span>Describing Event Suitability</span></h4><p>There are a variety of ways in which the suitability of an event for specific audiences can be expressed. This includes specifying that 
+an event is:</p><ul>
+<li>suited for a specific age range</li>
+<li>suited for people with specific levels of experience (<a href="https://www.openactive.io/ns/#level"><code>oa:level</code></a>)</li>
+<li>restricted to a male, female or mixed audience</li>
+</ul><section typeof="bibo:Chapter" resource="#age-ranges" property="bibo:hasPart"><h5 id="age-ranges" resource="#age-ranges"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.3.1 </span>Age Ranges</span></h5><p>Age ranges are specified using the <a href="https://www.openactive.io/ns/#ageRange"><code>oa:ageRange</code></a> property. The value is a 
+<a href="http://schema.org/QuantitativeValue"><code>schema:QuantifiedValue</code></a> which should have <a href="http://schema.org/minValue">minValue</a> or <a href="http://schema.org/maxValue">maxValue</a> properties. These properties specify an inclusive minimum and maximum age range for participants.</p><p>Data publishers using the <a href="https://www.openactive.io/ns/#ageRange"><code>oa:ageRange</code></a> property <em class="rfc2119" title="MUST">MUST</em> ensure that it has:</p><ul>
+<li>a <code>type</code> of <a href="http://schema.org/QuantitativeValue"><code>schema:QuantifiedValue</code></a></li>
+<li>at least one of the <code>minValue</code> or <code>maxValue</code>properties</li>
+</ul><p>Data consumers <em class="rfc2119" title="SHOULD">SHOULD</em> assume that:</p><ul>
+<li>if there is no <code>ageRange</code> property for an Event, then the event is suitable for adults only. E.g. as if the <code>minValue</code> has been specified as <code>18</code></li>
+<li>if an <code>ageRange</code> is provided without a <code>minValue</code> property, then there is no minimum age for the <code>Event</code></li>
+<li>if an <code>ageRange</code> is provided without a <code>maxValue</code> property, then there is no maximum age for the <code>Event</code></li>
+<li>if an <code>ageRange</code> is provided with a <code>minValue</code> of 0, and there is no <code>maxValue</code> property then the Event is suitable for all</li>
+</ul><p>The following example illustrates how to specify an Event that is suitable for people aged 60 or over.</p><div class="example"><div class="example-title marker"><span>Example 9</span><span style="text-transform: none">: Age range example</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"ageRange": {
+   "type": "QuantifiedValue",
+   "minValue": 60
+}
+}
+</code></pre></div><p>The following example illustrates an Event that is suitable for all ages. This is indicated by providing an <code>minValue</code> property with a value of zero and no <code>maxValue</code> property.</p><div class="example"><div class="example-title marker"><span>Example 10</span><span style="text-transform: none">: Age range - suitable for all example</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Exercise in the park",
+"ageRange": {
+   "type": "QuantifiedValue",
+   "minValue": 0
+}
+}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#gender-restriction" property="bibo:hasPart"><h5 id="gender-restriction" resource="#gender-restriction"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.3.2 </span>Gender Restriction</span></h5><p>Attendance at some events is limited to certain audiences. For example a female only gym class. The <a href="https://www.openactive.io/ns/#genderRestriction"><code>oa:genderRestriction</code></a> property can be used to specify these restrictions.</p><p>Data publishers using this property <em class="rfc2119" title="MUST">MUST</em> use one of the following values:</p><ul>
+<li><code><a href="https://www.openactive.io/ns#None">https://www.openactive.io/ns#None</a></code> indicating that the event has no restrictions</li>
+<li><code><a href="https://www.openactive.io/ns#Male">https://www.openactive.io/ns#Male</a></code> indicating that the event is restricted to the male gender</li>
+<li><code><a href="https://www.openactive.io/ns#Female">https://www.openactive.io/ns#Female</a></code> indicating that the event is restricted to the female gender</li>
+</ul><p>If the <code>genderRestriction</code> property is not supplied for an Event, then data consumers <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em> assume a default value, the value should be treated as <code>null</code>. When searching or filtering for gender restricted Events, data consumers <em class="rfc2119" title="SHOULD">SHOULD</em> remove Events with a <code>null</code> value. Invalid values for the <code>genderRestriction</code> property <em class="rfc2119" title="SHOULD">SHOULD</em> be treated as <code>null</code>.</p><div class="example"><div class="example-title marker"><span>Example 11</span><span style="text-transform: none">: Gender restriction example</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Gym class",
+"genderRestriction": "<a href="http://www.openactive.io/ns#Female">http://www.openactive.io/ns#Female</a>"
+}
+</code></pre></div></section></section><section typeof="bibo:Chapter" resource="#adding-programmes" property="bibo:hasPart"><h4 id="adding-programmes" resource="#adding-programmes"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.4 </span>Adding programmes</span></h4><p>Events can be associated with a Programme using the <a href="https://www.openactive.io/ns/#programme"><code>oa:programme</code></a> property. In its simplest form this allows the name of a Programme to be associated with an event:</p><div class="example"><div class="example-title marker"><span>Example 12</span><span style="text-transform: none">: Tagging an Event</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Rowing Class",
+"description": "A rowing class for beginners",
+"startDate": "2017-04-01T08:00:00Z",
+"duration": "PT60M",
+"level": ["Beginner"],
+"programme": "Learn to Row"
+}
+</code></pre></div><p>If more information about the programme is available, then this can be included by describing the Programme in a more structured way:</p><div class="example"><div class="example-title marker"><span>Example 13</span><span style="text-transform: none">: Tagging an Event</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Rowing Class",
+"description": "A rowing class for beginners",
+"startDate": "2017-04-01T08:00:00Z",
+"duration": "PT60M",
+"level": ["Beginner"],
+"programme": {
+  "name": "Learn to Row",
+  "url": "<a href="https://www.britishrowing.org/go-rowing/learn-to-row/">https://www.britishrowing.org/go-rowing/learn-to-row/</a>",
+  "description": "Getting started in rowing couldn’t be easier!"
+}
+}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#describing-scheduled-events" property="bibo:hasPart"><h4 id="describing-scheduled-events" resource="#describing-scheduled-events"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.5 </span>Describing scheduled events</span></h4><div class="note"><div class="note-title marker" aria-level="5" role="heading" id="h-note11"><span>Note</span></div><div class="">
+<strong>Schema.org support for recurring events</strong>
+
+<strong><a href="https://github.com/openactive/modelling-opportunity-data/issues/2">Issue 2</a></strong>: Schema.org support for recurring events
+
+This specification relies on some pending changes to Schema.org that will add recurrence rules to Events. The <a href="https://github.com/schemaorg/schemaorg/pull/1693">proposal</a> has been accepted, but is not yet formally part of the model.
+
+We expect that this proposal will become part of Schema.org in due course. This process will be driven by implementation experience and feedback from the community. 
+On that basis we have included the terms in specification. The following section is written on that basis. However both publishers and consumers should be aware that 
+this is an area that may change in future versions.
+</div></div><p>The following example illustrates basic usage of the <a href="http://pending.schema.org/eventSchedule"><code>schema:eventSchedule</code></a> property to associate an <code>Event</code> with a <a href="http://pending.schema.org/Schedule"><code>schema:Schedule</code></a>. The data describes a Tai Chi class that occurs every Wednesday at 7pm</p><div class="example"><div class="example-title marker"><span>Example 14</span><span style="text-transform: none">: Adding an event schedule</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"duration": "PT60M",
+"eventSchedule": {
+   "type": "Schedule",
+   "startDate": "2017-01-01",
+   "endDate": "2017-12-31",
+   "repeatFrequency": "P1W",
+   "byDay": "<a href="http://schema.org/Wednesday">http://schema.org/Wednesday</a>",
+   "startTime": "19:00Z",
+   "endTime": "20:00Z"
+}<br>}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#describing-event-availability" property="bibo:hasPart"><h4 id="describing-event-availability" resource="#describing-event-availability"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.6 </span>Describing event availability</span></h4><p>Schema.org provides a couple of basic properties for describing the maximum (<a href="http://schema.org/maximumAttendeeCapacity"><code>schema:maximumAttendeeCapacity</code></a>) and remaining capacity (<a href="http://schema.org/remainingAttendeeCapacity"><code>schema:remainingAttendeeCapacity</code></a>) for an <a href="https://schema.org/Event"><code>schema:Event</code></a>. </p><p>These properties can be used to provide some basic availability information for scheduled events. These are illustrated in the following example which states that a Tai chi class can be attended by up to 20 people and that there are 4 spaces remaining.</p><div class="example"><div class="example-title marker"><span>Example 15</span><span style="text-transform: none">: Basic event availability</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"maximumAttendeeCapacity": 20,
+"remainingAttendeeCapacity": 4
+}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#indicating-the-status-of-an-event" property="bibo:hasPart"><h4 id="indicating-the-status-of-an-event" resource="#indicating-the-status-of-an-event"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.7 </span>Indicating the status of an event</span></h4><p>An <a href="https://schema.org/Event"><code>schema:Event</code></a> may occasionally be rescheduled or cancelled. Schema.org provides the <a href="http://schema.org/eventStatus"><code>schema:eventStatus</code></a> property for indicating the current status of an event.</p><p>The property can have several standardised values which are defined by the <a href="http://schema.org/EventStatusType"><code>schema:EventStatusType</code></a> enumeration. The property values should therefore be one of the following URIs:</p><ul>
+<li>Cancelled: <code><a href="http://schema.org/EventCancelled">http://schema.org/EventCancelled</a></code></li>
+<li>Postponed: <code><a href="http://schema.org/EventPostponed">http://schema.org/EventPostponed</a></code></li>
+<li>Rescheduled: <code><a href="http://schema.org/EventRescheduled">http://schema.org/EventRescheduled</a></code></li>
+<li>Scheduled: <code><a href="http://schema.org/EventScheduled">http://schema.org/EventScheduled</a></code></li>
+</ul><p>If the status property is not provided then applications <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> assume a default value of <code><a href="http://schema.org/EventScheduled">http://schema.org/EventScheduled</a></code>.</p><p>The following example shows a Tai chi class that has been cancelled:</p><div class="example"><div class="example-title marker"><span>Example 16</span><span style="text-transform: none">: A cancelled event</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"eventStatus": "<a href="http://schema.org/EventCancelled">http://schema.org/EventCancelled</a>"
+}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#describing-support-for-disabilities-at-events" property="bibo:hasPart"><h4 id="describing-support-for-disabilities-at-events" resource="#describing-support-for-disabilities-at-events"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.5.8 </span>Describing support for disabilities at events</span></h4><p>This specification defines several ways to capture information from organisers about the types of support they provide for people with disabilities 
+or other impairments. This includes: </p><ul>
+<li>listing the types of disability or impairment that are, or can be accommodated at an event using the <a href="https://www.openactive.io/ns/#accessibilitySupport"><code>oa:accessibilitySupport</code></a> property</li>
+<li>providing additional notes for participants using the <a href="https://www.openactive.io/ns/#accessibilityInformation"><code>oa:accessibilityInformation</code></a> property</li>
+</ul><p>Examples of using these are shown below:</p><div class="example"><div class="example-title marker"><span>Example 17</span><span style="text-transform: none">: Accessibility information</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"accessibilitySupport": ["Hearing Impairment", "Visual Impairment"],
+"accessibilityInformation": "The location is fully accessible, please contact the organiser if you have questions"
+}
+</code></pre></div></section></section><section typeof="bibo:Chapter" resource="#describing-locations-code-schema-place-code-and-code-schema-postaladdress-code-" property="bibo:hasPart"><h3 id="describing-locations-code-schema-place-code-and-code-schema-postaladdress-code-" resource="#describing-locations-code-schema-place-code-and-code-schema-postaladdress-code-"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.6 </span>Describing Locations (<code>schema:Place</code> and <code>schema:PostalAddress</code>)</span></h3><p>Schema.org takes a flexible approach towards defining the locations for an <a href="https://schema.org/Event"><code>schema:Event</code></a>. </p><p>The legal values for the <a href="https://schema.org/location"><code>schema:location</code></a> property include:</p><ul>
+<li>a simple textual description</li>
+<li>a <a href="https://schema.org/PostalAddress"><code>schema:PostalAddress</code></a> </li>
+<li>a more fully defined <a href="https://schema.org/Place"><code>schema:Place</code></a> or one of its sub-types such as a <a href="https://schema.org/CivicStructure"><code>schema:CivicStructure</code></a> or <a href="https://schema.org/EventVenue"><code>schema:EventVenue</code></a></li>
+</ul><p>While all three forms are allowed by Schema.org, applications that publish opportunity data <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> either specify a <a href="https://schema.org/PostalAddress"><code>schema:PostalAddress</code></a> or a more detailed <a href="https://schema.org/Place"><code>schema:Place</code></a> description.</p><section typeof="bibo:Chapter" resource="#describing-addresses" property="bibo:hasPart"><h4 id="describing-addresses" resource="#describing-addresses"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.6.1 </span>Describing Addresses</span></h4><p>Schema.org provides the following properties for publishing address data using the <a href="https://schema.org/PostalAddress"><code>schema:PostalAddress</code></a> type.</p><br><br><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>   <tr>
+    <td><a href="https://schema.org/streetAddress"><code>schema:streetAddress</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>Street address</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/addressLocality"><code>schema:addressLocality</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>Town or other area</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/region"><code>schema:region</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>Region</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/postalCode"><code>schema:postalCode</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>Postcode</td>
+  </tr>
+</tbody></table><p>The following example shows how to markup a simple address:</p><div class="example"><div class="example-title marker"><span>Example 18</span><span style="text-transform: none">: An Address</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "PostalAddress",
+"streetAddress": "North Parade Road",
+"addressLocality": "Bath",
+"region": "Somerset",
+"postalCode": "BA2 4ET"
+}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#describing-places" property="bibo:hasPart"><h4 id="describing-places" resource="#describing-places"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.6.2 </span>Describing Places</span></h4><p>In order to provide additional information, e.g. the name of the location or its geographic co-ordinates, then the <a href="https://schema.org/Place"><code>schema:Place</code></a> 
+type <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> be used instead.</p><p>The following table lists the properties that can be used to provide descriptions of a <a href="https://schema.org/Place"><code>schema:Place</code></a> </p><br><br><br><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>
+  <tr>
+    <td><code>@id</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URI providing a unique identifier for the resource</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/identifier"><code>schema:identifier</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A local identifier for the resource</td>
+  </tr>   <tr>
+    <td><a href="https://schema.org/url"><code>schema:url</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URL to a web page (or section of a page) that describes the Place</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/name"><code>schema:name</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The name of the Place</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/description"><code>schema:description</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>A free text description of the Place</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/image"><code>schema:image</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>An image or photo that depicts the place</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/address"><code>schema:address</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>The street address of the location, expressed as a <a href="https://schema.org/PostalAddress"><code>schema:PostalAddress</code></a>. See the following section for more information on describing <a href="https://schema.org/PostalAddress"><code>schema:PostalAddress</code></a> resources</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/geo"><code>schema:geo</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>The geographic co-ordinates, specified as a latitude and longitude of a Place</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/containedInPlace"><code>schema:containedInPlace</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Indicates that this Place is part of a larger location. Can be used to allow, e.g. a pitch or other facility to be related to a parent location such as a Leisure Centre</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/containsPlace"><code>schema:containsPlace</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Relates a Place to other locations and facilities that it contains. Schema.org provides a specific type of Place, called a 
+    <a href="https://schema.org/SportsActivityLocation"><code>schema:SportsActivityLocation</code></a> for describing facilities</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/telephone"><code>schema:telephone</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A contact telephone number for the location, e.g. for enquiries</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/openingHoursSpecification"><code>schema:openingHoursSpecification</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Specifies the opening hours of a location. The value of this property is a <a href="http://schema.org/OpeningHoursSpecification"><code>schema:OpeningHoursSpecification</code></a>.</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/amenityFeature"><code>schema:amenityFeature</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Used to indicate whether specific amenities are available at a location. The value of this property will be an array of <a href="http://schema.org/LocationFeatureSpecification"><code>schema:LocationFeatureSpecification</code></a> objects. See "Describing Amenities" for more information.</td>
+  </tr> </tbody></table><p>This example illustrates a simple place description. Building on the previous example it adds the name, telephone number and website address for the leisure centre:</p><div class="example"><div class="example-title marker"><span>Example 19</span><span style="text-transform: none">: Describing a leisure centre</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Place",
+"url": "<a href="http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre">http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre</a>",
+"name": "Bath Sports and Leisure Centre",
+"address": {
+    "type": "PostalAddress",
+    "streetAddress": "North Parade Road",
+    "addressLocality": "Bath",
+    "region": "Somerset",
+    "postalCode": "BA2 4ET"
+},
+"telephone": "+44 (0)1225 486905"<br>}
+</code></pre></div><p>A more precise geographical location can be provided by adding a <a href="https://schema.org/geo"><code>schema:geo</code></a> property:</p><div class="example"><div class="example-title marker"><span>Example 20</span><span style="text-transform: none">: Locating a leisure centre</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Place",
+"url": "<a href="http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre">http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre</a>",
+"name": "Bath Sports and Leisure Centre",
+"address": {
+    "type": "PostalAddress",
+    "streetAddress": "North Parade Road",
+    "addressLocality": "Bath",
+    "region": "Somerset",
+    "postalCode": "BA2 4ET"
+},
+"telephone": "+44 (0)1225 486905",
+"geo": {
+  "type": "GeoCoordinates",
+  "latitude": "51.3816123",
+  "longitude": "-2.3544367"
+}
+}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#describing-amenities" property="bibo:hasPart"><h4 id="describing-amenities" resource="#describing-amenities"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.6.3 </span>Describing Amenities</span></h4><p>It can be useful to describe the amenities (e.g. characteristics, services or other features) available at a location. </p><p>Schema.org provides the <a href="http://schema.org/amenityFeature"><code>schema:amenityFeature</code></a> property for specifying an list of amenities that are available or unavailable at a specific <a href="http://schema.org/Place"><code>schema:Place</code></a>. The value of a the property is an array of objects that describe the individual amenities. </p><p>To improve consistency in how amenities are published, this specification defines some common types of amenities:</p><ul>
+<li><a href="https://www.openactive.io/ns#ChangingRooms"><code>ChangingRooms</code></a></li>
+<li><a href="https://www.openactive.io/ns#Showers"><code>Showers</code></a></li>
+<li><a href="https://www.openactive.io/ns#PublicToilets"><code>PublicToilets</code></a></li>
+<li><a href="https://www.openactive.io/ns#Lockers"><code>Lockers</code></a></li>
+<li><a href="https://www.openactive.io/ns#Towels"><code>Towels</code></a></li>
+<li><a href="https://www.openactive.io/ns#Creche"><code>Creche</code></a></li>
+<li><a href="https://www.openactive.io/ns#Parking"><code>Parking</code></a></li>
+<li><a href="https://www.openactive.io/ns#BabyChanging"><code>BabyChanging</code></a></li>
+</ul><p>Publishers <em class="rfc2119" title="SHOULD">SHOULD</em> use one of these types when applicable. If there is no pre-defined type then data publishers <em class="rfc2119" title="MUST">MUST</em> use the more generic <a href="http://schema.org/LocationFeatureSpecification"><code>schema:LocationFeatureSpecification</code></a> type. </p><p>This avoids the need for data consumers to have to rely on the <code>name</code> value to identify common amenities that may otherwise be named differently (e.g. "Changing Rooms, "Changing Facilities", etc).</p><div class="example"><div class="example-title marker"><span>Example 21</span><span style="text-transform: none">: Amenity example</span></div><pre class=""><code>
+{
+"type": "Place",
+"amenityFeature": [
+   {
+      "type": "ChangingRooms",
+      "name": "Changing Facilities",
+      "value": true
+   }
+]
+}
+</code></pre></div><p>Publishers <em class="rfc2119" title="MUST">MUST</em> include the <code>type</code>, <code>name</code> and <code>value</code> properties for each amenity. A <code>value</code> of <code>false</code> indicates that a specific amenity is not available.</p><p>Additional information <em class="rfc2119" title="MAY">MAY</em> be provided about each of the amenities, using properties from the <a href="http://schema.org/LocationFeatureSpecification"><code>schema:LocationFeatureSpecification</code></a> type. For example, specifying opening hours (<a href="http://schema.org/hoursAvailable"><code>schema:hoursAvailable</code></a>) or to add a description (<a href="http://schema.org/description"><code>schema:description</code></a>).</p><p>The list of pre-defined amenties <em class="rfc2119" title="MAY">MAY</em> be revised in future specifications based on feedback from the community. </p><p>In the meantime additional types of amenities can be specified using the more generic <a href="http://schema.org/LocationFeatureSpecification"><code>schema:LocationFeatureSpecification</code></a> type as shown below:</p><div class="example"><div class="example-title marker"><span>Example 22</span><span style="text-transform: none">: Generic amenity type example</span></div><pre class=""><code>
+{
+"type": "Place",
+"amenityFeature": [
+   {
+      "type": "LocationFeatureSpecification",
+      "name": "Outdoor seating",
+      "value": true
+   }
+]
+}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#describing-facilities" property="bibo:hasPart"><h4 id="describing-facilities" resource="#describing-facilities"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.6.4 </span>Describing Facilities</span></h4><p>Facilities available at a location can be expressed using the containment properties (<a href="https://schema.org/containedInPlace"><code>schema:containedInPlace</code></a> and <a href="https://schema.org/containsPlace"><code>schema:containsPlace</code></a>). The following example illustrates how to describe that a Leisure Centre includes a gym:</p><div class="example"><div class="example-title marker"><span>Example 23</span><span style="text-transform: none">: Describing a leisure centre</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Place",
+"url": "<a href="http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre">http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre</a>",
+"name": "Bath Sports and Leisure Centre",
+"address": {
+    "type": "PostalAddress",
+    "streetAddress": "North Parade Road",
+    "addressLocality": "Bath",
+    "region": "Somerset",
+    "postalCode": "BA2 4ET"
+},
+"containsPlace": {
+  "type": "SportsActivityLocation",
+  "url": "<a href="http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym">http://www.better.org.uk/leisure-centre/banes/bath-sports-and-leisure-centre/gym</a>",
+  "name": "Gym"
+}<br>}
+</code></pre></div></section></section><section typeof="bibo:Chapter" resource="#describing-organisers-code-schema-person-code-and-code-schema-organization-code-" property="bibo:hasPart"><h3 id="describing-organisers-code-schema-person-code-and-code-schema-organization-code-" resource="#describing-organisers-code-schema-person-code-and-code-schema-organization-code-"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.7 </span>Describing Organisers (<code>schema:Person</code> and <code>schema:Organization</code>)</span></h3><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note12"><span>Note</span></div><div class="">
+<p><strong>Applications must not publish personal data without permission</strong></p>
+<p>
+While the <a href="https://schema.org/Person"><code>schema:Person</code></a> type allows a variety of information to be published about a 
+person, applications <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> not publish this information as open data without consent.
+</p>
+</div></div><p>To describe the people and organisations involving in organising Events, Schema.org provides the <a href="https://schema.org/Person"><code>schema:Person</code></a> and <a href="https://schema.org/Organization"><code>schema:Organization</code></a> types.</p><p>People and organisations can be associated with an Event using the <a href="http://schema.org/organizer"><code>schema:organizer</code></a>, <a href="http://schema.org/contributor"><code>schema:contributor</code></a> or <a href="https://www.openactive.io/ns/#leader"><code>oa:leader</code></a> properties. These allow some flexibility in defining how a person or organisation is associated with an event. For example an event may be:</p><ul>
+<li>organized by an club (<code>schema:organizer</code>)</li>
+<li>be led by a specific coach (<code>oa:leader</code>) </li>
+<li>and involve other named participants (<code>oa:contributor</code>)</li>
+</ul><p>To help ensure that publishers apply these properties in consistent ways, it is recommended that:</p><ul>
+<li>For events taking place in a gym, the organizer should be listed as the gym (an <a href="https://schema.org/Organization"><code>schema:Organization</code></a>)</li>
+<li>For "user generated" events in a booking system, the organizer should be the account under which the events were created, rather than the booking system. The instructor for the event can be specified as the <code>oa:leader</code> or <code>oa:contributor</code></li>
+<li>For franchised events (e.g. Clubbercise), the organiser should be the franchisee, as they are ultimately responsible for organising that specific event</li>
+</ul><p>Both the <a href="https://schema.org/Person"><code>schema:Person</code></a> and <a href="https://schema.org/Organization"><code>schema:Organization</code></a> types support a common set of properties that capture the basic information required for publishing opportunity data.</p><br><br><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>
+  <tr>
+    <td><code>@id</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URI providing a unique identifier for the resource</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/identifier"><code>schema:identifier</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A local identifier for the resource</td>
+  </tr>   <tr>
+    <td><a href="https://schema.org/url"><code>schema:url</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>A URL to the homepage or other page about the organisation</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/name"><code>schema:name</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The name of the organisation</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/description"><code>schema:description</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A description of the organisation</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/logo"><code>schema:logo</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>The logo of an organisation</td>
+  </tr>
+</tbody></table><p>The following example illustrates how to associate an <a href="https://schema.org/Organization"><code>schema:Organization</code></a> with an event:</p><div class="example"><div class="example-title marker"><span>Example 24</span><span style="text-transform: none">: Specifying an organiser</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"startDate": "2017-03-22T20:00:00-05:00",
+"duration": "PT60M",
+"organizer": {
+  "type": "Organization",
+  "url": "<a href="http://example.org/clubs/1">http://example.org/clubs/1</a>",
+  "name": "Bath Tai Chi Club",
+  "logo": "<a href="http://www.example.org/clubs/1/logo.png">http://www.example.org/clubs/1/logo.png</a>"<br>}
+}
+</code></pre></div></section><section typeof="bibo:Chapter" resource="#describing-activity-lists-code-skos-conceptscheme-code-and-physical-activity-code-skos-concept-code-" property="bibo:hasPart"><h3 id="describing-activity-lists-code-skos-conceptscheme-code-and-physical-activity-code-skos-concept-code-" resource="#describing-activity-lists-code-skos-conceptscheme-code-and-physical-activity-code-skos-concept-code-"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.8 </span>Describing Activity Lists (<code>skos:ConceptScheme</code>) and Physical Activity (<code>skos:Concept</code>)</span></h3><p>List of Physical Activities are controlled vocabularies published using the types and properties defined by the <a href="https://www.w3.org/TR/skos-primer/">SKOS</a> standard. That 
+standard covers all the requirements <a href="#physical-activities">outlined in the concept model</a>, allowing:</p><ul>
+<li>activities to be organised into hierarchies to capture broader-narrow relationships, e.g. "Martial Arts" and "Judo"</li>
+<li>sharing of alternative labels to support search and indexing</li>
+<li>the sharing of standard codes to support data integration</li>
+</ul><p>The [<cite><a class="bibref" href="#bib-OpenActive-Activity-List">OpenActive-Activity-List</a></cite>] provides an openly licensed standard activity list that can be used by publishers. But where a publisher needs to publish their own list, then they can use the properties defined in the SKOS specification, as follows:</p><br><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>
+  <tr>
+    <td><code>@id</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URI providing a unique identifier for the resource</td>
+  </tr>
+  <tr>
+    <td><a href="http://purl.org/dc/terms/title"><code>dc:title</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>Title of the Activity List</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/description"><code>schema:description</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>Description of the activity list</td>
+  </tr>
+  <tr>
+    <td><a href="http://purl.org/dc/terms/license"><code>dc:license</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>Reference to the license under which the activity list has been published</td>
+  </tr>
+</tbody></table><p>The following example illustrates the basic structure of an activity list:</p><div class="example"><div class="example-title marker"><span>Example 25</span><span style="text-transform: none">: Publishing an activity list</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "ConceptScheme",
+"url": "<a href="http://www.example.org/activity-list">http://www.example.org/activity-list</a>",
+"title": "Activity List",
+"description": "An example activity list",
+"concepts": [{
+  "type": "Concept",
+  "prefLabel": "Martial Arts",
+  "narrower": {
+    "type": "Concept",
+    "prefLabel": "Tai Chi"
+  }<br>}]
+}
+</code></pre></div><p>The <code>concepts</code> property used in the above example is defined in the JSON-LD context published as part of the OpenActive Vocabulary ([<cite><a class="bibref" href="#bib-OpenActive-Vocabulary">OpenActive-Vocabulary</a></cite>]).</p><section typeof="bibo:Chapter" resource="#describing-physical-activities" property="bibo:hasPart"><h4 id="describing-physical-activities" resource="#describing-physical-activities"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.8.1 </span>Describing Physical Activities</span></h4><p>The following properties from the [<cite><a class="bibref" href="#bib-SKOS">SKOS</a></cite>] specification can be used to describe physical activities.</p><br><br><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>
+  <tr>
+    <td><code>@id</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A URI providing a unique identifier for the resource</td>
+  </tr>   <tr>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel"><code>skos:prefLabel</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>Preferred label for referring to the physical activity. The preferred labels should be used when publishing data about the activities involved in an event.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#altLabel"><code>skos:altLabel</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Alternative labels for the physical activity</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#inScheme"><code>skos:inScheme</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>Refers to the Activity List in which this physical activity is defined.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#broader"><code>skos:broader</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi".</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#narrower"><code>skos:narrower</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts"</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.w3.org/2009/08/skos-reference/skos.html#notation"><code>skos:notation</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Provides a unique code or identifier for an activity</td>
+  </tr>
+</tbody></table><p>The following markup illustrates how to describe a single activity.</p><div class="example"><div class="example-title marker"><span>Example 26</span><span style="text-transform: none">: Publishing an activity list</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Concept",
+"id": "<a href="http://www.example.org/activity-list#tai-chi">http://www.example.org/activity-list#tai-chi</a>",
+"prefLabel": "Tai Chi",
+"altLabel": "Tai-Chi",
+"inScheme": "<a href="http://www.example.org/activity-list">http://www.example.org/activity-list</a>"
+}
+</code></pre></div></section></section><section typeof="bibo:Chapter" resource="#describing-offers-code-schema-offer-code-" property="bibo:hasPart"><h3 id="describing-offers-code-schema-offer-code-" resource="#describing-offers-code-schema-offer-code-"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.9 </span>Describing Offers (<code>schema:Offer</code>)</span></h3><p>To indicate that a <code>schema:Event</code> is only available to paid attendees, opportunity data provides may include details of the offers available to participants. The <a href="http://schema.org/Offer"><code>schema:Offer</code></a> type provides some basic properties for indicating the price and availability of Offers.</p><br><br><br><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>   <tr>
+    <td><code>@id</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URI providing a unique identifier for the resource</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/identifier"><code>schema:identifier</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A local identifier for the resource</td>
+  </tr>   <tr>
+    <td><a href="https://schema.org/name"><code>schema:name</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The name of the offer suitable for display to participants</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/price"><code>schema:price</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The offer price available to participants</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/priceCurrency"><code>schema:priceCurrency</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The currency of the offer price.</td>
+  </tr>
+</tbody></table><p>The following example shows an event which offers a price for attending a single session.</p><div class="example"><div class="example-title marker"><span>Example 27</span><span style="text-transform: none">: Describing an Offer</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "Event",
+"url": "<a href="http://www.example.org/events/1">http://www.example.org/events/1</a>",
+"name": "Tai chi Class",
+"description": "A tai chi class intended for beginners",
+"duration": "PT60M",
+"offers": [{
+  "name": "Single session",
+  "price": "5",
+  "priceCurrency": "GBP"
+}]<br>}
+</code></pre></div><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note13"><span>Note</span></div><div class="">
+Schema.org provides <a href="http://schema.org/Offer">additional properties for describing Offers</a>. The above model highlights the properties 
+that support the most common, basic use case. Future versions of this specification may include more detail around describing offers.
+</div></div><p></p><p></p></section><section typeof="bibo:Chapter" resource="#describing-slots-code-oa-slot-code-" property="bibo:hasPart"><h3 id="describing-slots-code-oa-slot-code-" resource="#describing-slots-code-oa-slot-code-"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.10 </span>Describing Slots (<code>oa:Slot</code>)</span></h3><p></p><p>A Slot is an opportunity to use a facility at a specific time and for a 
+specified duration. A Slot is therefore a specific type of Event, although 
+it has a more constrained set of properties.</p><p>A series of Slots describes a calendar during which a facility is available 
+for use.</p><p>Slots are always associated with a <a href="https://www.openactive.io/ns/#FacilityUse"><code>oa:FacilityUse</code></a> 
+product which may link to more detail about the facility on offer and the costs 
+for hire.</p><br><br><br><br><br><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>   <tr>
+    <td><code>@id</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URI providing a unique identifier for the resource</td>
+  </tr>   <tr>
+    <td><a href="http://schema.org/identifier"><code>schema:identifier</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A local identifier for the resource</td>
+  </tr>   <tr>
+    <td><a href="https://www.openactive.io/ns/#facilityUse"><code>oa:facilityUse</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>
+    <p>Links a specific Slot with the <code>oa:FacilityUse</code> of which it is a part.
+    </p>
+  </td></tr>
+  <tr>
+    <td><a href="https://schema.org/startDate"><code>schema:startDate</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>
+    <p>The start date and time of the slot. Can be specified as a <a href="https://schema.org/Date"><code>schema:Date</code></a> or
+    <a href="https://schema.org/DateTime"><code>schema:DateTime</code></a>.
+    </p>
+  </td></tr>
+  <tr>
+    <td><a href="https://schema.org/endDate"><code>schema:endDate</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>
+    <p>
+    The end date and time of the event. Can be specified as a <a href="https://schema.org/Date"><code>schema:Date</code></a> or
+    <a href="https://schema.org/DateTime"><code>schema:DateTime</code></a>
+    </p>
+  </td></tr>
+  <tr>
+    <td><a href="https://schema.org/duration"><code>schema:duration</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The duration of the event given in [<cite><a class="bibref" href="#bib-ISO8601">ISO8601</a></cite>] format.</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/offers"><code>schema:offers</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Describes offers to book and use this specific slot. If unspecified, then a client <em class="rfc2119" title="SHOULD">SHOULD</em> use offers associated with the 
+    related Facility Use.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#remainingUses"><code>oa:remainingUses</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>
+    <p>Used to indicate the availability of this Slot. Where a Slot describes the opportunity to use 
+    a single facility this property should have a value of 0 or 1. Where a Slot describes the opportunity to 
+    use one of several facilities, which will be allocated during booking, then the property specific how many 
+    such facilities are remaining, and may then have a value greater than 1.</p>
+  </td></tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#maximumUses"><code>oa:maximumUses</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>
+    <p>Where a Slot describes the opportunity to 
+    use one of several facilities, which will be allocated during booking, then this value can be used to indicate how 
+    many facilities might be available.</p>
+  </td></tr> </tbody></table><p>Examples of describing a Slot are given in the next section.</p></section><section typeof="bibo:Chapter" resource="#describing-facility-use-code-oa-facilityuse-code-code-oa-individualfacilityuse-code-" property="bibo:hasPart"><h3 id="describing-facility-use-code-oa-facilityuse-code-code-oa-individualfacilityuse-code-" resource="#describing-facility-use-code-oa-facilityuse-code-code-oa-individualfacilityuse-code-"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.11 </span>Describing Facility Use (<code>oa:FacilityUse</code>, <code>oa:IndividualFacilityUse</code>)</span></h3><p>A Facility Use is a product. It describes an opportunity to use either one of 
+a group of facilities (<code>oa:FacilityUse</code>) or a individual facility 
+(<code>oa:IndividualFacilityUse</code>). </p><p>The opportunity to use a facility is divided into a calendar of Slots, which 
+allow a participant to use that facility for a specified time and duration.</p><table>
+<thead>
+  <tr><th>Property</th>
+  <th>Status</th>
+  <th>Notes</th>
+</tr></thead>
+<tbody>
+  <tr>
+    <td><code>@id</code></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URI providing a unique identifier for the resource</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/url"><code>schema:url</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>A URL to a web page (or section of a page) that describes the product</td>
+  </tr>
+  <tr>
+    <td><a href="http://schema.org/identifier"><code>schema:identifier</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>A local identifier for the product</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/name"><code>schema:name</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The name of the product or service</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/description"><code>schema:description</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em></em></td>
+    <td>A free text description of the product or service</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/image"><code>schema:image</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>An image or photo that depicts the product, e.g. a photo of the facility or equipment</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/ns/#activity"><code>oa:activity</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>Specifies the physical activity or activities that can be performed when the facility is used.</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/location"><code>schema:location</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>The location of the facility being used. This will either be a generic location, e.g. a leisure centre or sports hall for equipment or more temporary spaces, or a specific <code>schema:SportsActivityLocation</code> when describing opportunities to use 
+    a specific identifiable facility (<code>oa:IndividualFacilityUse</code>)</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/events"><code>schema:event</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="REQUIRED">REQUIRED</em></em></td>
+    <td>An array of one or more upcoming slots (<code>oa:Slot</code>) during which the product can be used. E.g. a list of hourly slots during which a 
+    football pitch might be hired. Only minimal information need be provided about each event, e.g. identifiers, start time, duration, 
+    event status, and any associated offers. This will be sufficient to allow data users to build a timetable of slots, with an availability 
+    status, price, etc.</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/offers"><code>schema:offers</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Describes a generic offer to use a facility, e.g to indicate it is available for a set price, or may be used for free. Where offers 
+    might vary based on time of day (e.g. peak pricing) then this information should be associated with the specific event ("slot")</td>
+  </tr>
+  <tr>
+    <td><a href="https://schema.org/hoursAvailable"><code>schema:hoursAvailable</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Specifies the hours during which this product is available. The value of this property is a schema:OpeningHoursSpecification.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.openactive.io/&quot;htns/#individualFacilityUses"><code>oa:individualFacilityUses</code></a></td>
+    <td><em class="rfc2119"><em class="rfc2119" title="OPTIONAL">OPTIONAL</em></em></td>
+    <td>Links a <code>oa:FacilityUse</code> product, describing a general opportunity to, e.g. book and play tennis at a leisure centre with an array of <code>oa:IndividualFacilityUse</code> products that provide a more detailed description about an opportunity to book, e.g. individual tennis courts. This allows a platform to publish both a general product and time-table as well as more detailed 
+    products for individual facilities.</td>
+  </tr>
+
+</tbody>
+</table><br><p>The following example describes opportunities to use table tennis facilities at 
+a leisure centre. By default use of a table is for 30 minutes and costs ten 
+pounds.</p><p>However at specific times the cost to use a table increases. This is indicated 
+by offers associated with the second Slot.</p><p>In both cases a maximum of four tables are available. In the example, only one 
+table remains for use in the first slot, while the second has three. </p><div class="example"><div class="example-title marker"><span>Example 28</span><span style="text-transform: none">: Describing use of a facility</span></div><pre class=""><code>
+{
+"@context": "<a href="https://www.openactive.io/ns/oa.jsonld">https://www.openactive.io/ns/oa.jsonld</a>",
+"type": "FacilityUse",
+"url": "<a href="http://www.example.org/facility-use/1">http://www.example.org/facility-use/1</a>",
+"name": "Example Leisure Centre Table Tennis",
+"description": "Table tennis tables are available to hire for thirty minute slots",
+"activity": "Table Tennis",
+"location": {
+  "type": "Place",
+  "name": "Example Leisure Centre",
+  "address": {
+    "type": "PostalAddress",
+    "streetAddress": "1 High Street",
+    "addressLocality": "Bristol",
+    "postalCode": "BS1 4SD"
+  }<br>},
+"offers": [
+    {
+      "name": "30 minute hire",
+      "price": "10",
+      "priceCurrency": "GBP"
+    }
+],
+"event": [
+    {
+      "type": "Slot",<br>      "id": "<a href="http://www.example.org/facility-use/slots/1">http://www.example.org/facility-use/slots/1</a>",
+      "facilityUse": "<a href="http://www.example.org/facility-use/1">http://www.example.org/facility-use/1</a>",
+      "startDate": "2018-03-01T10:00:00Z",<br>      "duration": "PT30M",<br>      "remainingUses": 1,
+      "maximumUses": 4
+    },
+    {
+      "type": "Slot",<br>      "id": "<a href="http://www.example.org/facility-use/slots/2">http://www.example.org/facility-use/slots/2</a>",
+      "facilityUse": "<a href="http://www.example.org/facility-use/1">http://www.example.org/facility-use/1</a>",
+      "startDate": "2018-03-01T11:00:00Z",<br>      "duration": "PT30M",<br>      "remainingUses": 3,
+      "maximumUses": 4,
+       "offers": [
+         {
+            "name": "30 minute hire",
+            "price": "15",
+            "priceCurrency": "GBP"
+         }
+       ]
+    }
+] 
+}
+</code></pre></div><p>The following example shows how to use the data model to publish opportunities 
+to hire a specific tennis court. As this is an <code>oa:IndividualFacilityUse</code> 
+the location field provides more detail on the location. The example describes 
+two Slots, but the second is no longer available.</p><div class="example"><div class="example-title marker"><span>Example 29</span><span style="text-transform: none">: Describing use of an individual facility</span></div><pre class=""><code>
+{
+"@context": "https://www.openactive.io/ns/oa.jsonld",
+"type": "IndividualFacilityUse",
+"url": "http://www.example.org/facility-use/2",
+"name": "Play Tenns on the Main Tennis Court",
+"description": "Tennis courts are available for 30 min sessions",
+"image": [
+   "http://example.org/images/1.jpg"
+],
+"activity": "Tennis",
+"location": {
+  "type": "SportsActivityLocation",
+  "name": "Main Tennis Court",
+  "containedInPlace": {
+     "type": "Place",
+     "name": "Example Leisure Centre",
+     "address": {
+       "type": "PostalAddress",
+       "streetAddress": "1 High Street",
+       "addressLocality": "Bristol",
+       "postalCode": "BS1 4SD"
+     }  
+  }
+},
+"event": [
+    {
+      "type": "Slot",   
+      "id": "http://www.example.org/facility-use/slots/1",
+      "facilityUse": "http://www.example.org/facility-use/1",
+      "startDate": "2018-03-01T10:00:00Z",   
+      "duration": "PT30M",   
+      "remainingUses": 1,
+      "maximumUses": 1
+    },
+    {
+      "type": "Slot",   
+      "id": "http://www.example.org/facility-use/slots/1",
+      "facilityUse": "http://www.example.org/facility-use/1",
+      "startDate": "2018-03-01T11:00:00Z",   
+      "duration": "PT30M",   
+      "remainingUses": 0,
+      "maximumUses": 1
+    }
+] 
+}
+</code></pre></div><div class="note"><div class="note-title marker" aria-level="4" role="heading" id="h-note14"><span>Note</span></div><div class="">
+<p>
+The community group feels that the data model proposed in this section adequately covers the primary use cases relating to publishing data on opportunities to hire and use facilities</p>
+<p>However we recognise that there may be some consequences on the volume of data shared via <a href="https://www.openactive.io/realtime-paged-data-exchange/">RPDE feeds</a>. Specifically, for multi-use facilities the booking of mutually exclusive configurations will end up increasing the volume of updates that need to be communicated to users.
+</p>
+<p>The community group has documented this issue and <a href="https://github.com/openactive/modelling-opportunity-data/issues/73">requests feedback from publishers and users</a> based on implementation feedback before deciding how to address the issue.</p>
+</div></div><p></p><p></p></section><section typeof="bibo:Chapter" resource="#describing-activity-opportunities-code-oa-activityopportunity-code-" property="bibo:hasPart"><h3 id="describing-activity-opportunities-code-oa-activityopportunity-code-" resource="#describing-activity-opportunities-code-oa-activityopportunity-code-"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.12 </span>Describing Activity Opportunities (<code>oa:ActivityOpportunity</code>)</span></h3><p></p><p></p><p>As described earlier in this specification, an <a href="#activity-opportunity">Activity Opportunity</a> is similar to an Event except it does not take 
+place at a specific time: individual participants will decide when they will take part in the physical activity.</p><p></p><p></p><p>The <a href="https://www.openactive.io/ns/#ActivityOpportunity"><code>oa:ActivityOpportunity</code></a> type will be used to represent these opportunities. </p><p></p><p></p><p>Information about Activity Opportunities can be published using the same set of properties that have been identified for <a href="#describing-events-code-schema-event-code-">Describing Events</a>.</p><p></p><p></p><p>However applications <em class="rfc2119"><em class="rfc2119" title="MUST">MUST</em></em> not use the <code>schema:schedule</code>, <code>schema:startDate</code> and <code>schema:endDate</code> properties on this 
+type of resource.</p><p></p><p></p></section><section typeof="bibo:Chapter" resource="#extending-the-model" property="bibo:hasPart"><h3 id="extending-the-model" resource="#extending-the-model"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.13 </span>Extending the Model</span></h3><p></p><p></p><p>The previous sections describe how to publish opportunity data using a combination of existing and new vocabularies. 
+But this approach may not address every requirement. Specific applications may need custom extensions and the community may need to 
+revise or improve the core model presented here. </p><p></p><p></p><p>Future versions of the specification may have a wider scope, e.g. to support description of facilities, equipment, 
+event booking or accreditation schemes for sporting organisations.</p><p></p><p></p><p>With this in mind, the following sections briefly outline some expected ways in which this specification and the practice of 
+publishing of opportunity data may evolve.</p><p></p><p></p><p>To support changing practice, consumers of opportunity data <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em> be liberal in what they accept 
+from data publishers, to allow the use of additional properties.</p><p></p><p></p><section typeof="bibo:Chapter" resource="#versioning-policy" property="bibo:hasPart"><h4 id="versioning-policy" resource="#versioning-policy"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.13.1 </span>Versioning Policy</span></h4><p></p><p></p><p>The broad goal is to ensure that future versions of this specification remain backwards compatible. This will ensure that 
+published data remains valid. </p><p></p><p></p><p>New types of resource, relationships and properties can easily be added to extend the model without impacting existing data. 
+Potential breaking changes would include changing the definitions of existing properties, or removing them from the specification.</p><p></p><p></p><p>To avoid this, the goal will be to:</p><p></p><p></p><ul><p></p>
+<p></p><li>evolve the definitions of existing properties to broadly retain their current meaning and legal values.</li><p></p>
+<p></p><li>deprecate, rather than remove properties that are judged, based on implementation experience, to be less useful or confusing. Deprecated properties will be clearly marked in both the human and machine-readable versions of the OpenActive namespace.</li><p></p>
+<p></p><li>ensure that conformance criteria are loosely defined, balancing the need to be able to validate data against a desire to allow 
+some evolution in practice</li>
+</ul><p></p><p></p><p>Proposed changes to the specification will also be communicated in advance of their formal release, through the sharing of public Editor's Drafts. 
+This will provide opportunities for both publishers and users of the data to update their applications. </p><p></p><p></p><p>To support additional testing and experimentation around new properties, a "beta" namespace has been defined to allow the community to explore 
+extensions to this specification in a controlled way. For more information on the process supporting that see [<cite><a class="bibref" href="#bib-OpenActive-Beta-Namespace">OpenActive-Beta-Namespace</a></cite>].</p><p></p><p></p><p>Regardless of the type of extension, activity can continue to be co-ordinated within the OpenActive Community Group as the primary forum 
+for standardising the publication of opportunity data.</p><p></p><p></p></section><section typeof="bibo:Chapter" resource="#relationship-with-schema-org-and-skos" property="bibo:hasPart"><h4 id="relationship-with-schema-org-and-skos" resource="#relationship-with-schema-org-and-skos"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.13.2 </span>Relationship with Schema.org and SKOS</span></h4><p></p><p></p><p>This specification draws heavily on [<cite><a class="bibref" href="#bib-SCHEMA-ORG">SCHEMA-ORG</a></cite>] and [<cite><a class="bibref" href="#bib-SKOS">SKOS</a></cite>] to define its core data model. Both of these specifications define additional 
+properties that are not directly referenced in this document.</p><p></p><p></p><p>However data publishers are free to use any additional types and properties where useful. [<cite><a class="bibref" href="#bib-SCHEMA-ORG">SCHEMA-ORG</a></cite>] in particular provides a source of a 
+wide range of additional properties for describing Events, Places, Organisations, etc. </p><p></p><p></p><p>For example an application may wish to share reviews of events, places or clubs. The <a href="https://schema.org/review"><code>schema:review</code></a> property 
+and its related data model can be used for this purpose, without requiring revisions to this specification.</p><p></p><p></p></section><section typeof="bibo:Chapter" resource="#defining-custom-vocabularies" property="bibo:hasPart"><h4 id="defining-custom-vocabularies" resource="#defining-custom-vocabularies"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.13.3 </span>Defining Custom Vocabularies</span></h4><p></p><p></p><p>There may be a need for new vocabulary to support the needs of specific applications or user communities. Where these are widely relevant 
+then these extensions might be included in this data model. </p><p></p><p></p><p>In other circumstances its expected that additional data models and specifications will be produced to support the needs of those 
+communities. For example it may be useful to define standard models for describing the characteristics of cycle tracks or 
+orienteering trails. These would be better defined either as custom vocabularies or proposed as [<cite><a class="bibref" href="#bib-SCHEMA-ORG">SCHEMA-ORG</a></cite>] extensions. </p><p></p><p></p><p>Where an application or community is defining a custom vocabulary then they <em class="rfc2119"><em class="rfc2119" title="SHOULD">SHOULD</em></em>:</p><p></p><p></p><ul><p></p>
+<p></p><li>publish documentation that describes the custom properties, types and controlled vocabularies being used</li><p></p>
+<p></p><li>create a custom [<cite><a class="bibref" href="#bib-JSON-LD">JSON-LD</a></cite>] schema that provides a machine-readable definition of the properties</li><p></p>
+<p></p><li>share the documentation and schema with the OpenActive community group</li>
+</ul><p></p><p></p><p>[<cite><a class="bibref" href="#bib-JSON-LD">JSON-LD</a></cite>] allows data to be <a href="https://www.w3.org/TR/json-ld/#advanced-context-usage">published with reference to multiple contexts</a>. This will help clarify for reusers where a dataset is combining this specification with one or more custom vocabularies.</p></section></section></section><p></p><section class="appendix informative" typeof="bibo:Chapter" resource="#acknowledgements" property="bibo:hasPart"><!--OddPage--><h2 id="acknowledgements" resource="#acknowledgements"><span property="xhv:role" resource="xhv:heading"><span class="secno">A. </span>Acknowledgements</span></h2><p><em>This section is non-normative.</em></p><p>The editors thank <a href="http://www.w3.org/community/openactive/participants">all members</a> of the OpenActive CG for contributions of various kinds.</p></section><section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" property="bibo:hasPart"><!--OddPage--><h2 id="h-references" resource="#h-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B. </span>References</span></h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" property="bibo:hasPart"><h3 id="h-normative-references" resource="#h-normative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.1 </span>Normative references</span></h3><dl class="bibliography" resource=""><dt id="bib-RFC2119">[RFC2119]</dt><dd>S. Bradner. IETF. <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires">https://tools.ietf.org/html/rfc2119</a>
+</dd></dl></section><section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" property="bibo:hasPart"><h3 id="h-informative-references" resource="#h-informative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.2 </span>Informative references</span></h3><dl class="bibliography" resource=""><dt id="bib-ISO8601">[ISO8601]</dt><dd>International Organization for Standardization (ISO). <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874" property="dc:references"><cite>Representation of dates and times. ISO 8601:2004.</cite></a>. 2004. ISO 8601:2004. URL: <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874" property="dc:references">http://www.iso.org/iso/catalogue_detail?csnumber=40874</a>
+</dd><dt id="bib-JSON-LD">[JSON-LD]</dt><dd>W3C. <a href="https://www.w3.org/TR/json-ld/" property="dc:references"><cite>JSON-LD 1.0</cite></a>. W3C Recommendation. URL: <a href="https://www.w3.org/TR/json-ld/" property="dc:references">https://www.w3.org/TR/json-ld/</a>
+</dd><dt id="bib-OpenActive-Activity-List">[OpenActive-Activity-List]</dt><dd>OpenActive Community Group. <a href="https://www.openactive.io/activity-list/" property="dc:references"><cite>OpenActive Activity List</cite></a>. URL: <a href="https://www.openactive.io/activity-list/" property="dc:references">https://www.openactive.io/activity-list/</a>
+</dd><dt id="bib-OpenActive-Beta-Namespace">[OpenActive-Beta-Namespace]</dt><dd>OpenActive Community Group. <a href="https://www.openactive.io/ns-beta/" property="dc:references"><cite>OpenActive Beta Namespace</cite></a>. URL: <a href="https://www.openactive.io/ns-beta/" property="dc:references">https://www.openactive.io/ns-beta/</a>
+</dd><dt id="bib-OpenActive-Vocabulary">[OpenActive-Vocabulary]</dt><dd>OpenActive Community Group. <a href="https://www.openactive.io/ns/" property="dc:references"><cite>OpenActive Vocabulary</cite></a>. URL: <a href="https://www.openactive.io/ns/" property="dc:references">https://www.openactive.io/ns/</a>
+</dd><dt id="bib-Publishing-Opportunity-Data">[Publishing-Opportunity-Data]</dt><dd>OpenActive Community Group. <a href="https://www.openactive.io/opportunity-data-primer/" property="dc:references"><cite>Publishing Opportunity Data: A Primer</cite></a>. URL: <a href="https://www.openactive.io/opportunity-data-primer/" property="dc:references">https://www.openactive.io/opportunity-data-primer/</a>
+</dd><dt id="bib-SCHEMA-ORG">[SCHEMA-ORG]</dt><dd><a href="http://schema.org/" property="dc:references"><cite>Schema.org</cite></a>. URL: <a href="http://schema.org/" property="dc:references">http://schema.org/</a>
+</dd><dt id="bib-SKOS">[SKOS]</dt><dd>W3C. <a href="https://www.w3.org/TR/skos-primer" property="dc:references"><cite>SKOS Simple Knowledge Organization System Primer</cite></a>. W3C Note. URL: <a href="https://www.w3.org/TR/skos-primer" property="dc:references">https://www.w3.org/TR/skos-primer</a>
+</dd></dl></section></section><p role="navigation" id="back-to-top"><a href="#toc"><abbr title="Back to Top">↑</abbr></a></p><script async="" defer="" src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
